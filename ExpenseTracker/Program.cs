@@ -11,6 +11,8 @@ var config = builder.Configuration;
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
 options.UseSqlServer(config.GetConnectionString("ExpenseTrackerDbConn")));
 
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCdkx3THxbf1x0ZFxMYl5bQHRPMyBoS35RckVkW39fcHRRQ2BdWUR1");
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -19,4 +19,35 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #12161d;
+  color: #fff;
+}
+e.bigger {
+    font-size: x-large;
+}
+
+/*Customizing Radio Button Group*/
+.e-btn-group.rbt-group
+{
+    width: 100%;
+}
+
+.e-btn-group.rbt-group .e-btn
+{
+    width: 50%;
+}
+
+.rbt-group label .e-btn
+{
+    box-shadow: none !important;
+    background-color: rgb(34, 43, 51);
+    color: #fff;
+    border: 1px solid #BBDEFB;
+}
+
+.e-btn-group.rbt-group input:checked + label.e-btn 
+{
+    background-color: #BBDEFB;
+    color: #212b36;
+    border: 1px solid #BBDEFB;
 }

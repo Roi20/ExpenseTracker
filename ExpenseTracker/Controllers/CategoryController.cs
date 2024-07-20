@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ExpenseTracker.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.Controllers
 {
@@ -11,7 +12,12 @@ namespace ExpenseTracker.Controllers
 
         public IActionResult Create()
         {
-            return View();
+
+            if (!ModelState.IsValid)
+                return Redirect("Index");
+
+
+            return View(new Category());
         }
 
         public IActionResult Update()
