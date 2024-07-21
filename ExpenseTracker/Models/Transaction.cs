@@ -8,7 +8,8 @@ namespace ExpenseTracker.Models
     {
         [Key]
         public int TransactionId { get; set; }
-        
+
+        [Required(ErrorMessage = "Amount was required")]
         public int Amount { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]

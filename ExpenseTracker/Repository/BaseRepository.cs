@@ -1,33 +1,107 @@
-﻿using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Context;
+using ExpenseTracker.Contracts;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T>
         where T : class
     {
-        public Task Create(T entity)
+
+        private readonly DbContext _db;
+        private readonly DbSet<T> _table;
+
+        public BaseRepository(ExpenseTrackerDbContext db)
         {
-            throw new NotImplementedException();
+            _db = db;
+            _table = _db.Set<T>();
+
         }
 
-        public Task Delete(object id)
+        public async Task<T> GetById(object id)
         {
-            throw new NotImplementedException();
+            try
+            {
+
+                return await _table.FindAsync(id);
+
+            }
+            catch
+            {
+                throw new Exception("An error occured while trying to fetch data.");
+            }
         }
 
-        public Task<IEnumerable<T>> GetAll()
+        public async Task Create(T entity)
         {
-            throw new NotImplementedException();
+            try 
+            {
+                await _table.AddAsync(entity);
+                await _db.SaveChangesAsync();
+            }
+            catch(DbUpdateException)
+            {
+                throw;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
         }
 
-        public Task<T> GetById(int id)
+        public async Task Delete(object id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var entity = await GetById(id);
+
+                if(entity != null) 
+                {
+                    _table.Remove(entity);
+                    await _db.SaveChangesAsync();
+                }
+
+            }
+            catch(DbUpdateException)
+            {
+                throw;
+            }
         }
 
-        public Task Update(object id, object model)
+        public async Task<IEnumerable<T>> GetAll()
         {
-            throw new NotImplementedException();
+            try 
+            {
+               return await _table.ToListAsync();
+            
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
+        }
+
+        public async Task Update(object id, object model)
+        {
+            try 
+            {
+                var entity = await GetById(id);
+
+                if(entity != null) 
+                {
+                    _db.Entry(entity).CurrentValues.SetValues(model);
+                    await _db.SaveChangesAsync();
+                }
+
+            }
+            catch (DbUpdateException) 
+            {
+                throw;
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
         }
 
 

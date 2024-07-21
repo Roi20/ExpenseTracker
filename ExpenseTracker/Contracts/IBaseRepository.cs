@@ -3,7 +3,7 @@
     public interface IBaseRepository<T>
     {
         Task <IEnumerable<T>> GetAll();
-        Task<T> GetById(int id);
+        Task<T> GetById(object id);
         Task Create(T entity);
         Task Update(object id, object model);
         Task Delete(object id);

@@ -1,10 +1,19 @@
-﻿using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Context;
+using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Repository
 {
     public class CategoryRepository : ICategoryRepository
     {
+
+
+        public CategoryRepository(ExpenseTrackerDbContext db)
+        {
+            
+        }
+
         public Task Create(Category entity)
         {
             throw new NotImplementedException();
@@ -20,7 +29,7 @@ namespace ExpenseTracker.Repository
             throw new NotImplementedException();
         }
 
-        public Task<Category> GetById(int id)
+        public Task<Category> GetById(object id)
         {
             throw new NotImplementedException();
         }
@@ -30,7 +39,6 @@ namespace ExpenseTracker.Repository
             throw new NotImplementedException();
         }
 
-        //provision
         public Task<IEnumerable<Category>> UserId(string userId)
         {
             throw new NotImplementedException();

@@ -24,10 +24,14 @@
             <div class="mb-3">
                 <ejs-textbox id="icon" placeholder="Icon" ejs-for="Icon" floatLabelType="Always"></ejs-textbox>
             </div>
-            <div><span asp-validation-for="Type" class="text-danger"></span></div>
             <div id="createBtn">
                 <button type="submit" class="w-100 btn btn-primary">Create</button>
             </div>
         </form>
     </div>
 </div>
+
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+}

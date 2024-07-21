@@ -1,4 +1,6 @@
 using ExpenseTracker.Context;
+using ExpenseTracker.Contracts;
+using ExpenseTracker.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,8 +10,12 @@ builder.Services.AddControllersWithViews();
 
 var config = builder.Configuration;
 
+// Sql Dependency
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
 options.UseSqlServer(config.GetConnectionString("ExpenseTrackerDbConn")));
+
+// Repository Dependency
+builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCdkx3THxbf1x0ZFxMYl5bQHRPMyBoS35RckVkW39fcHRRQ2BdWUR1");
 
