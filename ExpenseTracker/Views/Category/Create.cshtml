@@ -1,35 +1,7 @@
-﻿@model Category
+﻿@page
+@model Category
 
 
-<div class="row d-flex justify-content-center">
-    <div class="col-md-5">
-        <div class="mb-3">
-            <h1>Category</h1>
-        </div>
-        <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <div class="e-btn-group rbt-group">
-                    <input class="" type="radio" id="radioleft" name="Type" value="Expense" checked="@(Model.Type=="Expense")" />
-                    <label class="e-btn" for="radioleft">Expense</label>
-                    <input type="radio" id="radiomiddle" name="Type" value="Income" checked="@(Model.Type=="Income")" />
-                    <label class="e-btn" for="radiomiddle">Income</label>
-                </div>
-            </div>
-            <div><span asp-validation-for="Title" class="text-danger"></span></div>
-            <div class="mb-2">
-                <ejs-textbox id="title" placeholder="Title" ejs-for="Title" floatLabelType="Always"></ejs-textbox>
-            </div>
-            <div><span asp-validation-for="Icon" class="text-danger"></span></div>
-            <div class="mb-3">
-                <ejs-textbox id="icon" placeholder="Icon" ejs-for="Icon" floatLabelType="Always"></ejs-textbox>
-            </div>
-            <div id="createBtn">
-                <button type="submit" class="w-100 btn btn-primary">Create</button>
-            </div>
-        </form>
-    </div>
-</div>
 
 @section Scripts{
 

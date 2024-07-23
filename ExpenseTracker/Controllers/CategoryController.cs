@@ -22,7 +22,9 @@ namespace ExpenseTracker.Controllers
         {
             try 
             {
-                return View(await _repo.GetAll());
+                var entities = await _repo.GetAll();
+               
+                return View(entities);
                  
             }
             catch
@@ -66,6 +68,7 @@ namespace ExpenseTracker.Controllers
 
         }
 
+        
         public async Task<IActionResult> Update(int id) 
         {
 
@@ -80,7 +83,7 @@ namespace ExpenseTracker.Controllers
 
 
         }
-
+        
 
         [HttpPost]
         [ValidateAntiForgeryToken]

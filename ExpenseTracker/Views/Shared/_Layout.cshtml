@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ExpenseTracker</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-   @*<link rel="stylesheet" href="https://cdn.syncfusion.com/ej2/26.1.35/material.css" />*@
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
     <link href="https://cdn.syncfusion.com/ej2/26.1.35/bootstrap5-dark.css" rel="stylesheet" />
-    <!-- Syncfusion ASP.NET Core controls styles -->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExpenseTracker.styles.css" asp-append-version="true" />
-    <!-- Syncfusion ASP.NET Core controls scripts -->
-    <script src="https://cdn.syncfusion.com/ej2/26.1.35/dist/ej2.min.js"></script>
+    <script src="https://kit.fontawesome.com/3c3b820551.js" crossorigin="anonymous"></script>
+    @RenderSection("CustomStyles", required: false)
 </head>
-<body class="e.bigger">
-    <div class="container">
+<body>
+    <div class="container-fluid">
         <header>
             <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 mt-2">
                 <div class="container-fluid">
@@ -36,12 +35,11 @@
                 </div>
             </nav>
         </header>
-        <div class="container">
-            <main role="main" class="pb-3">
+        <div class="container" id="mainContainer">
+            <main role="main" class="pb-3 h-100">
                 @RenderBody()
             </main>
         </div>
-
         <!--footer class="border-top footer text-muted">
             <div class="container">
                 &copy; 2024 - ExpenseTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -54,5 +52,6 @@
     @await RenderSectionAsync("Scripts", required: false)
     <!-- Syncfusion ASP.NET Core Script Manager -->
     <ejs-scripts></ejs-scripts>
+    @RenderSection("CustomsScripts", required: false)
 </body>
 </html>
