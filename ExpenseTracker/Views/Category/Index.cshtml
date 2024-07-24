@@ -1,5 +1,5 @@
 ﻿
-@model IEnumerable<Category>
+@model PaginatedResult<Category>
 
 
 @section CustomStyles
@@ -21,7 +21,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Result)
                     {
                         <tr>
                             <td class="text-end">@item.CategoryId</td>
@@ -42,10 +42,39 @@
                 </tbody>
             </table>
         </div>
+        <nav class="pagination-outer" aria-label="Page navigation">
+            <ul class="pagination p-3">
+                <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
+                    <a class="page-link bg-transparent" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
+                        <span aria-hidden="true" class="bg-transparent">« Previous</span>
+                    </a>
+                </li>
+                @for (var pageNumber = 1; pageNumber <= Model.TotalCount; pageNumber++)
+                {
+                    if (pageNumber == Model.Page)
+                    {
+                        <li class="page-item">
+                            <span class="page-link bg-transparent border-0 text-light text-xl">@pageNumber</span>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="page-item">
+                            <a class="page-link" asp-route-p="@pageNumber">
+                                <span>@pageNumber</span>
+                            </a>
+                        </li>
+                    }
+                }
+                <li class="page-item @(Model.Page == Model.TotalCount ? "disabled" : "")" id="nextPrev">
+                    <a class="page-link bg-transparent" asp-route-p="@(Model.Page + 1)" aria-label="Next">
+                        <span aria-hidden="true" class="bg-transparent">Next »</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
    </div>
  </div>
-
-
 
      
  

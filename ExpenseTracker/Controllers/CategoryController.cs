@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -18,11 +19,11 @@ namespace ExpenseTracker.Controllers
             _repo = repo;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(PaginatedRequest request)
         {
             try 
             {
-                var entities = await _repo.GetAll();
+                var entities = await _repo.GetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE);
                
                 return View(entities);
                  

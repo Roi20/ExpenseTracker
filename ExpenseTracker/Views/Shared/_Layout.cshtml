@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - ExpenseTracker</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.syncfusion.com/ej2/26.1.35/bootstrap5-dark.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExpenseTracker.styles.css" asp-append-version="true" />
@@ -35,8 +35,8 @@
                 </div>
             </nav>
         </header>
-        <div class="container" id="mainContainer">
-            <main role="main" class="pb-3 h-100">
+        <div class="container p-0" id="mainContainer">
+            <main role="main" class="p-4 h-100 d-flex justify-content-center">
                 @RenderBody()
             </main>
         </div>

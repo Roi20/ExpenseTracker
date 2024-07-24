@@ -15,11 +15,11 @@ html {
 html {
     position: relative;
     min-height: 100%;
-    font-family: "Lato";
+    font-family: "Libre Franklin";
 }
 
 *:not(.fa-solid):not(.fa):not(.e-icons) {
-    font-family: "Lato";
+    font-family: "Libre Franklin";
 }
 
 body {
@@ -29,6 +29,7 @@ body {
 #mainContainer
 {
     height: 100vh;
+   
     
 }
 
