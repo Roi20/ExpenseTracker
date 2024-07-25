@@ -7,13 +7,41 @@
     <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
 }
 
-
 <div class="row d-flex justify-content-center bg-image" style="background-color: #f5f7fa; height: 100%; width: 100%">
-   <div class="col-md-8 mt-5 pb-2">
-        <div class="mt-5" id="tableHolder">
-            <table class="table table-hover table-dark mb-0">
-                <thead>
-                    <tr class="text-uppercase text-success">
+   <div class="col-md-8 p-0 mt-5">
+        <div class="container p-0 mt-5" id="tableHolder">
+            <div class="row w-100 m-auto p-0">
+                <div class="col-6 p-0 mt-4">
+                    <a class="btn bg-success border-outline" asp-action="Create">
+                        <span class="text-light h-100 w-100">
+                            <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Category
+                        </span>
+                    </a>
+                </div>
+                <div class="col-6 p-0 mt-4">
+                    <form asp-action="Index" method="get">
+                        <div class="input-group input-group-sm mb-2 w-75 float-end">
+                            <input type="text"
+                                   class="form-control rounded-0"
+                                   aria-label="Small"
+                                   placeholder="Search"
+                                   aria-describedby="inputGroup-sizing-sm"
+                                   name="s"
+                                   value="@Model.SearchKeyword">
+                            <div class="input-group-prepend bg-success">
+                                <button class="btn btn-sm h-100 text-center bg-transparent"
+                                        type="submit"
+                                        id="inputGroup-sizing-sm">
+                                    <i class="fa-solid fa-magnifying-glass text-light"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <table class="table table-hover table-dark mb-0 mt-0 bg-secondary">
+                <thead class="bg-secondary">
+                    <tr class="text-success">
                         <th class="text-end" >#</th>
                         <th class="text-start">Title</th>
                         <th>Type</th>
@@ -45,7 +73,7 @@
         <nav class="pagination-outer" aria-label="Page navigation">
             <ul class="pagination p-3">
                 <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
+                    <a class="page-link bg-transparent" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
                         <span aria-hidden="true" class="bg-transparent">« Previous</span>
                     </a>
                 </li>
@@ -60,14 +88,14 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-route-p="@pageNumber">
+                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">
                                 <span>@pageNumber</span>
                             </a>
                         </li>
                     }
                 }
                 <li class="page-item @(Model.Page == Model.TotalCount ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-p="@(Model.Page + 1)" aria-label="Next">
+                    <a class="page-link bg-transparent" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page + 1)" aria-label="Next">
                         <span aria-hidden="true" class="bg-transparent">Next »</span>
                     </a>
                 </li>

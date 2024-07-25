@@ -12,9 +12,9 @@ namespace ExpenseTracker.Controllers
     public class CategoryController : BaseController
     {
 
-        private readonly IBaseRepository<Category> _repo;
+        private readonly ICategoryRepository _repo;
 
-        public CategoryController(IBaseRepository<Category> repo)
+        public CategoryController(ICategoryRepository repo)
         {
             _repo = repo;
         }
@@ -23,8 +23,14 @@ namespace ExpenseTracker.Controllers
         {
             try 
             {
-                var entities = await _repo.GetPaginated(request.PageNumber, PaginatedRequest.ITEMS_PER_PAGE);
-               
+                var entities = await _repo.GetPaginated(
+                        request.PageNumber, 
+                        PaginatedRequest.ITEMS_PER_PAGE,
+                        request.SearchKeyword ??  string.Empty
+                    );
+
+                entities.SearchKeyword = request.SearchKeyword;
+
                 return View(entities);
                  
             }
@@ -34,7 +40,6 @@ namespace ExpenseTracker.Controllers
             }
            
         }
-
         public IActionResult Create()
         {
 

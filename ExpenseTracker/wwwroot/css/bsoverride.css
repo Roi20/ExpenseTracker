@@ -9,12 +9,60 @@ table
 {
     box-shadow: 5px;
 }
+
+#tableHolder
+{
+  // background-color: #393939 !important;   
+}
 /*Category Table End*/
+
+/*Search box*/
+.input-group input
+{
+    
+    height: 40px;
+    border: 2px solid #198754;
+    border-radius: unset;
+    width: 75%;
+}
+
+.input-group-prepend:focus
+{
+    border-color: #198754;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-size: larger;
+}
+
+.input-group .form-control:focus
+{
+    border-color: #198754;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-size: larger;
+    transition: ease-in-out .5s;
+}
+
+
+
+
+.input-group-prepend button span
+{
+    border: none;
+    background-color: #198754;
+    color: #fff;
+    
+}
+
+#tableHolder div .btn
+{
+    border: 2px solid #198754;
+    border-radius: unset;
+}
 
 
 /*Pagination*/
-.pagination
-{
+.pagination {
     background-color: #393939 !important;
 }
 
