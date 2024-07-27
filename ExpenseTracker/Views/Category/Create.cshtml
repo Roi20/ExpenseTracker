@@ -1,8 +1,57 @@
-﻿@page
+﻿
 @model Category
 
 
 
+@section CustomStyles{
+
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")"/>
+   
+}
+
+<div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
+    <div class="col-md-5 bg-dark main-container">
+        <div class="text-center mt-4" id="title-holder">
+            <h3 class="text-light">New Category</h3>
+            <p class="text-light small">Create a new category <br />
+                to track your expenses</p>
+        </div>
+        <div>
+            <form asp-action="Create" method="post" class="p-2 h-100">
+                @Html.AntiForgeryToken()
+                <div class="text-center"><span asp-validation-for="Title" class="text-danger small"></span></div>
+                <div class="mb-3">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" placeholder="Title" class="form-control rounded-0" />
+                </div>
+                <label asp-for="Icon"></label>
+                <div class="input-group mb-3">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Icon">
+                        <option class="font-monospace" value="☕" selected>☕</option>
+                        <option value="✈️" class="font-monospace">✈️</option>
+                        <option value="🏚️" class="font-monospace">🏚️</option>
+                        <option value="🥎" class="font-monospace">🥎</option>
+                        <option value="🍴" class="font-monospace">🍴</option>
+                        <option value="🚘" class="font-monospace">🚘</option>🛍️
+                        <option value="🛍️" class="font-monospace">🛍️</option>
+                    </select>
+                </div>
+                <label asp-for="Type"></label>
+                <div class="input-group mb-3">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Type">
+                        <option value="Unspecified" class="font-monospace" selected>Unspecified</option>
+                        <option value="Expense" class="font-monospace">Expense</option>
+                        <option value="Income" class="font-monospace">Income</option>
+                    </select>
+                </div>
+                <div id="createBtnHolder" class="mt-4 pb-5">
+                    <button class="btn w-100 rounded-0" type="submit">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+    
 @section Scripts{
 
     <partial name="_ValidationScriptsPartial" />

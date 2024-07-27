@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
 }
 
-<div class="row d-flex justify-content-center bg-image" style="background-color: #f5f7fa; height: 100%; width: 100%">
-   <div class="col-md-8 p-0 mt-5">
+<div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
+   <div class="col-md-8 p-0">
         <div class="container p-0 mt-5" id="tableHolder">
             <div class="row w-100 m-auto p-0">
                 <div class="col-6 p-0 mt-4">
@@ -20,6 +20,7 @@
                 </div>
                 <div class="col-6 p-0 mt-4">
                     <form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken()
                         <div class="input-group input-group-sm mb-2 w-75 float-end">
                             <input type="text"
                                    class="form-control rounded-0"
@@ -42,7 +43,8 @@
             <table class="table table-hover table-dark mb-0 mt-0 bg-secondary">
                 <thead class="bg-secondary">
                     <tr class="text-success">
-                        <th class="text-end" >#</th>
+                        <th></th>
+                        <th class="text-end">#</th>
                         <th class="text-start">Title</th>
                         <th>Type</th>
                         <th>Actions</th>
@@ -52,6 +54,7 @@
                     @foreach (var item in Model.Result)
                     {
                         <tr>
+                            <td class="text-center">@item.Icon</td>
                             <td class="text-end">@item.CategoryId</td>
                             <td>@item.Title</td>
                             <td>@item.Type</td>

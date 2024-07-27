@@ -12,7 +12,7 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
+html, body{
     position: relative;
     min-height: 100%;
     font-family: "Libre Franklin";
@@ -24,11 +24,13 @@ html {
 
 body {
   margin-bottom: 60px;
+  background-color: #121212;
 }
 
 #mainContainer
 {
-    height: 100vh;
+
+   height: 100%;
    
     
 }

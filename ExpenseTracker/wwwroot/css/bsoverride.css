@@ -2,7 +2,7 @@
 /*Category Table*/
 th 
 {
-    background-color: #393939 !important;   
+    background-color: #332940 !important;   
 }
 
 table
@@ -14,6 +14,13 @@ table
 {
   // background-color: #393939 !important;   
 }
+
+#tableHolder div .btn
+{
+    border: 2px solid #198754;
+    border-radius: unset;
+}
+
 /*Category Table End*/
 
 /*Search box*/
@@ -44,8 +51,6 @@ table
 }
 
 
-
-
 .input-group-prepend button span
 {
     border: none;
@@ -53,20 +58,17 @@ table
     color: #fff;
     
 }
+/*Search box end*/
 
-#tableHolder div .btn
-{
-    border: 2px solid #198754;
-    border-radius: unset;
-}
+
 
 
 /*Pagination*/
 .pagination {
-    background-color: #393939 !important;
+    background-color: #332940 !important;
 }
 
-.pagination li a, span
+.pagination li a, .pagination li a span
 {
    
     background-color: transparent;
@@ -114,6 +116,61 @@ table
 {
     color: #fff;
 }
-
-
 /*Pagination End*/
+
+
+
+/*Create Form from Create View*/
+
+/*title*/
+.main-container #title-holder h3
+{
+   font-variant-caps: all-small-caps
+}
+
+/*label*/
+.main-container form label
+{
+    color: #fff;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+    font-variant-caps: all-small-caps;
+}
+
+/*button*/
+.main-container form button
+{
+    background-color: transparent;
+    border: 2px solid #198254;
+    font-variant-caps: all-small-caps;
+    color: #fff;
+}
+
+.main-container form button:hover 
+{
+     box-shadow: 0 0 8px #719ECE;
+     color: #fff;
+}
+
+/*input*/
+.main-container form input:focus
+{
+    outline: none !important;
+    border: 1px solid #198254;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+/*select*/
+.main-container form select:focus
+{
+    outline: none !important;
+    border: 1px solid #198254;
+    box-shadow: 0 0 10px #719ECE;
+}
+
+/*Create form*/
+@media only screen and (max-width: 992px) {
+
+
+
+}
