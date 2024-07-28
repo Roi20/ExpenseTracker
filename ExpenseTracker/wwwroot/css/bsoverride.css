@@ -2,7 +2,7 @@
 /*Category Table*/
 th 
 {
-    background-color: #332940 !important;   
+    background-color: #1F1A24 !important;   
 }
 
 table
@@ -65,7 +65,7 @@ table
 
 /*Pagination*/
 .pagination {
-    background-color: #332940 !important;
+    background-color: #1F1A24 !important;
 }
 
 .pagination li a, .pagination li a span
@@ -151,6 +151,23 @@ table
      box-shadow: 0 0 8px #719ECE;
      color: #fff;
 }
+/*Cancel Button*/
+.main-container form #btnHolder a
+{
+    background-color: transparent;
+    border: 2px solid #dc3545;
+    font-variant-caps: all-small-caps;
+    color: #fff;
+}
+
+.main-container form #btnHolder a:hover 
+{
+
+     box-shadow: 0 0 8px #719ECE;
+     color: #fff;
+}
+
+
 
 /*input*/
 .main-container form input:focus

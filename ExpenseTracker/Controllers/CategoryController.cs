@@ -82,7 +82,7 @@ namespace ExpenseTracker.Controllers
 
             if (entity == null)
             {
-                return View();
+                return NotFound();
             }
 
             return View(entity);
@@ -105,7 +105,7 @@ namespace ExpenseTracker.Controllers
                 
                 TempData["Message"] = $"{model.Title}, Updated successfully";
                 
-                return Redirect("Index");
+                return RedirectToAction("Index");
 
             }
             catch(DbUpdateException ex) 
