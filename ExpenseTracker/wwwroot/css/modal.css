@@ -1,0 +1,95 @@
+﻿
+
+.popup-modal .close
+{
+    position: absolute;
+    top: 8px;
+    text-decoration: none;
+    right: 20px;
+    font-size: 30px;
+    color: #333;
+    font-weight: bold;
+}
+    .popup-modal .close:hover {
+        color: #06D85F
+    }
+
+
+.popup-modal #btn-holder
+{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+}
+
+
+.overlay
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.7);
+    transition: opacity 500ms;
+    visibility: hidden;
+    opacity: 0;
+}
+    .overlay:target
+    {
+        visibility: visible;
+        opacity: 1;
+    }
+
+.popup-modal
+{
+    background: #fff;
+    position: absolute;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    height: 230px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    transition: all 2s ease-in-out;
+    
+}
+
+
+.overlay:target .popup-modal
+{
+    animation: popup 0.7s;
+}
+
+@keyframes popup {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    60% {
+        transform: scale(1.1);
+    }
+
+    70% {
+        transform: scale(1.2);
+    }
+
+    80% {
+        transform: scale(1);
+    }
+
+    90% {
+        transform: scale(1.1);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}

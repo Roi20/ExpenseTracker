@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Syncfusion.EJ2.Notifications;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ExpenseTracker.Controllers
 {
@@ -46,6 +47,8 @@ namespace ExpenseTracker.Controllers
             return View(new Category());
 
         }
+
+        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category model)
@@ -74,7 +77,7 @@ namespace ExpenseTracker.Controllers
 
         }
 
-        
+
         public async Task<IActionResult> Update(int id) 
         {
 
@@ -86,7 +89,6 @@ namespace ExpenseTracker.Controllers
             }
 
             return View(entity);
-
 
         }
         
@@ -124,15 +126,29 @@ namespace ExpenseTracker.Controllers
 
             if (entity == null)
             {
-                return View();
+                return NotFound();
             }
 
             return View(entity);
         }
 
-        public async Task<IActionResult> ConfirmedDelete()
+        public async Task<IActionResult> ConfirmedDelete(Category model)
         {
-            return View();
+            try
+            {
+                await _repo.Delete(model.CategoryId);
+                TempData["Message"] = $"{model.Title}, Deleted successfully";
+                return RedirectToAction("Index");
+
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DbUpdateException($"DbUpdateException: Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
         }
 
 

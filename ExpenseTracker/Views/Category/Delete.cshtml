@@ -1,1 +1,40 @@
-﻿<h1>Delete Category Page</h1>
+﻿@model Category
+
+@section CustomStyles{
+
+    <link rel="stylesheet" href="@Url.Content("~/css/modal.css")" />
+}
+
+<div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
+    
+    <a class="button" href="#popupModal">Launch Modal</a>
+
+    <div class="overlay" id="popupModal">
+        <div class="popup-modal">
+            <div id="close-modal">
+                <a class="close" href="#">&times;</a>
+            </div>
+            <div class="content h-100 align-items-center d-flex justify-content-center p-3 flex-column">
+                <div>
+                    sample content agsdhfgashdgfahgsfdghafsgdhfasdasg
+                </div>
+                <div id="btn-holder">
+                    <button>cancel</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@*<partial name="_ModalDeleteFunction" />*@
+
+
+
+
+@*@section CustomsScripts{
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+
+}
+*@

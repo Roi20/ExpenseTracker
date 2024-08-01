@@ -1,4 +1,21 @@
 ﻿
+/*Cancel Button - From Create and Update*/
+.main-container form #btnHolder a
+{
+    background-color: transparent;
+    border: 2px solid #dc3545;
+    font-variant-caps: all-small-caps;
+    color: #fff;
+}
+
+.main-container form #btnHolder a:hover 
+{
+
+     box-shadow: 0 0 8px #719ECE;
+     color: #fff;
+}
+/*End - /*Cancel Button - From Create and Update*/
+
 /*Category Table*/
 th 
 {
@@ -8,11 +25,6 @@ th
 table
 {
     box-shadow: 5px;
-}
-
-#tableHolder
-{
-  // background-color: #393939 !important;   
 }
 
 #tableHolder div .btn
@@ -151,23 +163,6 @@ table
      box-shadow: 0 0 8px #719ECE;
      color: #fff;
 }
-/*Cancel Button*/
-.main-container form #btnHolder a
-{
-    background-color: transparent;
-    border: 2px solid #dc3545;
-    font-variant-caps: all-small-caps;
-    color: #fff;
-}
-
-.main-container form #btnHolder a:hover 
-{
-
-     box-shadow: 0 0 8px #719ECE;
-     color: #fff;
-}
-
-
 
 /*input*/
 .main-container form input:focus
@@ -191,3 +186,10 @@ table
 
 
 }
+
+/*Delete Confirmation Modal*/
+.modal .modal-dialog #deleteModal
+{
+    background-color: #323949;
+}
+

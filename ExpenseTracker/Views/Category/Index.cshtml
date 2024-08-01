@@ -6,7 +6,21 @@
     <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
 }
 
+
 <div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
+    @if (TempData["Message"] != null)
+    {
+
+        <partial name="_PopUpSuccessModal" />
+        <!--div class="alert alert-success d-flex align-items-center alert-dismissible fade show" tabindex="-1" role="alert">
+            <svg class="bi flex-shrink-0 me-2" height="20" width="20" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
+            <div>
+                <strong>@TempData["Message"].</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
+                </button>
+            </div>
+        </!--div-->
+    }
    <div class="col-md-8 p-0">
         <div class="container p-0 mt-5" id="tableHolder">
             <div class="row w-100 m-auto p-0">
@@ -59,7 +73,10 @@
                             <td>@item.Type</td>
                             <td>
                                 <div class="text-start">
-                                    <a asp-action="Update" asp-route-id="@item.CategoryId" class="text-warning text-decoration-none me-1">
+                                    <a asp-action="Update" asp-route-id="@item.CategoryId" class="text-warning text-decoration-none me-1"
+                                       data-bs-toggle="tooltip" 
+                                       data-bs-placement="left"
+                                       title="Update">
                                         <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
                                     </a>
                                     <a asp-action="Delete" asp-route-id="@item.CategoryId" class="text-danger text-decoration-none ms-1">
@@ -105,6 +122,9 @@
         </nav>
    </div>
  </div>
+@section CustomsScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
 
+}
      
  
