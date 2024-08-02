@@ -15,13 +15,19 @@
                 <a class="close" href="#">&times;</a>
             </div>
             <div class="content h-100 align-items-center d-flex justify-content-center p-3 flex-column">
-                <div>
-                    sample content agsdhfgashdgfahgsfdghafsgdhfasdasg
-                </div>
-                <div id="btn-holder">
-                    <button>cancel</button>
-                    <button>Delete</button>
-                </div>
+                <form class="h-100 w-100">
+                    <div class="text-light text-start mt-5" style="word-wrap: break-word">
+                        @TempData
+                    </div>
+                    <div id="btn-holder">
+                        <div id="cancelBtn">
+                            <a class="w-100 text-center align-content-center" asp-action="Index" id="cancel-btn">Cancel</a>
+                        </div>
+                        <div id="delBtn">
+                            <button id="delete-btn">Delete</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

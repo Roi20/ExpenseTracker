@@ -7,11 +7,11 @@
     text-decoration: none;
     right: 20px;
     font-size: 30px;
-    color: #333;
+    color: #fff;
     font-weight: bold;
 }
     .popup-modal .close:hover {
-        color: #06D85F
+        color: #B00020;
     }
 
 
@@ -20,6 +20,12 @@
     position: absolute;
     bottom: 15px;
     right: 20px;
+    width: 50%;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+   
+    
 }
 
 
@@ -43,7 +49,7 @@
 
 .popup-modal
 {
-    background: #fff;
+    background: #2A1617;
     position: absolute;
     padding: 20px;
     border-radius: 5px;
@@ -54,7 +60,7 @@
     left: 0;
     bottom: 0;
     margin: auto;
-    transition: all 2s ease-in-out;
+    transition: all 1s ease-in-out;
     
 }
 
@@ -93,3 +99,57 @@
         transform: scale(1);
     }
 }
+
+.popup-modal form #btn-holder div
+{
+    border-radius: 20px/50px;
+    font-size: .8em;
+    width: 40%;
+    border: none;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+.popup-modal form #btn-holder #cancel-btn
+{
+  
+   color: #fff;
+   text-decoration: none;
+    
+}
+
+.popup-modal form #btn-holder #delete-btn
+{
+  
+   color: #fff;
+   border: none;
+   background: none;
+   
+   
+    
+}
+
+.popup-modal form #btn-holder #delBtn {
+    background-color: #B00020;
+    transition: background-color 0.5s;
+}
+    .popup-modal form #btn-holder #delBtn:hover {
+       
+       // border: 2px solid #B00020;
+        background-color: transparent;
+    }
+
+
+
+.popup-modal form #btn-holder #cancelBtn {
+    background-color: #9FA6B2;
+    transition: background-color 0.5s;
+}
+    .popup-modal form #btn-holder #cancelBtn:hover {
+       // border: 2px solid #9FA6B2;
+        background-color: transparent;
+    }
+
