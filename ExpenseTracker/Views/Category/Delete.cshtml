@@ -6,25 +6,26 @@
 }
 
 <div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
-    
-    <a class="button" href="#popupModal">Launch Modal</a>
 
+    @*<a class="button" href="#popupModal">Launch Modal</a>*@
     <div class="overlay" id="popupModal">
         <div class="popup-modal">
             <div id="close-modal">
-                <a class="close" href="#">&times;</a>
+                <a class="close" asp-action="Index">&times;</a>
             </div>
             <div class="content h-100 align-items-center d-flex justify-content-center p-3 flex-column">
-                <form class="h-100 w-100">
+                <form asp-action="ConfirmedDelete" class="h-100 w-100">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(i => i.CategoryId)
                     <div class="text-light text-start mt-5" style="word-wrap: break-word">
-                        @TempData
+                        Are you sure you want to delete <strong>@Model.Title</strong> ?
                     </div>
                     <div id="btn-holder">
                         <div id="cancelBtn">
                             <a class="w-100 text-center align-content-center" asp-action="Index" id="cancel-btn">Cancel</a>
                         </div>
                         <div id="delBtn">
-                            <button id="delete-btn">Delete</button>
+                            <button type="submit" id="delete-btn">Delete</button>
                         </div>
                     </div>
                 </form>
@@ -39,8 +40,7 @@
 
 
 
-@*@section CustomsScripts{
+@section CustomsScripts{
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
 
 }
-*@

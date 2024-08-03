@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
 }
 
-
+<partial name="_PopUpSuccessModal" />
 <div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
     @if (TempData["Message"] != null)
     {
@@ -25,7 +25,7 @@
         <div class="container p-0 mt-5" id="tableHolder">
             <div class="row w-100 m-auto p-0">
                 <div class="col-6 p-0 mt-4">
-                    <a class="btn bg-success border-outline" asp-action="Create">
+                    <a class="btn bg-success border-outline" asp-action="Create" id="createBtn">
                         <span class="text-light h-100 w-100">
                             <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Category
                         </span>

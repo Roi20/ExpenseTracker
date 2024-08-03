@@ -1,19 +1,22 @@
-﻿
+﻿baseModel = {
+
+    getModal: $('#popupModal'),
+
+    getSuccessModal: $('#popup-modal')
+
+}
+
 
 $(window).on('load', function () {
-    $('.modal').modal('show');
+
+    baseModel.getModal.css('display', 'block');
+    basemodel.getSuccessModal.show();
 });
 
 
-$('#closeBtn').on('click', function () {
-    $('#myModal').modal('hide')
-});
 
 
-/*
-$('#delete-submit').click(function () {
 
-    $('#deleteForm').submit();
 
-}); 
-*/
+
+

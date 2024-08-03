@@ -1,27 +1,21 @@
 ﻿
-<div class="modal fade" tabindex="-1" role="dialog" id="myModal">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Delete</h5>
-                <a asp-action="Index" class="btn btn-secondary" aria-label="">
-                    <span aria-hidden="true">&times;</span>
-                </a>
-            </div>
-            <div class="modal-body">
-                <form asp-action="" id="deleteForm">
-                    @Html.AntiForgeryToken()
-                    @*@Html.HiddenFor(i => i.CategoryId)*@
-                    <strong>Success</strong>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-primary">Ok</button>
-            </div>
-        </div>
+@section CustomStyles{
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")"/>
+}
+
+<div class="overlay" id="popup-modal">
+    <div class="popup">
+        <img src="~/Images/check-mark-green2.png"/>
+        <h2>Success</h2>
+        <p>asdasdasdasdasdasdghasdhjagshjdgahsgdhjagsdhgashdghasgdhagshdgahsdgahsgdhasghdgahsgdhashhhss</p>
+        <button class="button" type="button" id="ok-btn">Close</button>
     </div>
 </div>
-@section CustomsScripts {
+
+
+
+
+@*section CustomsScripts {
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
 
-}
+}*@

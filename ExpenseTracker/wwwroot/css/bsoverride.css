@@ -1,4 +1,17 @@
 ﻿
+/*Create Btn*/
+.container #createBtn:hover
+{
+    opacity: 0.9;
+}
+
+/*search btn*/
+.container form .input-group-prepend:hover
+{
+    opacity: 0.9;
+}
+
+
 /*Cancel Button - From Create and Update*/
 .main-container form #btnHolder a
 {
@@ -187,9 +200,110 @@ table
 
 }
 
-/*Delete Confirmation Modal*/
-.modal .modal-dialog #deleteModal
+/*Success Modal Customization*/
+
+.overlay
 {
-    background-color: #323949;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
 }
 
+.overlay .popup
+{
+
+    background: #1F1B24;
+    margin: auto;
+    max-width: 400px;
+    border-radius: 5px;
+    padding: 20px;
+    transition: all 1s ease-in-out;
+    animation: popup 1s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+    
+}
+    /*Modal popup animation*/
+    @keyframes popup {
+        0% {
+            transform: scale(0.0);
+        }
+
+        10% {
+            transform: scale(0.1);
+        }
+
+        20% {
+            transform: scale(0.2);
+        }
+
+        30%{
+            transform: scale(0.3);
+        }
+
+        40% {
+            transform: scale(0.4);
+        }
+        50% {
+            transform: scale(0.5);
+        }
+        60% {
+            transform: scale(0.6);
+        }
+        70% {
+            transform: scale(0.7);
+        }
+        80% {
+            transform: scale(0.8);
+        }
+        90% {
+            transform: scale(0.9);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
+    /*Modal popup animation - End*/
+.overlay .popup img 
+{
+    width: 100px;
+    margin-top: -65px;
+    box-shadow: 0 2px 5px rgba(#81F580, #81F580, #81F580, 0.6);
+    border-radius: 50%;
+}
+
+.overlay .popup h2
+{
+    margin-top: 10px;
+    color: #81F580;
+}
+
+.overlay .popup p
+{
+    margin-top: 10px;
+    color: #FFFFFF;
+    font-weight: bold;
+    word-wrap: break-word;
+    width: 100%;
+} 
+
+.overlay .popup button
+{
+    border-radius: 20px/50px;
+    border: none;
+    background-color: #81F580;
+    margin-top: 30px;
+    width: 40%;
+    height: 40px;
+    color: #FFFFFF;
+}

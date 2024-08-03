@@ -36,20 +36,14 @@
     bottom: 0;
     left: 0;
     right: 0;
-    background: rgba(0,0,0,0.7);
+    background: rgba(0,0,0,0.3);
     transition: opacity 500ms;
-    visibility: hidden;
-    opacity: 0;
+    display: none;
 }
-    .overlay:target
-    {
-        visibility: visible;
-        opacity: 1;
-    }
 
-.popup-modal
-{
-    background: #2A1617;
+
+.popup-modal {
+    background: #1F1B24;
     position: absolute;
     padding: 20px;
     border-radius: 5px;
@@ -61,14 +55,14 @@
     bottom: 0;
     margin: auto;
     transition: all 1s ease-in-out;
-    
+    animation: popup 0.7s;
 }
 
-
+/*
 .overlay:target .popup-modal
 {
     animation: popup 0.7s;
-}
+}*/
 
 @keyframes popup {
     0% {
