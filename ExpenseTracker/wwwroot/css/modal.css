@@ -54,43 +54,41 @@
     left: 0;
     bottom: 0;
     margin: auto;
+    animation: popup;
     transition: all 1s ease-in-out;
-    animation: popup 0.7s;
+    -moz-transition: all 1s ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+    animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+    -moz-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
 }
 
-/*
-.overlay:target .popup-modal
-{
-    animation: popup 0.7s;
-}*/
+.overlay .content form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+    .overlay .content h2 {
+        color: #B00020;
+        font-variant-caps:all-small-caps;
+    }
+
 
 @keyframes popup {
-    0% {
-        transform: scale(1);
+    from {
+        -moz-transform: translate(-0%, -100%) scale(0.1);
+        -webkit-transform: translate(-0%, -100%) scale(0.1);
+        -ms-transform: translate(-0%, -100%) scale(0.1);
     }
 
-    50% {
-        transform: scale(1.2);
-    }
-
-    60% {
-        transform: scale(1.1);
-    }
-
-    70% {
-        transform: scale(1.2);
-    }
-
-    80% {
-        transform: scale(1);
-    }
-
-    90% {
-        transform: scale(1.1);
-    }
-
-    100% {
-        transform: scale(1);
+    to {
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
     }
 }
 
@@ -107,28 +105,28 @@
     
 }
 
+
 .popup-modal form #btn-holder #cancel-btn
 {
   
    color: #fff;
    text-decoration: none;
+   font-variant-caps:all-small-caps;
     
 }
 
-.popup-modal form #btn-holder #delete-btn
-{
-  
-   color: #fff;
-   border: none;
-   background: none;
-   
-   
-    
+.popup-modal form #btn-holder #delete-btn {
+    color: #fff;
+    border: none;
+    background: none;
+    font-variant-caps: all-small-caps;
 }
 
+/*Div holder of del-btn*/
 .popup-modal form #btn-holder #delBtn {
     background-color: #B00020;
     transition: background-color 0.5s;
+    font-variant-caps: all-small-caps;
 }
     .popup-modal form #btn-holder #delBtn:hover {
        
@@ -137,10 +135,11 @@
     }
 
 
-
+/*Div holder of cancel-btn*/
 .popup-modal form #btn-holder #cancelBtn {
     background-color: #9FA6B2;
     transition: background-color 0.5s;
+    
 }
     .popup-modal form #btn-holder #cancelBtn:hover {
        // border: 2px solid #9FA6B2;

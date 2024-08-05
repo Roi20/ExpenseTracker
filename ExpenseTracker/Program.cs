@@ -39,6 +39,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Category}/{action=Delete}/{id=1}");
+    pattern: "{controller=Category}/{action=Index}/{id?}");
 
 app.Run();

@@ -105,7 +105,7 @@ namespace ExpenseTracker.Controllers
 
                 await _repo.Update(model.CategoryId, new {model.Title, model.Icon, model.Type });
                 
-                TempData["Message"] = $"{model.Title}, Updated successfully";
+                TempData["Message"] = $"{model.Title}, Updated Successfully";
                 
                 return RedirectToAction("Index");
 
@@ -137,7 +137,7 @@ namespace ExpenseTracker.Controllers
             try
             {
                 await _repo.Delete(model.CategoryId);
-                TempData["Message"] = $"{model.Title}, Deleted successfully";
+                TempData["Message"] = $"Deleted Successfully";
                 return RedirectToAction("Index");
 
             }

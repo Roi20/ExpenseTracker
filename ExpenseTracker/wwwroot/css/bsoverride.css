@@ -216,85 +216,65 @@ table
     z-index: 999;
 }
 
-.overlay .popup
-{
-
-    background: #1F1B24;
-    margin: auto;
-    max-width: 400px;
-    border-radius: 5px;
-    padding: 20px;
-    transition: all 1s ease-in-out;
-    animation: popup 1s;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    animation-timing-function: ease-in-out;
-    -webkit-animation-timing-function: ease-in-out;
-    
-}
+    .overlay .popup {
+        background: #1F1B24;
+        margin: auto;
+        max-width: 400px;
+        min-width: 30%;
+        border-radius: 5px;
+        padding: 20px;
+        transition: all 1s ease-in-out;
+        animation: popup;
+        animation-duration: 2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-timing-function: ease-in-out;
+        -moz-animation-duration: 2s;
+        -webkit-animation-duration: 2s;
+        -moz-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-timing-function: ease-in-out;
+    }
     /*Modal popup animation*/
     @keyframes popup {
-        0% {
-            transform: scale(0.0);
+        from {
+            -moz-transform: translate(-0%, -100%) scale(0.1);
+            -webkit-transform: translate(-0%, -100%) scale(0.1);
+            -ms-transform: translate(-0%, -100%) scale(0.1);
         }
 
-        10% {
-            transform: scale(0.1);
+        to {
+            -moz-transform: scale(1);
+            -webkit-transform: scale(1);
+            -ms-transform: scale(1);
         }
-
-        20% {
-            transform: scale(0.2);
-        }
-
-        30%{
-            transform: scale(0.3);
-        }
-
-        40% {
-            transform: scale(0.4);
-        }
-        50% {
-            transform: scale(0.5);
-        }
-        60% {
-            transform: scale(0.6);
-        }
-        70% {
-            transform: scale(0.7);
-        }
-        80% {
-            transform: scale(0.8);
-        }
-        90% {
-            transform: scale(0.9);
-        }
-        100% {
-            transform: scale(1);
-        }
+     
     }
     /*Modal popup animation - End*/
 .overlay .popup img 
 {
     width: 100px;
     margin-top: -65px;
-    box-shadow: 0 2px 5px rgba(#81F580, #81F580, #81F580, 0.6);
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
     border-radius: 50%;
 }
 
 .overlay .popup h2
 {
     margin-top: 10px;
-    color: #81F580;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
 }
 
 .overlay .popup p
 {
     margin-top: 10px;
     color: #FFFFFF;
-    font-weight: bold;
     word-wrap: break-word;
     width: 100%;
+    text-align: center;
 } 
 
 .overlay .popup button
@@ -306,4 +286,9 @@ table
     width: 40%;
     height: 40px;
     color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+    transition: background-color .5s ease-in-out;
 }
+    .overlay .popup button:hover {
+        background-color: #B00020;
+    }

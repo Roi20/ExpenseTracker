@@ -2,10 +2,11 @@
 
     getModal: $('#popupModal'),
 
-    getSuccessModal: $('#popup-modal')
+    getSuccessModal: $('#popup-modal'),
 
+    closeModalBtn: $('#close-btn')
+    
 }
-
 
 $(window).on('load', function () {
 
@@ -13,7 +14,9 @@ $(window).on('load', function () {
     basemodel.getSuccessModal.show();
 });
 
-
+baseModel.closeModalBtn.on('click', function () {
+    baseModel.getSuccessModal.hide();
+});
 
 
 
