@@ -5,7 +5,11 @@
     <link rel="stylesheet" href="@Url.Content("~/css/modal.css")" />
 }
 
-<div class="row d-flex justify-content-center bg-image" style="height: 100%; width: 100%">
+@{
+    ViewData["CurrentPage"] = "Index";
+}
+
+<div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
 
     @*<a class="button" href="#popupModal">Launch Modal</a>*@
     <div class="overlay" id="popupModal">
@@ -14,7 +18,7 @@
                 <a class="close" asp-action="Index">&times;</a>
             </div>
             <div class="content h-100 align-items-center d-flex justify-content-center p-3 flex-column">
-                <h2 class="text-center mb-0">Delete</h2>
+                <h2 class="text-center mb-0">Delete Category</h2>
                 <form asp-action="ConfirmedDelete" class="h-100 w-100 mt-0">
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(i => i.CategoryId)

@@ -35,4 +35,12 @@ body {
     
 }
 
-
+/*Breadcrumb*/
+#mainContainer .row nav li a
+{
+   text-decoration: none;
+   font-variant-caps: all-small-caps;
+   font-weight: bold;
+   color: #FFFFFF;
+}
+    #mainContainer .row nav {

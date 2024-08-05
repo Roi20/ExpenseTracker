@@ -36,8 +36,34 @@
             </nav>
         </header>
         <div class="container p-0 mt-5" id="mainContainer">
-            <main role="main" class="h-100 d-flex justify-content-center">
-                @RenderBody()
+            <div class="row w-100 m-auto">
+                @if(ViewData["CurrentPage"]?.ToString() == "Index")
+                {
+                    <div class="col-md-8 m-auto p-0 mb-0">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a asp-action="Index">Index</a></li>
+                                <li class="breadcrumb-item"><a asp-action="Create">Create</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            </ol>
+                        </nav>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-5 m-auto p-0">
+                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item text-decoration-none"><a asp-action="Index">Index</a></li>
+                                <li class="breadcrumb-item"><a asp-action="Create">Create</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                            </ol>
+                        </nav>
+                    </div>
+                }
+            </div>
+            <main role="main" class="h-100 d-flex justify-content-center flex-column">
+                 @RenderBody()
             </main>
         </div>
         <!--footer class="border-top footer text-muted">
