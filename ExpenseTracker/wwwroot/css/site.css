@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -36,11 +36,19 @@ body {
 }
 
 /*Breadcrumb*/
-#mainContainer .row nav li a
+
+
+
+
+#mainContainer .row nav li
 {
    text-decoration: none;
    font-variant-caps: all-small-caps;
    font-weight: bold;
-   color: #FFFFFF;
+   color: #9FA6B2;
 }
-    #mainContainer .row nav {
+    #mainContainer .row nav li.active{
+        color: #198754;
+        display: block;
+    }
+

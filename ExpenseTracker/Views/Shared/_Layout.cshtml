@@ -39,24 +39,58 @@
             <div class="row w-100 m-auto">
                 @if(ViewData["CurrentPage"]?.ToString() == "Index")
                 {
-                    <div class="col-md-8 m-auto p-0 mb-0">
-                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                    <div class="col-md-8 m-auto p-0 mb-0" id="breadcrumb">
+                        <nav style="--bs-breadcrumb-divider: '&raquo;';" aria-label="breadcrumb">
                             <ol class="breadcrumb">
-                                <li class="breadcrumb-item"><a asp-action="Index">Index</a></li>
-                                <li class="breadcrumb-item"><a asp-action="Create">Create</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-house"></i> Home
+                                    </span>
+                                </li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "")">
+                                  <span>
+                                        <i class="fa-solid fa-square-plus"></i> Create
+                                  </span>  
+                                </li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Update" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-square-pen"></i> Update
+                                    </span>
+                                </li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Delete" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-square-minus"></i> Delete
+                                    </span>
+                                </li>
                             </ol>
                         </nav>
                     </div>
                 }
                 else
                 {
-                    <div class="col-md-5 m-auto p-0">
-                        <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item text-decoration-none"><a asp-action="Index">Index</a></li>
-                                <li class="breadcrumb-item"><a asp-action="Create">Create</a></li>
-                                <li class="breadcrumb-item active" aria-current="page">Library</li>
+                    <div class="col-md-5 m-auto p-0" id="breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&raquo;';">
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-house"></i> Home
+                                    </span>
+                                </li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-square-plus"></i> Create
+                                    </span>
+                                </li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Update" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-square-pen"></i> Update
+                                    </span>
+                                </li>
+                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Delete" ? "active" : "")">
+                                    <span>
+                                        <i class="fa-solid fa-square-minus"></i> Delete
+                                    </span>
+                                </li>
                             </ol>
                         </nav>
                     </div>
