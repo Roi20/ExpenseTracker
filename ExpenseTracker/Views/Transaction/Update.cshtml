@@ -1,0 +1,66 @@
+﻿@model Transaction
+
+
+@section CustomStyles {
+
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
+
+}
+
+@{
+    ViewData["CurrentPage"] = "Update";
+}
+
+<div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
+    <div class="col-md-5 bg-dark main-container">
+        <div class="text-center mt-4" id="title-holder">
+            <h3 class="text-light">Edit Category</h3>
+        </div>
+        <div>
+            <form asp-action="Update" method="post" class="p-2 h-100">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(i => i.CategoryId)
+                <div class="text-center"><span asp-validation-for="CategoryId" class="text-danger small"></span></div>
+                <div class="mb-3">
+                    <label asp-for="CategoryId"></label>
+                    <input asp-for="CategoryId" placeholder="@Model.CategoryId" class="form-control rounded-0" />
+                </div>
+                <label asp-for="Amount"></label>
+                <div class="input-group mb-3">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Amount">
+                        <option class="font-monospace" value="@Model.Amount" selected>@Model.Amount</option>
+                        <option value="✈️" class="font-monospace">✈️</option>
+                        <option value="🏚️" class="font-monospace">🏚️</option>
+                        <option value="🥎" class="font-monospace">🥎</option>
+                        <option value="🍴" class="font-monospace">🍴</option>
+                        <option value="🚘" class="font-monospace">🚘</option>
+                        <option value="🛍️" class="font-monospace">🛍️</option>💲
+                        <option value="💲" class="font-monospace">💲</option>
+                    </select>
+                </div>
+                <label asp-for="Note"></label>
+                <div class="input-group mb-3">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Note">
+                        <option value="Unspecified" class="font-monospace">Unspecified</option>
+                        <option value="Expense" class="font-monospace">Expense</option>
+                        <option value="Income" class="font-monospace">Income</option>
+                    </select>
+                </div>
+                <div class="text-center"><span asp-validation-for="Date" class="text-danger small"></span></div>
+                <div class="mb-3">
+                    <label asp-for="Date"></label>
+                    <input asp-for="Date" placeholder="Amount" class="form-control rounded-0" />
+                </div>
+                <div id="btnHolder" class="mt-4 pb-5">
+                    <button type="submit" class="btn w-100 rounded-0">Save</button>
+                    <a asp-action="Index" class="btn w-100 mt-3 btn-danger rounded-0">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

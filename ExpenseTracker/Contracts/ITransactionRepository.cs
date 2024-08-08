@@ -1,4 +1,6 @@
-﻿using System.Transactions;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Models;
+using ExpenseTracker.Repository;
 
 namespace ExpenseTracker.Contracts
 {

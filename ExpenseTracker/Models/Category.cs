@@ -25,14 +25,7 @@ namespace ExpenseTracker.Models
         public string Type { get; set; } = "Unspecified";
 
 
-        public string CategoryWithIcon 
-        {
-            get
-            {
-                return Icon + "  " + "  " +Title;
-            }
-
-        }
+    
 
 
     }
