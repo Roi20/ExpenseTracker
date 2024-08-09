@@ -1,4 +1,4 @@
-﻿@model Transaction
+﻿@model TransactionViewModel
 
 
 
@@ -23,36 +23,25 @@
         <div>
             <form asp-action="Create" method="post" class="p-2 h-100">
                 @Html.AntiForgeryToken()
-                <div class="text-center"><span asp-validation-for="CategoryId" class="text-danger small"></span></div>
+                <div class="text-center"><span asp-validation-for="Transaction.Date" class="text-danger small"></span></div>
                 <div class="mb-3">
-                    <label asp-for="CategoryId"></label>
-                    <input asp-for="CategoryId" placeholder="Amount" class="form-control rounded-0" />
+                    <label asp-for="Transaction.Date"></label>
+                    <input asp-for="Transaction.Date" type="date" class="form-control rounded-0" />
                 </div>
-                <label asp-for="Amount"></label>
-                <div class="input-group mb-3">
-                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Amount">
-                        <option class="font-monospace" value="☕" selected>☕</option>
-                        <option value="✈️" class="font-monospace">✈️</option>
-                        <option value="🏚️" class="font-monospace">🏚️</option>
-                        <option value="🥎" class="font-monospace">🥎</option>
-                        <option value="🍴" class="font-monospace">🍴</option>
-                        <option value="🚘" class="font-monospace">🚘</option>
-                        <option value="🛍️" class="font-monospace">🛍️</option>💲
-                        <option value="💲" class="font-monospace">💲</option>
+                <label asp-for="Transaction.CategoryId"></label>
+                <div class="input-group mb-2">
+                    <select class="form-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId"
+                            asp-items="@(new SelectList(Model.Categories, "CategoryId", "Title"))">
                     </select>
                 </div>
-                <label asp-for="Note"></label>
-                <div class="input-group mb-3">
-                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Note">
-                        <option value="Unspecified" class="font-monospace" selected>Unspecified</option>
-                        <option value="Expense" class="font-monospace">Expense</option>
-                        <option value="Income" class="font-monospace">Income</option>
-                    </select>
+                <div class="text-center"><span asp-validation-for="Transaction.Amount" class="text-danger small"></span></div>
+                <div class="mb-2">
+                    <label asp-for="Transaction.Amount"></label>
+                    <input asp-for="Transaction.Amount" placeholder="Amount" class="form-control rounded-0" />
                 </div>
-                <div class="text-center"><span asp-validation-for="Date" class="text-danger small"></span></div>
-                <div class="mb-3">
-                    <label asp-for="Date"></label>
-                    <input asp-for="Date" placeholder="" class="form-control rounded-0" />
+                <label asp-for="Transaction.Note"></label>
+                <div class="mb-2">
+                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="2"></textarea>
                 </div>
                 <div id="btnHolder" class="mt-4 pb-5">
                     <button class="btn w-100 rounded-0" type="submit">Create</button>

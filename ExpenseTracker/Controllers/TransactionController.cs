@@ -1,7 +1,9 @@
-﻿using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Metadata.Ecma335;
 
 namespace ExpenseTracker.Controllers
 {
@@ -15,15 +17,33 @@ namespace ExpenseTracker.Controllers
             _repo = repo;            
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            try
+            {
+                var entities = await _repo.GetAll();
+
+                if(entities != null)
+                    return View(entities);
+
+                return NotFound();
+
+            }
+            catch
+            {
+                throw new Exception();
+            }
         }
-
-
+        
         public IActionResult Create() 
         {
-            return View(new Transaction());
+            var viewModel = new TransactionViewModel
+            {
+                Transaction = new Transaction(),
+                Categories = _repo.GetAllCategoriesAsync().Result
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
@@ -56,7 +76,14 @@ namespace ExpenseTracker.Controllers
 
         public IActionResult Update() 
         {
-            return View(new Transaction());
+
+            var viewModel = new TransactionViewModel
+            {
+                Transaction = new Transaction(),
+                Categories = _repo.GetAllCategoriesAsync().Result
+            };
+
+            return View(viewModel);
         }
 
 

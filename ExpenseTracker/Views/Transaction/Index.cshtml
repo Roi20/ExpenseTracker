@@ -1,4 +1,4 @@
-﻿@model PaginatedResult<Transaction>
+﻿@model IEnumerable<Transaction>
 
 
 @section CustomStyles
@@ -10,12 +10,12 @@
     ViewData["CurrentPage"] = "Index";
 }
 
-@*<partial name="_PopUpSuccessModal" />*@
+
 <div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
     @if (TempData["Message"] != null)
     {
 
-        <partial name="_PopUpSuccessModal" />
+        @*<partial name="_PopUpSuccessModal" />*@
         <!--div class="alert alert-success d-flex align-items-center alert-dismissible fade show" tabindex="-1" role="alert">
             <svg class="bi flex-shrink-0 me-2" height="20" width="20" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
             <div>
@@ -45,7 +45,7 @@
                                    placeholder="Search"
                                    aria-describedby="inputGroup-sizing-sm"
                                    name="s"
-                                   value="@Model.SearchKeyword">
+                                   value="">
                             <div class="input-group-prepend bg-success">
                                 <button class="btn btn-sm h-100 text-center bg-transparent"
                                         type="submit"
@@ -60,19 +60,21 @@
             <table class="table table-hover table-dark mb-0 mt-0 bg-secondary">
                 <thead class="bg-secondary">
                     <tr class="text-success">
-                        <th></th>
-                        <th class="text-start">Title</th>
-                        <th>Type</th>
+                        <th>Category Id</th>
+                        <th class="">Amount</th>
+                        <th>Note</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Result)
+                    @foreach (var item in Model)
                     {
                         <tr>
-                            <td class="text-center"></td>
-                            <td class="text-start"></td>
-                            <td></td>
+                            <td class="">@item.CategoryId</td>
+                            <td>@item.Amount</td>
+                            <td class="">@item.Note</td>
+                            <td>@item.Date</td>
                             <td>
                                 <div class="text-start">
                                     <a asp-action="Update" asp-route-id="@item.CategoryId" class="text-warning text-decoration-none me-1"
@@ -91,6 +93,7 @@
                 </tbody>
             </table>
         </div>
+        @*
         <nav class="pagination-outer" aria-label="Page navigation">
             <ul class="pagination p-3">
                 <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
@@ -122,6 +125,7 @@
                 </li>
             </ul>
         </nav>
+        *@
     </div>
 </div>
 @section CustomsScripts {

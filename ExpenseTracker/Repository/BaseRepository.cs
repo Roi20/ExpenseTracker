@@ -11,7 +11,7 @@ namespace ExpenseTracker.Repository
     {
 
         private readonly DbContext _db;
-        private readonly DbSet<T> _table;
+        protected readonly DbSet<T> _table;
 
         public BaseRepository(ExpenseTrackerDbContext db)
         {

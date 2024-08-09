@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
@@ -15,11 +16,11 @@ namespace ExpenseTracker.Models
         [Column(TypeName = "nvarchar(100)")]
         public string? Note { get; set; }
 
-        public DateTime Date { get; set; } = DateTime.Now;
+        public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
-        [ForeignKey("Category")]
+        [ForeignKey("Category"), DisplayName("Category")]
         public int CategoryId { get; set; }
-
+       
         public virtual Category Category { get; set; }
     }
 }

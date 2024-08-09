@@ -8,18 +8,27 @@ namespace ExpenseTracker.Repository
 {
     public class TransactionRepository : BaseRepository<Transaction>,  ITransactionRepository
     {
-        public TransactionRepository(ExpenseTrackerDbContext db) : base(db)
+
+        private readonly ICategoryRepository _categoryRepository;
+
+
+        public TransactionRepository(ExpenseTrackerDbContext db, ICategoryRepository categoryRepository) : base(db)
         {
-         
+            _categoryRepository = categoryRepository;
         }
 
-        /*
-        public async Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, string keyword)
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
         {
-            return await GetPaginated(page, pageSize, t => t.Note.Contains(keyword ?? string.Empty));
+            try
+            {
+                return await _categoryRepository.GetAll();
+            }
+            catch (Exception) 
+            {
+                throw;
+            }
+            
         }
-        */
-
 
     }
 }

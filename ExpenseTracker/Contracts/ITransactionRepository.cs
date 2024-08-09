@@ -6,5 +6,9 @@ namespace ExpenseTracker.Contracts
 {
     public interface ITransactionRepository : IBaseRepository<Transaction>
     {
+
+        Task <IEnumerable<Category>> GetAllCategoriesAsync();
+
+
     }
 }
