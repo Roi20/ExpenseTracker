@@ -127,6 +127,26 @@ namespace ExpenseTracker.Repository
 
         }
 
+        public async Task<PaginatedResult<T>> GetPagination(int page, int pageSize)
+        {
+            var count = await _table.CountAsync();
+
+            var records = await _table
+                          .Skip((page - 1) * pageSize)
+                          .Take(pageSize)
+                          .ToListAsync();
+
+
+            return new PaginatedResult<T>
+            {
+                Result = records,
+                Page = page,
+                TotalCount = (int)Math.Ceiling(count / (double)pageSize)
+
+            };
+
+        }
+
 
         //(Not Use) Provision for future redesign of this project with user account
         public Task<IEnumerable<T>> UserId(string userId)

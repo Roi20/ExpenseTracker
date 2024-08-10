@@ -30,7 +30,7 @@
                 </div>
                 <label asp-for="Transaction.CategoryId"></label>
                 <div class="input-group mb-2">
-                    <select class="form-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId"
+                    <select class="form-select custom-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId"
                             asp-items="@(new SelectList(Model.Categories, "CategoryId", "Title"))">
                     </select>
                 </div>
@@ -39,10 +39,12 @@
                     <label asp-for="Transaction.Amount"></label>
                     <input asp-for="Transaction.Amount" placeholder="Amount" class="form-control rounded-0" />
                 </div>
-                <label asp-for="Transaction.Note"></label>
-                <div class="mb-2">
-                    <textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="2"></textarea>
+                <div class="form-group">
+                    <label asp-for="Transaction.Note"></label>
+                    <div><span asp-validation-for="Transaction.Note" class="text-danger"></span></div>
+                    <textarea asp-for="Transaction.Note" class="form-control" rows="2"></textarea>
                 </div>
+
                 <div id="btnHolder" class="mt-4 pb-5">
                     <button class="btn w-100 rounded-0" type="submit">Create</button>
                     <a asp-action="Index" class="btn w-100 mt-3 btn-danger rounded-0">Cancel</a>

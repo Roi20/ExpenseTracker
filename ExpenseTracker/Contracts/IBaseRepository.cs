@@ -12,6 +12,8 @@ namespace ExpenseTracker.Contracts
         Task Delete(object id);
         Task <PaginatedResult<T>> GetPaginated(int page, int pageSize, Expression<Func<T, bool>> condition);
 
+        Task<PaginatedResult<T>> GetPagination(int page, int pageSize);
+
 
         //Get all by user id - Not yet implemented, this is just a provision for integrating user input data
         Task<IEnumerable<T>> UserId(string userId);

@@ -292,3 +292,10 @@ table
     .overlay .popup button:hover {
         background-color: #B00020;
     }
+
+
+/*DropDown select*/
+.main-container form .input-group .custom-select {
+    //font-family: "Libre Franklin" !important;
+   // -webkit-appearance: none;
+}

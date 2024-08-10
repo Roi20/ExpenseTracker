@@ -5,6 +5,7 @@
         public int Page { get; set; }
         public int TotalCount { get; set; }
         public string? SearchKeyword { get; set; }
+        public int? SearchAmount { get; set; }
         public IEnumerable<T>? Result { get; set; }
 
     }

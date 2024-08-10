@@ -17,24 +17,46 @@ namespace ExpenseTracker.Controllers
             _repo = repo;            
         }
 
+        /*
         public async Task<IActionResult> Index()
         {
             try
             {
                 var entities = await _repo.GetAll();
+                return View(entities);
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Exception: {ex.Message} || StackTrace: {ex.StackTrace}");
+            }
+        }
+        */
 
-                if(entities != null)
-                    return View(entities);
 
-                return NotFound();
 
+        public async Task<IActionResult> Index(PaginatedRequest request) 
+        {
+
+            try
+            {
+                var entities = await _repo.GetPagination(
+                    request.PageNumber,
+                    PaginatedRequest.ITEMS_PER_PAGE);
+
+               // entities.SearchAmount = request.SearchAmount;
+
+                return View(entities);
             }
             catch
             {
-                throw new Exception();
+                return NotFound();
             }
+
         }
-        
+
+
+
+
         public IActionResult Create() 
         {
             var viewModel = new TransactionViewModel
@@ -48,13 +70,12 @@ namespace ExpenseTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Transaction model)
+        public async Task<IActionResult> Create(TransactionViewModel models)
         {
-            if (!ModelState.IsValid)
-                return View(ModelState);
 
             try
             {
+                var model = models.Transaction;
 
                 await _repo.Create(model);
 
@@ -65,6 +86,7 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
+                ModelState.AddModelError("", $"Unable to update todo. | Error: {ex.Message} | {ex.StackTrace}");
                 return StatusCode(500, $"Unable to update database: {ex.Message}");
             }
             catch (Exception ex)
@@ -129,6 +151,38 @@ namespace ExpenseTracker.Controllers
                 throw new Exception();
             }
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            var entity = await _repo.GetById(id);
+
+            if (entity == null)
+            {
+                return NotFound();
+            }
+
+            return View(entity);
+        }
+
+        public async Task<IActionResult> ConfirmedDelete(Transaction model)
+        {
+            try
+            {
+                await _repo.Delete(model.TransactionId);
+                TempData["Message"] = $"Deleted Successfully";
+                return RedirectToAction("Index");
+
+            }
+            catch (DbUpdateException ex)
+            {
+                throw new DbUpdateException($"DbUpdateException: Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+            }
+            catch (Exception)
+            {
+                throw new Exception();
+            }
+        }
+
 
 
 

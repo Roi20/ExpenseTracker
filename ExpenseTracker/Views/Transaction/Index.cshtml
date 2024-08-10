@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Transaction>
+﻿@model PaginatedResult<Transaction>
 
 
 @section CustomStyles
@@ -31,7 +31,7 @@
                 <div class="col-6 p-0 mt-4">
                     <a class="btn bg-success border-outline" asp-action="Create" id="createBtn">
                         <span class="text-light h-100 w-100">
-                            <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Category
+                            <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Transaction
                         </span>
                     </a>
                 </div>
@@ -68,7 +68,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
+                    @foreach (var item in Model.Result)
                     {
                         <tr>
                             <td class="">@item.CategoryId</td>
@@ -77,13 +77,13 @@
                             <td>@item.Date</td>
                             <td>
                                 <div class="text-start">
-                                    <a asp-action="Update" asp-route-id="@item.CategoryId" class="text-warning text-decoration-none me-1"
+                                    <a asp-action="Update" asp-route-id="@item.TransactionId" class="text-warning text-decoration-none me-1"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="left"
                                        title="Update">
                                         <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="text-danger text-decoration-none ms-1">
+                                    <a asp-action="Delete" asp-route-id="@item.TransactionId" class="text-danger text-decoration-none ms-1">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                     </a>
                                 </div>
@@ -93,11 +93,10 @@
                 </tbody>
             </table>
         </div>
-        @*
         <nav class="pagination-outer" aria-label="Page navigation">
             <ul class="pagination p-3">
                 <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
+                    <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
                         <span aria-hidden="true" class="bg-transparent">« Previous</span>
                     </a>
                 </li>
@@ -112,20 +111,19 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">
+                            <a class="page-link" asp-route-a="@Model.SearchAmount" asp-route-p="@pageNumber">
                                 <span>@pageNumber</span>
                             </a>
                         </li>
                     }
                 }
                 <li class="page-item @(Model.Page == Model.TotalCount ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page + 1)" aria-label="Next">
+                    <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page + 1)" aria-label="Next">
                         <span aria-hidden="true" class="bg-transparent">Next »</span>
                     </a>
                 </li>
             </ul>
         </nav>
-        *@
     </div>
 </div>
 @section CustomsScripts {
