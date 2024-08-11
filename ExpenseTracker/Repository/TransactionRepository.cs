@@ -13,17 +13,16 @@ namespace ExpenseTracker.Repository
         private readonly ICategoryRepository _categoryRepository;
 
 
+
         public TransactionRepository(ExpenseTrackerDbContext db, ICategoryRepository categoryRepository) : base(db)
         {
             _categoryRepository = categoryRepository;
+
         }
 
-        public async Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize)
+        public async Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, int searchAmount)
         {
-
-            
-            return await GetPaginated(page, pageSize);
-
+            return await GetPaginated(page, pageSize, t => t.Amount == searchAmount);
         }
 
         public async Task<IEnumerable<Category>> GetAllCategoriesAsync()

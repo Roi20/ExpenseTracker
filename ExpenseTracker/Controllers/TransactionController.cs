@@ -41,9 +41,10 @@ namespace ExpenseTracker.Controllers
             {
                 var entities = await _repo.GetPagination(
                     request.PageNumber,
-                    PaginatedRequest.ITEMS_PER_PAGE);
+                    PaginatedRequest.ITEMS_PER_PAGE
+                    );
 
-               // entities.SearchAmount = request.SearchAmount;
+              //  entities.SearchAmount = request.SearchAmount;
 
                 return View(entities);
             }
