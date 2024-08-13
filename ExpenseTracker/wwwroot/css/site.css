@@ -1,4 +1,6 @@
-﻿html {
+﻿
+
+html {
   font-size: 14px;
 }
 
@@ -15,11 +17,11 @@
 html, body{
     position: relative;
     min-height: 100%;
-    font-family: "Libre Franklin";
+    font-family: "Libre Franklin" !important;
 }
 
 *:not(.fa-solid):not(.fa):not(.e-icons) {
-    font-family: "Libre Franklin";
+    font-family: "Libre Franklin" !important;
 }
 
 body {
@@ -32,12 +34,9 @@ body {
 
    height: 100%;
    
-    
 }
 
 /*Breadcrumb*/
-
-
 
 
 #mainContainer .row nav li
