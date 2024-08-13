@@ -1,0 +1,60 @@
+﻿@model TransactionViewModel
+
+
+
+@section CustomStyles {
+
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
+
+}
+
+@{
+    ViewData["CurrentPage"] = "Create";
+}
+
+<div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
+    <div class="col-md-5 bg-dark main-container m-auto">
+        <div class="text-center mt-4" id="title-holder">
+            <h3 class="text-light">New Transaction</h3>
+            <p class="text-light small">
+                Create a new Transaction<br />
+            </p>
+        </div>
+        <div>
+            <form asp-action="Create" method="post" class="p-2 h-100">
+                @Html.AntiForgeryToken()
+                <div class="text-center"><span asp-validation-for="Transaction.Date" class="text-danger small"></span></div>
+                <div class="mb-3">
+                    <label asp-for="Transaction.Date"></label>
+                    <input asp-for="Transaction.Date" type="date" class="form-control rounded-0" />
+                </div>
+                <label asp-for="Transaction.CategoryId"></label>
+                <div class="input-group mb-2">
+                    <select class="form-select custom-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId"
+                            asp-items="@(new SelectList(Model.Categories, "CategoryId", "Title"))">
+                    </select>
+                </div>
+                <div class="text-center"><span asp-validation-for="Transaction.Amount" class="text-danger small"></span></div>
+                <div class="mb-2">
+                    <label asp-for="Transaction.Amount"></label>
+                    <input asp-for="Transaction.Amount" placeholder="Amount" class="form-control rounded-0" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Transaction.Note"></label>
+                    <div><span asp-validation-for="Transaction.Note" class="text-danger"></span></div>
+                    <textarea asp-for="Transaction.Note" class="form-control" rows="2"></textarea>
+                </div>
+
+                <div id="btnHolder" class="mt-4 pb-5">
+                    <button class="btn w-100 rounded-0" type="submit">Create</button>
+                    <a asp-action="Index" class="btn w-100 mt-3 btn-danger rounded-0">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,39 +1,21 @@
-﻿using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Context;
+using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Repository
 {
-    public class CategoryRepository : ICategoryRepository
+    public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
-        public Task Create(Category entity)
+        
+        public CategoryRepository(ExpenseTrackerDbContext db) : base(db)
         {
-            throw new NotImplementedException();
         }
 
-        public Task Delete(object id)
+        public async Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword)
         {
-            throw new NotImplementedException();
-        }
-
-        public Task<IEnumerable<Category>> GetAll()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Category> GetById(int id)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task Update(object id, object model)
-        {
-            throw new NotImplementedException();
-        }
-
-        //provision
-        public Task<IEnumerable<Category>> UserId(string userId)
-        {
-            throw new NotImplementedException();
+            return await GetPaginated(page, pageSize, t => t.Title.Contains(keyword ?? string.Empty));
         }
     }
 }

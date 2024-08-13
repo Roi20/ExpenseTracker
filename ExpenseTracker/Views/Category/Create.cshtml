@@ -1,33 +1,64 @@
-﻿@model Category
+﻿
+@model Category
 
 
-<div class="row d-flex justify-content-center">
-    <div class="col-md-5">
-        <div class="mb-3">
-            <h1>Category</h1>
+
+@section CustomStyles{
+
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")"/>
+   
+}
+
+@{
+    ViewData["CurrentPage"] = "Create";
+}
+
+<div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
+    <div class="col-md-5 bg-dark main-container m-auto">
+        <div class="text-center mt-4" id="title-holder">
+            <h3 class="text-light">New Category</h3>
+            <p class="text-light small">Create a new category <br />
+                to track your expenses</p>
         </div>
-        <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="mb-3">
-                <div class="e-btn-group rbt-group">
-                    <input class="" type="radio" id="radioleft" name="Type" value="Expense" checked="@(Model.Type=="Expense")" />
-                    <label class="e-btn" for="radioleft">Expense</label>
-                    <input type="radio" id="radiomiddle" name="Type" value="Income" checked="@(Model.Type=="Income")" />
-                    <label class="e-btn" for="radiomiddle">Income</label>
+        <div>
+            <form asp-action="Create" method="post" class="p-2 h-100">
+                @Html.AntiForgeryToken()
+                <div class="text-center"><span asp-validation-for="Title" class="text-danger small"></span></div>
+                <div class="mb-3">
+                    <label asp-for="Title"></label>
+                    <input asp-for="Title" placeholder="Title" class="form-control rounded-0" />
                 </div>
-            </div>
-            <div><span asp-validation-for="Title" class="text-danger"></span></div>
-            <div class="mb-2">
-                <ejs-textbox id="title" placeholder="Title" ejs-for="Title" floatLabelType="Always"></ejs-textbox>
-            </div>
-            <div><span asp-validation-for="Icon" class="text-danger"></span></div>
-            <div class="mb-3">
-                <ejs-textbox id="icon" placeholder="Icon" ejs-for="Icon" floatLabelType="Always"></ejs-textbox>
-            </div>
-            <div><span asp-validation-for="Type" class="text-danger"></span></div>
-            <div id="createBtn">
-                <button type="submit" class="w-100 btn btn-primary">Create</button>
-            </div>
-        </form>
+                <label asp-for="Icon"></label>
+                <div class="input-group mb-3">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Icon">
+                        <option class="font-monospace" value="☕" selected>☕</option>
+                        <option value="✈️" class="font-monospace">✈️</option>
+                        <option value="🏚️" class="font-monospace">🏚️</option>
+                        <option value="🥎" class="font-monospace">🥎</option>
+                        <option value="🍴" class="font-monospace">🍴</option>
+                        <option value="🚘" class="font-monospace">🚘</option>
+                        <option value="🛍️" class="font-monospace">🛍️</option>💲
+                        <option value="💲" class="font-monospace">💲</option>
+                    </select>
+                </div>
+                <label asp-for="Type"></label>
+                <div class="input-group mb-3">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Type">
+                        <option value="Unspecified" class="font-monospace" selected>Unspecified</option>
+                        <option value="Expense" class="font-monospace">Expense</option>
+                        <option value="Income" class="font-monospace">Income</option>
+                    </select>
+                </div>
+                <div id="btnHolder" class="mt-4 pb-5">
+                    <button class="btn w-100 rounded-0" type="submit">Create</button>
+                    <a asp-action="Index" class="btn w-100 mt-3 btn-danger rounded-0">Cancel</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
+    
+@section Scripts{
+
+    <partial name="_ValidationScriptsPartial" />
+}

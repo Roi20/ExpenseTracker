@@ -1,0 +1,148 @@
+﻿
+
+.popup-modal .close
+{
+    position: absolute;
+    top: 8px;
+    text-decoration: none;
+    right: 20px;
+    font-size: 30px;
+    color: #fff;
+    font-weight: bold;
+}
+    .popup-modal .close:hover {
+        color: #B00020;
+    }
+
+
+.popup-modal #btn-holder
+{
+    position: absolute;
+    bottom: 15px;
+    right: 20px;
+    width: 50%;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+   
+    
+}
+
+
+.overlay
+{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0,0,0,0.3);
+    transition: opacity 500ms;
+    display: none;
+}
+
+
+.popup-modal {
+    background: #1F1B24;
+    position: absolute;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    height: 230px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    margin: auto;
+    animation: popup;
+    transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+    animation-duration: 2s;
+    -moz-animation-duration: 2s;
+    -webkit-animation-duration: 2s;
+    -moz-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    -webkit-animation-timing-function: ease-in-out;
+}
+
+.overlay .content form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+    .overlay .content h2 {
+        color: #B00020;
+        font-variant-caps:all-small-caps;
+    }
+
+
+@keyframes popup {
+    from {
+        -moz-transform: translate(-0%, -100%) scale(0.1);
+        -webkit-transform: translate(-0%, -100%) scale(0.1);
+        -ms-transform: translate(-0%, -100%) scale(0.1);
+    }
+
+    to {
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+    }
+}
+
+.popup-modal form #btn-holder div
+{
+    border-radius: 20px/50px;
+    font-size: .8em;
+    width: 40%;
+    border: none;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+}
+
+
+.popup-modal form #btn-holder #cancel-btn
+{
+  
+   color: #fff;
+   text-decoration: none;
+   font-variant-caps:all-small-caps;
+    
+}
+
+.popup-modal form #btn-holder #delete-btn {
+    color: #fff;
+    border: none;
+    background: none;
+    font-variant-caps: all-small-caps;
+}
+
+/*Div holder of del-btn*/
+.popup-modal form #btn-holder #delBtn {
+    background-color: #B00020;
+    transition: background-color 0.5s;
+    font-variant-caps: all-small-caps;
+}
+    .popup-modal form #btn-holder #delBtn:hover {
+       
+       // border: 2px solid #B00020;
+        background-color: transparent;
+    }
+
+
+/*Div holder of cancel-btn*/
+.popup-modal form #btn-holder #cancelBtn {
+    background-color: #9FA6B2;
+    transition: background-color 0.5s;
+    
+}
+    .popup-modal form #btn-holder #cancelBtn:hover {
+       // border: 2px solid #9FA6B2;
+        background-color: transparent;
+    }
+

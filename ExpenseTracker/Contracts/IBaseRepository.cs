@@ -1,18 +1,17 @@
-﻿namespace ExpenseTracker.Contracts
+﻿using ExpenseTracker.Common;
+using System.Linq.Expressions;
+
+namespace ExpenseTracker.Contracts
 {
     public interface IBaseRepository<T>
     {
         Task <IEnumerable<T>> GetAll();
-        Task<T> GetById(int id);
+        Task<T> GetById(object id);
         Task Create(T entity);
         Task Update(object id, object model);
         Task Delete(object id);
-
-
-        //Get all by user id - Not yet implemented, this is just a provision for integrating user input data
-        Task<IEnumerable<T>> UserId(string userId);
-
-
+        Task <PaginatedResult<T>> GetPaginated(int page, int pageSize, Expression<Func<T, bool>> condition);
+        Task<PaginatedResult<T>> GetPagination(int page, int pageSize);
 
     }
 }

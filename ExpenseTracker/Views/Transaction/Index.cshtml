@@ -1,4 +1,4 @@
-﻿@model PaginatedResult<Category>
+﻿@model PaginatedResult<Transaction>
 
 
 @section CustomStyles
@@ -16,13 +16,13 @@
     {
         <partial name="_PopUpSuccessModal" />
     }
-   <div class="col-md-8 p-0 m-auto">
+    <div class="col-md-8 p-0 m-auto">
         <div class="container p-0 mt-5" id="tableHolder">
             <div class="row w-100 m-auto p-0">
                 <div class="col-6 p-0 mt-4">
                     <a class="btn bg-success border-outline" asp-action="Create" id="createBtn">
                         <span class="text-light h-100 w-100">
-                            <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Category
+                            <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Transaction
                         </span>
                     </a>
                 </div>
@@ -36,7 +36,7 @@
                                    placeholder="Search"
                                    aria-describedby="inputGroup-sizing-sm"
                                    name="s"
-                                   value="@Model.SearchKeyword">
+                                   value="">
                             <div class="input-group-prepend bg-success">
                                 <button class="btn btn-sm h-100 text-center bg-transparent"
                                         type="submit"
@@ -51,9 +51,10 @@
             <table class="table table-hover table-dark mb-0 mt-0 bg-secondary">
                 <thead class="bg-secondary">
                     <tr class="text-success">
-                        <th></th>
-                        <th class="text-start">Title</th>
-                        <th>Type</th>
+                        <th>Category Id</th>
+                        <th class="">Amount</th>
+                        <th>Note</th>
+                        <th>Date</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -61,18 +62,19 @@
                     @foreach (var item in Model.Result)
                     {
                         <tr>
-                            <td class="text-center">@item.Icon</td>
-                            <td class="text-start">@item.Title</td>
-                            <td>@item.Type</td>
+                            <td class="">@item.CategoryId</td>
+                            <td>@item.Amount</td>
+                            <td class="">@item.Note</td>
+                            <td>@item.Date</td>
                             <td>
                                 <div class="text-start">
-                                    <a asp-action="Update" asp-route-id="@item.CategoryId" class="text-warning text-decoration-none me-1"
-                                       data-bs-toggle="tooltip" 
+                                    <a asp-action="Update" asp-route-id="@item.TransactionId" class="text-warning text-decoration-none me-1"
+                                       data-bs-toggle="tooltip"
                                        data-bs-placement="left"
                                        title="Update">
                                         <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="text-danger text-decoration-none ms-1">
+                                    <a asp-action="Delete" asp-route-id="@item.TransactionId" class="text-danger text-decoration-none ms-1">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                     </a>
                                 </div>
@@ -85,7 +87,7 @@
         <nav class="pagination-outer" aria-label="Page navigation">
             <ul class="pagination p-3">
                 <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
+                    <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
                         <span aria-hidden="true" class="bg-transparent">« Previous</span>
                     </a>
                 </li>
@@ -100,24 +102,22 @@
                     else
                     {
                         <li class="page-item">
-                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">
+                            <a class="page-link" asp-route-a="@Model.SearchAmount" asp-route-p="@pageNumber">
                                 <span>@pageNumber</span>
                             </a>
                         </li>
                     }
                 }
                 <li class="page-item @(Model.Page == Model.TotalCount ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page + 1)" aria-label="Next">
+                    <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page + 1)" aria-label="Next">
                         <span aria-hidden="true" class="bg-transparent">Next »</span>
                     </a>
                 </li>
             </ul>
         </nav>
-   </div>
- </div>
+    </div>
+</div>
 @section CustomsScripts {
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
 
 }
-     
- 

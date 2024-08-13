@@ -1,0 +1,36 @@
+﻿@model Category
+    
+@section CustomStyles
+{
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
+}
+
+@*
+<div class="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content" id="deleteModal">
+            <div class="modal-body">
+                <form asp-action="ConfirmedDelete" id="deleteForm" class="p-4">
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(i => i.CategoryId)
+                    <div class="text-light mt-3">
+                        <span class="text-center">
+                            Are you sure you want to delete <strong>@Model.Title</strong> ?
+                        </span>
+                    </div>
+                   <div class="mt-5 float-end">
+                        <button id="delete-submit" type="submit" class="btn btn-warning">Delete</button>
+                        <a asp-action="Index" class="btn btn-secondary" id="closeBtn">Cancel</a>
+                   </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+*@
+
+@section CustomsScripts {
+
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+
+}

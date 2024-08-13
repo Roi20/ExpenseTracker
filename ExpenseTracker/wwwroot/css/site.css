@@ -1,4 +1,4 @@
-html {
+﻿html {
   font-size: 14px;
 }
 
@@ -12,42 +12,43 @@ html {
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+html, body{
+    position: relative;
+    min-height: 100%;
+    font-family: "Libre Franklin";
+}
+
+*:not(.fa-solid):not(.fa):not(.e-icons) {
+    font-family: "Libre Franklin";
 }
 
 body {
   margin-bottom: 60px;
-  background-color: #12161d;
-  color: #fff;
-}
-e.bigger {
-    font-size: x-large;
+  background-color: #121212;
 }
 
-/*Customizing Radio Button Group*/
-.e-btn-group.rbt-group
+#mainContainer
 {
-    width: 100%;
+
+   height: 100%;
+   
+    
 }
 
-.e-btn-group.rbt-group .e-btn
-{
-    width: 50%;
-}
+/*Breadcrumb*/
 
-.rbt-group label .e-btn
-{
-    box-shadow: none !important;
-    background-color: rgb(34, 43, 51);
-    color: #fff;
-    border: 1px solid #BBDEFB;
-}
 
-.e-btn-group.rbt-group input:checked + label.e-btn 
+
+
+#mainContainer .row nav li
 {
-    background-color: #BBDEFB;
-    color: #212b36;
-    border: 1px solid #BBDEFB;
+   text-decoration: none;
+   font-variant-caps: all-small-caps;
+   font-weight: bold;
+   color: #9FA6B2;
 }
+    #mainContainer .row nav li.active{
+        color: #198754;
+        display: block;
+    }
+
