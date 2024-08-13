@@ -20,6 +20,7 @@ namespace ExpenseTracker.Repository
 
         }
 
+        //Not in Use Method
         public async Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, int searchAmount)
         {
             return await GetPaginated(page, pageSize, t => t.Amount == searchAmount);

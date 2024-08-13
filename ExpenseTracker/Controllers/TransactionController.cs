@@ -17,23 +17,6 @@ namespace ExpenseTracker.Controllers
             _repo = repo;            
         }
 
-        /*
-        public async Task<IActionResult> Index()
-        {
-            try
-            {
-                var entities = await _repo.GetAll();
-                return View(entities);
-            }
-            catch(Exception ex)
-            {
-                throw new Exception($"Exception: {ex.Message} || StackTrace: {ex.StackTrace}");
-            }
-        }
-        */
-
-
-
         public async Task<IActionResult> Index(PaginatedRequest request) 
         {
 
@@ -44,8 +27,6 @@ namespace ExpenseTracker.Controllers
                     PaginatedRequest.ITEMS_PER_PAGE
                     );
 
-              //  entities.SearchAmount = request.SearchAmount;
-
                 return View(entities);
             }
             catch
@@ -54,8 +35,6 @@ namespace ExpenseTracker.Controllers
             }
 
         }
-
-
 
 
         public IActionResult Create() 
@@ -87,7 +66,7 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
-                ModelState.AddModelError("", $"Unable to update todo. | Error: {ex.Message} | {ex.StackTrace}");
+                ModelState.AddModelError("", $"Unable to update | Error: {ex.Message} | {ex.StackTrace}");
                 return StatusCode(500, $"Unable to update database: {ex.Message}");
             }
             catch (Exception ex)
@@ -96,47 +75,36 @@ namespace ExpenseTracker.Controllers
             }
 
         }
-
-        public IActionResult Update() 
-        {
-
-            var viewModel = new TransactionViewModel
-            {
-                Transaction = new Transaction(),
-                Categories = _repo.GetAllCategoriesAsync().Result
-            };
-
-            return View(viewModel);
-        }
-
-
-        /*
         public async Task<IActionResult> Update(int id) 
         {
-            
+          
             var entity = await _repo.GetById(id);
 
             if (entity == null)
                 return NotFound();
 
+            var viewModel = new TransactionViewModel()
+            {
+                Transaction = entity, 
+                Categories = _repo.GetAllCategoriesAsync().Result
+            };
 
-            return View(entity);
+
+            return View(viewModel);
 
         }
-        */
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(Transaction model)
+        public async Task<IActionResult> Update(TransactionViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(ModelState);
 
             try
             {
 
-                await _repo.Update(model.TransactionId, new {model.CategoryId, model.Amount, model.Note, model.Date });
+                var entity = model.Transaction;
+
+                await _repo.Update(entity.TransactionId, new {entity.CategoryId, entity.Amount, entity.Note, entity.Date });
 
                 TempData["Message"] = $"Transaction Updated Successfully";
 
@@ -145,11 +113,12 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
-                throw new DbUpdateException($"DbUpdateException: Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+                ModelState.AddModelError("", $"Unable to update | Error: {ex.Message} | {ex.StackTrace}");
+                return StatusCode(500, $"Unable to update database: {ex.Message}");
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception();
+                throw new Exception($"Exception Message: {ex.Message} | StackTrace:  {ex.StackTrace}");
             }
         }
 
@@ -161,6 +130,8 @@ namespace ExpenseTracker.Controllers
             {
                 return NotFound();
             }
+
+            
 
             return View(entity);
         }

@@ -14,16 +14,7 @@
 <div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
     @if (TempData["Message"] != null)
     {
-
-        @*<partial name="_PopUpSuccessModal" />*@
-        <!--div class="alert alert-success d-flex align-items-center alert-dismissible fade show" tabindex="-1" role="alert">
-            <svg class="bi flex-shrink-0 me-2" height="20" width="20" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill" /></svg>
-            <div>
-                <strong>@TempData["Message"].</strong>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close">
-                </button>
-            </div>
-        </!--div-->
+        <partial name="_PopUpSuccessModal" />
     }
     <div class="col-md-8 p-0 m-auto">
         <div class="container p-0 mt-5" id="tableHolder">
