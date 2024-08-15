@@ -30,8 +30,12 @@
                 </div>
                 <label asp-for="Transaction.CategoryId"></label>
                 <div class="input-group mb-1">
-                    <select class="form-select custom-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId"
-                            asp-items="@(new SelectList(Model.Categories, "CategoryId", "Title"))">
+                    <select class="form-select custom-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId">
+                        <option class="font-monospace" value="" disabled selected>Choose Category</option>
+                        @foreach (var item in Model.Categories)
+                        {
+                            <option class="font-monospace" value="@item.CategoryId">@item.Title</option>
+                        }
                     </select>
                 </div>
                 <div class="text-center"><span asp-validation-for="Transaction.Amount" class="text-danger small"></span></div>

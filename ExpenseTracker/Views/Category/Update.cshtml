@@ -29,7 +29,8 @@
                 <label asp-for="Icon"></label>
                 <div class="input-group mb-1">
                     <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Icon">
-                        <option class="font-monospace" value="@Model.Icon" selected>@Model.Icon</option>
+                        <option value="" class="font-monospace" disabled selected>Choose Icon</option>
+                        <option class="font-monospace" value="☕">☕</option>
                         <option value="✈️" class="font-monospace">✈️</option>
                         <option value="🏚️" class="font-monospace">🏚️</option>
                         <option value="🥎" class="font-monospace">🥎</option>
@@ -42,7 +43,7 @@
                 <label asp-for="Type"></label>
                 <div class="input-group mb-1">
                     <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Type">
-                        <option value="Unspecified" class="font-monospace">Unspecified</option>
+                        <option value="" disabled selected>Choose Type</option>
                         <option value="Expense" class="font-monospace">Expense</option>
                         <option value="Income" class="font-monospace">Income</option>
                     </select>

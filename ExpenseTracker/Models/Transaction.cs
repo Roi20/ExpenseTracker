@@ -10,7 +10,6 @@ namespace ExpenseTracker.Models
         [Key]
         public int TransactionId { get; set; }
 
-        [DisplayFormat(DataFormatString = "{C:0}")]
         [Required(ErrorMessage = "Amount was required")]
         [Range(1, int.MaxValue, ErrorMessage = "Amount must be greater than 0")]
         public int Amount { get; set; }
@@ -22,7 +21,15 @@ namespace ExpenseTracker.Models
 
         [ForeignKey("Category"), DisplayName("Category")]
         public int CategoryId { get; set; }
-       
+
         public virtual Category Category { get; set; }
+        
+        public string? FormattedAmount
+        {
+            get
+            {
+                return $"{(Category == null || Category.Type == "Expense" ? '-' : '+' )} {Amount.ToString("PHP#,##0")}";
+            }
+        }
     }
 }

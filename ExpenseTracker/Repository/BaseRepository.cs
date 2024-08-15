@@ -127,6 +127,7 @@ namespace ExpenseTracker.Repository
 
         }
 
+        /*
         public async Task<PaginatedResult<T>> GetPagination(int page, int pageSize)
         {
             var count = await _table.CountAsync();
@@ -146,6 +147,7 @@ namespace ExpenseTracker.Repository
             };
 
         }
+        */
 
 
         //(Not Use) Provision for future redesign of this project with user account

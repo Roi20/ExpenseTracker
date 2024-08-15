@@ -119,14 +119,15 @@ table
 {
       text-align: center;
       border-radius: 5px;
-      border: 2px solid #198754;
+     // border: 2px solid #198754;
+      border: none;
       transition: ease-in-out;
 }
 
 
 .pagination .page-item.disabled
 {
-    background-color: #198754 !important;
+   // background-color: #198754 !important;
     border-radius: 5px;
     transition: ease-in-out .5s;
 }
@@ -294,8 +295,14 @@ table
     }
 
 
-/*DropDown select*/
-.main-container form .input-group .custom-select {
-    //font-family: "Libre Franklin" !important;
-   // -webkit-appearance: none;
+/*DropDown select
+ form select.form-select{
+   // -moz-appearance: none;
+   // appearance: none;
+    //font-family: "Libre Franklin" sans-serif !important;
 }
+select.form-select option {
+       // -moz-appearance: none;
+       // appearance: none;
+        //font-family: "Libre Franklin", sans-serif !important;
+    }*/

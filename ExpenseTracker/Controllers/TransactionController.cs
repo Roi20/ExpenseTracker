@@ -17,25 +17,41 @@ namespace ExpenseTracker.Controllers
             _repo = repo;            
         }
 
-        public async Task<IActionResult> Index(PaginatedRequest request) 
+
+        public async Task<IActionResult> Index(PaginatedRequest request)
         {
 
             try
             {
+
                 var entities = await _repo.GetPagination(
                     request.PageNumber,
-                    PaginatedRequest.ITEMS_PER_PAGE
-                    );
+                    PaginatedRequest.ITEMS_PER_PAGE);
 
                 return View(entities);
+
             }
-            catch
+            catch(Exception ex)
             {
-                return NotFound();
+                throw new Exception($"Exception : {ex.Message} || StackTrace: {ex.StackTrace}");
             }
 
         }
 
+
+
+        /*
+        public async Task<IActionResult> Index() 
+        {
+            var entities = await _repo.GetAllTransaction();
+           
+            if(entities == null)
+                return NotFound();
+
+            return View(entities);
+
+        }
+        */
 
         public IActionResult Create() 
         {

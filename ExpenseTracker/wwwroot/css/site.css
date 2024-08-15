@@ -17,11 +17,11 @@ html {
 html, body{
     position: relative;
     min-height: 100%;
-    font-family: "Libre Franklin" !important;
+    font-family: "Libre Franklin";
 }
 
 *:not(.fa-solid):not(.fa):not(.e-icons) {
-    font-family: "Libre Franklin" !important;
+    font-family: "Libre Franklin";
 }
 
 body {

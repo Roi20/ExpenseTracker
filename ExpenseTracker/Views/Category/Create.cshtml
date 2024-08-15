@@ -1,7 +1,18 @@
 ﻿
 @model Category
 
-
+@{
+    var emojis = new List<string>();
+    emojis.Add("☕");
+    emojis.Add("🏚️");
+    emojis.Add("✈️");
+    emojis.Add("🥎");
+    emojis.Add("✈️");
+    emojis.Add("🍴");
+    emojis.Add("🚘");
+    emojis.Add("🛍️");
+    emojis.Add("💲");
+}
 
 @section CustomStyles{
 
@@ -31,20 +42,17 @@
                 <label asp-for="Icon"></label>
                 <div class="input-group mb-1">
                     <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Icon">
-                        <option class="font-monospace" value="☕" selected>☕</option>
-                        <option value="✈️" class="font-monospace">✈️</option>
-                        <option value="🏚️" class="font-monospace">🏚️</option>
-                        <option value="🥎" class="font-monospace">🥎</option>
-                        <option value="🍴" class="font-monospace">🍴</option>
-                        <option value="🚘" class="font-monospace">🚘</option>
-                        <option value="🛍️" class="font-monospace">🛍️</option>💲
-                        <option value="💲" class="font-monospace">💲</option>
+                        <option class="font-monospace" value="" disabled selected>Choose Icon</option>
+                        @foreach(var icon in emojis)
+                        {
+                            <option class="font-monospace" value="@icon">@icon</option>
+                        }
                     </select>
                 </div>
                 <label asp-for="Type"></label>
                 <div class="input-group mb-1">
                     <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Type">
-                        <option value="Unspecified" class="font-monospace" selected>Unspecified</option>
+                        <option value="" class="font-monospace" disabled selected>Choose Type</option>
                         <option value="Expense" class="font-monospace">Expense</option>
                         <option value="Income" class="font-monospace">Income</option>
                     </select>

@@ -52,9 +52,9 @@
                 <thead class="bg-secondary">
                     <tr class="text-success">
                         <th>Category Id</th>
-                        <th class="">Amount</th>
                         <th>Note</th>
                         <th>Date</th>
+                        <th class="">Amount</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -63,9 +63,9 @@
                     {
                         <tr>
                             <td class="">@item.CategoryId</td>
-                            <td>@item.Amount</td>
                             <td class="">@item.Note</td>
                             <td>@item.Date</td>
+                            <td>@item.FormattedAmount</td>
                             <td>
                                 <div class="text-start">
                                     <a asp-action="Update" asp-route-id="@item.TransactionId" class="text-warning text-decoration-none me-1"

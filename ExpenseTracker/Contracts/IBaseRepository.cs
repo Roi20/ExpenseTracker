@@ -11,7 +11,7 @@ namespace ExpenseTracker.Contracts
         Task Update(object id, object model);
         Task Delete(object id);
         Task <PaginatedResult<T>> GetPaginated(int page, int pageSize, Expression<Func<T, bool>> condition);
-        Task<PaginatedResult<T>> GetPagination(int page, int pageSize);
+       // Task<PaginatedResult<T>> GetPagination(int page, int pageSize);
 
     }
 }
