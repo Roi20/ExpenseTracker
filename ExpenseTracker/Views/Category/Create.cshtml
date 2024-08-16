@@ -7,11 +7,17 @@
     emojis.Add("🏚️");
     emojis.Add("✈️");
     emojis.Add("🥎");
-    emojis.Add("✈️");
     emojis.Add("🍴");
     emojis.Add("🚘");
     emojis.Add("🛍️");
     emojis.Add("💲");
+    emojis.Add("🩺");
+    emojis.Add("🗝️");
+    emojis.Add("🏥");
+    emojis.Add("💵");
+    emojis.Add("🎮");
+    emojis.Add("🐕");
+    emojis.Add("💊");
 }
 
 @section CustomStyles{
@@ -39,9 +45,9 @@
                     <label asp-for="Title"></label>
                     <input asp-for="Title" placeholder="Title" class="form-control rounded-0" />
                 </div>
-                <label asp-for="Icon"></label>
+                <label asp-for="Icon"></label>                                                   
                 <div class="input-group mb-1">
-                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Icon">
+                    <select class="form-select rounded-0" onfocus="this.size=5" onblur="this.size=1" id="inputGroupSelect02" asp-for="Icon">
                         <option class="font-monospace" value="" disabled selected>Choose Icon</option>
                         @foreach(var icon in emojis)
                         {
@@ -69,4 +75,8 @@
 @section Scripts{
 
     <partial name="_ValidationScriptsPartial" />
+}
+
+section CustomScripts{
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
 }

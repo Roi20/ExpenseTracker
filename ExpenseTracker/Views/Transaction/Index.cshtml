@@ -48,10 +48,10 @@
                     </form>
                 </div>
             </div>
-            <table class="table table-hover table-dark mb-0 mt-0 bg-secondary">
+            <table class="table table-sm table-hover table-dark mb-0 mt-0 bg-secondary">
                 <thead class="bg-secondary">
-                    <tr class="text-success">
-                        <th>Category Id</th>
+                    <tr class="text-success fs-9">
+                        <th>Category</th>
                         <th>Note</th>
                         <th>Date</th>
                         <th class="">Amount</th>
@@ -61,9 +61,9 @@
                 <tbody>
                     @foreach (var item in Model.Result)
                     {
-                        <tr>
-                            <td class="">@item.CategoryId</td>
-                            <td class="">@item.Note</td>
+                        <tr class="fs-9">
+                            <td>@item.CategoryName</td>
+                            <td>@item.Note</td>
                             <td>@item.Date</td>
                             <td>@item.FormattedAmount</td>
                             <td>
@@ -117,7 +117,7 @@
         </nav>
     </div>
 </div>
-@section CustomsScripts {
+@section CustomScripts {
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
 
 }

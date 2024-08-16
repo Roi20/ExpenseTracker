@@ -9,6 +9,7 @@
     <link href="https://cdn.syncfusion.com/ej2/26.1.35/bootstrap5-dark.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExpenseTracker.styles.css" asp-append-version="true" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/3c3b820551.js" crossorigin="anonymous"></script>
     @RenderSection("CustomStyles", required: false)
 </head>
@@ -109,7 +110,7 @@
     @await RenderSectionAsync("Scripts", required: false)
     <!-- Syncfusion ASP.NET Core Script Manager -->
     <ejs-scripts></ejs-scripts>
-    @RenderSection("CustomsScripts", required: false)
-    <script src="https://cdn.jsdelivr.net/npm/@@joeattardi/emoji-button/dist/index.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0/dist/js/select2.min.js"></script>
+    @RenderSection("CustomScripts", required: false)
 </body>
 </html>

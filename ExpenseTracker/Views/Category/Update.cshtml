@@ -1,10 +1,29 @@
 ﻿
 @model Category
 
+@{
+    var emojis = new List<string>();
+    emojis.Add("☕");
+    emojis.Add("🏚️");
+    emojis.Add("✈️");
+    emojis.Add("🥎");
+    emojis.Add("🍴");
+    emojis.Add("🚘");
+    emojis.Add("🛍️");
+    emojis.Add("💲");
+    emojis.Add("🩺");
+    emojis.Add("🗝️");
+    emojis.Add("🏥");
+    emojis.Add("💵");
+    emojis.Add("🎮");
+    emojis.Add("🐕");
+    emojis.Add("💊");
+}
+
 
 @section CustomStyles {
 
-    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")"/>
 
 }
 
@@ -22,22 +41,18 @@
                 @Html.AntiForgeryToken()
                 @Html.HiddenFor(i => i.CategoryId)
                 <div class="text-center"><span asp-validation-for="Title" class="text-danger small"></span></div>
-                <div class="mb-3">
+                <div class="mb-1">
                     <label asp-for="Title"></label>
                     <input asp-for="Title" placeholder="@Model.Title" class="form-control rounded-0" />
                 </div>
                 <label asp-for="Icon"></label>
                 <div class="input-group mb-1">
-                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Icon">
-                        <option value="" class="font-monospace" disabled selected>Choose Icon</option>
-                        <option class="font-monospace" value="☕">☕</option>
-                        <option value="✈️" class="font-monospace">✈️</option>
-                        <option value="🏚️" class="font-monospace">🏚️</option>
-                        <option value="🥎" class="font-monospace">🥎</option>
-                        <option value="🍴" class="font-monospace">🍴</option>
-                        <option value="🚘" class="font-monospace">🚘</option>
-                        <option value="🛍️" class="font-monospace">🛍️</option>💲
-                        <option value="💲" class="font-monospace">💲</option>
+                    <select class="form-select rounded-0" onfocus="this.size=5" onblur="this.size=1" id="inputGroupSelect02" asp-for="Icon">
+                        <option class="font-monospace" value="" disabled selected>Choose Icon</option>
+                        @foreach (var icon in emojis)
+                        {
+                            <option class="font-monospace" value="@icon">@icon</option>
+                        }
                     </select>
                 </div>
                 <label asp-for="Type"></label>

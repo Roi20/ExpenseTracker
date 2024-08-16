@@ -31,5 +31,13 @@ namespace ExpenseTracker.Models
                 return $"{(Category == null || Category.Type == "Expense" ? '-' : '+' )} {Amount.ToString("PHP#,##0")}";
             }
         }
+
+        public string? CategoryName
+        {
+            get
+            {
+                return  Category == null ? string.Empty : Category.Title;
+            }
+        }
     }
 }

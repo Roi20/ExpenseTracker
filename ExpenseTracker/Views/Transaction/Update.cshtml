@@ -30,7 +30,7 @@
                 </div>
                 <label asp-for="Transaction.CategoryId"></label>
                 <div class="input-group mb-1">
-                    <select class="form-select custom-select rounded-0" id="categoryId" asp-for="Transaction.CategoryId">
+                    <select class="form-select custom-select rounded-0" onfocus="this.size=5" onblur="this.size=1" id="categoryId" asp-for="Transaction.CategoryId">
                         <option class="font-monospace" value="" disabled selected>Choose Category</option>
                         @foreach (var item in Model.Categories)
                         {
