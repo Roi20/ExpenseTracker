@@ -1,0 +1,62 @@
+﻿@if (ViewData["CurrentPage"]?.ToString() == "Index")
+{
+    <div class="col-md-8 m-auto p-0 mb-0" id="breadcrumb">
+        <nav style="--bs-breadcrumb-divider: '&raquo;';" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-house"></i> Home
+                    </span>
+                </li>
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-square-plus"></i> Create
+                    </span>
+                </li>
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Update" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-square-pen"></i> Update
+                    </span>
+                </li>
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Delete" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-square-minus"></i> Delete
+                    </span>
+                </li>
+            </ol>
+        </nav>
+    </div>
+}
+else if (ViewData["CurrentPage"]?.ToString() == "Dashboard")
+{
+    //Display None
+}
+else
+{
+    <div class="col-md-5 m-auto p-0" id="breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&raquo;';">
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-house"></i> Home
+                    </span>
+                </li>
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-square-plus"></i> Create
+                    </span>
+                </li>
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Update" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-square-pen"></i> Update
+                    </span>
+                </li>
+                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Delete" ? "active" : "")">
+                    <span>
+                        <i class="fa-solid fa-square-minus"></i> Delete
+                    </span>
+                </li>
+            </ol>
+        </nav>
+    </div>
+}

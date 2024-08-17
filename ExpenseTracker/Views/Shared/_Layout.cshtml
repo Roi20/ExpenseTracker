@@ -14,96 +14,39 @@
     @RenderSection("CustomStyles", required: false)
 </head>
 <body>
-    <div class="container-fluid">
+    <div class="sidebar col-2 d-none d-md-block" id="side-bar">
+        <partial name="_Sidebar" />
+    </div>
+     <div class="col-12 col-md-10 p-0" id="main">
+         @*
         <header>
-            <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 mt-2">
-                <div class="container-fluid">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExpenseTracker</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                            aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                        <ul class="navbar-nav flex-grow-1">
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <div class="container-fluid">
+        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExpenseTracker</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+        <ul class="navbar-nav flex-grow-1">
+        <li class="nav-item">
+        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
+        </li>
+        </ul>
+        </div>
+        </div>
+        </nav>
         </header>
-        <div class="container p-0 mt-2" id="mainContainer">
+         *@
+        <div class="container pt-5 p-0" id="mainContainer">
             <div class="row w-100 m-auto">
-                @if(ViewData["CurrentPage"]?.ToString() == "Index")
-                {
-                    <div class="col-md-8 m-auto p-0 mb-0" id="breadcrumb">
-                        <nav style="--bs-breadcrumb-divider: '&raquo;';" aria-label="breadcrumb">
-                            <ol class="breadcrumb">
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-house"></i> Home
-                                    </span>
-                                </li>
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "")">
-                                  <span>
-                                        <i class="fa-solid fa-square-plus"></i> Create
-                                  </span>  
-                                </li>
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Update" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-square-pen"></i> Update
-                                    </span>
-                                </li>
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Delete" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-square-minus"></i> Delete
-                                    </span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                }
-                else
-                {
-                    <div class="col-md-5 m-auto p-0" id="breadcrumb">
-                        <nav aria-label="breadcrumb">
-                            <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&raquo;';">
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-house"></i> Home
-                                    </span>
-                                </li>
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-square-plus"></i> Create
-                                    </span>
-                                </li>
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Update" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-square-pen"></i> Update
-                                    </span>
-                                </li>
-                                <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Delete" ? "active" : "")">
-                                    <span>
-                                        <i class="fa-solid fa-square-minus"></i> Delete
-                                    </span>
-                                </li>
-                            </ol>
-                        </nav>
-                    </div>
-                }
+                <partial name="_BreadCrumb" />
             </div>
-            <main role="main" class="h-100 d-flex justify-content-center flex-column">
-                 @RenderBody()
+            <main role="main" class="">
+                @RenderBody()
             </main>
         </div>
-        <!--footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2024 - ExpenseTracker - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </!--footer-->
-    </div>
+     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
