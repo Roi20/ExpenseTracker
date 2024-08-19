@@ -44,10 +44,23 @@ body {
     padding: 0;
 }
 
+/*Sidebar toggle button*/
+
+.sidebarToggle #sidebar-toggle{
+    border: none;
+    background: none;
+}
+.sidebarToggle #hide-sidebar {
+    border: none;
+    background: none;
+}
+
+
+/*Sidebar toggle button End*/
+
 #main{
    min-height: 100vh;
-   overflow-y: scroll;
-   overflow-x: scroll;
+   overflow: auto;
 }
 
 

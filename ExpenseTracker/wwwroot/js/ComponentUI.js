@@ -20,3 +20,4 @@ baseModel.closeModalBtn.on('click', function () {
     baseModel.getSuccessModal.hide();
 });
 
+/*Sidebar Toggle Button*/

@@ -16,7 +16,7 @@
     {
         <partial name="_PopUpSuccessModal" />
     }
-    <div class="col-md-8 p-0 m-auto">
+    <div class="col p-2 m-auto">
         <div class="container p-0 mt-2" id="tableHolder">
             <div class="row w-100 m-auto p-0">
                 <div class="col-6 p-0 mt-4">
@@ -84,7 +84,7 @@
                 </tbody>
             </table>
         </div>
-        <nav class="pagination-outer" aria-label="Page navigation">
+        <nav class="pagination-outer bg-info" aria-label="Page navigation">
             <ul class="pagination p-3">
                 <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
                     <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
