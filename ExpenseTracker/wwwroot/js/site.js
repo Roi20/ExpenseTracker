@@ -1,51 +1,40 @@
-﻿
-var toggle = document.getElementById('sidebar-toggle');
-var hideSidebar = document.getElementById('hide-sidebar');
+﻿/*var menuToggle = document.getElementById('menu-toggle');
+var sideBar = document.getElementById('side-bar');
+var icon = document.getElementById('icon');
+var main = document.getElementById('main');
 
-toggle.addEventListener('click', function () {
-    var sidebar = document.getElementById('side-bar');
-    var main = document.getElementById('main');
-    var wrapper = document.getElementById('sidebar-wrapper');
 
-    if (sidebar.classList.contains('d-none')) {
-        sidebar.classList.remove('d-none');
-        sidebar.classList.add('d-block');
-        main.classList.remove('col-11');
-        main.classList.add('col-md-10');
-        wrapper.classList.add('d-none');
-       
-    } else {
-        sidebar.classList.remove('d-block');
-        sidebar.classList.add('d-none');
+menuToggle.addEventListener('click', function () {
+    sideBar.classList.toggle('d-none');
+    if (sideBar.contains('d-none'))
+    {
+        sideBar.classList.remove('d-none');
         main.classList.remove('col-md-10');
-        main.classList.add('col-11');
-        
+        main.classList.add('col-12');
+        icon.classList.remove("fa-bars");
+        icon.classList.add("fa-xmark");
     }
-});
-
-hideSidebar.addEventListener('click', function () {
-    var sidebar = document.getElementById('side-bar');
-    var main = document.getElementById('main');
-    var wrapper = document.getElementById('sidebar-wrapper');
-
-    if (sidebar.classList.contains('d-block')) {
-        sidebar.classList.remove('d-block');
-        wrapper.classList.add('col-1')
-        wrapper.classList.add('d-block')
-    
-       // sidebar.classList.add('d-none');
-       // main.classList.remove('col-11');
-       // main.classList.add('col-md-11');
-        //wrapper.classList.add('col-1');
-       // wrapper.classList.add('d-block');
-
-
-    } else {
-        sidebar.classList.remove('d-block');
-        sidebar.classList.add('d-none');
-        main.classList.remove('col-md-10');
-        main.classList.add('col-11');
-
+    else {
+        main.classList.remove("col-12");
+        main.classList.add("col-md-10");
+        icon.classList.remove("fa-xmark");
+        icon.classList.add("fa-bars");
     }
-});
 
+
+}); */
+
+
+    $('#menu-toggle').click(function () {
+        // Toggle sidebar visibility
+        $('#side-bar').toggleClass('d-none');
+        $('#main-content').toggleClass('col-md-12 col-md-10');
+
+        // Toggle icon between menu and close
+        var icon = $('#icon');
+        if (icon.hasClass('fa-bars')) {
+            icon.removeClass('fa-bars').addClass('fa-times'); // Switch to close icon
+        } else {
+            icon.removeClass('fa-times').addClass('fa-bars'); // Switch back to menu icon
+        }
+    });

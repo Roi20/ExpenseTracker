@@ -32,6 +32,7 @@ body {
     display: flex;
     margin: 0;
     padding: 0;
+    transition: ease-in-out .3s;
 }
 
 
@@ -42,18 +43,17 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
+
 }
+
 
 /*Sidebar toggle button*/
 
-.sidebarToggle #sidebar-toggle{
+.burgerMenu #menu-toggle{
     border: none;
     background: none;
 }
-.sidebarToggle #hide-sidebar {
-    border: none;
-    background: none;
-}
+
 
 
 /*Sidebar toggle button End*/
@@ -84,5 +84,18 @@ body {
         color: #198754;
         display: block;
     }
+    #mainContainer .row nav li a {
+        color: #9FA6B2;
+        text-decoration: none;
+    }
 
-
+    #mainContainer .row nav li.active a {
+        color:#198754;
+        text-decoration: none;
+    }
+    #mainContainer .row nav li a:hover {
+        color: #198754;
+        text-decoration: none;
+    }
+/*Breadcrumb End*/
+     

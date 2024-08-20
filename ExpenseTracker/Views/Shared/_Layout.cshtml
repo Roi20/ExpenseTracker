@@ -18,19 +18,11 @@
     @if (ViewData["CurrentPage"]?.ToString() == "Index" ||
          ViewData["CurrentPage"]?.ToString() == "Dashboard")
     {
-        <div class="sidebarToggle d-md-none col-1 p-0" id="sidebar-wrapper" style="z-index: 9999;">
-            <button class="text-light mt-3" type="button" id="sidebar-toggle">
-                <span class="fs-4">
-                    <i class="fa-solid fa-bars"></i>
-                </span>
-            </button>
-        </div>
-
         <div class="sidebar col-2 d-none d-md-block" id="side-bar">
             <partial name="_Sidebar" />
         </div>
     }
-    <div id="main" class="col-11 col-md-10 p-auto @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "w-100" : "")">
+    <div id="main" class="col-12 col-md-10 p-auto @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "w-100" : "")">
          @*
         <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
@@ -52,6 +44,14 @@
         </header>
          *@
         <div class="container pt-5 p-0 p-md-2" id="mainContainer">
+            <div class="burgerMenu p-auto h-100 w-100 @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "d-none" : "")"
+                 id="burger-menu" style="z-index: 9999;">
+                <button class="text-light d-md-none float-end" type="button" id="menu-toggle">
+                    <span class="fs-4">
+                        <i class="fa-solid fa-bars" id="icon"></i>
+                    </span>
+                </button>
+            </div>
             <div class="row w-100 m-auto">
                 <partial name="_BreadCrumb" />
             </div>
