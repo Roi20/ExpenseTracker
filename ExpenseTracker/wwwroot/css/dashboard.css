@@ -1,0 +1,20 @@
+﻿
+#dash-main-div{
+    background-color: red;
+
+}
+
+
+.firstDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#col{
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    
+}

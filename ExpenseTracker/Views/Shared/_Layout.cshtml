@@ -18,21 +18,15 @@
     @if (ViewData["CurrentPage"]?.ToString() == "Index" ||
          ViewData["CurrentPage"]?.ToString() == "Dashboard")
     {
-        <div class="sidebar col-2 d-none d-sm-block" id="side-bar">
+        <div class="sidebar" id="side-bar">
             <partial name="_Sidebar" />
         </div>
     }
-    <div id="main" class="col-12 col-sm-10 p-auto @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "w-100" : "")">
- <!-- #region Navbar -->
-
-
-
-<!-- #endregion -->
-       
-        <div class="container pt-5 p-0 p-sm-2" id="mainContainer">
+    <div id="main" class=" p-0" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "left: 0" : "")">
+        <div class="container pt-2 p-0" id="mainContainer">
             <div class="burgerMenu p-auto h-100 w-100 @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "d-none" : "")"
                  id="burger-menu" style="z-index: 9999;">
-                <button class="text-light d-sm-none float-end" type="button" id="menu-toggle">
+                <button class="text-light float-end" type="button" id="menu-toggle">
                     <span class="fs-4">
                         <i class="fa-solid fa-bars" id="icon"></i>
                     </span>

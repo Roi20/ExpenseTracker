@@ -1,4 +1,9 @@
-﻿
+﻿@section CustomStyles {
+
+    <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
+
+}
+
 
 @{
     ViewData["CurrentPage"] = "Dashboard";
@@ -6,4 +11,21 @@
 
 
 
-<h1 class="text-light">Welcome to Dashboard</h1>
+<div class="main" id="dash-main-div">
+    <div class="firstDiv" id="first-div">
+        <div class="row">
+            <div class="col total-income" id="col">
+                <h1>Total Income</h1>
+            </div>
+            <div class="col total-expense" id="col">
+                <h1>Total Expense</h1>
+            </div>
+            <div class="col total-balance" id="col">
+                <h1>Balance</h1>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

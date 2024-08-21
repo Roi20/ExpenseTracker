@@ -28,7 +28,7 @@ html, body {
 body {
     background-color: #121212;
     height: 80vh;
-    display: flex;
+    //display: flex;
     margin: 0;
     padding: 0;
     
@@ -40,34 +40,20 @@ body {
 .sidebar {
     background: #1F1B24;
     min-height: 100vh;
-    margin: 0;
-    padding: 0;
-   
+    width: 290px;
+    position: fixed; /* Fixes the sidebar to the left */
+    top: 0;
+    left: 0;
+    z-index: 999; /* Ensures it stays on top of the main content */
+    transform: translateX(-100%); /* Hide the sidebar by default */
+    transition: transform 0.3s ease; /* Animation for slide-in effect */
 }
 
-/* Initial state of the sidebar */
-#side-bar {
-    transition: margin-left 0.3s ease;
-}
-
-    /* When the sidebar is hidden */
-    #side-bar.hidden {
-        margin-left: -100%; /* Moves sidebar out of the screen */
+    .sidebar.active {
+        transform: translateX(0); /* Slide sidebar into view */
     }
 
-/* Adjust main content when sidebar is hidden */
-#main.sidebar-hidden {
-    width: 100%; /* Make main content full width */
-    transition: width 0.3s ease;
-}
-
-#icon {
-    transition: transform 0.3s ease; /* Smooth transition for icon */
-}
-
-    #icon.fa-times {
-        transform: rotate(90deg); /* Rotate the close icon smoothly */
-    }
+/*Sidebar End*/
 
 
 
@@ -77,15 +63,28 @@ body {
     border: none;
     background: none;
 }
+/* Icon styles */
+#menu-toggle {
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
 
+    /* Rotate icon when active */
+    #menu-toggle.active {
+        transform: rotate(90deg); /* Rotate the icon 90 degrees */
+    }
 
 
 /*Sidebar toggle button End*/
 
-#main{
-   min-height: 100vh;
-   overflow: auto;
+#main {
+
+    position: relative;
+    left: 0; /* No margin for the main content */
+    width: 100%; /* Full width by default */
+    transition: left 0.3s ease; /* Smooth transition for main content movement */
 }
+
 
 
 
