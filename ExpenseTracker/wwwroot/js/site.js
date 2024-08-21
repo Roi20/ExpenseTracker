@@ -22,13 +22,13 @@ menuToggle.addEventListener('click', function () {
     }
 
 
-}); */
-
+}); 
+    */
 
     $('#menu-toggle').click(function () {
         // Toggle sidebar visibility
         $('#side-bar').toggleClass('d-none');
-        $('#main-content').toggleClass('col-md-12 col-md-10');
+        $('#mainContainer').toggleClass('col-md-12 col-md-10');
 
         // Toggle icon between menu and close
         var icon = $('#icon');
@@ -38,3 +38,7 @@ menuToggle.addEventListener('click', function () {
             icon.removeClass('fa-times').addClass('fa-bars'); // Switch back to menu icon
         }
     });
+    
+
+
+

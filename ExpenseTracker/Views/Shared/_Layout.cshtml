@@ -18,35 +18,21 @@
     @if (ViewData["CurrentPage"]?.ToString() == "Index" ||
          ViewData["CurrentPage"]?.ToString() == "Dashboard")
     {
-        <div class="sidebar col-2 d-none d-md-block" id="side-bar">
+        <div class="sidebar col-2 d-none d-sm-block" id="side-bar">
             <partial name="_Sidebar" />
         </div>
     }
-    <div id="main" class="col-12 col-md-10 p-auto @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "w-100" : "")">
-         @*
-        <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-        <div class="container-fluid">
-        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ExpenseTracker</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-        <ul class="navbar-nav flex-grow-1">
-        <li class="nav-item">
-        <a class="nav-link text-dark" asp-area="" asp-controller="Category" asp-action="Index">Category</a>
-        </li>
-        </ul>
-        </div>
-        </div>
-        </nav>
-        </header>
-         *@
-        <div class="container pt-5 p-0 p-md-2" id="mainContainer">
+    <div id="main" class="col-12 col-sm-10 p-auto @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "w-100" : "")">
+ <!-- #region Navbar -->
+
+
+
+<!-- #endregion -->
+       
+        <div class="container pt-5 p-0 p-sm-2" id="mainContainer">
             <div class="burgerMenu p-auto h-100 w-100 @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "d-none" : "")"
                  id="burger-menu" style="z-index: 9999;">
-                <button class="text-light d-md-none float-end" type="button" id="menu-toggle">
+                <button class="text-light d-sm-none float-end" type="button" id="menu-toggle">
                     <span class="fs-4">
                         <i class="fa-solid fa-bars" id="icon"></i>
                     </span>

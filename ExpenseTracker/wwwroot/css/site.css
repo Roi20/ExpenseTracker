@@ -15,7 +15,6 @@ html {
 }
 
 html, body {
-    // position: relative;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -32,7 +31,7 @@ body {
     display: flex;
     margin: 0;
     padding: 0;
-    transition: ease-in-out .3s;
+    
 }
 
 
@@ -43,8 +42,33 @@ body {
     min-height: 100vh;
     margin: 0;
     padding: 0;
-
+   
 }
+
+/* Initial state of the sidebar */
+#side-bar {
+    transition: margin-left 0.3s ease;
+}
+
+    /* When the sidebar is hidden */
+    #side-bar.hidden {
+        margin-left: -100%; /* Moves sidebar out of the screen */
+    }
+
+/* Adjust main content when sidebar is hidden */
+#main.sidebar-hidden {
+    width: 100%; /* Make main content full width */
+    transition: width 0.3s ease;
+}
+
+#icon {
+    transition: transform 0.3s ease; /* Smooth transition for icon */
+}
+
+    #icon.fa-times {
+        transform: rotate(90deg); /* Rotate the close icon smoothly */
+    }
+
 
 
 /*Sidebar toggle button*/
@@ -68,7 +92,7 @@ body {
 #mainContainer
 {
   
-   padding-top: 5rem;
+   padding-top: 3rem;
    
 }
 
