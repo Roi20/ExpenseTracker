@@ -1,4 +1,8 @@
-﻿@section CustomStyles {
+﻿@model DashboardViewModel
+
+
+
+@section CustomStyles {
 
     <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
 
@@ -23,7 +27,7 @@
                         <h6>Total Income</h6>
                     </div>
                     <div class="col" id="income-numbers">
-                        <h5>PHP 3000000</h5>
+                        <h5>@Model.TotalIncome.ToString("PHP#,##0")</h5>
                     </div>
                 </div>
             </div>
@@ -36,7 +40,7 @@
                         <h6>Total Expense</h6>
                     </div>
                     <div class="col" id="expense-numbers">
-                        <h5>PHP 3000000</h5>
+                        <h5>@Model.TotalExpense.ToString("PHP#,##0")</h5>
                     </div>
                 </div>
             </div>
@@ -46,10 +50,10 @@
                 </div>
                 <div class="balance p-0 mt-0 w-100" id="balance">
                     <div class="col w-100" id="t-balance">
-                        <h6>Total Balance</h6>
+                        <h6>Balance</h6>
                     </div>
                     <div class="col" id="balance-numbers">
-                        <h5>PHP 3000000</h5>
+                        <h5>@Model.Balance.ToString("PHP#,##0")</h5>
                     </div>
                 </div>
             </div>

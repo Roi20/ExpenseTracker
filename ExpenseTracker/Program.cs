@@ -18,6 +18,7 @@ options.UseSqlServer(config.GetConnectionString("ExpenseTrackerDbConn")));
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ICategoryRepository,  CategoryRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
+builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCdkx3THxbf1x0ZFxMYl5bQHRPMyBoS35RckVkW39fcHRRQ2BdWUR1");
 

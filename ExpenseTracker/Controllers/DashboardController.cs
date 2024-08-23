@@ -1,12 +1,46 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Contracts;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.Controllers
 {
     public class DashboardController : BaseController
     {
-        public IActionResult Index()
+
+        private readonly IDashboardRepository _repo;
+
+        public DashboardController(IDashboardRepository repo)
         {
-            return View();
+            _repo = repo;
+        }
+
+
+        public IActionResult Index(DashboardViewModel model)
+        {
+
+            try
+            {
+
+                model = new DashboardViewModel
+                {
+                    TotalIncome = _repo.TotalIncome(),
+                    TotalExpense = _repo.TotalExpense(),
+                    Balance = _repo.Balalance()
+                };
+
+                if (model == null)
+                    return NotFound("No Item Found");
+
+
+                return View(model);
+
+            }
+            catch(Exception ex)
+            {
+                throw new Exception($"Exception Message: {ex.Message} || StackTrace: {ex.StackTrace}");
+            }
+
+       
         }
     }
 }

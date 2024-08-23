@@ -16,8 +16,8 @@
     {
         <partial name="_PopUpSuccessModal" />
     }
-    <div class="col p-2 m-auto">
-        <div class="container p-0 mt-2" id="tableHolder">
+    <div class="col p-2 pt-0 m-auto">
+        <div class="container p-0 mt-0" id="tableHolder">
             <div class="row w-100 m-auto p-0">
                 <div class="col-6 p-0 mt-4">
                     <a class="btn bg-success border-outline" asp-action="Create" id="createBtn">
@@ -48,7 +48,7 @@
                     </form>
                 </div>
             </div>
-            <table class="table table-sm table-hover table-dark mb-0 mt-0 bg-secondary">
+            <table class="table table-sm table-hover pt-0 table-dark mb-0 mt-0 bg-secondary">
                 <thead class="bg-secondary">
                     <tr class="text-success fs-9">
                         <th>Category</th>
@@ -65,7 +65,7 @@
                             <td>@item.CategoryName</td>
                             <td>@item.Note</td>
                             <td>@item.Date</td>
-                            <td>@item.FormattedAmount</td>
+                            <td style="@(item.FormattedAmount.StartsWith('+') ? "color: #198754" : "color: #dc3545" )">@item.FormattedAmount</td>
                             <td>
                                 <div class="text-start">
                                     <a asp-action="Update" asp-route-id="@item.TransactionId" class="text-warning text-decoration-none me-1"
@@ -74,7 +74,10 @@
                                        title="Update">
                                         <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
                                     </a>
-                                    <a asp-action="Delete" asp-route-id="@item.TransactionId" class="text-danger text-decoration-none ms-1">
+                                    <a asp-action="Delete" asp-route-id="@item.TransactionId" class="text-danger text-decoration-none ms-1"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Delete">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                     </a>
                                 </div>
