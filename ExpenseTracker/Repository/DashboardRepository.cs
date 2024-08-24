@@ -19,7 +19,7 @@ namespace ExpenseTracker.Repository
             _transaction = _db.Set<Transaction>();
         } 
 
-        public int Balalance()
+        public int Balance()
         {
 
            return TotalIncome() - TotalExpense();

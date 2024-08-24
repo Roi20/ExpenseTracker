@@ -9,7 +9,7 @@ namespace ExpenseTracker.Contracts
         Task <IEnumerable<Transaction>> GetLastTwoWeeksData();
         int TotalIncome();
         int TotalExpense();
-        int Balalance();
+        int Balance();
 
     }
 }

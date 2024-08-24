@@ -13,10 +13,8 @@
     ViewData["CurrentPage"] = "Dashboard";
 }
 
-
-
 <div class="main" id="dash-main-div">
-    <div class="firstDiv" id="first-div">
+    <div class="row firstDiv" id="first-div">
         <div class="row">
             <div class="col-sm total-income w-100" id="col">
                 <div class="holder">
@@ -59,10 +57,20 @@
             </div>
         </div>
     </div>
-    <div class="secopndDiv" id="second-div">
-
+    <div class="row secondDiv p-0" id="second-div">
+        <div class="row">
+            <div class="col-sm-4 p-4 pt-1">
+                <partial name="_DoughnutChart" />
+            </div>
+            <div class="col-sm">
+                <h1>Sample</h1>
+            </div>
+        </div>
     </div>
 </div>
 
+@section CustomScripts {
 
+    <script src="@Url.Content("~/js/doughnutChart.js")"></script>
+}
 

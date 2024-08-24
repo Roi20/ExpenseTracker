@@ -1,5 +1,6 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.Controllers
@@ -25,7 +26,8 @@ namespace ExpenseTracker.Controllers
                 {
                     TotalIncome = _repo.TotalIncome(),
                     TotalExpense = _repo.TotalExpense(),
-                    Balance = _repo.Balalance()
+                    Balance = _repo.Balance()
+                    
                 };
 
                 if (model == null)

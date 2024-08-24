@@ -9,10 +9,11 @@
 
 /*First Div*/
 .firstDiv{
-    width: 80%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .firstDiv .row{
@@ -104,5 +105,31 @@
 
 /*End of First Div*/
 
+/*Second Div*/
 
+.secondDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
 
+.secondDiv .col-sm-4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #121212;
+    border-radius: 5px;
+    
+}
+.secondDiv .col-sm {
+    display: flex;
+    background: #121212;
+    border-radius: 5px;
+}
+.secondDiv .row{
+   column-gap: 4px;
+   row-gap: 10px;
+}
