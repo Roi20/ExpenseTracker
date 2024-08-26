@@ -116,13 +116,15 @@
    
 }
 
-.secondDiv .col-sm-4 {
+.secondDiv #chart-container {
     display: flex;
     justify-content: center;
     align-items: center;
     background: #121212;
     border-radius: 5px;
-    
+    position: relative;
+    padding: 0;
+    overflow: hidden;
 }
 .secondDiv .col-sm {
     display: flex;
@@ -132,4 +134,21 @@
 .secondDiv .row{
    column-gap: 4px;
    row-gap: 10px;
+}
+
+
+/*Chart*/
+
+#chart-container {
+
+   
+}
+
+canvas{
+  // background: white;
+    width: 100% !important;
+    height: 100% !important;
+    font-variant: small-caps !important;
+
+ 
 }
