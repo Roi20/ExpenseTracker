@@ -34,6 +34,23 @@ namespace ExpenseTracker.Controllers
                     return NotFound("No Item Found");
 
 
+                var data = _repo.GetLastTwoWeeksData()
+                                .Result
+                                .Where(x => x.Category.Type == "Expense")
+                                .GroupBy(i => i.Category.CategoryId)
+                                .Select(x => new
+                                {
+                                    Category = x.First().Category.Title,
+                                    Sum = x.Sum(x => x.Amount),
+                                    FormattedAmount = x.Sum(x => x.Amount).ToString("PHP#,##0")
+
+                                }).ToList();
+
+
+                ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
+
+
+
                 return View(model);
 
             }

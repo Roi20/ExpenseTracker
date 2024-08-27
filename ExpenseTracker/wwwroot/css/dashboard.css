@@ -17,8 +17,8 @@
 }
 
 .firstDiv .row{
-    column-gap: 10px;
-    row-gap: 10px;
+    column-gap: 8px;
+    row-gap: 8px;
     padding: 1rem;
 }
 
@@ -31,6 +31,7 @@
     background: #121212;
     display: flex;
     overflow: hidden;
+    width: 100%;
 }
 
 .holder {
@@ -132,7 +133,7 @@
     border-radius: 5px;
 }
 .secondDiv .row{
-   column-gap: 4px;
+   column-gap: 5px;
    row-gap: 10px;
 }
 

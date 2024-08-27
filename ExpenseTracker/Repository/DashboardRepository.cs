@@ -59,5 +59,23 @@ namespace ExpenseTracker.Repository
 
             return totalIncome;
         }
+
+        public void DoughnutChartData()
+        {
+
+            /*
+            GetLastTwoWeeksData()
+                                .Result
+                                .Where(x => x.Category.Type == "Expense")
+                                .GroupBy(i => i.Category.CategoryId)
+                                .Select(x => new
+                                {
+                                    Category = x.Key,
+                                    Sum = x.Sum(x => x.Amount).ToString("PHP#,##0")
+
+                                }).ToList();
+            
+           */
+        }
     }
 }

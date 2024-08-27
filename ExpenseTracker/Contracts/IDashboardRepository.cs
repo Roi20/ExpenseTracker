@@ -7,6 +7,7 @@ namespace ExpenseTracker.Contracts
     {
 
         Task <IEnumerable<Transaction>> GetLastTwoWeeksData();
+        void DoughnutChartData();
         int TotalIncome();
         int TotalExpense();
         int Balance();
