@@ -44,12 +44,11 @@ namespace ExpenseTracker.Controllers
                                     Sum = x.Sum(x => x.Amount),
                                     FormattedAmount = x.Sum(x => x.Amount).ToString("PHP#,##0")
 
-                                }).ToList();
-
+                                })
+                                .OrderByDescending(o => o.Sum)
+                                .ToList();
 
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
-
-
 
                 return View(model);
 

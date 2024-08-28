@@ -30,7 +30,7 @@ if (window.chartData) {
                 data: values,
                 backgroundColor: backgroundColors,
                 borderColor: '#121212',
-                borderWidth: 2
+                borderWidth: 0
             }]
         },
         options: {
@@ -54,7 +54,7 @@ if (window.chartData) {
                         return context.chart.data.labels[context.dataIndex];
                     },
                     font: {
-                        size: 10,
+                        size: 6,
                        
                         
                     },
@@ -75,19 +75,24 @@ if (window.chartData) {
                 },
                 title: {
                     display: true,
-                    text: 'Categories',
+                    text: 'Expense by Category',
                     color: '#9FA6B2',
+                    padding: {
+                        bottom: 10,
+                        top: 10
+                    },
                     font: {
                         size: 22,
 
                     }
+
                  
                 },
                 legend: {
                     display: true,
                     position: 'bottom',
                     labels: {
-                        padding: 20,
+                        padding: 10,
                         usePointStyle: true,
                         pointStyle: 'circle',
                         font: {

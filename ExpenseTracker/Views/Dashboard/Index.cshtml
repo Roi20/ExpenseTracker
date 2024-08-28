@@ -59,21 +59,24 @@
     </div>
     <div class="row secondDiv p-1" id="second-div">
         <div class="row">
-            <div class="col-sm-4" id="chart-container">
-                <partial name="_DoughnutChart" />
+            <div class="col-md-4" id="chart-container">
+                <canvas id="myChart"></canvas>
             </div>
-            <div class="col-sm">
-                <h1>Sample</h1>
+            <div class="col-md p-0" id="lineChart-container">
+                <canvas width ="400" height="200" id="myLineChart"></canvas>
             </div>
         </div>
     </div>
 </div>
 
 @section CustomScripts {
-
+  
     <script>
         window.chartData = @Html.Raw(ViewBag.DoughnutChart)
     </script>
+   
     <script src="@Url.Content("~/js/doughnutChart.js")"></script>
+
+    <script src="@Url.Content("~/js/LineChart.js")"></script>
 }
 
