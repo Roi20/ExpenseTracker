@@ -17,14 +17,18 @@ namespace ExpenseTracker.Repository
         {
             _db = db;
             _transaction = _db.Set<Transaction>();
-        } 
+        }
 
-        public int Balance()
+        public async Task<int> Balance()
         {
 
-           return TotalIncome() - TotalExpense();
+            var Income = await TotalIncome();
+            var Expense = await TotalExpense();
+
+            return Income - Expense;
 
         }
+
 
         public async Task<IEnumerable<Transaction>> GetLastTwoWeeksData()
         {
@@ -40,9 +44,9 @@ namespace ExpenseTracker.Repository
         
         }
 
-        public int TotalExpense()
+        public async Task<int> TotalExpense()
         {
-            var lastTwoWeeksData = GetLastTwoWeeksData().Result;
+            var lastTwoWeeksData = await GetLastTwoWeeksData();
 
             var totalExpense = lastTwoWeeksData.Where(x => x.Category.Type == "Expense")
                                               .Sum(x => x.Amount);
@@ -50,9 +54,9 @@ namespace ExpenseTracker.Repository
             return totalExpense;
         }
 
-        public int TotalIncome()
+        public async Task<int> TotalIncome()
         {
-            var lastTwoWeeksData = GetLastTwoWeeksData().Result;
+            var lastTwoWeeksData = await GetLastTwoWeeksData();
 
             var totalIncome = lastTwoWeeksData.Where(x => x.Category.Type == "Income")
                                               .Sum(x => x.Amount);
@@ -60,22 +64,27 @@ namespace ExpenseTracker.Repository
             return totalIncome;
         }
 
-        public void DoughnutChartData()
+
+        public async Task<IEnumerable<ExpenseSummary>> DoughnutChartData()
         {
+            var data = await GetLastTwoWeeksData();
 
-            /*
-            GetLastTwoWeeksData()
-                                .Result
-                                .Where(x => x.Category.Type == "Expense")
-                                .GroupBy(i => i.Category.CategoryId)
-                                .Select(x => new
-                                {
-                                    Category = x.Key,
-                                    Sum = x.Sum(x => x.Amount).ToString("PHP#,##0")
+            var dataSet =  data.Where(x => x.Category.Type == "Expense")
+                               .GroupBy(i => i.Category.CategoryId)
+                               .Select(x => new ExpenseSummary
+                               {
+                                   CategoryName = x.First().Category.Title,
+                                   SumAmount = x.Sum(x => x.Amount),
+                                   FormattedAmount = x.Sum(x => x.Amount).ToString("PHP #,##0")
 
-                                }).ToList();
-            
-           */
+                               })
+                               .OrderByDescending(o => o.SumAmount)
+                               .ToList();
+
+            return dataSet;
+
         }
+
+
     }
 }

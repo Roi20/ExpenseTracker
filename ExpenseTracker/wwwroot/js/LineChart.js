@@ -6,7 +6,7 @@ var ctx = document.getElementById('myLineChart').getContext('2d');
 var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'], // Replace with your actual labels (e.g., months)
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Replace with your actual labels (e.g., months)
         datasets: [
             {
                 label: 'Income',

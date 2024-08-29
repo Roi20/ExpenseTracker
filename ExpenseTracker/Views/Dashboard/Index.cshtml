@@ -25,7 +25,7 @@
                         <h6>Total Income</h6>
                     </div>
                     <div class="col" id="income-numbers">
-                        <h5>@Model.TotalIncome.ToString("PHP#,##0")</h5>
+                        <h5>@Model.TotalIncome.ToString("PHP #,##0")</h5>
                     </div>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                         <h6>Total Expense</h6>
                     </div>
                     <div class="col" id="expense-numbers">
-                        <h5>@Model.TotalExpense.ToString("PHP#,##0")</h5>
+                        <h5>@Model.TotalExpense.ToString("PHP #,##0")</h5>
                     </div>
                 </div>
             </div>
@@ -51,7 +51,7 @@
                         <h6>Balance</h6>
                     </div>
                     <div class="col" id="balance-numbers">
-                        <h5>@Model.Balance.ToString("PHP#,##0")</h5>
+                        <h5>@Model.Balance.ToString("PHP #,##0")</h5>
                     </div>
                 </div>
             </div>
@@ -72,7 +72,7 @@
 @section CustomScripts {
   
     <script>
-        window.chartData = @Html.Raw(ViewBag.DoughnutChart)
+        window.chartData = JSON.parse('@Html.Raw(ViewBag.DoughnutChart)');
     </script>
    
     <script src="@Url.Content("~/js/doughnutChart.js")"></script>

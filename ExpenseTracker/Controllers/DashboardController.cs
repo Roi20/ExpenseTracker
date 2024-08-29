@@ -16,37 +16,22 @@ namespace ExpenseTracker.Controllers
         }
 
 
-        public IActionResult Index(DashboardViewModel model)
+        public async Task<IActionResult> Index()
         {
 
             try
             {
 
-                model = new DashboardViewModel
+                var model = new DashboardViewModel
                 {
-                    TotalIncome = _repo.TotalIncome(),
-                    TotalExpense = _repo.TotalExpense(),
-                    Balance = _repo.Balance()
+                    TotalIncome = await _repo.TotalIncome(),
+                    TotalExpense = await _repo.TotalExpense(),
+                    Balance = await _repo.Balance()
                     
                 };
 
-                if (model == null)
-                    return NotFound("No Item Found");
-
-
-                var data = _repo.GetLastTwoWeeksData()
-                                .Result
-                                .Where(x => x.Category.Type == "Expense")
-                                .GroupBy(i => i.Category.CategoryId)
-                                .Select(x => new
-                                {
-                                    Category = x.First().Category.Title,
-                                    Sum = x.Sum(x => x.Amount),
-                                    FormattedAmount = x.Sum(x => x.Amount).ToString("PHP#,##0")
-
-                                })
-                                .OrderByDescending(o => o.Sum)
-                                .ToList();
+                var data = await _repo.DoughnutChartData();
+               
 
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
 

@@ -3,8 +3,8 @@
 
 if (window.chartData) {
 
-    var labels = chartData.map(item => item.Category);
-    var values = chartData.map(item => item.Sum);
+    var labels = chartData.map(item => item.CategoryName);
+    var values = chartData.map(item => item.SumAmount);
     var formattedValues = chartData.map(item => item.FormattedAmount);
 
 
@@ -51,7 +51,7 @@ if (window.chartData) {
                     color: '#FFFFFF',
                     display: true,
                     formatter: function (value, context) {
-                        return context.chart.data.labels[context.dataIndex];
+                        return formattedValues[context.dataIndex]; //context.chart.data.labels[context.dataIndex];
                     },
                     font: {
                         size: 6,
@@ -76,7 +76,7 @@ if (window.chartData) {
                 title: {
                     display: true,
                     text: 'Expense by Category',
-                    color: '#9FA6B2',
+                    color: '#FFFFFF',
                     padding: {
                         bottom: 10,
                         top: 10
@@ -97,8 +97,10 @@ if (window.chartData) {
                         pointStyle: 'circle',
                         font: {
                             size: 10
-                        }
-                    }
+                        },
+                        color: '#FFFFFF'
+                    },
+                   
                 },
                 tooltip: {
                     callbacks: {
