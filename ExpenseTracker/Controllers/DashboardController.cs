@@ -21,16 +21,18 @@ namespace ExpenseTracker.Controllers
 
             try
             {
+                var StartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-14));
+                var EndDate = DateOnly.FromDateTime(DateTime.Today);
 
                 var model = new DashboardViewModel
                 {
-                    TotalIncome = await _repo.TotalIncome(),
-                    TotalExpense = await _repo.TotalExpense(),
-                    Balance = await _repo.Balance()
+                    TotalIncome = await _repo.TotalIncome(StartDate, EndDate),
+                    TotalExpense = await _repo.TotalExpense(StartDate, EndDate),
+                    Balance = await _repo.Balance(StartDate, EndDate)
                     
                 };
 
-                var data = await _repo.DoughnutChartData();
+                var data = await _repo.DoughnutChartData(StartDate, EndDate);
                
 
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
