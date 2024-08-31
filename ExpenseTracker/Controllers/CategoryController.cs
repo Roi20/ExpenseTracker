@@ -68,11 +68,11 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
-                return StatusCode(500, $"Unable to update database: {ex.Message}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex) 
             {
-                throw new Exception($"Exception Message: {ex.Message} | StackTrace:  {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
 
         }
@@ -112,11 +112,11 @@ namespace ExpenseTracker.Controllers
             }
             catch(DbUpdateException ex) 
             {
-                throw new DbUpdateException($"DbUpdateException: Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
-            catch (Exception) 
+            catch (Exception ex) 
             {
-                throw new Exception();
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -143,11 +143,11 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
-                throw new DbUpdateException($"DbUpdateException: Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
         }
 

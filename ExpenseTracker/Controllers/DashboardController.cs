@@ -21,6 +21,7 @@ namespace ExpenseTracker.Controllers
 
             try
             {
+                //Last two weeks transactions
                 var StartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-14));
                 var EndDate = DateOnly.FromDateTime(DateTime.Today);
 
@@ -32,9 +33,11 @@ namespace ExpenseTracker.Controllers
                     
                 };
 
-                var data = await _repo.DoughnutChartData(StartDate, EndDate);
-               
+                var LineChartData = await _repo.GetLineChartData(StartDate, EndDate);
 
+                var data = await _repo.DoughnutChartData(StartDate, EndDate);
+
+                ViewBag.LineChart = Newtonsoft.Json.JsonConvert.SerializeObject(LineChartData);
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
 
                 return View(model);
@@ -42,7 +45,9 @@ namespace ExpenseTracker.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception($"Exception Message: {ex.Message} || StackTrace: {ex.StackTrace}");
+
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+
             }
 
        

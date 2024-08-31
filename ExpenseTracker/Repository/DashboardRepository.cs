@@ -73,8 +73,6 @@ namespace ExpenseTracker.Repository
         public async Task<IEnumerable<ExpenseSummary>> DoughnutChartData(DateOnly startDate, DateOnly endDate)
         {
 
-            //var EndDate = DateOnly.FromDateTime(DateTime.Today);
-
             var data = await GetData(startDate, endDate);
 
             var dataSet =  data.Where(x => x.Category.Type == "Expense")
@@ -104,21 +102,57 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public async Task<List<LineChartData>> IncomeSummary(DateOnly startDate, DateOnly endDate)
+        public async Task<Dictionary<string, int>> IncomeSummary(DateOnly startDate, DateOnly endDate)
         {
             var data = await GetData(startDate, endDate);
 
             var incomeSummary = data.Where(x => x.Category.Type == "Income")
                                    .GroupBy(g => g.Date)
-                                   .Select(s => new LineChartData 
-                                   {
-                                       NumberOfDays = s.First().Date.ToString("dd-MMM"),
-                                       Income = s.Sum(a => a.Amount)
-
-                                   }).ToList();
+                                   .ToDictionary( g => 
+                                        
+                                      g.Key.ToString("dd-MMM"),
+                                      g => g.Sum(a => a.Amount)
+                                        
+                                    );
+                               
 
             return incomeSummary;
 
+        }
+
+        public async Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate)
+        {
+            var data = await GetData(startDate, endDate);
+
+            var expenseSummary = data.Where(x => x.Category.Type == "Expense")
+                                     .GroupBy(g => g.Date)
+                                     .ToDictionary(g =>
+
+                                         g.Key.ToString("dd-MMM"),
+                                         g => g.Sum(a => a.Amount)
+    
+                                     );
+
+            return expenseSummary;
+        }
+
+        public async Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate)
+        {
+            var days = LastTwoWeeks(startDate);
+            var incomeData = await IncomeSummary(startDate, endDate);
+            var expenseData = await ExpenseSummary(startDate, endDate);
+
+            var LineChartData = days.Select(day => new LineChartData
+            {
+                NumberOfDays = day,
+                Income = incomeData.ContainsKey(day) ? incomeData[day] : 0,
+                Expense = expenseData.ContainsKey(day) ? expenseData[day] : 0,
+                //FormattedIncome = incomeData.ContainsKey(day) ? incomeData[day].ToString("PHP #,##0") : "0",
+                //FormattedExpense = expenseData.ContainsKey(day) ? incomeData[day].ToString("PHP #,##0") : "0",
+
+            }).ToList();
+
+            return LineChartData;
         }
     }
 }

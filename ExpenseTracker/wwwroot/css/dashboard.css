@@ -64,24 +64,27 @@
     margin-bottom: 0;
 }
 
-.total-income .holder, 
-.income #income-numbers h5 {
+.total-income .holder {
 
     color: #198754;
 }
 
-.total-expense .holder, 
-.expense #expense-numbers h5 {
+.total-expense .holder {
 
     color: #dc3545;
 }
 
-.total-balance .holder, 
-.balance #balance-numbers h5 {
+.total-balance .holder {
 
     color: #ffc107;
 }
 
+.balance #balance-numbers h5,
+.income #income-numbers h5,
+.expense #expense-numbers h5 {
+
+    color: #FFFFFF;
+}
 
 .income #income-numbers h5, 
 .expense #expense-numbers h5, 

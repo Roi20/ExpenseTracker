@@ -1,30 +1,51 @@
 ﻿Chart.register(ChartDataLabels);
 
+console.log(LineChartData);
+
+var label = LineChartData.map(x => x.NumberOfDays);
+var Income = LineChartData.map(x => x.Income);
+var Expense = LineChartData.map(x => x.Expense);
+
+
+
+var formatter = new Intl.NumberFormat('en-PH', {
+    style: 'currency',
+    currency: 'PHP'
+    
+});
+
+var formattedIncome = Income.map(value => formatter.format(value));
+var formattedExpense = Expense.map(value => formatter.format(value));
+
+
 
 var ctx = document.getElementById('myLineChart').getContext('2d');
 
 var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // Replace with your actual labels (e.g., months)
+        labels: label,
         datasets: [
             {
                 label: 'Income',
-                data: [500, 700, 800, 600, 1000, 1200, 1500, 200, 500, 1000, 2000, 750], // Replace with your actual income data
-                borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                data: Income,
+                borderColor: '#4CB140',
+                backgroundColor: '#4CB140',
                 borderWidth: 2,
-                fill: false, // Fill the area under the line
-                lineTension: 0.3
+                fill: false,
+                lineTension: 0.4,
+                pointRadius: 0
             },
             {
                 label: 'Expense',
-                data: [400, 500, 700, 800, 900, 1100, 1300, 200, 500, 10, 200, 3000], // Replace with your actual expense data
-                borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                data: Expense,
+                borderColor: '#C9190B',
+                backgroundColor: '#C9190B',
                 borderWidth: 2,
-                fill: false, // Fill the area under the line
-                lineTension: 0.3
+                fill: false, 
+                lineTension: 0.4,
+                pointRadius: 0,
+
             }
         ]
     },
@@ -41,16 +62,29 @@ var myLineChart = new Chart(ctx, {
         },
         plugins: {
             legend: {
-                position: 'top', // Position the legend
+                position: 'bottom', 
                 labels: {
                     font: {
-                        size: '10'
-                    }
+                        size: '10',
+                    },
+                    usePointStyle: true,
+                    pointStyle: 'star',
+                    color: '#FFFFFF',
+                    
                 },
+               
             },
             title: {
                 display: true,
-                text: 'Income vs Expense'
+                text: 'Income vs Expense',
+                color: '#FFFFFF',
+                padding: {
+                    bottom: 30,
+                    top: 10
+                },
+                font: {
+                    size: 18
+                },
             },
 
             datalabels: {
@@ -63,15 +97,20 @@ var myLineChart = new Chart(ctx, {
                 padding: {
                     top: 0,
                     bottom: 0
-                }
+                },
+                display: false,
+                formatter: function (value) {
+                    return formatter.format(value)
+                },
             }
         },
         scales: {
             y: {
-                beginAtZero: true,
+                
+                beginAtZero: false,
                 position: 'left', // Align y-axis labels on the left side
                 ticks: {
-                    padding: 15, // Add padding between ticks and labels
+                    padding: 5, // Add padding between ticks and labels
                     font: {
                         size: 10,  // Adjust the font size
                     },
@@ -79,9 +118,14 @@ var myLineChart = new Chart(ctx, {
                 },
                 grid: {
 
-                    drawOnChartArea: false,
-                    drawTicks: true,
-                    display: false
+                    drawOnChartArea: true,
+                    drawTicks: false,
+                    display: true,
+                    borderWidth: 1,
+                    color: 'rgba(255, 255, 255, 0.1)' 
+                },
+                border: {
+                    dash: [1,2]
                 }
             },
             x: {
@@ -98,9 +142,10 @@ var myLineChart = new Chart(ctx, {
                 },
                 grid: {
                     drawOnChartArea: false,
-                    drawTicks: true,
-                    display: false,
-                   
+                    drawTicks: false,
+                    display: true,
+                    color: 'rgba(255, 255, 255, 0.2)', 
+                    
                 }
             }
         },

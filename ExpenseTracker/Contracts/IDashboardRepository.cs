@@ -12,7 +12,10 @@ namespace ExpenseTracker.Contracts
         Task<int> TotalExpense(DateOnly startDate, DateOnly endDate);
         Task<int> Balance(DateOnly startDate, DateOnly endDate);
         string[] LastTwoWeeks(DateOnly startDate);
-        Task<List<LineChartData>> IncomeSummary(DateOnly startDate, DateOnly endDate);
+        Task<Dictionary<string, int>> IncomeSummary(DateOnly startDate, DateOnly endDate);
+        Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate);
+        Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate);
+
 
 
     }

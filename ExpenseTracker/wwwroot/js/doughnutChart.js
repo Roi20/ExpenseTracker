@@ -1,11 +1,22 @@
 ﻿Chart.register(ChartDataLabels);
 
 
+
+
+
+
 if (window.chartData) {
 
     var labels = chartData.map(item => item.CategoryName);
     var values = chartData.map(item => item.SumAmount);
     var formattedValues = chartData.map(item => item.FormattedAmount);
+
+
+    var formatter = new Intl.NumberFormat('en-PH', {
+        style: 'currency',
+        currency: 'PHP'
+
+    });
 
 
     //Color Selection
@@ -50,8 +61,8 @@ if (window.chartData) {
                 datalabels: {
                     color: '#FFFFFF',
                     display: true,
-                    formatter: function (value, context) {
-                        return formattedValues[context.dataIndex]; //context.chart.data.labels[context.dataIndex];
+                    formatter: function (value) {
+                        return formatter.format(value)
                     },
                     font: {
                         size: 6,

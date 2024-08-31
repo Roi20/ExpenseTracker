@@ -33,25 +33,10 @@ namespace ExpenseTracker.Controllers
             }
             catch(Exception ex)
             {
-                throw new Exception($"Exception : {ex.Message} || StackTrace: {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
 
         }
-
-
-
-        /*
-        public async Task<IActionResult> Index() 
-        {
-            var entities = await _repo.GetAllTransaction();
-           
-            if(entities == null)
-                return NotFound();
-
-            return View(entities);
-
-        }
-        */
 
         public IActionResult Create() 
         {
@@ -83,11 +68,11 @@ namespace ExpenseTracker.Controllers
             catch (DbUpdateException ex)
             {
                 ModelState.AddModelError("", $"Unable to update | Error: {ex.Message} | {ex.StackTrace}");
-                return StatusCode(500, $"Unable to update database: {ex.Message}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex)
             {
-                throw new Exception($"Exception Message: {ex.Message} | StackTrace:  {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
 
         }
@@ -130,11 +115,11 @@ namespace ExpenseTracker.Controllers
             catch (DbUpdateException ex)
             {
                 ModelState.AddModelError("", $"Unable to update | Error: {ex.Message} | {ex.StackTrace}");
-                return StatusCode(500, $"Unable to update database: {ex.Message}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex)
             {
-                throw new Exception($"Exception Message: {ex.Message} | StackTrace:  {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
         }
 
@@ -163,11 +148,11 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
-                throw new DbUpdateException($"DbUpdateException: Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw new Exception();
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
         }
 
