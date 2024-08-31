@@ -1,40 +1,17 @@
-﻿/*var menuToggle = document.getElementById('menu-toggle');
-var sideBar = document.getElementById('side-bar');
-var icon = document.getElementById('icon');
-var main = document.getElementById('main');
+﻿
+$('#menu-toggle').click(function () {
+    // Toggle the active class to animate the icon
+    $(this).toggleClass('active');
 
+    // Toggle the active class to show/hide the sidebar
+    $('#side-bar').toggleClass('active');
 
-menuToggle.addEventListener('click', function () {
-    sideBar.classList.toggle('d-none');
-    if (sideBar.contains('d-none'))
-    {
-        sideBar.classList.remove('d-none');
-        main.classList.remove('col-md-10');
-        main.classList.add('col-12');
-        icon.classList.remove("fa-bars");
-        icon.classList.add("fa-xmark");
+    // Toggle icon between menu and close
+    var icon = $('#icon');
+    if (icon.hasClass('fa-bars')) {
+        icon.removeClass('fa-bars').addClass('fa-times'); // Switch to close icon
+    } else {
+        icon.removeClass('fa-times').addClass('fa-bars'); // Switch back to menu icon
     }
-    else {
-        main.classList.remove("col-12");
-        main.classList.add("col-md-10");
-        icon.classList.remove("fa-xmark");
-        icon.classList.add("fa-bars");
-    }
+});
 
-
-}); */
-
-
-    $('#menu-toggle').click(function () {
-        // Toggle sidebar visibility
-        $('#side-bar').toggleClass('d-none');
-        $('#main-content').toggleClass('col-md-12 col-md-10');
-
-        // Toggle icon between menu and close
-        var icon = $('#icon');
-        if (icon.hasClass('fa-bars')) {
-            icon.removeClass('fa-bars').addClass('fa-times'); // Switch to close icon
-        } else {
-            icon.removeClass('fa-times').addClass('fa-bars'); // Switch back to menu icon
-        }
-    });

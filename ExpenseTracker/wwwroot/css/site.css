@@ -15,7 +15,6 @@ html {
 }
 
 html, body {
-    // position: relative;
     min-height: 100vh;
     margin: 0;
     padding: 0;
@@ -27,12 +26,12 @@ html, body {
 }
 
 body {
-    background-color: #121212;
+    background-color: #000000;
     height: 80vh;
-    display: flex;
+    //display: flex;
     margin: 0;
     padding: 0;
-    transition: ease-in-out .3s;
+    
 }
 
 
@@ -41,10 +40,21 @@ body {
 .sidebar {
     background: #1F1B24;
     min-height: 100vh;
-    margin: 0;
-    padding: 0;
-
+    width: 290px;
+    position: fixed; /* Fixes the sidebar to the left */
+    top: 0;
+    left: 0;
+    z-index: 999; /* Ensures it stays on top of the main content */
+    transform: translateX(-100%); /* Hide the sidebar by default */
+    transition: transform 0.3s ease; /* Animation for slide-in effect */
 }
+
+    .sidebar.active {
+        transform: translateX(0); /* Slide sidebar into view */
+    }
+
+/*Sidebar End*/
+
 
 
 /*Sidebar toggle button*/
@@ -53,22 +63,32 @@ body {
     border: none;
     background: none;
 }
+/* Icon styles */
+#menu-toggle {
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition */
+}
 
+    /* Rotate icon when active */
+    #menu-toggle.active {
+        transform: rotate(90deg); /* Rotate the icon 90 degrees */
+    }
 
 
 /*Sidebar toggle button End*/
 
-#main{
-   min-height: 100vh;
-   overflow: auto;
+#main {
+
+    position: relative;
+    left: 0; /* No margin for the main content */
+    width: 100%; /* Full width by default */
+    transition: left 0.3s ease; /* Smooth transition for main content movement */
 }
-
-
 
 #mainContainer
 {
   
-   padding-top: 5rem;
+   padding-top: 3rem;
    
 }
 

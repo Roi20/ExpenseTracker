@@ -8,11 +8,15 @@
 
   <ItemGroup>
     <Content Remove="wwwroot\js\ComponentUI.js" />
+    <Content Remove="wwwroot\js\doughnutChart.js" />
+    <Content Remove="wwwroot\js\LineChart.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\modal.css" />
     <_ContentIncludedByDefault Remove="wwwroot\js\ComponentUI.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\doughnutChart.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\LineChart.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,6 +32,8 @@
 
   <ItemGroup>
     <None Include="wwwroot\js\ComponentUI.js" />
+    <None Include="wwwroot\js\doughnutChart.js" />
+    <None Include="wwwroot\js\LineChart.js" />
   </ItemGroup>
 
 </Project>

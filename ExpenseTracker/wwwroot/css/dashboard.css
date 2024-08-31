@@ -1,0 +1,164 @@
+﻿
+#dash-main-div{
+   justify-content: center;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   width: 100%;
+}
+
+/*First Div*/
+.firstDiv{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.firstDiv .row{
+    column-gap: 8px;
+    row-gap: 8px;
+    padding: 1rem;
+}
+
+#col {
+    min-height: 80px;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 0;
+    background: #121212;
+    display: flex;
+    overflow: hidden;
+    width: 100%;
+}
+
+.holder {
+    height: 100%;
+    background: #1F1B24;
+    width: 25%;
+    padding: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.5vw;
+}
+
+.income #t-income h6, 
+.expense #t-expense h6, 
+.balance #t-balance h6 {
+
+    width: 100%;
+    font-size: 1vw;
+    font-variant-caps: all-small-caps;
+    color: #9FA6B2;
+    text-align: start;
+    padding-left: 4px;
+    padding-top: 2px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.total-income .holder {
+
+    color: #198754;
+}
+
+.total-expense .holder {
+
+    color: #dc3545;
+}
+
+.total-balance .holder {
+
+    color: #ffc107;
+}
+
+.balance #balance-numbers h5,
+.income #income-numbers h5,
+.expense #expense-numbers h5 {
+
+    color: #FFFFFF;
+}
+
+.income #income-numbers h5, 
+.expense #expense-numbers h5, 
+.balance #balance-numbers h5 {
+
+    font-size: 1.7vw;
+    font-weight: bold;
+    text-align: center;
+    margin-top: auto;
+    margin-bottom: auto;
+
+}
+
+.income #income-numbers, 
+.expense #expense-numbers, 
+.balance #balance-numbers {
+
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+}
+
+/*End of First Div*/
+
+/*Second Div*/
+
+.secondDiv {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+   
+}
+
+.secondDiv #chart-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #121212;
+    border-radius: 5px;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+}
+.secondDiv #lineChart-container {
+    display: flex;
+    background: #121212;
+    border-radius: 5px;
+    position: relative;
+    padding: 0;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+
+}
+.secondDiv .row{
+   column-gap: 5px;
+   row-gap: 10px;
+}
+
+
+/*Chart*/
+
+#chart-container {
+
+   
+}
+
+canvas{
+  // background: white;
+    width: 100% !important;
+    height: 100% !important;
+    font-variant: small-caps !important;
+
+ 
+}

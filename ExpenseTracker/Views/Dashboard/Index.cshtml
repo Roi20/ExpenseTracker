@@ -1,9 +1,83 @@
-﻿
+﻿@model DashboardViewModel
+
+
+
+@section CustomStyles {
+
+    <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
+
+}
+
 
 @{
     ViewData["CurrentPage"] = "Dashboard";
 }
 
+<div class="main p-0" id="dash-main-div">
+    <div class="row firstDiv" id="first-div">
+        <div class="row">
+            <div class="col-sm total-income w-100" id="col">
+                <div class="holder">
+                    PHP
+                </div>
+                <div class="income p-0 mt-0 w-100" id="income">
+                    <div class="col w-100" id="t-income">
+                        <h6>Total Income</h6>
+                    </div>
+                    <div class="col" id="income-numbers">
+                        <h5>@Model.TotalIncome.ToString("PHP #,##0")</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm total-expense" id="col">
+                <div class="holder">
+                    PHP
+                </div>
+                <div class="expense p-0 mt-0 w-100" id="expense">
+                    <div class="col w-100" id="t-expense">
+                        <h6>Total Expense</h6>
+                    </div>
+                    <div class="col" id="expense-numbers">
+                        <h5>@Model.TotalExpense.ToString("PHP #,##0")</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm total-balance" id="col">
+                <div class="holder">
+                    PHP
+                </div>
+                <div class="balance p-0 mt-0 w-100" id="balance">
+                    <div class="col w-100" id="t-balance">
+                        <h6>Balance</h6>
+                    </div>
+                    <div class="col" id="balance-numbers">
+                        <h5>@Model.Balance.ToString("PHP #,##0")</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row secondDiv p-1" id="second-div">
+        <div class="row">
+            <div class="col-md-4" id="chart-container">
+                <canvas id="myChart"></canvas>
+            </div>
+            <div class="col-md p-0" id="lineChart-container">
+                <canvas width ="400" height="200" id="myLineChart"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
 
+@section CustomScripts {
+  
+    <script>
+        window.chartData = JSON.parse('@Html.Raw(ViewBag.DoughnutChart)');
+        var LineChartData = @Html.Raw(ViewBag.LineChart)
+    </script>
+   
+    <script src="@Url.Content("~/js/doughnutChart.js")"></script>
 
-<h1 class="text-light">Welcome to Dashboard</h1>
+    <script src="@Url.Content("~/js/LineChart.js")"></script>
+}
+
