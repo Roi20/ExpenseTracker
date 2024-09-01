@@ -294,15 +294,17 @@ table
         background-color: #B00020;
     }
 
+/*Sorting Div*/
 
-/*DropDown select
- form select.form-select{
-   // -moz-appearance: none;
-   // appearance: none;
-    //font-family: "Libre Franklin" sans-serif !important;
+#sortingDiv{
+    width: 35%;
 }
-select.form-select option {
-       // -moz-appearance: none;
-       // appearance: none;
-        //font-family: "Libre Franklin", sans-serif !important;
-    }*/
+/*#198254*/
+#sortBtn {
+    background: none;
+    border: none;
+    outline: none;
+    color: #FFFFFF ;
+    font-weight: bold;
+    float: right
+}

@@ -30,19 +30,49 @@ namespace ExpenseTracker.Repository
         }
 
 
-        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize)
+        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder)
         {
             var count = await _table.Include(t => t.Category).CountAsync();
 
-            var records = await _table.Include(t => t.Category)
-                      .Skip((page - 1) * pageSize)
-                      .Take(pageSize)
-                      .ToListAsync();
+            IQueryable<Transaction> records = _table.Include(i => i.Category);
 
+
+            switch (sortOrder)
+            {
+                case "Category":
+                    records = records.OrderBy(i => i.Category.Title);
+                    break;
+
+                case "Category Desc":
+                    records = records.OrderByDescending(i => i.Category.Title);
+                    break;
+
+                case "Amount":
+                    records = records.OrderBy(i => i.Amount);
+                    break;
+
+                case "Amount Desc":
+                    records = records.OrderByDescending(i => i.Amount);
+                    break;
+
+                case "Date Desc":
+                    records = records.OrderByDescending(i => i.Date);
+                    break;
+
+                default:
+                    records = records.OrderBy(t => t.Date);
+                    break;
+            }
+                      
+
+            var paginatedRecords = await records
+                                         .Skip((page - 1) * pageSize)
+                                         .Take(pageSize)
+                                         .ToListAsync();
 
             return new PaginatedResult<Transaction>
             {
-                Result = records,
+                Result = paginatedRecords,
                 Page = page,
                 TotalCount = (int)Math.Ceiling(count / (double)pageSize)
 
