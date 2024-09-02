@@ -16,13 +16,13 @@ namespace ExpenseTracker.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int dayRange = 7)
         {
 
             try
             {
-                //Last two weeks transactions
-                var StartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-14));
+
+                var StartDate = DateOnly.FromDateTime(DateTime.Today.AddDays(-dayRange));
                 var EndDate = DateOnly.FromDateTime(DateTime.Today);
 
                 var model = new DashboardViewModel
@@ -32,14 +32,14 @@ namespace ExpenseTracker.Controllers
                     Balance = await _repo.Balance(StartDate, EndDate)
                     
                 };
-
-                var LineChartData = await _repo.GetLineChartData(StartDate, EndDate);
+            
+                var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1);
 
                 var data = await _repo.DoughnutChartData(StartDate, EndDate);
 
                 ViewBag.LineChart = Newtonsoft.Json.JsonConvert.SerializeObject(LineChartData);
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
-
+                ViewBag.DayRange = dayRange;
                 return View(model);
 
             }
@@ -52,5 +52,11 @@ namespace ExpenseTracker.Controllers
 
        
         }
+
+
+
+
+
+
     }
 }
