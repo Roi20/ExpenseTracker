@@ -16,7 +16,5 @@ namespace ExpenseTracker.Contracts
         Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate);
         Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range);
 
-
-
     }
 }

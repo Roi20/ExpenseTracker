@@ -3,6 +3,7 @@ using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace ExpenseTracker.Repository
 {
@@ -13,9 +14,61 @@ namespace ExpenseTracker.Repository
         {
         }
 
+        public async Task<bool> CheckIfExist(Expression<Func<Category, bool>> condition)
+        {
+            return await _table.AnyAsync(condition);
+        }
+
         public async Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword)
         {
             return await GetPaginated(page, pageSize, t => t.Title.Contains(keyword ?? string.Empty));
+        }
+
+        public async Task CreateCategory(Category entity)
+        {
+            try
+            {
+                var checkIfExist = await CheckIfExist(x => x.Title == entity.Title);
+
+                if (!checkIfExist)
+                {
+                    await Create(entity);
+
+                }
+                else
+                {
+                    throw new Exception("Category Title Already Exist");
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        public async Task UpdateCategory(object id, object model)
+        {
+            try
+            {
+                var entity = await GetById(id);
+                var checkIfExist = await CheckIfExist(x => x.Title == entity.Title);
+
+                if (!checkIfExist)
+                {
+                    await Update(id, model);
+
+                }
+                else
+                {
+                    throw new Exception("Category Title Already Exist");
+                }
+
+            }
+            catch
+            {
+                throw;
+            }
         }
     }
 }

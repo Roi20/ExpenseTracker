@@ -46,12 +46,20 @@ table
     border-radius: unset;
 }
 
-/*Category Table End*/
+#CategoryTypeBg{
+    padding : 2px 6px 2px 6px;
+    border-radius: 4px;
+    font-size: .7em;
+    width: 80px;
+    display: inline-block;
+    text-align: center;
+    font-variant-caps: all-small-caps;
+}
 
+
+/*Category Table End*/
 /*Search box*/
-.input-group input
-{
-    
+.input-group input {
     height: 40px;
     border: 2px solid #198754;
     border-radius: unset;

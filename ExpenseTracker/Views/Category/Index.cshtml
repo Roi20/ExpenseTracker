@@ -62,7 +62,7 @@
                         <tr class="fs-9">
                             <td class="text-center">@item.Icon</td>
                             <td class="text-start">@item.Title</td>
-                            <td>@item.Type</td>
+                            <td><span class="@(item.Type == "Income" ? "bg-success" : "bg-danger")" id="CategoryTypeBg">@item.Type</span></td>
                             <td>
                                 <div class="text-start">
                                     <a asp-action="Update" asp-route-id="@item.CategoryId" class="text-warning text-decoration-none me-1"

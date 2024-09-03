@@ -58,8 +58,7 @@ namespace ExpenseTracker.Controllers
 
             try
             {
-
-                await _repo.Create(model);
+                await _repo.CreateCategory(model);
 
                 TempData["Message"] = $"{model.Title}, Created Successfully";
 
@@ -103,7 +102,7 @@ namespace ExpenseTracker.Controllers
             try 
             {
 
-                await _repo.Update(model.CategoryId, new {model.Title, model.Icon, model.Type });
+                await _repo.UpdateCategory(model.CategoryId, new {model.Title, model.Icon, model.Type });
                 
                 TempData["Message"] = $"{model.Title}, Updated Successfully";
                 
