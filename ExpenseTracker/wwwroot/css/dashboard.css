@@ -147,15 +147,68 @@
 }
 
 
-/*Chart*/
+/*Data Display Last 7Days/14Days/30Days*/
 
-#chart-container {
+#DataHolder{
+    padding-bottom: 0;
+}
 
+#DataHolder form{
+    margin-bottom: 0;
+}
+
+#dataDisplay{
+   
+    padding: 0;
+    border-radius: 5px;
+    overflow: hidden;
+
+}
+
+#dataDisplaySelect{
+    border: none;
+    cursor: pointer;
+    font-family: "Libre Franklin" !important;
+    width: 10%;
+    border-radius: 5px;
+    font-size: 0.6em;
+    background: none;
+    color: #FFFFFF;
+    outline-color: none;
+    
+}
+
+
+#dataDisplaySelect option{
+    background: #121212;
+    
+}
+
+
+#dataDisplayText {
+    font-size: 0.6em;
+    font-style: italic;
+    color: #FFFFFF;
    
 }
 
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    #dataDisplaySelect{
+        width: 40%;
+    }
+
+}
+
+
+    /*Chart*/
+    #chart-container {
+    }
+
 canvas{
-  // background: white;
+ 
     width: 100% !important;
     height: 100% !important;
     font-variant: small-caps !important;

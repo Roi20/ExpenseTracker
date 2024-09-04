@@ -40,7 +40,7 @@ body {
 .sidebar {
     background: #1F1B24;
     min-height: 100vh;
-    width: 290px;
+    width: 200px;
     position: fixed; /* Fixes the sidebar to the left */
     top: 0;
     left: 0;

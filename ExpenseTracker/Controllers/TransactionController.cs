@@ -24,9 +24,12 @@ namespace ExpenseTracker.Controllers
             try
             {
 
+                ViewBag.SortOrder = request.SortOrder;
+
                 var entities = await _repo.GetPagination(
                     request.PageNumber,
-                    PaginatedRequest.ITEMS_PER_PAGE);
+                    PaginatedRequest.ITEMS_PER_PAGE,
+                    request.SortOrder);
 
                 return View(entities);
 

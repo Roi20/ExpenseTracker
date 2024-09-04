@@ -15,5 +15,7 @@ namespace ExpenseTracker.Common
 
         [FromQuery(Name = "a")]
         public int? SearchAmount { get; set; }
+
+        public string SortOrder { get; set; }
     }
 }

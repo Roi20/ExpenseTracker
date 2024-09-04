@@ -46,7 +46,6 @@ namespace ExpenseTracker.Repository
         public async Task<int> TotalExpense(DateOnly startDate, DateOnly endDate)
         {
    
-          //  var  EndDate  = DateOnly.FromDateTime(DateTime.Today);
 
             var lastTwoWeeksData = await GetData(startDate, endDate);
 
@@ -58,8 +57,6 @@ namespace ExpenseTracker.Repository
 
         public async Task<int> TotalIncome(DateOnly startDate, DateOnly endDate)
         {
-
-            //var EndDate = DateOnly.FromDateTime(DateTime.Today);
 
             var lastTwoWeeksData = await GetData(startDate, endDate);
 
@@ -91,10 +88,10 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public string[] LastTwoWeeks(DateOnly startDate)
+        public string[] LastTwoWeeks(DateOnly startDate, int range)
         {
 
-            var days = Enumerable.Range(0, 15)
+            var days = Enumerable.Range(0, range)
                                  .Select(x => startDate.AddDays(x).ToString("dd-MMM"))
                                  .ToArray();
 
@@ -136,19 +133,18 @@ namespace ExpenseTracker.Repository
             return expenseSummary;
         }
 
-        public async Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate)
+        public async Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range)
         {
-            var days = LastTwoWeeks(startDate);
+
+            var days = LastTwoWeeks(startDate, Range);
             var incomeData = await IncomeSummary(startDate, endDate);
             var expenseData = await ExpenseSummary(startDate, endDate);
 
             var LineChartData = days.Select(day => new LineChartData
             {
                 NumberOfDays = day,
-                Income = incomeData.ContainsKey(day) ? incomeData[day] : 0,
-                Expense = expenseData.ContainsKey(day) ? expenseData[day] : 0,
-                //FormattedIncome = incomeData.ContainsKey(day) ? incomeData[day].ToString("PHP #,##0") : "0",
-                //FormattedExpense = expenseData.ContainsKey(day) ? incomeData[day].ToString("PHP #,##0") : "0",
+                Income = incomeData.ContainsKey(day) ? incomeData[day] : default,
+                Expense = expenseData.ContainsKey(day) ? expenseData[day] : default,
 
             }).ToList();
 

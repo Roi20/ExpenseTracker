@@ -21,3 +21,12 @@ baseModel.closeModalBtn.on('click', function () {
 });
 
 /*Sidebar Toggle Button*/
+
+
+
+function submitForm() {
+    document.getElementById('sortForm').submit();
+}
+
+
+
