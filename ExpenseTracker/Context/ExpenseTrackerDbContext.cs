@@ -1,11 +1,13 @@
-﻿using ExpenseTracker.Models;
+﻿using ExpenseTracker.Data;
+using ExpenseTracker.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace ExpenseTracker.Context
 {
-    public class ExpenseTrackerDbContext : DbContext
+    public class ExpenseTrackerDbContext : IdentityDbContext<AppIdentityUser>
     {
-        public ExpenseTrackerDbContext(DbContextOptions options) : base(options)
+        public ExpenseTrackerDbContext(DbContextOptions<ExpenseTrackerDbContext> options) : base(options)
         {
             
         }

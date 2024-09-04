@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using ExpenseTracker.Data;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
@@ -22,8 +23,12 @@ namespace ExpenseTracker.Models
         [ForeignKey("Category"), DisplayName("Category")]
         public int CategoryId { get; set; }
 
+        [ForeignKey("AppIdentityUser")]
+        public string User_Id { get; set; }
+
         public virtual Category Category { get; set; }
-        
+        public virtual AppIdentityUser User {get; set;}
+
         public string? FormattedAmount
         {
             get

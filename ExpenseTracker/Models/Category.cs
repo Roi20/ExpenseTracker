@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using ExpenseTracker.Data;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -22,8 +23,12 @@ namespace ExpenseTracker.Models
         [Required(ErrorMessage = "Please select between Expense and Income")]
         [StringLength(20)]
         [Column(TypeName = "nvarchar(20)")]
-        public string Type { get; set; } = "Unspecified";
+        public string Type { get; set; }
 
+        [ForeignKey("AppIdentityUser")]
+        public string User_Id { get; set; }
+
+        public virtual AppIdentityUser User { get; set; }
 
     
 
