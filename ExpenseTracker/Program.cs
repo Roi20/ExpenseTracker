@@ -9,10 +9,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 var config = builder.Configuration;
+var CONNECTION_STRING = "ExpenseTrackerDbConn";
+
 
 // Sql Dependency
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
-options.UseSqlServer(config.GetConnectionString("ExpenseTrackerDbConn")));
+options.UseSqlServer(config.GetConnectionString(CONNECTION_STRING)));
+
+
 
 // Repository Dependency
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
