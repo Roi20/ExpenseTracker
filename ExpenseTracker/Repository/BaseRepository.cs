@@ -7,7 +7,7 @@ using System.Linq.Expressions;
 namespace ExpenseTracker.Repository
 {
     public class BaseRepository<T> : IBaseRepository<T>
-        where T : class
+        where T : class, IBaseModel
     {
 
         private readonly DbContext _db;
@@ -149,13 +149,9 @@ namespace ExpenseTracker.Repository
         }
         */
 
-
-        //(Not Use) Provision for future redesign of this project with user account
-        public Task<IEnumerable<T>> UserId(string userId)
+        public async Task<IEnumerable<T>> GetAllUserData(string userId)
         {
-            throw new NotImplementedException();
+            return await _table.Where(x => x.User_Id == userId).ToListAsync();
         }
-
-      
     }
 }

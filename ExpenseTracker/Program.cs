@@ -4,20 +4,24 @@ using ExpenseTracker.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ExpenseTracker.Data;
-
+//ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
 
-
-
 var config = builder.Configuration;
-var CONNECTION_STRING = builder.Configuration.GetConnectionString("ExpenseTrackerAppDbConn") ?? throw new InvalidOperationException("ConnectionString 'ExpenseTrackerAppDbConn' not found.");
+var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 
 // Sql Dependency
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
-        options.UseSqlServer(CONNECTION_STRING));
+        options.UseSqlServer(CONNECTION_STRING, 
+        sqlOptions => sqlOptions.EnableRetryOnFailure(
+            
+                  maxRetryCount: 5,
+                  maxRetryDelay: TimeSpan.FromSeconds(30),
+                  errorNumbersToAdd: null
+            )));
 
-//builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Identity
 builder.Services.AddDefaultIdentity<AppIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
@@ -32,7 +36,8 @@ builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-//Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NCaF5cXmZCdkx3THxbf1x0ZFxMYl5bQHRPMyBoS35RckVkW39fcHRRQ2BdWUR1");
+
+builder.Services.AddRazorPages();
 
 var app = builder.Build();
 
@@ -40,7 +45,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
 
-   // app.UseMigrationsEndPoint();
+    app.UseMigrationsEndPoint();
 
 }
 else
@@ -60,6 +65,8 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
 
 app.Run();

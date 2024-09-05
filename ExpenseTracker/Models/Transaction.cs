@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Data;
+﻿using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -6,7 +7,7 @@ using System.Data;
 
 namespace ExpenseTracker.Models
 {
-    public class Transaction
+    public class Transaction : IBaseModel
     {
         [Key]
         public int TransactionId { get; set; }

@@ -24,16 +24,24 @@ namespace ExpenseTracker.Controllers
         {
             try 
             {
-                var entities = await _repo.GetPaginated(
-                        request.PageNumber, 
-                        PaginatedRequest.ITEMS_PER_PAGE,
-                        request.SearchKeyword ??  string.Empty
+                var userId = GetUserId();
+
+                if(userId != string.Empty)
+                {
+                    var entities = await _repo.GetPaginated(
+                     request.PageNumber,
+                     PaginatedRequest.ITEMS_PER_PAGE,
+                     request.SearchKeyword ?? string.Empty
                     );
 
-                entities.SearchKeyword = request.SearchKeyword;
+                    entities.SearchKeyword = request.SearchKeyword;
 
-                return View(entities);
-                 
+                    return View(entities);
+                }
+
+                return NotFound("User Not Found");
+
+
             }
             catch
             {
@@ -53,8 +61,10 @@ namespace ExpenseTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Category model)
         {
+            ValidateUserId(model);
+
             if (!ModelState.IsValid)
-                return View(ModelState);
+              return View(ModelState);
 
             try
             {
@@ -96,9 +106,12 @@ namespace ExpenseTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Update(Category model)
         {
+
+            ValidateUserId(model);
+
             if (!ModelState.IsValid) 
                 return View(ModelState);
-            
+
             try 
             {
 
@@ -147,6 +160,17 @@ namespace ExpenseTracker.Controllers
             catch (Exception ex)
             {
                 return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+        //Set the User_Id for its current user
+        private void ValidateUserId(Category model)
+        {
+            var userId = GetUserId();
+
+            if (userId != string.Empty)
+            {
+                model.User_Id = userId;
             }
         }
 

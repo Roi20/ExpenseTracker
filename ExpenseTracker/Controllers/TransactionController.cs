@@ -41,12 +41,12 @@ namespace ExpenseTracker.Controllers
 
         }
 
-        public IActionResult Create() 
+        public async Task<IActionResult> Create() 
         {
             var viewModel = new TransactionViewModel
             {
                 Transaction = new Transaction(),
-                Categories = _repo.GetAllCategoriesAsync().Result
+                Categories = await _repo.GetAllCategoriesAsync()
             };
 
             return View(viewModel);
@@ -90,7 +90,7 @@ namespace ExpenseTracker.Controllers
             var viewModel = new TransactionViewModel()
             {
                 Transaction = entity, 
-                Categories = _repo.GetAllCategoriesAsync().Result
+                Categories = await _repo.GetAllCategoriesAsync()
             };
 
 

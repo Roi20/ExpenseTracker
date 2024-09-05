@@ -1,11 +1,12 @@
-﻿using ExpenseTracker.Data;
+﻿using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Models
 {
-    public class Category
+    public class Category : IBaseModel
     {
         [Key]
         public int CategoryId { get; set; }
@@ -29,9 +30,6 @@ namespace ExpenseTracker.Models
         public string User_Id { get; set; }
 
         public virtual AppIdentityUser User { get; set; }
-
-    
-
 
     }
 }
