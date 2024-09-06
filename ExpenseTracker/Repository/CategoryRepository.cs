@@ -9,9 +9,12 @@ namespace ExpenseTracker.Repository
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
-        
+
+        private readonly DbContext _db;
+
         public CategoryRepository(ExpenseTrackerDbContext db) : base(db)
         {
+            _db = db;
         }
 
         public async Task<bool> CheckIfExist(Expression<Func<Category, bool>> condition)
@@ -32,6 +35,7 @@ namespace ExpenseTracker.Repository
 
                 if (!checkIfExist)
                 {
+
                     await Create(entity);
 
                 }
@@ -47,16 +51,24 @@ namespace ExpenseTracker.Repository
             }
         }
 
-        public async Task UpdateCategory(object id, object model)
+        public async Task UpdateCategory(int id, Category model)
         {
             try
             {
-                var entity = await GetById(id);
-                var checkIfExist = await CheckIfExist(x => x.Title == entity.Title);
+               
+                var checkIfExist = await CheckIfExist(x => x.Title == model.Title && x.CategoryId != id);
 
                 if (!checkIfExist)
                 {
-                    await Update(id, model);
+                   
+                    var entity = await GetById(id);
+                    if(entity == null)
+                    {
+                        throw new Exception("Category not found.");
+                    }
+
+                    _db.Entry(entity).CurrentValues.SetValues(model);
+                    await _db.SaveChangesAsync();
 
                 }
                 else

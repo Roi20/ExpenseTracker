@@ -3,6 +3,7 @@ using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Syncfusion.EJ2.Notifications;
@@ -63,9 +64,6 @@ namespace ExpenseTracker.Controllers
         {
             ValidateUserId(model);
 
-            if (!ModelState.IsValid)
-              return View(ModelState);
-
             try
             {
                 await _repo.CreateCategory(model);
@@ -77,6 +75,7 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
+                ModelState.AddModelError("", "An error occured while trying to save your todo item");
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex) 
@@ -109,13 +108,18 @@ namespace ExpenseTracker.Controllers
 
             ValidateUserId(model);
 
-            if (!ModelState.IsValid) 
-                return View(ModelState);
-
             try 
             {
 
-                await _repo.UpdateCategory(model.CategoryId, new {model.Title, model.Icon, model.Type });
+                await _repo.UpdateCategory(model.CategoryId, new Category
+                {
+
+                    Title = model.Title,
+                    Icon = model.Icon,
+                    Type = model.Type,
+                    User_Id = model.User_Id
+
+                });
                 
                 TempData["Message"] = $"{model.Title}, Updated Successfully";
                 
@@ -124,6 +128,7 @@ namespace ExpenseTracker.Controllers
             }
             catch(DbUpdateException ex) 
             {
+                ModelState.AddModelError("", "An error occured while trying to save your todo item");
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex) 
@@ -168,9 +173,13 @@ namespace ExpenseTracker.Controllers
         {
             var userId = GetUserId();
 
-            if (userId != string.Empty)
+            if (!string.IsNullOrEmpty(userId))
             {
                 model.User_Id = userId;
+            }
+            else
+            {
+                ModelState.AddModelError("", "User_Id was null or empty.");
             }
         }
 

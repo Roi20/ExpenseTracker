@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Migrations
 {
     [DbContext(typeof(ExpenseTrackerDbContext))]
-    [Migration("20240905192049_InitialMigration")]
+    [Migration("20240906154657_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -113,16 +113,13 @@ namespace ExpenseTracker.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("User_Id")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("User_Id");
 
                     b.ToTable("Categories");
                 });
@@ -147,18 +144,15 @@ namespace ExpenseTracker.Migrations
                     b.Property<string>("Note")
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("User_Id")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("TransactionId");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("User_Id");
 
                     b.ToTable("Transactions");
                 });
@@ -304,7 +298,10 @@ namespace ExpenseTracker.Migrations
                 {
                     b.HasOne("ExpenseTracker.Data.AppIdentityUser", "User")
                         .WithMany("Categories")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Category_AspNetUsers");
 
                     b.Navigation("User");
                 });
@@ -319,7 +316,10 @@ namespace ExpenseTracker.Migrations
 
                     b.HasOne("ExpenseTracker.Data.AppIdentityUser", "User")
                         .WithMany("Transactions")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("User_Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("FK_Transaction_AspNetUsers");
 
                     b.Navigation("Category");
 

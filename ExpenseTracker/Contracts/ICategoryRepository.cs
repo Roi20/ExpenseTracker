@@ -11,7 +11,7 @@ namespace ExpenseTracker.Contracts
         Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword);
         Task<bool> CheckIfExist(Expression<Func<Category, bool>> condition);
         Task CreateCategory(Category entity);
-        Task UpdateCategory(object id, object model);
+        Task UpdateCategory(int id, Category model);
 
     }
 }

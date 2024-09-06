@@ -26,7 +26,7 @@ namespace ExpenseTracker.Models
         [Column(TypeName = "nvarchar(20)")]
         public string Type { get; set; }
 
-        [ForeignKey("AppIdentityUser")]
+        [ForeignKey("User")]
         public string User_Id { get; set; }
 
         public virtual AppIdentityUser User { get; set; }

@@ -165,17 +165,17 @@ namespace ExpenseTracker.Migrations
                     Title = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Icon = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
                     Type = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    User_Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    User_Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Categories", x => x.CategoryId);
                     table.ForeignKey(
-                        name: "FK_Categories_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Category_AspNetUsers",
+                        column: x => x.User_Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -188,23 +188,23 @@ namespace ExpenseTracker.Migrations
                     Note = table.Column<string>(type: "nvarchar(100)", nullable: true),
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
-                    User_Id = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    User_Id = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transactions", x => x.TransactionId);
                     table.ForeignKey(
-                        name: "FK_Transactions_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_Transaction_AspNetUsers",
+                        column: x => x.User_Id,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Transactions_Categories_CategoryId",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
                         principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.NoAction);
                 });
 
             migrationBuilder.CreateIndex(
@@ -247,9 +247,9 @@ namespace ExpenseTracker.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Categories_UserId",
+                name: "IX_Categories_User_Id",
                 table: "Categories",
-                column: "UserId");
+                column: "User_Id");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Transactions_CategoryId",
@@ -257,9 +257,9 @@ namespace ExpenseTracker.Migrations
                 column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Transactions_UserId",
+                name: "IX_Transactions_User_Id",
                 table: "Transactions",
-                column: "UserId");
+                column: "User_Id");
         }
 
         /// <inheritdoc />
