@@ -23,15 +23,24 @@ namespace ExpenseTracker.Controllers
 
             try
             {
+                var userId = GetUserId();
 
-                ViewBag.SortOrder = request.SortOrder;
+                if (!string.IsNullOrEmpty(userId))
+                {
+                    ViewBag.SortOrder = request.SortOrder;
 
-                var entities = await _repo.GetPagination(
-                    request.PageNumber,
-                    PaginatedRequest.ITEMS_PER_PAGE,
-                    request.SortOrder);
+                    var entities = await _repo.GetPagination(
+                        request.PageNumber,
+                        PaginatedRequest.ITEMS_PER_PAGE,
+                        request.SortOrder,
+                        userId);
 
-                return View(entities);
+                    return View(entities);
+
+                }
+
+                return NotFound("User Not Found.");
+               
 
             }
             catch(Exception ex)
@@ -43,10 +52,13 @@ namespace ExpenseTracker.Controllers
 
         public async Task<IActionResult> Create() 
         {
+
+            var userId = GetUserId();
+
             var viewModel = new TransactionViewModel
             {
                 Transaction = new Transaction(),
-                Categories = await _repo.GetAllCategoriesAsync()
+                Categories = await _repo.GetAllCategoriesAsync(userId)
             };
 
             return View(viewModel);
@@ -60,6 +72,8 @@ namespace ExpenseTracker.Controllers
             try
             {
                 var model = models.Transaction;
+
+                ValidateUserId(model);
 
                 await _repo.Create(model);
 
@@ -81,6 +95,8 @@ namespace ExpenseTracker.Controllers
         }
         public async Task<IActionResult> Update(int id) 
         {
+
+            var userId = GetUserId(); 
           
             var entity = await _repo.GetById(id);
 
@@ -90,7 +106,7 @@ namespace ExpenseTracker.Controllers
             var viewModel = new TransactionViewModel()
             {
                 Transaction = entity, 
-                Categories = await _repo.GetAllCategoriesAsync()
+                Categories = await _repo.GetAllCategoriesAsync(userId)
             };
 
 
@@ -100,15 +116,16 @@ namespace ExpenseTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(TransactionViewModel model)
+        public async Task<IActionResult> Update(TransactionViewModel models)
         {
 
             try
             {
+                var model = models.Transaction;
 
-                var entity = model.Transaction;
+                ValidateUserId(model);
 
-                await _repo.Update(entity.TransactionId, new {entity.CategoryId, entity.Amount, entity.Note, entity.Date });
+                await _repo.Update(model.TransactionId, new {model.CategoryId, model.Amount, model.Note, model.Date });
 
                 TempData["Message"] = $"Transaction Updated Successfully";
 

@@ -1,12 +1,14 @@
 ﻿using ExpenseTracker.Models;
+using System.Security.Policy;
 
 namespace ExpenseTracker.Common
 {
-    public class TransactionViewModel
+    public class CategoryViewModel
     {
-        public Transaction Transaction { get; set; }
+        public Category Category { get; set; }
+
         public IEnumerable<Category> Categories { get; set; }
-         
 
     }
+
 }

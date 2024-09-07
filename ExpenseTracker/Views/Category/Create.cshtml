@@ -1,5 +1,5 @@
 ﻿
-@model Category
+@model CategoryViewModel
 
 @{
     var emojis = new List<string>();
@@ -37,18 +37,22 @@
             <p class="text-light small">Create a new category <br />
                 to track your expenses</p>
         </div>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="text-center"><span class="text-danger small">@TempData["ErrorMessage"]</span></div>
+        }
         <div>
             <form asp-action="Create" method="post" class="p-2 h-100">
                 @Html.AntiForgeryToken()
-                <div class="text-center"><span asp-validation-for="Title" class="text-danger small"></span></div>
+                <div class="text-center"><span asp-validation-for="@Model.Category.Title" class="text-danger small"></span></div>
                 <div class="mb-1">
-                    <label asp-for="Title"></label>
-                    <input asp-for="Title" placeholder="Title" class="form-control rounded-0" />
+                    <label asp-for="@Model.Category.Title"></label>
+                    <input asp-for="@Model.Category.Title" placeholder="Title" class="form-control rounded-0" />
                 </div>
-                <div class="text-center"><span asp-validation-for="Icon" class="text-danger small"></span></div>
-                <label asp-for="Icon"></label>                                                   
+                <div class="text-center"><span asp-validation-for="@Model.Category.Icon" class="text-danger small"></span></div>
+                <label asp-for="@Model.Category.Icon"></label>
                 <div class="input-group mb-1">
-                    <select class="form-select rounded-0" onfocus="this.size=5" onblur="this.size=1" id="inputGroupSelect02" asp-for="Icon">
+                    <select class="form-select rounded-0" onfocus="this.size=5" onblur="this.size=1" id="inputGroupSelect02" asp-for="@Model.Category.Icon">
                         <option class="font-monospace" value="" disabled selected>Choose Icon</option>
                         @foreach(var icon in emojis)
                         {
@@ -56,10 +60,10 @@
                         }
                     </select>
                 </div>
-                <div class="text-center"><span asp-validation-for="Type" class="text-danger small"></span></div>
-                <label asp-for="Type"></label>
+                <div class="text-center"><span asp-validation-for="@Model.Category.Type" class="text-danger small"></span></div>
+                <label asp-for="@Model.Category.Type"></label>
                 <div class="input-group mb-1">
-                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="Type">
+                    <select class="form-select rounded-0" id="inputGroupSelect02" asp-for="@Model.Category.Type">
                         <option value="" class="font-monospace" disabled selected>Choose Type</option>
                         <option value="Expense" class="font-monospace">Expense</option>
                         <option value="Income" class="font-monospace">Income</option>

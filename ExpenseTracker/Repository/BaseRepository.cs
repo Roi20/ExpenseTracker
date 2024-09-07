@@ -70,11 +70,11 @@ namespace ExpenseTracker.Repository
             }
         }
 
-        public async Task<IEnumerable<T>> GetAll()
+        public async Task<IEnumerable<T>> GetAll(string userId)
         {
             try 
             {
-               return await _table.ToListAsync();
+               return await _table.Where(x => x.User_Id == userId).ToListAsync();
             
             }
             catch (Exception) 
@@ -126,28 +126,6 @@ namespace ExpenseTracker.Repository
             };
 
         }
-
-        /*
-        public async Task<PaginatedResult<T>> GetPagination(int page, int pageSize)
-        {
-            var count = await _table.CountAsync();
-
-            var records = await _table
-                          .Skip((page - 1) * pageSize)
-                          .Take(pageSize)
-                          .ToListAsync();
-
-
-            return new PaginatedResult<T>
-            {
-                Result = records,
-                Page = page,
-                TotalCount = (int)Math.Ceiling(count / (double)pageSize)
-
-            };
-
-        }
-        */
 
         public async Task<IEnumerable<T>> GetAllUserData(string userId)
         {

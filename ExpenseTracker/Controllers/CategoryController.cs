@@ -27,12 +27,13 @@ namespace ExpenseTracker.Controllers
             {
                 var userId = GetUserId();
 
-                if(userId != string.Empty)
+                if(userId != string.Empty )
                 {
                     var entities = await _repo.GetPaginated(
                      request.PageNumber,
                      PaginatedRequest.ITEMS_PER_PAGE,
-                     request.SearchKeyword ?? string.Empty
+                     request.SearchKeyword ?? string.Empty,
+                     userId
                     );
 
                     entities.SearchKeyword = request.SearchKeyword;
@@ -53,22 +54,41 @@ namespace ExpenseTracker.Controllers
         public IActionResult Create()
         {
 
-            return View(new Category());
+            var viewModel = new CategoryViewModel()
+            {
+                Category = new Category()
+            };
+
+            return View(viewModel);
 
         }
 
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category model)
+        public async Task<IActionResult> Create(CategoryViewModel model)
         {
-            ValidateUserId(model);
+
+            var viewModel = model.Category;
+
+            ValidateUserId(viewModel);
 
             try
             {
-                await _repo.CreateCategory(model);
 
-                TempData["Message"] = $"{model.Title}, Created Successfully";
+                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title);
+
+               
+
+                if (ifExist)
+                {
+                    TempData["ErrorMessage"] = "Category Already Exist.";
+                    return View();
+                }
+                    
+                await _repo.Create(viewModel);
+
+                TempData["Message"] = $"{viewModel.Title}, Created Successfully";
 
                 return Redirect("Index");
 
@@ -96,32 +116,38 @@ namespace ExpenseTracker.Controllers
                 return NotFound();
             }
 
-            return View(entity);
+            var viewModel = new CategoryViewModel()
+            {
+                Category = entity
+            };
+
+            return View(viewModel);
 
         }
         
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(Category model)
+        public async Task<IActionResult> Update(CategoryViewModel model)
         {
 
-            ValidateUserId(model);
+            var viewModel = model.Category;
+
+            ValidateUserId(viewModel);
 
             try 
             {
 
-                await _repo.UpdateCategory(model.CategoryId, new Category
+                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title);
+
+                if (ifExist)
                 {
+                    TempData["ErrorMessage"] = "Category Already Exist.";
+                    return View(model);
+                }
 
-                    Title = model.Title,
-                    Icon = model.Icon,
-                    Type = model.Type,
-                    User_Id = model.User_Id
-
-                });
+                await _repo.Update(viewModel.CategoryId, new {viewModel.Title, viewModel.Icon, viewModel.Type});
                 
-                TempData["Message"] = $"{model.Title}, Updated Successfully";
+                TempData["Message"] = $"{viewModel.Title}, Updated Successfully";
                 
                 return RedirectToAction("Index");
 
@@ -165,21 +191,6 @@ namespace ExpenseTracker.Controllers
             catch (Exception ex)
             {
                 return View("Error", new ErrorViewModel { Message = ex.Message });
-            }
-        }
-
-        //Set the User_Id for its current user
-        private void ValidateUserId(Category model)
-        {
-            var userId = GetUserId();
-
-            if (!string.IsNullOrEmpty(userId))
-            {
-                model.User_Id = userId;
-            }
-            else
-            {
-                ModelState.AddModelError("", "User_Id was null or empty.");
             }
         }
 

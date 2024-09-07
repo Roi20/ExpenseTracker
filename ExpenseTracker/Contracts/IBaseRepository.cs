@@ -5,7 +5,7 @@ namespace ExpenseTracker.Contracts
 {
     public interface IBaseRepository<T>
     {
-        Task <IEnumerable<T>> GetAll();
+        Task <IEnumerable<T>> GetAll(string userId);
         Task<T> GetById(object id);
         Task Create(T entity);
         Task Update(object id, object model);
