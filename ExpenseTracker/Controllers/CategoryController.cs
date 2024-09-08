@@ -72,13 +72,12 @@ namespace ExpenseTracker.Controllers
             var viewModel = model.Category;
 
             ValidateUserId(viewModel);
-
+            var currentUserId = GetUserId();
             try
             {
 
-                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title);
-
-               
+                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title && 
+                                                            x.User_Id == currentUserId);
 
                 if (ifExist)
                 {
@@ -104,8 +103,6 @@ namespace ExpenseTracker.Controllers
             }
 
         }
-
-
         public async Task<IActionResult> Update(int id) 
         {
 
@@ -133,11 +130,12 @@ namespace ExpenseTracker.Controllers
             var viewModel = model.Category;
 
             ValidateUserId(viewModel);
-
+            var currentUserId = GetUserId();
             try 
             {
 
-                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title);
+                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title &&
+                                                            x.User_Id == currentUserId);
 
                 if (ifExist)
                 {

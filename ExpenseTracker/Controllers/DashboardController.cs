@@ -9,15 +9,18 @@ namespace ExpenseTracker.Controllers
     {
 
         private readonly IDashboardRepository _repo;
-
+      
         public DashboardController(IDashboardRepository repo)
         {
             _repo = repo;
+           
         }
 
 
         public async Task<IActionResult> Index(int dayRange = 7)
         {
+
+            var currentUserId = GetUserId();
 
             try
             {
@@ -27,15 +30,15 @@ namespace ExpenseTracker.Controllers
 
                 var model = new DashboardViewModel
                 {
-                    TotalIncome = await _repo.TotalIncome(StartDate, EndDate),
-                    TotalExpense = await _repo.TotalExpense(StartDate, EndDate),
-                    Balance = await _repo.Balance(StartDate, EndDate)
+                    TotalIncome = await _repo.TotalIncome(StartDate, EndDate, currentUserId),
+                    TotalExpense = await _repo.TotalExpense(StartDate, EndDate, currentUserId),
+                    Balance = await _repo.Balance(StartDate, EndDate, currentUserId)
                     
                 };
             
-                var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1);
+                var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1, currentUserId);
 
-                var data = await _repo.DoughnutChartData(StartDate, EndDate);
+                var data = await _repo.DoughnutChartData(StartDate, EndDate, currentUserId);
 
                 ViewBag.LineChart = Newtonsoft.Json.JsonConvert.SerializeObject(LineChartData);
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
