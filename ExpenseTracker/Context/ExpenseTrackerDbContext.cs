@@ -29,7 +29,6 @@ namespace ExpenseTracker.Context
                   .HasConstraintName("FK_Transaction_AspNetUsers");
         }
 
-
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
 

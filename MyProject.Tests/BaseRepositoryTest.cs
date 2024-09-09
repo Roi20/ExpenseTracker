@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.InMemory;
 using Moq;
 using System;
 using System.CodeDom;
@@ -11,9 +12,28 @@ using System.Threading.Tasks;
 using System.Transactions;
 using NUnit.Framework;
 using NUnit.Framework.Legacy;
+using ExpenseTracker.Common;
+using System.Linq.Expressions;
+using ExpenseTracker.Repository;
+using Microsoft.AspNetCore.Authentication;
+using NuGet.Protocol.Core.Types;
+using ExpenseTracker.Context;
 
-namespace MyProject.Tests
+namespace MyProject.Testing
 {
+
+    [TestFixture]
+    public class MyTest
+    {
+        [Test]
+        public void Test()
+        {
+            ClassicAssert.AreEqual(1, 1);
+        }
+    }
+
+
+    /*
     public class BaseRepositoryTest<T>
         where T : class, IBaseModel
     {
@@ -63,9 +83,19 @@ namespace MyProject.Tests
         }
 
 
+
     }
 
-    public class TestDbContext : DbContext
+    public class PaginatedResult<T>
+    {
+        public List<T> Result { get; set; }
+        public int Page { get; set; }
+        public int TotalCount { get; set; }
+    }
+
+
+  
+    public class ExpenseTrackerDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
 
@@ -79,13 +109,16 @@ namespace MyProject.Tests
     [TestFixture]
     public class BaseRepoTest
     {
-        private TestDbContext _context;
+        private ExpenseTrackerDbContext _context;
         private BaseRepositoryTest<Category> _repo;
+        private BaseRepository<Category> _repository;
+        private DbContextOptions<ExpenseTrackerDbContext> _options;
 
         [SetUp]
         public void setup()
         {
-            _context = new TestDbContext();
+      
+            _context = new ExpenseTrackerDbContext();
             _repo = new BaseRepositoryTest<Category>(_context);
 
         }
@@ -207,6 +240,14 @@ namespace MyProject.Tests
 
         }
 
+
+        [Test]
+        public void Pagination()
+        {
+            
+        }
+
+
         [TearDown]
         public void TearDown()
         {
@@ -215,6 +256,94 @@ namespace MyProject.Tests
         }
     }
 
+    */
+
+    [TestFixture]
+    public class TestBaseRepository
+    {
+        private ExpenseTrackerDbContext _context;
+        private DbContextOptions<ExpenseTrackerDbContext> _options;
+        private BaseRepository<Category> _repo;
+
+
+        [SetUp]
+        public void Setup()
+        {
+            var optionsBuilder = new DbContextOptionsBuilder<ExpenseTrackerDbContext>();
+            optionsBuilder.UseInMemoryDatabase("TestDataBase");
+
+            _options = optionsBuilder.Options;
+            _context = new ExpenseTrackerDbContext(_options);
+            _repo = new BaseRepository<Category>(_context);
+
+        }
+
+        [Test]
+        public void TestCalculator()
+        {
+            var a = 10;
+            var b = 11;
+
+            var result = Calculator(a, b);
+
+            ClassicAssert.AreEqual(21, result);
+
+
+        }
+
+
+        [Test]
+        public void TestDbContext()
+        {
+            ClassicAssert.IsNotNull(_context);
+        }
+
+        [Test]
+        public async Task AddEntity_ShouldAddAnEntity()
+        {
+           
+            var category = new Category
+            {
+                CategoryId = 1,
+                Title = "My Title",
+                Icon = "Icon",
+                Type = "Type 1",
+                User_Id = "1234"
+            };
+
+            await _repo.Create(category);
+
+            var result = await _repo.GetAll(category.User_Id);
+            var resToList = result.ToList();
+
+            ClassicAssert.AreEqual(1, result.Count());
+            ClassicAssert.AreEqual("1234", resToList[0].User_Id);
+            
+        }
+
+
+
+        [TearDown]
+        public void TearDown()
+        {
+            _context.Database.EnsureDeleted();
+            _context.Dispose();
+        }
+
+        public static int Calculator(int a, int b)
+        {
+            return a + b;
+        }
+
+    }
+
+
+
 }
+
+
+
+
+
 
 

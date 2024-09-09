@@ -1,16 +1,9 @@
-namespace MyProject.Tests
-{
-    public class Tests
-    {
-        [SetUp]
-        public void Setup()
-        {
-        }
+using ExpenseTracker.Contracts;
+using ExpenseTracker.Models;
+using ExpenseTracker.Repository;
+using Microsoft.EntityFrameworkCore;
+using NUnit.Framework.Legacy;
 
-        [Test]
-        public void Test1()
-        {
-            Assert.Pass();
-        }
-    }
+namespace MyProject.Test
+{
 }
