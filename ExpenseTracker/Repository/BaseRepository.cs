@@ -106,6 +106,9 @@ namespace ExpenseTracker.Repository
             }
         }
 
+        //page = 2
+        //pagesize = 2
+
         public async Task<PaginatedResult<T>> GetPaginated(int page, int pageSize,
             Expression<Func<T, bool>> condition)
         {

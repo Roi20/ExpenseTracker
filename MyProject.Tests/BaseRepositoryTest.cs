@@ -18,6 +18,7 @@ using ExpenseTracker.Repository;
 using Microsoft.AspNetCore.Authentication;
 using NuGet.Protocol.Core.Types;
 using ExpenseTracker.Context;
+using System.Numerics;
 
 namespace MyProject.Testing
 {
@@ -264,6 +265,7 @@ namespace MyProject.Testing
         private ExpenseTrackerDbContext _context;
         private DbContextOptions<ExpenseTrackerDbContext> _options;
         private BaseRepository<Category> _repo;
+        private CategoryRepository repo;
 
 
         [SetUp]
@@ -275,6 +277,7 @@ namespace MyProject.Testing
             _options = optionsBuilder.Options;
             _context = new ExpenseTrackerDbContext(_options);
             _repo = new BaseRepository<Category>(_context);
+            repo = new CategoryRepository(_context);
 
         }
 
@@ -321,6 +324,46 @@ namespace MyProject.Testing
             
         }
 
+        [Test]
+        public async Task GetPagination_ShouldReturnPaginatedPage()
+        {
+
+
+            var category1 = new Category { CategoryId = 1, Icon = "i", Title = "title 1", Type = "Income 1", User_Id = "Sample UserId1" };
+            var category2 = new Category { CategoryId = 2, Icon = "i", Title = "title 1", Type = "Income 2", User_Id = "Sample UserId1" };
+            var category3 = new Category { CategoryId = 3, Icon = "i", Title = "title  6", Type = "Income 3", User_Id = "Sample UserId1" };
+            var category4 = new Category { CategoryId = 4, Icon = "i", Title = "titless 6", Type = "Income 4", User_Id = "Sample UserId1" };
+            var category5 = new Category { CategoryId = 5, Icon = "i", Title = "title 6", Type = "Income 5", User_Id = "Sample UserId1" };
+            var category6 = new Category { CategoryId = 6, Icon = "i", Title = "title 6", Type = "Income 6", User_Id = "Sample UserId1" };
+
+
+            await _repo.Create(category1);
+            await _repo.Create(category2);
+            await _repo.Create(category3);
+            await _repo.Create(category4);
+            await _repo.Create(category5);
+            await _repo.Create(category6);
+
+
+            int page = 1;
+            int pageSize = 2;
+            string keyword = "1";
+            Expression<Func<Category, bool>> condition = x => x.Title.Contains(keyword ?? string.Empty);
+            var userId = "Sample UserId1";
+
+
+            var result = await repo.GetPaginated(page, pageSize, keyword, userId);
+
+
+            // number of pages based on the pagesize, if the table has 6 entities
+            // TotalCount = (int)MathF.Ceiling(count / (double)pageSize)
+            //Note: check the keyword, the total count will be changed depends on keyword.
+            ClassicAssert.AreEqual(1, result.TotalCount);
+
+            //item that present on the current page, was the only item will be counted.
+            ClassicAssert.AreEqual(2, result.Result.Count());
+         
+        }
 
 
         [TearDown]
@@ -335,6 +378,11 @@ namespace MyProject.Testing
             return a + b;
         }
 
+
+        public class Pagination : PaginatedResult<Category>
+        {
+
+        }
     }
 
 
