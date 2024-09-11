@@ -1,0 +1,111 @@
+﻿
+
+
+
+body {
+    display: flex;
+    justify-content: center;
+    font-family: "Libre Franklin";
+    flex-direction: column;
+    background-color: #000101;
+}
+
+.wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    background: #17181d;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 18px;
+    align-items: center;
+    box-shadow: 1px 1px #852467; /*#fb4b4e*/
+    min-width: 420px;
+}
+
+form{
+
+    width: 100%;
+    border-radius: 14px;
+    overflow: hidden;
+    padding: 10px;
+}
+
+#inputHolder {
+    background-color: #0f0f0f;
+    margin-bottom: 20px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+}
+
+.fa-solid {
+    float: left;
+    margin-top: auto;
+    margin-bottom: auto;
+    width: 10%;
+    text-align: center;
+    font-size: 1.2em;
+    color: #852467;
+}
+
+input::-webkit-input-placeholder {
+    color: red !important;
+}
+
+input::-moz-placeholder {
+    color: #FFFFFF;
+}
+
+#inputHolder input {
+    width: 90%;
+    height: 45px;
+    border-radius: 2px;
+    font-size: 1em;
+    background-color: #0f0f0f;
+    color: #FFFFFF;
+    border: none;
+    float: right;
+}
+
+
+input:focus {
+    outline: none;
+    -webkit-text-fill-color: white !important;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+    outline: none;
+    caret-color: #FFFFFF !important;
+}
+
+
+.title {
+    width: 90%;
+    margin-top: 20px;
+}
+
+.title h5{
+    font-weight: bold;
+}
+
+.formHolder{
+    width: 90%;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    .wrapper {
+        width: 70%;
+    }
+}

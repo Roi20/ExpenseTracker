@@ -29,7 +29,10 @@
         </nav>
     </div>
 }
-else if (ViewData["CurrentPage"]?.ToString() == "Dashboard" || ViewData["CurrentPage"]?.ToString() == "Error")
+else if (ViewData["CurrentPage"]?.ToString() == "Dashboard" || 
+         ViewData["CurrentPage"]?.ToString() == "Error" || 
+         ViewData["Title"]?.ToString() == "Log in" ||
+         ViewData["Title"]?.ToString() == "Register")
 {
     //Display None
 }
