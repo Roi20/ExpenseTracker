@@ -1,6 +1,14 @@
 ﻿
+* {
+    letter-spacing: 1px;
+}
 
-
+.validation ul{
+    list-style-type: none;
+    text-align: center;
+    list-style: none;
+    padding-left: 2px;
+}
 
 body {
     display: flex;
@@ -21,8 +29,9 @@ body {
     justify-content: center;
     border-radius: 18px;
     align-items: center;
-    box-shadow: 1px 1px #852467; /*#fb4b4e*/
+    box-shadow: 1px 1px #e85d04; /*#fb4b4e // #852467*/
     min-width: 420px;
+    padding-bottom: 30px;
 }
 
 form{
@@ -36,24 +45,24 @@ form{
 #inputHolder {
     background-color: #0f0f0f;
     margin-bottom: 20px;
-    border-radius: 2px;
+    border-radius: 3px;
     display: flex;
     justify-content: center;
     padding: 2px;
 }
 
-.fa-solid {
+.icon {
     float: left;
     margin-top: auto;
     margin-bottom: auto;
     width: 10%;
     text-align: center;
     font-size: 1.2em;
-    color: #852467;
+    color: #e85d04;
 }
 
 input::-webkit-input-placeholder {
-    color: red !important;
+    color: #FFFFFF !important;
 }
 
 input::-moz-placeholder {
@@ -63,7 +72,7 @@ input::-moz-placeholder {
 #inputHolder input {
     width: 90%;
     height: 45px;
-    border-radius: 2px;
+    border-radius: 5px;
     font-size: 1em;
     background-color: #0f0f0f;
     color: #FFFFFF;
@@ -100,6 +109,111 @@ input:-webkit-autofill:active {
 
 .formHolder{
     width: 90%;
+}
+
+#btnHolder {
+    background: linear-gradient(to bottom left, #e85d04, #ba2c27, #3c096c);
+    height: 45px;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-top: 30px;
+    transition: All .3s ease-in-out;
+}
+
+    #btnHolder:hover {
+        box-shadow: 1px 1px #FFFFFF;
+    }
+
+.submit-button {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background-color: transparent;
+    color: #FFFFFF;
+    font-weight: 400;
+    border-radius: 5px;
+    text-align: left;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.submit-button span{
+    float: right;
+}
+
+.fa-arrow-right{
+    font-size: 1.2em;
+}
+
+/*validation text*/
+.text-danger{
+    text-align: center;
+    display: block;
+    font-size: .8em;
+    font-variant-caps: all-small-caps;
+}
+
+.google-button {
+    width: 100%;
+    height: 45px;
+    border-radius: 3px;
+    font-weight: 400;
+    padding-left: 25px;
+    padding-right: 40px;
+    background-color: #292c35;
+    color: #FFFFFF;
+    border: none;
+    transition: All .3s ease-in-out;
+}
+
+.google-button:hover{
+    box-shadow: 1px 1px #FFFFFF;  
+}
+
+.google-button span{
+
+    float: left;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+
+.fa-brands{
+    font-size: 1.2em;
+    color: #FFFFFF;
+}
+
+#text-link {
+    margin-top: 0px;
+    text-align: center;
+    padding-left: 2px;
+    padding-right: 0px;
+    width: 93%;
+    margin: auto;
+}
+
+#text-link a{
+    
+    font-size: .8em;
+    text-decoration: none;
+    color: #FFFFFF;
+    font-weight: 400;
+    letter-spacing: 1px;
+    transition: all .3s ease-in-out;
+}
+
+#text-link a:hover{
+    color: #5acaf9;
+    letter-spacing: 2px;
+}
+
+
+#register-link{
+    float: left;
+}
+
+#forgot-password{
+    float: right;
 }
 
 @media only screen and (max-width: 768px) {

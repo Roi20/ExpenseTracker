@@ -11,6 +11,16 @@ var config = builder.Configuration;
 var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 
+//Google Authentication
+builder.Services.AddAuthentication().AddGoogle(googleOptions =>
+{
+
+    googleOptions.ClientId = config.GetSection("GoogleAuthentication:ClientId").Value ?? "ClientId Not Found";
+    googleOptions.ClientSecret = config.GetSection("GoogleAuthentication:ClientSecret").Value?? "ClientSecret Not Found";
+
+
+});
+
 // Sql Dependency
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
         options.UseSqlServer(CONNECTION_STRING, 
