@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
-using ExpenseTracker.Migrations;
+//using ExpenseTracker.Migrations;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
@@ -30,11 +30,13 @@ namespace ExpenseTracker.Repository
         }
 
 
-        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder)
+        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId)
         {
             var count = await _table.Include(t => t.Category).CountAsync();
 
-            IQueryable<Transaction> records = _table.Include(i => i.Category);
+            IQueryable<Transaction> records = _table.Where(x => x.User_Id == userId)
+                                                    .Include(i => i.Category);
+                                                   
 
 
             switch (sortOrder)
@@ -80,11 +82,11 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public async Task<IEnumerable<Category>> GetAllCategoriesAsync()
+        public async Task<IEnumerable<Category>> GetAllCategoriesAsync(string userId)
         {
             try
             {
-                return await _categoryRepository.GetAll();
+                return await _categoryRepository.GetAll(userId);
             }
             catch (Exception) 
             {

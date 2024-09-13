@@ -1,9 +1,17 @@
 ﻿
+.main-container{
+    min-height: 600px;
+    border-radius: 5px;
+    min-width: 430px;
+    max-width: 440px;
+}
+
 /*Create Btn*/
 .container #createBtn:hover
 {
     opacity: 0.9;
 }
+
 
 /*search btn*/
 .container form .input-group-prepend:hover

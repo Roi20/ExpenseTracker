@@ -29,21 +29,22 @@
         </nav>
     </div>
 }
-else if (ViewData["CurrentPage"]?.ToString() == "Dashboard" || ViewData["CurrentPage"]?.ToString() == "Error")
+else if (ViewData["CurrentPage"]?.ToString() == "Error" ||
+         ViewData["CurrentPage"]?.ToString() == "Create" ||
+         ViewData["CurrentPage"]?.ToString() == "Update" ||
+         ViewData["CurrentPage"]?.ToString() == "Delete")
 {
-    //Display None
-}
-else
-{
+         
+
     <div class="col-md-5 m-auto p-0 pt-3" id="breadcrumb">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb" style="--bs-breadcrumb-divider: '&raquo;';">
                 <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Index" ? "active" : "")">
-                   <a asp-action="Index">
+                    <a asp-action="Index">
                         <span>
                             <i class="fa-solid fa-house"></i> Home
                         </span>
-                   </a>
+                    </a>
                 </li>
                 <li class="breadcrumb-item @(ViewData["CurrentPage"]?.ToString() == "Create" ? "active" : "d-none")">
                     <span>
@@ -63,4 +64,9 @@ else
             </ol>
         </nav>
     </div>
+    
+}
+else
+{
+    //Display None
 }

@@ -1,10 +1,12 @@
-﻿using Microsoft.Extensions.Diagnostics.HealthChecks;
+﻿using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ExpenseTracker.Models
 {
-    public class Category
+    public class Category : IBaseModel
     {
         [Key]
         public int CategoryId { get; set; }
@@ -22,11 +24,12 @@ namespace ExpenseTracker.Models
         [Required(ErrorMessage = "Please select between Expense and Income")]
         [StringLength(20)]
         [Column(TypeName = "nvarchar(20)")]
-        public string Type { get; set; } = "Unspecified";
+        public string Type { get; set; }
 
+        [ForeignKey("User")]
+        public string User_Id { get; set; }
 
-    
-
+        public virtual AppIdentityUser User { get; set; }
 
     }
 }

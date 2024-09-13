@@ -19,58 +19,60 @@ namespace ExpenseTracker.Repository
             _transaction = _db.Set<Transaction>();
         }
 
-        public async Task<int> Balance(DateOnly startDate, DateOnly endDate)
+        public async Task<int> Balance(DateOnly startDate, DateOnly endDate, string userId)
         {
 
-            var Income = await TotalIncome(startDate, endDate);
-            var Expense = await TotalExpense(startDate, endDate);
+            var Income = await TotalIncome(startDate, endDate, userId);
+            var Expense = await TotalExpense(startDate, endDate, userId);
 
             return Income - Expense;
 
         }
 
 
-        public async Task<IEnumerable<Transaction>> GetData(DateOnly StartDate, DateOnly EndDate)
+        public async Task<IEnumerable<Transaction>> GetData(DateOnly StartDate, DateOnly EndDate, string userId)
         {
 
 
             var Data = await _transaction.Include(x => x.Category)
-                                         .Where(t => t.Date >= StartDate && t.Date <= EndDate)
-                                         .ToListAsync();
+                                         .Where(t => t.Date >= StartDate && 
+                                                     t.Date <= EndDate && 
+                                                     t.User_Id == userId)
+                                                      .ToListAsync();
 
             return Data;
                                          
         
         }
 
-        public async Task<int> TotalExpense(DateOnly startDate, DateOnly endDate)
+        public async Task<int> TotalExpense(DateOnly startDate, DateOnly endDate, string userId)
         {
    
 
-            var lastTwoWeeksData = await GetData(startDate, endDate);
+            var Data = await GetData(startDate, endDate, userId);
 
-            var totalExpense = lastTwoWeeksData.Where(x => x.Category.Type == "Expense")
-                                              .Sum(x => x.Amount);
+            var totalExpense = Data.Where(x => x.Category.Type == "Expense")
+                                                .Sum(x => x.Amount);
 
             return totalExpense;
         }
 
-        public async Task<int> TotalIncome(DateOnly startDate, DateOnly endDate)
+        public async Task<int> TotalIncome(DateOnly startDate, DateOnly endDate, string userId)
         {
 
-            var lastTwoWeeksData = await GetData(startDate, endDate);
+            var Data = await GetData(startDate, endDate, userId);
 
-            var totalIncome = lastTwoWeeksData.Where(x => x.Category.Type == "Income")
-                                              .Sum(x => x.Amount);
+            var totalIncome = Data.Where(x => x.Category.Type == "Income")
+                                               .Sum(x => x.Amount);
 
             return totalIncome;
         }
 
 
-        public async Task<IEnumerable<ExpenseSummary>> DoughnutChartData(DateOnly startDate, DateOnly endDate)
+        public async Task<IEnumerable<ExpenseSummary>> DoughnutChartData(DateOnly startDate, DateOnly endDate, string userId)
         {
 
-            var data = await GetData(startDate, endDate);
+            var data = await GetData(startDate, endDate, userId);
 
             var dataSet =  data.Where(x => x.Category.Type == "Expense")
                                .GroupBy(i => i.Category.CategoryId)
@@ -88,7 +90,7 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public string[] LastTwoWeeks(DateOnly startDate, int range)
+        public string[] DayRange(DateOnly startDate, int range)
         {
 
             var days = Enumerable.Range(0, range)
@@ -99,9 +101,9 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public async Task<Dictionary<string, int>> IncomeSummary(DateOnly startDate, DateOnly endDate)
+        public async Task<Dictionary<string, int>> IncomeSummary(DateOnly startDate, DateOnly endDate, string userId)
         {
-            var data = await GetData(startDate, endDate);
+            var data = await GetData(startDate, endDate, userId);
 
             var incomeSummary = data.Where(x => x.Category.Type == "Income")
                                    .GroupBy(g => g.Date)
@@ -117,9 +119,9 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public async Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate)
+        public async Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate, string userId)
         {
-            var data = await GetData(startDate, endDate);
+            var data = await GetData(startDate, endDate, userId);
 
             var expenseSummary = data.Where(x => x.Category.Type == "Expense")
                                      .GroupBy(g => g.Date)
@@ -133,12 +135,12 @@ namespace ExpenseTracker.Repository
             return expenseSummary;
         }
 
-        public async Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range)
+        public async Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range, string userId)
         {
 
-            var days = LastTwoWeeks(startDate, Range);
-            var incomeData = await IncomeSummary(startDate, endDate);
-            var expenseData = await ExpenseSummary(startDate, endDate);
+            var days = DayRange(startDate, Range);
+            var incomeData = await IncomeSummary(startDate, endDate, userId);
+            var expenseData = await ExpenseSummary(startDate, endDate, userId);
 
             var LineChartData = days.Select(day => new LineChartData
             {

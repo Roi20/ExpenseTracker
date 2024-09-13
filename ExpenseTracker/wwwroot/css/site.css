@@ -21,7 +21,7 @@ html, body {
     font-family: "Libre Franklin";
 }
 
-*:not(.fa-solid):not(.fa):not(.e-icons) {
+*:not(.fa-solid):not(.fa):not(.e-icons):not(.fa-brands) {
     font-family: "Libre Franklin";
 }
 

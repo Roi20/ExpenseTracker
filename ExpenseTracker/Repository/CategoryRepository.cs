@@ -9,9 +9,10 @@ namespace ExpenseTracker.Repository
 {
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
-        
+
         public CategoryRepository(ExpenseTrackerDbContext db) : base(db)
         {
+        
         }
 
         public async Task<bool> CheckIfExist(Expression<Func<Category, bool>> condition)
@@ -19,56 +20,12 @@ namespace ExpenseTracker.Repository
             return await _table.AnyAsync(condition);
         }
 
-        public async Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword)
+        public async Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword, string userId)
         {
-            return await GetPaginated(page, pageSize, t => t.Title.Contains(keyword ?? string.Empty));
+            return await GetPaginated(page, pageSize, 
+                                      t => t.Title.Contains(keyword ?? string.Empty) 
+                                      && t.User_Id == userId);
         }
 
-        public async Task CreateCategory(Category entity)
-        {
-            try
-            {
-                var checkIfExist = await CheckIfExist(x => x.Title == entity.Title);
-
-                if (!checkIfExist)
-                {
-                    await Create(entity);
-
-                }
-                else
-                {
-                    throw new Exception("Category Title Already Exist");
-                }
-
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        public async Task UpdateCategory(object id, object model)
-        {
-            try
-            {
-                var entity = await GetById(id);
-                var checkIfExist = await CheckIfExist(x => x.Title == entity.Title);
-
-                if (!checkIfExist)
-                {
-                    await Update(id, model);
-
-                }
-                else
-                {
-                    throw new Exception("Category Title Already Exist");
-                }
-
-            }
-            catch
-            {
-                throw;
-            }
-        }
     }
 }

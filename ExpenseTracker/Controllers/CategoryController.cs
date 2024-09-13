@@ -3,6 +3,7 @@ using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Syncfusion.EJ2.Notifications;
@@ -24,16 +25,25 @@ namespace ExpenseTracker.Controllers
         {
             try 
             {
-                var entities = await _repo.GetPaginated(
-                        request.PageNumber, 
-                        PaginatedRequest.ITEMS_PER_PAGE,
-                        request.SearchKeyword ??  string.Empty
+                var userId = GetUserId();
+
+                if(userId != string.Empty )
+                {
+                    var entities = await _repo.GetPaginated(
+                     request.PageNumber,
+                     PaginatedRequest.ITEMS_PER_PAGE,
+                     request.SearchKeyword ?? string.Empty,
+                     userId
                     );
 
-                entities.SearchKeyword = request.SearchKeyword;
+                    entities.SearchKeyword = request.SearchKeyword;
 
-                return View(entities);
-                 
+                    return View(entities);
+                }
+
+                return NotFound("User Not Found");
+
+
             }
             catch
             {
@@ -44,29 +54,47 @@ namespace ExpenseTracker.Controllers
         public IActionResult Create()
         {
 
-            return View(new Category());
+            var viewModel = new CategoryViewModel()
+            {
+                Category = new Category()
+            };
+
+            return View(viewModel);
 
         }
 
         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Category model)
+        public async Task<IActionResult> Create(CategoryViewModel model)
         {
-            if (!ModelState.IsValid)
-                return View(ModelState);
 
+            var viewModel = model.Category;
+
+            ValidateUserId(viewModel);
+            var currentUserId = GetUserId();
             try
             {
-                await _repo.CreateCategory(model);
 
-                TempData["Message"] = $"{model.Title}, Created Successfully";
+                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title && 
+                                                            x.User_Id == currentUserId);
+
+                if (ifExist)
+                {
+                    TempData["ErrorMessage"] = "Category Already Exist.";
+                    return View();
+                }
+                    
+                await _repo.Create(viewModel);
+
+                TempData["Message"] = $"{viewModel.Title}, Created Successfully";
 
                 return Redirect("Index");
 
             }
             catch (DbUpdateException ex)
             {
+                ModelState.AddModelError("", "An error occured while trying to save your todo item");
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex) 
@@ -75,8 +103,6 @@ namespace ExpenseTracker.Controllers
             }
 
         }
-
-
         public async Task<IActionResult> Update(int id) 
         {
 
@@ -87,30 +113,46 @@ namespace ExpenseTracker.Controllers
                 return NotFound();
             }
 
-            return View(entity);
+            var viewModel = new CategoryViewModel()
+            {
+                Category = entity
+            };
+
+            return View(viewModel);
 
         }
         
-
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(Category model)
+        public async Task<IActionResult> Update(CategoryViewModel model)
         {
-            if (!ModelState.IsValid) 
-                return View(ModelState);
-            
+
+            var viewModel = model.Category;
+
+            ValidateUserId(viewModel);
+            var currentUserId = GetUserId();
             try 
             {
 
-                await _repo.UpdateCategory(model.CategoryId, new {model.Title, model.Icon, model.Type });
+                var ifExist = await _repo.CheckIfExist(x => x.Title == viewModel.Title &&
+                                                            x.User_Id == currentUserId);
+
+                if (ifExist)
+                {
+                    TempData["ErrorMessage"] = "Category Already Exist.";
+                    return View(model);
+                }
+
+                await _repo.Update(viewModel.CategoryId, new {viewModel.Title, viewModel.Icon, viewModel.Type});
                 
-                TempData["Message"] = $"{model.Title}, Updated Successfully";
+                TempData["Message"] = $"{viewModel.Title}, Updated Successfully";
                 
                 return RedirectToAction("Index");
 
             }
             catch(DbUpdateException ex) 
             {
+                ModelState.AddModelError("", "An error occured while trying to save your todo item");
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (Exception ex) 

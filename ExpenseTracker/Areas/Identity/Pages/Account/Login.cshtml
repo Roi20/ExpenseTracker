@@ -1,0 +1,92 @@
+﻿@page
+@model LoginModel
+
+@{
+    ViewData["Title"] = "Log in";
+}
+
+@section CustomStyles{
+
+    <link rel="stylesheet" href="@Url.Content("~/css/loginAndregister.css")"/>
+}
+
+
+<div class="wrapper">
+    <div class="title row mb-2">
+        <h5 class="text-light">Track your everyday Expenses</h5>
+        <p class="text-secondary">by login your account here</p>
+    </div>
+    <div class="row formHolder">
+        <form id="account" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger validation" role="alert"></div>
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+            <div id="inputHolder">
+                <i class="fa-solid fa-envelope icon"></i>
+                <input asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="Email" />
+            </div>
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div id="inputHolder">
+                <i class="fa-solid fa-lock icon"></i>
+                <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="Password" />
+            </div>
+            <div id="btnHolder">
+                <button type="submit" class="submit-button">
+                    Login to Your Account
+                    <span>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </span>
+                </button>
+            </div>
+            <!--div>
+                <p>
+                    <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                </p>
+                <p>
+                    <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
+                </p>
+            </!--div-->
+        </form>
+        @{
+            if ((Model.ExternalLogins?.Count ?? 0) != 0)
+            {
+
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                    <div>
+                        <p>
+                            @foreach (var provider in Model.ExternalLogins!)
+                            {
+                                <button type="submit" class="google-button" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                    <span>
+                                        <i class="fa-brands fa-google"></i>
+                                    </span>
+                                   Sign in with @provider.DisplayName
+                                </button>
+                            }
+                        </p>
+                    </div>
+                </form>
+            }
+        }
+        <div class="register-link" id="text-link">
+            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" id="register-link">Sign up here</a>
+            <a id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
+        </div>
+    </div>
+</div>
+<!--div class="checkbox mb-3">
+          <label asp-for="Input.RememberMe" class="form-label">
+              <input class="form-check-input" asp-for="Input.RememberMe" />
+@Html.DisplayNameFor(m => m.Input.RememberMe)
+          </label>
+      </!--div-->
+    <!--div class="col-md-6 col-md-offset-2">
+        <section>
+            <h3>Use another service to log in.</h3>
+            <hr />
+        </section>
+    </!--div>
+</div-->
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

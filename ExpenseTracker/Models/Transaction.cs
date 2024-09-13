@@ -1,11 +1,13 @@
-﻿using System.ComponentModel;
+﻿using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data;
 
 namespace ExpenseTracker.Models
 {
-    public class Transaction
+    public class Transaction : IBaseModel
     {
         [Key]
         public int TransactionId { get; set; }
@@ -22,8 +24,12 @@ namespace ExpenseTracker.Models
         [ForeignKey("Category"), DisplayName("Category")]
         public int CategoryId { get; set; }
 
+        [ForeignKey("User")]
+        public string User_Id { get; set; }
+
         public virtual Category Category { get; set; }
-        
+        public virtual AppIdentityUser User {get; set;}
+
         public string? FormattedAmount
         {
             get

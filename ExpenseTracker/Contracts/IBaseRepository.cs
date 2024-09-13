@@ -5,13 +5,14 @@ namespace ExpenseTracker.Contracts
 {
     public interface IBaseRepository<T>
     {
-        Task <IEnumerable<T>> GetAll();
+        Task <IEnumerable<T>> GetAll(string userId);
         Task<T> GetById(object id);
         Task Create(T entity);
         Task Update(object id, object model);
         Task Delete(object id);
         Task <PaginatedResult<T>> GetPaginated(int page, int pageSize, Expression<Func<T, bool>> condition);
-       // Task<PaginatedResult<T>> GetPagination(int page, int pageSize);
+        Task<IEnumerable<T>> GetAllUserData(string userId);
+
 
     }
 }
