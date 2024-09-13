@@ -15,32 +15,12 @@
     @RenderSection("CustomStyles", required: false)
 </head>
 <body>
-
-    @if (ViewData["CurrentPage"]?.ToString() == "Index" ||
-         ViewData["CurrentPage"]?.ToString() == "Dashboard")
-    {
-        <div class="sidebar" id="side-bar">
-            <partial name="_Sidebar" />
-        </div>
-    }
-    <div id="main" class=" p-0" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "left: 0" : "")">
-        <div class="container pt-2 p-0" id="mainContainer">
-            <div class="burgerMenu p-auto h-100 w-100 @(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "d-none" : "")"
-                 id="burger-menu" style="z-index: 9999;">
-                <button class="text-light float-end" type="button" id="menu-toggle">
-                    <span class="fs-4">
-                        <i class="fa-solid fa-bars" id="icon"></i>
-                    </span>
-                </button>
-            </div>
-            <div class="row w-100 m-auto">
-                <partial name="_BreadCrumb" />
-            </div>
-            <main role="main" class="">
-                @RenderBody()
-            </main>
-        </div>
-     </div>
+    <div class="sideBar" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "display: none;" : "" )">
+        <h1 class="text-light">sample</h1>
+    </div>
+    <div id="main" class="main-layout">
+        @RenderBody()
+    </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

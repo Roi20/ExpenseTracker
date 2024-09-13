@@ -3,14 +3,14 @@
 
 @section CustomStyles
 {
-    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")" />
+  
 }
 
 @{
     ViewData["CurrentPage"] = "Index";
 }
 
-<div class="row p-0 d-flex justify-content-center m-auto p-2" style="height: 100%; width: 100%">
+<div class="p-0 d-flex justify-content-center m-auto p-2" style="height: 100%; width: 100%">
     @if (TempData["Message"] != null)
     {
         <partial name="_PopUpSuccessModal" />

@@ -32,6 +32,7 @@ body {
     align-items: center;
     box-shadow: 1px 1px #e85d04; /*#fb4b4e // #852467*/
     min-width: 420px;
+    max-width: 450px;
     padding-bottom: 30px;
 }
 
@@ -242,6 +243,7 @@ input:-webkit-autofill:active {
     align-items: center;
     box-shadow: 1px 1px #e85d04; /*#fb4b4e // #852467*/
     min-width: 420px;
+    max-width: 450px;
     padding-bottom: 30px
 }
 
