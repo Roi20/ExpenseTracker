@@ -3,6 +3,7 @@
     letter-spacing: 1px;
 }
 
+/*start of login form*/
 .validation ul{
     list-style-type: none;
     text-align: center;
@@ -58,7 +59,7 @@ form{
     width: 10%;
     text-align: center;
     font-size: 1.2em;
-    color: #e85d04;
+    color: #595959; /*#e85d04*/
 }
 
 input::-webkit-input-placeholder {
@@ -122,6 +123,7 @@ input:-webkit-autofill:active {
 
     #btnHolder:hover {
         box-shadow: 1px 1px #FFFFFF;
+        letter-spacing: 5px;
     }
 
 .submit-button {
@@ -135,6 +137,11 @@ input:-webkit-autofill:active {
     text-align: left;
     padding-left: 25px;
     padding-right: 25px;
+    transition: all .3s ease-in-out;
+}
+
+.submit-button:hover{
+    padding-right: 15px;
 }
 
 .submit-button span{
@@ -152,7 +159,7 @@ input:-webkit-autofill:active {
     font-size: .8em;
     font-variant-caps: all-small-caps;
 }
-
+/*validation text end*/
 .google-button {
     width: 100%;
     height: 45px;
@@ -164,6 +171,7 @@ input:-webkit-autofill:active {
     color: #FFFFFF;
     border: none;
     transition: All .3s ease-in-out;
+    margin-top: 10px;
 }
 
 .google-button:hover{
@@ -215,6 +223,165 @@ input:-webkit-autofill:active {
 #forgot-password{
     float: right;
 }
+/*end of login form*/
+
+
+
+/*start of registration form*/
+
+.register-wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+    background: #17181d;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border-radius: 18px;
+    align-items: center;
+    box-shadow: 1px 1px #e85d04; /*#fb4b4e // #852467*/
+    min-width: 420px;
+    padding-bottom: 30px
+}
+
+
+.register-holder{
+    width: 100%;
+}
+
+.registerForm{
+    width: 100%;
+}
+
+
+
+.register-holder input{
+
+    width: 90%;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 1em;
+    background-color: #0f0f0f;
+    color: #FFFFFF;
+    border: none;
+    float: right;
+    margin-left: auto;
+}
+
+.registerInput {
+
+    background-color: #0f0f0f;
+    border-radius: 3px;
+    display: flex;
+    justify-content: center;
+    padding: 2px;
+    margin-bottom: 10px;
+}
+
+.reg-title{
+    width: 100%;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-left: 5px;
+    padding-top: 20px;
+}
+
+
+.reg-icon{
+
+    width: 10%;
+    text-align: center;
+    margin: auto;
+    font-size: 1.2em;
+    color: #595959;
+
+}
+
+.reg-submit {
+    
+    margin-top: 10px;
+    border: none;
+    width: 100%;
+    border-radius: 3px;
+    height: 40px;
+    background: linear-gradient(to bottom left, #e85d04, #ba2c27, #3c096c);
+    color: #FFFFFF;
+    font-weight: 400;
+    letter-spacing: 2px;
+    font-size: 1em;
+}
+.reg-submit:hover{
+    box-shadow: 2px 2px #FFFFFF;
+}
+
+.reg-google-button {
+    width: 100%;
+    height: 40px;
+    border-radius: 3px;
+    font-weight: 400;
+    padding-left: 25px;
+    padding-right: 40px;
+    background-color: #292c35;
+    color: #FFFFFF;
+    border: none;
+    margin-bottom: 0;
+    transition: All .3s ease-in-out;
+    margin-top: 8px;
+}
+
+.reg-google-button:hover{
+    box-shadow: 1px 1px #FFFFFF;  
+}
+
+.reg-google-button span{
+
+    float: left;
+    align-items: center;
+    text-align: center;
+    align-content: center;
+}
+
+.reg-google-button fa-brands{
+    font-size: 1em;
+    color: #FFFFFF;
+}
+
+.form-horizontal{
+    padding-top: 0;
+    padding-bottom: 0;
+}
+
+.register-holder #login-link{
+    text-decoration: none;
+    font-size: .8em;
+    color: #FFFFFF;
+    transition: all .3s ease-in-out;
+}
+
+#login-link-text {
+    transition: all .3s ease-in-out;
+}
+
+#login-link-text:hover {
+    color: #5acaf9;
+    letter-spacing: 2px;
+}
+
+
+
+
+/*end of registration form*/
+
+
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */

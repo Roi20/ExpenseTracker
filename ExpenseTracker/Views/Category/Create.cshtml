@@ -30,8 +30,8 @@
     ViewData["CurrentPage"] = "Create";
 }
 
-<div class="row d-flex justify-content-center m-auto" style="height: 100%; width: 100%">
-    <div class="col-md-5 bg-dark main-container m-auto">
+<div class="row d-flex justify-content-center m-auto p-2" style="height: 100%; width: 100%;">
+    <div class="col-md-5 bg-dark main-container m-auto p-2">
         <div class="text-center mt-2 pt-3" id="title-holder">
             <h3 class="text-light">New Category</h3>
             <p class="text-light small">Create a new category <br />
@@ -41,7 +41,7 @@
         {
             <div class="text-center"><span class="text-danger small">@TempData["ErrorMessage"]</span></div>
         }
-        <div>
+        <div class="p-2">
             <form asp-action="Create" method="post" class="p-2 h-100">
                 @Html.AntiForgeryToken()
                 <div class="text-center"><span asp-validation-for="@Model.Category.Title" class="text-danger small"></span></div>

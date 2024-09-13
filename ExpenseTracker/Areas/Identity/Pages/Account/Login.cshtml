@@ -50,7 +50,7 @@
             if ((Model.ExternalLogins?.Count ?? 0) != 0)
             {
 
-                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal pb-0 pt-4">
+                <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                     <div>
                         <p>
                             @foreach (var provider in Model.ExternalLogins!)
