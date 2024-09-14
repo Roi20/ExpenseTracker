@@ -1,4 +1,139 @@
-﻿
+﻿*{
+    letter-spacing: 1px;
+}
+
+.title-container{
+    color: #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    padding-bottom: 5px;
+}
+.title{
+    font-size: 1.3em;
+    align-items: center;
+    display: flex;
+    font-weight: 500;
+    letter-spacing: 2px;
+  
+}
+
+.title-container a {
+    border-radius: 8px;
+    font-size: .8em;
+    box-shadow: 1px 1px 1px #dcdcdc;
+}
+
+
+.crud-main-container {
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+}
+
+.crud-content{
+    height: 100%;
+    padding-top: 2px;
+}
+
+.search-bar-holder {
+    background: #dcdcdc;
+    width: 100%;
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.search-bar-holder form{
+    background: #181818;
+    width: 30%;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 1px 1px 1px;
+}
+
+.search-bar-holder form input{
+    width: 85%;
+    height: 100%;
+    color: #9FA6B2;
+    border: none;
+    font-size: 1em;
+    background: none;
+    padding: 5px;
+}
+
+
+.search-bar-holder form button{
+    float: right;
+    width: 15%;
+    height: 100%;
+    border: none;
+    text-align: center;
+    padding: 0;
+    font-size: 1.2em;
+    background: none;
+
+}
+
+.search-icon {
+    color: #9FA6B2;
+}
+
+.search-bar-holder form button:focus,
+.search-bar-holder form input:focus{
+    outline: none;
+}
+.filter {
+    background: #181818;
+    height: 40px;
+    border-radius: 8px;
+    width: 65%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    justify-content: space-around;
+    box-shadow: 1px 1px 1px;
+}
+
+
+.filter span{
+    font-size: .9em;
+    color: #9FA6B2;
+    font-weight: 500;
+}
+
+
+.table {
+   
+    padding: 10px;
+}
+
+
+@media only screen and (max-width: 768px) {
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
 .main-container{
     min-height: 600px;
     border-radius: 5px;
@@ -6,21 +141,21 @@
     max-width: 440px;
 }
 
-/*Create Btn*/
+/*Create Btn
 .container #createBtn:hover
 {
     opacity: 0.9;
 }
 
 
-/*search btn*/
+/*search btn
 .container form .input-group-prepend:hover
 {
     opacity: 0.9;
 }
 
 
-/*Cancel Button - From Create and Update*/
+/*Cancel Button - From Create and Update
 .main-container form #btnHolder a
 {
     background-color: transparent;
@@ -37,7 +172,7 @@
 }
 /*End - /*Cancel Button - From Create and Update*/
 
-/*Category Table*/
+/*Category Table
 th 
 {
     background-color: #1F1A24 !important;   
@@ -65,8 +200,8 @@ table
 }
 
 
-/*Category Table End*/
-/*Search box*/
+/*Category Table End
+/*Search box
 .input-group input {
     height: 40px;
     border: 2px solid #198754;
@@ -104,7 +239,7 @@ table
 
 
 
-/*Pagination*/
+/*Pagination*
 .pagination {
     background-color: #1F1A24 !important;
 }
@@ -162,15 +297,15 @@ table
 
 
 
-/*Create Form from Create View*/
+/*Create Form from Create View*
 
-/*title*/
+/*title*
 .main-container #title-holder h3
 {
    font-variant-caps: all-small-caps
 }
 
-/*label*/
+/*label*
 .main-container form label
 {
     color: #fff;
@@ -179,7 +314,7 @@ table
     font-variant-caps: all-small-caps;
 }
 
-/*button*/
+/*button*
 .main-container form button
 {
     background-color: transparent;
@@ -194,7 +329,7 @@ table
      color: #fff;
 }
 
-/*input*/
+/*input*
 .main-container form input:focus
 {
     outline: none !important;
@@ -202,7 +337,7 @@ table
     box-shadow: 0 0 10px #719ECE;
 }
 
-/*select*/
+/*select*
 .main-container form select:focus
 {
     outline: none !important;
@@ -210,14 +345,14 @@ table
     box-shadow: 0 0 10px #719ECE;
 }
 
-/*Create form*/
+/*Create form*
 @media only screen and (max-width: 992px) {
 
 
 
 }
 
-/*Success Modal Customization*/
+/*Success Modal Customization*
 
 .overlay
 {
@@ -254,7 +389,7 @@ table
         animation-timing-function: ease-in-out;
         -webkit-animation-timing-function: ease-in-out;
     }
-    /*Modal popup animation*/
+    /*Modal popup animation*
     @keyframes popup {
         from {
             -moz-transform: translate(-0%, -100%) scale(0.1);
@@ -269,7 +404,7 @@ table
         }
      
     }
-    /*Modal popup animation - End*/
+    /*Modal popup animation - End*
 .overlay .popup img 
 {
     width: 100px;
@@ -310,12 +445,12 @@ table
         background-color: #B00020;
     }
 
-/*Sorting Div*/
+/*Sorting Div*
 
 #sortingDiv{
     width: 35%;
 }
-/*#198254*/
+/*#198254*
 #sortBtn {
     background: none;
     border: none;
@@ -324,3 +459,4 @@ table
     font-weight: bold;
     float: right
 }
+*/

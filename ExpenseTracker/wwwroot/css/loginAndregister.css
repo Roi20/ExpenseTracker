@@ -4,6 +4,13 @@
 }
 
 /*start of login form*/
+
+.login-main-container, .register-main-container{
+    height:100%;
+    align-content:center;
+}
+
+
 .validation ul{
     list-style-type: none;
     text-align: center;
@@ -16,7 +23,7 @@ body {
     justify-content: center;
     font-family: "Libre Franklin";
     flex-direction: column;
-    background-color: #000101;
+    background-color: #080808; /*#000101*/
 }
 
 .wrapper {

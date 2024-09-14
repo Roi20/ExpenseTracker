@@ -25,79 +25,99 @@ html, body {
     font-family: "Libre Franklin";
 }
 
+
+.container-fluid{
+
+    width: 100%;
+    height: 100%;
+    display: flex;
+    padding: 0;
+    transition: all .5s ease-in-out;
+}
+
+
 .sideBar {
     width: 220px;
-    position: absolute;
-    top: 0;
-    bottom: 0;
     z-index: 999;
     transition: all .3s ease-in-out;
     background: #17181d;
 }
 
 .main-layout{
-    margin-left: 220px;
+    flex: 1;
 }
 
 
 body {
 
-    background-color: #000000;
-    height: 80vh;
-    display: flex;
+    background-color: #080808;
     margin: 0;
     padding: 0;
+    height: 100vh;
+}
+
+@media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+
+    .sideBar {
+        width: 0;
+        opacity: 0;
+    }
+
+    .main-layout {
+        margin-left: 0;
+    }
 }
 
 
-/*Sidebar*/
+
+/*Sidebar*
 
 .sidebar {
     background: #1F1B24;
     min-height: 100vh;
     width: 200px;
-    position: fixed; /* Fixes the sidebar to the left */
+    position: fixed; /* Fixes the sidebar to the left *
     top: 0;
     left: 0;
-    z-index: 999; /* Ensures it stays on top of the main content */
-    transform: translateX(-100%); /* Hide the sidebar by default */
-    transition: transform 0.3s ease; /* Animation for slide-in effect */
+    z-index: 999; /* Ensures it stays on top of the main content *
+    transform: translateX(-100%); /* Hide the sidebar by default *
+    transition: transform 0.3s ease; /* Animation for slide-in effect *
 }
 
     .sidebar.active {
-        transform: translateX(0); /* Slide sidebar into view */
+        transform: translateX(0); /* Slide sidebar into view *
     }
 
-/*Sidebar End*/
+/*Sidebar End*
 
 
-
-/*Sidebar toggle button*/
+/*Sidebar toggle button*
 
 .burgerMenu #menu-toggle{
     border: none;
     background: none;
 }
-/* Icon styles */
+/* Icon styles *
 #menu-toggle {
     cursor: pointer;
-    transition: transform 0.3s ease; /* Smooth transition */
+    transition: transform 0.3s ease; /* Smooth transition *
 }
 
-    /* Rotate icon when active */
+    /* Rotate icon when active *
     #menu-toggle.active {
         transform: rotate(90deg); /* Rotate the icon 90 degrees */
     }
 
 
-/*Sidebar toggle button End*/
+/*Sidebar toggle button End*
 
 #main {
 
     position: relative;
-    left: 0; /* No margin for the main content */
-    width: 100%; /* Full width by default */
-    transition: left 0.3s ease; /* Smooth transition for main content movement */
+    left: 0; /* No margin for the main content *
+    width: 100%; /* Full width by default *
+    transition: left 0.3s ease; /* Smooth transition for main content movement *
 }
 
 #mainContainer
@@ -105,9 +125,9 @@ body {
   
    padding-top: 3rem;
    
-}
+} */
 
-/*Breadcrumb*/
+/*Breadcrumb*
 #mainContainer .row nav li
 {
    text-decoration: none;
@@ -134,13 +154,4 @@ body {
     }
 /*Breadcrumb End*/
 
-@media only screen and (max-width: 768px) {
-    /* For mobile phones: */
 
-    .sideBar {
-        display: none;
-    }
-    .main-layout {
-        margin-left: 0;
-    }
-}
