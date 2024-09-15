@@ -33,7 +33,7 @@
        </div>
         <div class="search-bar-holder">
             <form>
-                <input type="text" placeholder="Search category title...."/>
+                <input type="text" placeholder="Search Category Title.."/>
                 <button type="submit">
                     <span>
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -51,7 +51,7 @@
                 </div>
                 <div>
                     <span>
-                        Category
+                        Title
                     </span>
                 </div>
                 <div>
@@ -62,7 +62,82 @@
             </div>
         </div>
         <div class="table">
-            
+            <table class="table-content">
+                <thead>
+                    <tr>
+                        <th>Icon</th>
+                        <th>Title</th>
+                        <th>Type</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var item in Model.Result)
+                    {
+                        <tr>
+                            <td>@item.Icon</td>
+                            <td>@item.Title</td>
+                            <td class="type-custom"><span class="@(item.Type == "Income" ? "bg-success" : "bg-danger")" id="type-bg"></span>@item.Type</td>
+                            <td>
+                                <div class="action-button">
+                                    <a asp-action="Update" asp-route-id="@item.CategoryId" class=""
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Update">
+                                        <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.CategoryId" class="text-danger"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Delete">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-div">
+            <div class="pagination-content">
+                <div class="pagination">
+                    <ul class="pagination-numbers">
+                        <li class="previousBtn page-item @(Model.Page == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page - 1)">
+                                <span>
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </span>
+                            </a>
+                        </li>
+                        @for(var pageNumber = 1; pageNumber <= Model.TotalCount; pageNumber++)
+                        {
+                            if (pageNumber == Model.Page)
+                            {
+                                <li class="page-item">
+                                    <span class="page-link">@pageNumber</span>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">
+                                        <span>@pageNumber</span>
+                                    </a>
+                                </li>
+                            }
+                            
+                        }
+                        <li class="nextBtn page-item @(Model.Page == Model.TotalCount ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page + 1)">
+                                <span>
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
    </div>
  </div>
