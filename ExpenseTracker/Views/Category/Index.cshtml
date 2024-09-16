@@ -33,7 +33,10 @@
        </div>
         <div class="search-bar-holder">
             <form>
-                <input type="text" placeholder="Search Category Title.."/>
+                <input type="text" 
+                       placeholder="Search Category Title.." 
+                       name="s"
+                       value="@Model.SearchKeyword"/>
                 <button type="submit">
                     <span>
                         <i class="fa-solid fa-magnifying-glass search-icon"></i>
@@ -114,13 +117,13 @@
                         {
                             if (pageNumber == Model.Page)
                             {
-                                <li class="page-item">
+                                <li class="page-item" id="currentBtn">
                                     <span class="page-link">@pageNumber</span>
                                 </li>
                             }
                             else
                             {
-                                <li class="page-item">
+                                <li class="page-item" id="activeBtn">
                                     <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">
                                         <span>@pageNumber</span>
                                     </a>

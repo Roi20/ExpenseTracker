@@ -40,6 +40,7 @@
 .crud-content{
     height: 100%;
     padding-top: 2px;
+    padding-bottom: 20px;
 }
 
 .search-bar-holder {
@@ -212,7 +213,7 @@
 .nextBtn a{
     background: none;
     border: none;
-    font-size: 1.2em;
+    font-size: .9em;
     color: #ffffff;
     font-weight: bold;
     padding: 5px;
@@ -229,23 +230,36 @@
     margin: 0 15px;
 }
 
-.pagination ul li span{
+.pagination ul li.disabled a{
+    background-color: transparent !important;
+}
+.pagination ul a:hover{
+    background: none;
+    font-weight: bold;
+    color: #FFFFFF;
+    font-size: 1em;
+}
+
+#currentBtn span{
+     
     background: none;
     border: none;
     color: #9FA6B2;
 }
-.pagination ul li span:hover {
+
+#activeBtn a{
+    
     background: none;
-    color: #9FA6B2;
+    border: none;
+    font-weight: bold;
+    color: #FFFFFF;
+    border-radius: 10px;
 }
 
-.pagination ul li.disabled a{
-    background-color: transparent !important;
-}
 
 
-.pagination ul li:hover:not(.previousBtn):not(.nextBtn) {
-}
+
+
 
 
 
@@ -300,7 +314,9 @@
         }
      
     }
-    /*Modal popup animation - End*/
+
+
+/*Modal popup animation - End*/
 .overlay .popup img 
 {
     width: 100px;
@@ -340,6 +356,8 @@
     .overlay .popup button:hover {
         background-color: #B00020;
     }
+
+
 
 
 @media only screen and (max-width: 768px) {
