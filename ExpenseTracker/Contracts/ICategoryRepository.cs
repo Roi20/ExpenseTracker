@@ -8,7 +8,7 @@ namespace ExpenseTracker.Contracts
     public interface ICategoryRepository : IBaseRepository<Category>
     {
 
-        Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword, string userId);
+        Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword, string userId, string sortOrder);
         Task<bool> CheckIfExist(Expression<Func<Category, bool>> condition);
 
     }

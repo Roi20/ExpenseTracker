@@ -52,13 +52,13 @@
     justify-content: space-between;
 }
 
-.search-bar-holder form{
+.search-bar-holder .searchForm{
     background: #212b38;
     width: 30%;
-    height: 36px;
+    height: 30px;
     overflow: hidden;
     border-radius: 8px;
-    box-shadow: 1px 1px 1px #e85d04;
+    box-shadow: 1px 1px 1px #dddddd;
 }
 
 .search-bar-holder form input{
@@ -70,6 +70,12 @@
     background: none;
     padding: 10px;
 }
+
+.search-bar-holder form input::placeholder{
+    font-size: 0.7em;
+}
+
+
 
 
 .search-bar-holder form button{
@@ -94,7 +100,7 @@
 }
 .filter {
     background: #212b38;
-    height: 36px;
+    height: 30px;
     border-radius: 8px;
     width: 65%;
     display: flex;
@@ -102,7 +108,7 @@
     padding: 10px;
     text-align: center;
     justify-content: space-around;
-    box-shadow: 1px 1px 1px #e85d04;
+    box-shadow: 1px 1px 1px #dddddd;
 }
 
 
@@ -111,6 +117,26 @@
     color: #FFFFFF;
     font-weight: 500;
 }
+
+.filter-name {
+    display: flex;
+    justify-content: center;
+}
+
+.filter-name form{
+    width: 100%;
+    background: none;
+    display: flex;
+    font-size: .7em;
+
+}
+
+.filter-name button{
+    color: #FFFFFF;
+}
+
+
+
 
 
 .table {
@@ -185,6 +211,8 @@
 }
 
 
+
+
 .pagination-div {
     margin-top: 0;
     padding: 0 10px 0px 10px;
@@ -200,12 +228,58 @@
     justify-content: center;
 }
 
-
-
 .pagination {
-   display: flex;
-   align-items: center;
-   text-align: center;
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+
+.ulList{
+   
+    padding: 0;
+    margin-left: 0;
+    margin: auto;
+}
+
+.ulList li{
+    list-style: none;
+    list-style-type: none;
+    margin-left: 10px;
+    display: inline-block;
+    border-radius: 50%;
+   
+}
+
+.ulList li a{
+    color: #a5a9ae;
+    font-weight: bold;
+    font-size: .9em;
+    letter-spacing: 2px;
+}
+.ulList li a:hover{
+    color: #FFFFFF;
+}
+
+.ulList li.active a{
+    font-size: 1.1em;
+}
+
+.ulList li.disabled a span{
+    color: #17181d !important;
+}
+
+
+.ulList li a,
+ulList li.disabled a {
+    border: none;
+    background: none !important;
+}
+
+
+
+/*
+.pagination {
+
 
 }
 
@@ -255,6 +329,8 @@
     color: #FFFFFF;
     border-radius: 10px;
 }
+
+    */
 
 
 

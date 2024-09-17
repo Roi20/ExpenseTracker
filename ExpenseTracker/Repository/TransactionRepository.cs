@@ -23,13 +23,6 @@ namespace ExpenseTracker.Repository
 
         }
 
-        //Not in Use Method
-        public async Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, int searchAmount)
-        {
-            return await GetPaginated(page, pageSize, t => t.Amount == searchAmount);
-        }
-
-
         public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId)
         {
             var count = await _table.Include(t => t.Category).CountAsync();
@@ -76,7 +69,7 @@ namespace ExpenseTracker.Repository
             {
                 Result = paginatedRecords,
                 Page = page,
-                TotalCount = (int)Math.Ceiling(count / (double)pageSize)
+                TotalPage = (int)Math.Ceiling(count / (double)pageSize)
 
             };
 

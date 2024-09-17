@@ -93,7 +93,7 @@
                         <span aria-hidden="true" class="bg-transparent">« Previous</span>
                     </a>
                 </li>
-                @for (var pageNumber = 1; pageNumber <= Model.TotalCount; pageNumber++)
+                @for (var pageNumber = 1; pageNumber <= Model.TotalPage; pageNumber++)
                 {
                     if (pageNumber == Model.Page)
                     {
@@ -110,7 +110,7 @@
                         </li>
                     }
                 }
-                <li class="page-item @(Model.Page == Model.TotalCount ? "disabled" : "")" id="nextPrev">
+                <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")" id="nextPrev">
                     <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page + 1)" aria-label="Next">
                         <span aria-hidden="true" class="bg-transparent">Next »</span>
                     </a>

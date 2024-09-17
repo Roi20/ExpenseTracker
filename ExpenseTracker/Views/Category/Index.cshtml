@@ -10,6 +10,18 @@
 @{
     ViewData["CurrentPage"] = "Index";
     ViewData["Title"] = "Category";
+
+    var currentPage = Model.Page;
+    var totalPageCount = Model.TotalPage;
+    var maxPageDisplay = 5;
+    var startPage = Math.Max(1, currentPage - maxPageDisplay / 2);
+    var endPage = Math.Min(totalPageCount, startPage + maxPageDisplay - 1);
+
+    if(endPage - currentPage < maxPageDisplay && startPage > 1)
+    {
+        startPage = Math.Max(1, endPage - maxPageDisplay - 1);
+    }
+
 }
 
 <div class="crud-main-container">
@@ -32,7 +44,8 @@
             </a>
        </div>
         <div class="search-bar-holder">
-            <form>
+            <form asp-action="Index" method="get" class="searchForm">
+               @Html.AntiForgeryToken();
                 <input type="text" 
                        placeholder="Search Category Title.." 
                        name="s"
@@ -47,20 +60,26 @@
                 <div>
                     <span> <i class="fa-solid fa-rotate"></i> Order by: </span>
                 </div>
-                <div>
-                    <span>
-                        Icon
-                    </span>
+                <div class="filter-name">
+                    <form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Icon" ? "Icon_Desc" : "Icon")" />
+                        <button class="" type="submit">Icon</button>
+                    </form>
                 </div>
-                <div>
-                    <span>
-                        Title
-                    </span>
+                <div class="filter-name">
+                    <form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Title" ? "Title_Desc" : "Title")" />
+                        <button class="" type="submit">Title</button>
+                    </form>
                 </div>
-                <div>
-                    <span>
-                        Type
-                    </span>
+                <div class="filter-name">
+                    <<form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Type" ? "Type_Desc" : "Type")" />
+                        <button class="" type="submit">Type</button>
+                    </form>
                 </div>
             </div>
         </div>
@@ -105,36 +124,50 @@
         <div class="pagination-div">
             <div class="pagination-content">
                 <div class="pagination">
-                    <ul class="pagination-numbers">
-                        <li class="previousBtn page-item @(Model.Page == 1 ? "disabled" : "")">
-                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page - 1)">
+                    <ul class="ulList">
+                        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
+                                                 asp-route-p="@(Model.Page == 1)" 
+                                                 asp-route-sort="@ViewBag.SortOrder)">
                                 <span>
-                                    <i class="fa-solid fa-chevron-left"></i>
+                                    First
                                 </span>
                             </a>
                         </li>
-                        @for(var pageNumber = 1; pageNumber <= Model.TotalCount; pageNumber++)
-                        {
-                            if (pageNumber == Model.Page)
-                            {
-                                <li class="page-item" id="currentBtn">
-                                    <span class="page-link">@pageNumber</span>
-                                </li>
-                            }
-                            else
-                            {
-                                <li class="page-item" id="activeBtn">
-                                    <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@pageNumber">
-                                        <span>@pageNumber</span>
-                                    </a>
-                                </li>
-                            }
-                            
-                        }
-                        <li class="nextBtn page-item @(Model.Page == Model.TotalCount ? "disabled" : "")">
-                            <a class="page-link" asp-route-s="@Model.SearchKeyword" asp-route-p="@(Model.Page + 1)">
+                        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
+                                                 asp-route-p="@(Model.Page - 1)"
+                                                 asp-route-sort="@ViewBag.SortOrder">
                                 <span>
-                                    <i class="fa-solid fa-chevron-right"></i>
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </span>
+                            </a>
+                        </li>
+                        @for(var pageNumber = startPage; pageNumber <= endPage; pageNumber++)
+                        {
+                            <li class="page-item @(pageNumber == currentPage ? "active" : "")">
+                                <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
+                                                     asp-route-p="@(pageNumber)"
+                                                     asp-route-sort="@ViewBag.SortOrder">
+                                    @pageNumber
+                                </a>
+                            </li>
+                        }
+                        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
+                                                 asp-route-p="@(Model.Page + 1)"
+                                                 asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
+                                                 asp-route-p="@(Model.Page = Model.TotalPage)" 
+                                                 asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    Last
                                 </span>
                             </a>
                         </li>

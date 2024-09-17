@@ -1,7 +1,9 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.EJ2.Linq;
 using System.Linq.Expressions;
 
 namespace ExpenseTracker.Repository
@@ -106,27 +108,25 @@ namespace ExpenseTracker.Repository
             }
         }
 
-        //page = 2
-        //pagesize = 2
-
-        public async Task<PaginatedResult<T>> GetPaginated(int page, int pageSize,
-            Expression<Func<T, bool>> condition)
+        public async Task<PaginatedResult<T>> GetPaginated(int page, 
+                                                           int pageSize, 
+                                                           Expression<Func<T, bool>> condition)
         {
-            var count = await _table.Where(condition).CountAsync();
+            var totalCount = await _table.Where(condition).CountAsync();
 
             var records = await _table.Where(condition)
-                          .Skip((page - 1) * pageSize)
-                          .Take(pageSize)
-                          .ToListAsync();
-
+                                      .Skip((page - 1) * pageSize)
+                                      .Take(pageSize)
+                                      .ToListAsync();
 
             return new PaginatedResult<T>
             {
                 Result = records,
                 Page = page,
-                TotalCount = (int)Math.Ceiling(count / (double)pageSize)
-
+                TotalPage = (int)Math.Ceiling(totalCount / (double)pageSize)
             };
+       
+              
 
         }
 

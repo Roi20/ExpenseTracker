@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Syncfusion.EJ2.Notifications;
+using Syncfusion.EJ2.Schedule;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace ExpenseTracker.Controllers
@@ -29,13 +30,16 @@ namespace ExpenseTracker.Controllers
 
                 if(userId != string.Empty )
                 {
+                    ViewBag.SortOrder = request.SortOrder;
+
                     var entities = await _repo.GetPaginated(
                      request.PageNumber,
                      PaginatedRequest.ITEMS_PER_PAGE,
                      request.SearchKeyword ?? string.Empty,
-                     userId
+                     userId, request.SortOrder
                     );
 
+      
                     entities.SearchKeyword = request.SearchKeyword;
 
                     return View(entities);
