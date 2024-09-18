@@ -39,7 +39,7 @@ html, body {
 
 .sideBar {
     width: 220px;
-    z-index: 999;
+   // z-index: 999;
     transition: all .3s ease-in-out;
     background: #17181d;
 
@@ -65,10 +65,13 @@ body {
     .sideBar {
         width: 0;
         opacity: 0;
+        display: none;
+        transition: display .3s ease-in-out;
     }
 
     .main-layout {
-        margin-left: 0;
+       // margin-left: -220px;
+        
     }
 }
 

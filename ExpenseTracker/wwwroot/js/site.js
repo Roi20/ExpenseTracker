@@ -1,4 +1,4 @@
-﻿
+﻿/*
 $('#menu-toggle').click(function () {
     // Toggle the active class to animate the icon
     $(this).toggleClass('active');
@@ -14,4 +14,4 @@ $('#menu-toggle').click(function () {
         icon.removeClass('fa-times').addClass('fa-bars'); // Switch back to menu icon
     }
 });
-
+*/
