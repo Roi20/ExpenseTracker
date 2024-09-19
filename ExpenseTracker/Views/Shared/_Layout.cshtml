@@ -16,10 +16,10 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="sideBar" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "display: none;" : "" )">
+        <div class="sideBar" id="sideBar" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "display: none" : "" )">
             <h1 class="text-light">sample</h1>
         </div>
-        <div id="main" class="main-layout">
+        <div id="main-layout" class="main-layout">
             @RenderBody()
         </div>
     </div>

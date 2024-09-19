@@ -3,7 +3,7 @@
 }
 
 .navBar {
-    background: #212b38;
+    background: none;
     height: 45px;
     margin-bottom: 4px;
     border-radius: 0 0 3px 3px;
@@ -64,6 +64,11 @@
 }
 
 
+.navBar .navUl li:last-child{
+   display: none;
+}
+
+
 
 .title-container{
     color: #e0e0e0;
@@ -71,7 +76,7 @@
     justify-content: space-between;
     padding: 10px;
     padding-bottom: 0;
-    padding-top: 10px;
+    padding-top: 2px;
     margin-top: 0;    
 }
 .title{
@@ -505,9 +510,20 @@ ulList li.disabled a {
 
 
 @media only screen and (max-width: 768px) {
+    
+    .navBar .navUl li:last-child {
+        display: block !important;
+    }
+}
+
+@media only screen and (width > 768px){
+
 }
 
 @media only screen and (max-width: 400px) {
+
+  
+
 
     .crud-main-container{
         padding: 10px;
@@ -520,7 +536,7 @@ ulList li.disabled a {
 
     .crud-main-container {
        
-       // margin-left: -220px;
+       
     }
 
 }

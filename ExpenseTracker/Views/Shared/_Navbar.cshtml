@@ -1,4 +1,4 @@
-﻿<div class="navBar">
+﻿<div class="navBar" id="navBar">
     <ul class="navUl">
         <li>
             <a asp-controller="Home" asp-action="Index">
@@ -27,7 +27,7 @@
             </a>
         </li>
         <li>
-            <button type="button" id="toggle-btn">
+            <button type="button" onclick="sidebarOnclick()"  id="toggle-btn">
                 <span>
                     <i class="fa-solid fa-circle-arrow-right"></i>  Sidebar
                 </span>
@@ -35,3 +35,9 @@
         </li>
     </ul>
 </div>
+
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <script src="@Url.Content("~/js/site.js")"></script>
+
+}

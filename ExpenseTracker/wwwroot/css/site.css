@@ -39,10 +39,10 @@ html, body {
 
 .sideBar {
     width: 220px;
-   // z-index: 999;
-    transition: all .3s ease-in-out;
+    z-index: 999;
     background: #17181d;
-
+    opacity: 1;
+    transition: all .5s ease-in;
 }
 
 .main-layout{
@@ -59,19 +59,23 @@ body {
     height: 100vh;
 }
 
-@media only screen and (max-width: 768px) {
+@media screen and (max-width: 768px) {
     /* For mobile phones: */
 
     .sideBar {
-        width: 0;
-        opacity: 0;
+
         display: none;
-        transition: display .3s ease-in-out;
+        opacity: 0;
+        transition: all .5s ease-in;
     }
 
+
+}
+
+@media screen and (min-width: 769px) {
+
     .main-layout {
-       // margin-left: -220px;
-        
+        margin-left: 0;
     }
 }
 
@@ -113,7 +117,7 @@ body {
     /* Rotate icon when active *
     #menu-toggle.active {
         transform: rotate(90deg); /* Rotate the icon 90 degrees */
-    }
+    
 
 
 /*Sidebar toggle button End*

@@ -54,6 +54,10 @@ namespace ExpenseTracker.Repository
                     records = records.OrderByDescending(i => i.Date);
                     break;
 
+                case "Date":
+                    records = records.OrderBy(t => t.Date);
+                    break;
+
                 default:
                     records = records.OrderBy(t => t.Date);
                     break;
