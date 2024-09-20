@@ -208,7 +208,50 @@
     border: none;
 }
 
+/*Transaction filter section*/
 
+.filter-transaction {
+    background: #212b38;
+    height: 30px;
+    border-radius: 8px;
+    width: 65%;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    text-align: center;
+    justify-content: space-evenly;
+    box-shadow: 1px 1px 1px #dddddd;
+}
+
+.filter-transaction span {
+    font-size: .7em;
+    color: #FFFFFF;
+    font-weight: 500;
+    height: 100%;
+    padding: 2px;
+    display: block;
+
+}
+
+.filter-name-transaction {
+    display: flex;
+    justify-content: center;
+}
+.filter-name-transaction form {
+    width: 100%;
+    background: none;
+    display: flex;
+    font-size: .7em;
+    padding: 0;
+}
+
+.filter-name-transaction button {
+    color: #FFFFFF;
+    background: none;
+    border: none;
+}
+
+/*Transaction filter section end*/
 
 
 
@@ -283,9 +326,6 @@
 
 }
 
-
-
-
 .pagination-div {
     margin-top: 0;
     padding: 0 10px 0px 10px;
@@ -349,61 +389,38 @@ ulList li.disabled a {
 }
 
 
+/*Create Form*/
 
-/*
-.pagination {
-
-
+.create-main-container{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.previousBtn a,
-.nextBtn a{
-    background: none;
-    border: none;
-    font-size: .9em;
-    color: #ffffff;
-    font-weight: bold;
-    padding: 5px;
-}
-
-.pagination ul{
-    margin: auto;
-    text-align: center;
-    padding: 2px 20px 2px 20px;
-}
-
-.pagination ul li{
-    display: inline-block;
-    margin: 0 15px;
-}
-
-.pagination ul li.disabled a{
-    background-color: transparent !important;
-}
-.pagination ul a:hover{
-    background: none;
-    font-weight: bold;
-    color: #FFFFFF;
-    font-size: 1em;
-}
-
-#currentBtn span{
-     
-    background: none;
-    border: none;
-    color: #9FA6B2;
-}
-
-#activeBtn a{
-    
-    background: none;
-    border: none;
-    font-weight: bold;
-    color: #FFFFFF;
+.wrapper {
+    background: white;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 20px 10px 20px 10px;
     border-radius: 10px;
+    min-width: 420px;
+    background: #17181d;
 }
 
-    */
+.create-title{
+    display: flex;
+}
+
+
+.wrapper form{
+    background: blue;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+}
 
 
 
@@ -514,6 +531,14 @@ ulList li.disabled a {
     .navBar .navUl li:last-child {
         display: block !important;
     }
+
+    .table-content th,
+    .table-content td {
+        padding: 8px .2em;
+        font-size: .8em;
+    }
+
+
 }
 
 @media only screen and (width > 768px){

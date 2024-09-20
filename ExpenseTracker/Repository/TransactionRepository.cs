@@ -5,6 +5,7 @@ using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace ExpenseTracker.Repository
 {
@@ -23,13 +24,30 @@ namespace ExpenseTracker.Repository
 
         }
 
-        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId)
+        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId, string keyword)
         {
-            var count = await _table.Include(t => t.Category).CountAsync();
 
-            IQueryable<Transaction> records = _table.Where(x => x.User_Id == userId)
-                                                    .Include(i => i.Category);
-                                                   
+
+            Expression<Func<Transaction, bool>> condition = x => x.User_Id == userId && x
+                                                                  .Category.Title
+                                                                  .Contains(keyword ?? string.Empty) || x
+                                                                  .Amount.ToString()
+                                                                  .Contains(keyword ?? string.Empty) && x
+                                                                  .User_Id == userId || x
+                                                                  .Note.Contains(keyword ?? string.Empty) && x
+                                                                  .User_Id == userId || x
+                                                                  .Date.ToString()
+                                                                  .Contains(keyword ?? string.Empty) && x
+                                                                  .User_Id == userId;
+
+
+
+            var count = await _table.Where(condition).Include(t => t.Category).CountAsync();
+
+
+            IQueryable<Transaction> records = _table.Where(condition).Include(i => i.Category);
+
+
 
 
             switch (sortOrder)

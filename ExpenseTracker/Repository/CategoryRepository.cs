@@ -26,10 +26,11 @@ namespace ExpenseTracker.Repository
                                                                   string userId, 
                                                                   string sortOrder)
         {
-            var totalCount = await _table.Where(x => x.Title.Contains(keyword ?? string.Empty)).CountAsync();
+            Expression<Func<Category, bool>> condition = x => x.Title.Contains(keyword ?? string.Empty) && x.User_Id == userId;
 
-            var records = _table.Where(x => x.Title.Contains(keyword?? string.Empty) && 
-                                            x.User_Id == userId);
+            var totalCount = await _table.Where(condition).CountAsync();
+
+            var records = _table.Where(condition);
 
 
 

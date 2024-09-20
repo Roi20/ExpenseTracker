@@ -72,7 +72,7 @@
     justify-content: center;
     align-content: center;
 }
-    .overlay .content h2 {
+    .overlay .content h4 {
         color: #B00020;
         font-variant-caps:all-small-caps;
     }
@@ -95,14 +95,13 @@
 .popup-modal form #btn-holder div
 {
     border-radius: 20px/50px;
-    font-size: .8em;
+    font-size: .7em;
     width: 40%;
     border: none;
     height: 35px;
     display: flex;
     justify-content: center;
     text-align: center;
-    
 }
 
 

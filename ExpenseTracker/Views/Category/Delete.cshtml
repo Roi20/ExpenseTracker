@@ -17,11 +17,11 @@
                 <a class="close" asp-action="Index">&times;</a>
             </div>
             <div class="content h-100 align-items-center d-flex justify-content-center p-3 flex-column">
-                <h2 class="text-center mb-0">Delete Category</h2>
+                <h4 class="text-center mb-0">Delete Category</h4>
                 <form asp-action="ConfirmedDelete" class="h-100 w-100 mt-0">
                     @Html.AntiForgeryToken()
                     @Html.HiddenFor(i => i.CategoryId)
-                    <div class="text-light" style="word-wrap: break-word">
+                    <div class="text-light mt-0 pt-0" style="word-wrap: break-word">
                         <p class="text-start">Are you sure you want to delete <strong>@Model.Title</strong> ?</p>
                     </div>
                     <div id="btn-holder">

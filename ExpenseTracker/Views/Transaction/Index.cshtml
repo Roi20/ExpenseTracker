@@ -37,7 +37,7 @@
             </span>
             <a class="btn btn-primary" asp-action="Create">
                 <span class="">
-                    <i class="fa-solid fa-plus"></i> Add Category
+                    <i class="fa-solid fa-plus"></i> Add Transaction
                 </span>
             </a>
         </div>
@@ -45,7 +45,7 @@
             <form asp-action="Index" method="get" class="searchForm">
                 @Html.AntiForgeryToken();
                 <input type="text"
-                       placeholder="Search Category Title.."
+                       placeholder="Search.."
                        name="s"
                        value="@Model.SearchKeyword" />
                 <button type="submit">
@@ -54,25 +54,25 @@
                     </span>
                 </button>
             </form>
-            <div class="filter">
+            <div class="filter-transaction">
                 <div>
                     <span> <i class="fa-solid fa-rotate"></i> Order by: </span>
                 </div>
-                <div class="filter-name">
+                <div class="filter-name-transaction">
                     <form asp-action="Index" method="get">
                         @Html.AntiForgeryToken();
                         <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Category" ? "Category Desc" : "Category")" />
                         <button class="" type="submit">Category</button>
                     </form>
                 </div>
-                <div class="filter-name">
+                <div class="filter-name-transaction">
                     <form asp-action="Index" method="get">
                         @Html.AntiForgeryToken();
                         <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Amount" ? "Amount Desc" : "Amount")" />
                         <button class="" type="submit">Amount</button>
                     </form>
                 </div>
-                <div class="filter-name">
+                <div class="filter-name-transaction">
                     <<form asp-action="Index" method="get">
                         @Html.AntiForgeryToken();
                         <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Date" ? "Date Desc" : "Date")" />
@@ -125,7 +125,7 @@
             <div class="pagination-content">
                 <div class="pagination">
                     <ul class="ulList">
-                        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == 1 || Model.TotalPage == 0 ? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
                                asp-route-p="@(Model.Page == 1)"
                                asp-route-sort="@ViewBag.SortOrder)">
@@ -134,7 +134,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == 1  || Model.TotalPage == 0 ? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
                                asp-route-p="@(Model.Page - 1)"
                                asp-route-sort="@ViewBag.SortOrder">
@@ -153,7 +153,7 @@
                                 </a>
                             </li>
                         }
-                        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0  ? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
                                asp-route-p="@(Model.Page + 1)"
                                asp-route-sort="@ViewBag.SortOrder">
@@ -162,9 +162,9 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0 ? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
-                               asp-route-p="@(Model.Page = Model.TotalPage)"
+                               asp-route-p="@(Model.TotalPage)"
                                asp-route-sort="@ViewBag.SortOrder">
                                 <span>
                                     Last

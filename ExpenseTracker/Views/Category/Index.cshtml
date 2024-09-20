@@ -123,7 +123,7 @@
             <div class="pagination-content">
                 <div class="pagination">
                     <ul class="ulList">
-                        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == 1 || Model.TotalPage == 0? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
                                                  asp-route-p="@(Model.Page == 1)" 
                                                  asp-route-sort="@ViewBag.SortOrder)">
@@ -132,7 +132,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="page-item @(Model.Page == 1 ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == 1 || Model.TotalPage == 0 ? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
                                                  asp-route-p="@(Model.Page - 1)"
                                                  asp-route-sort="@ViewBag.SortOrder">
@@ -151,7 +151,7 @@
                                 </a>
                             </li>
                         }
-                        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
                                                  asp-route-p="@(Model.Page + 1)"
                                                  asp-route-sort="@ViewBag.SortOrder">
@@ -160,7 +160,7 @@
                                 </span>
                             </a>
                         </li>
-                        <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")">
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0 ? "disabled" : "")">
                             <a class="page-link" asp-route-s="@(Model.SearchKeyword)" 
                                                  asp-route-p="@(Model.Page = Model.TotalPage)" 
                                                  asp-route-sort="@ViewBag.SortOrder">

@@ -43,6 +43,7 @@ html, body {
     background: #17181d;
     opacity: 1;
     transition: all .5s ease-in;
+    display: block;
 }
 
 .main-layout{

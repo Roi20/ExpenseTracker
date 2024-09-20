@@ -7,6 +7,10 @@
    width: 100%;
 }
 
+.navbar{
+    padding: 2px 10px 0px 12px;
+}
+
 /*First Div*/
 .firstDiv{
     width: 100%;
