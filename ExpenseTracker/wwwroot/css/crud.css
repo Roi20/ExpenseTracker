@@ -407,22 +407,115 @@ ulList li.disabled a {
     border-radius: 10px;
     min-width: 420px;
     background: #17181d;
+    overflow: hidden;
+    box-shadow: 1px 1px 1px #FFFFFF;
 }
 
 .create-title{
     display: flex;
+    padding-left: 10px;
 }
 
 
 .wrapper form{
-    background: blue;
     display: flex;
     flex-direction: column;
     width: 100%;
+    padding: 10px;
 
 }
 
+#crud-input{
+    width: 100%;
+    overflow: hidden;
+}
 
+.crud-form form label{
+    margin-bottom: 5px;
+    color: #FFFFFF;
+}
+
+.crud-form form span{
+    display: inline-block;
+    font-size: .9em;
+    text-align: center;
+}
+
+#crud-input input, #crud-input select{
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: none;
+    padding: 10px;
+}
+
+.form-button{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 20px;
+}
+
+.form-button .submit-button, 
+.form-button .cancel-button{
+    width: 100%;
+    height: 36px;
+    background: none;
+    border-radius: 5px;
+    overflow: hidden;
+    font-size: .9em;
+    font-weight: 500;
+    
+}
+
+.form-button .submit-button:hover, 
+.form-button .cancel-button:hover {
+
+    box-shadow: 1px 1px 1px #FFFFFF;
+
+}
+
+.form-button .submit-button button{
+    width: 100%;
+    height: 100%;
+    border: none;
+    letter-spacing: 2px;
+    font-variant-caps:all-small-caps;
+    background: #08852C;
+    color: #FFFFFF;
+}
+
+.form-button .cancel-button a{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 2px;
+    background: #AE1918;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cancel-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+#crud-input textarea{
+    border-radius: 5px;
+    width: 100%;
+    border: none;
+}
+
+#crud-input textarea:focus,
+#crud-input input{
+    outline: none;
+}
 
 
 

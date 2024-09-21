@@ -34,23 +34,46 @@
 <div class="create-main-container">
     <div class="wrapper">
         <div class="create-title row mb-2">
-            <h5 class="text-light">Create your new Category</h5>
+            <h5 class="text-light">Create New Category</h5>
             <!--p class="text-secondary">by login your account here</!--p-->
         </div>
-        <div class="formHolder">
-            <form id="create-form" method="post">
+        <div class="crud-form">
+            <form id="create-form" asp-action="Create" method="post">
                 @Html.AntiForgeryToken()
+                <label asp-for="@Model.Category.Title"></label>
                 <span asp-validation-for="@Model.Category.Title" class="text-danger"></span>
-                <div id="inputHolder">
+                <div id="crud-input">
                     <input asp-for="@Model.Category.Title"  placeholder="Title" />
                 </div>
+                <label asp-for="@Model.Category.Icon"></label>
                 <span asp-validation-for="@Model.Category.Icon" class="text-danger"></span>
-                <div id="inputHolder">
-                    <h3>Icon DropDown</h3>
+                <div id="crud-input">
+                     <select asp-for="@Model.Category.Icon">
+                        <option class="font-monospace" selected disabled>Choose Icon</option>
+                        @foreach(var i in emojis)
+                        {
+                            <option class="font-monospace" value="@i ">
+                                @i
+                            </option>
+                        }
+                    </select>
                 </div>
+                <label asp-for="@Model.Category.Type"></label>
                 <span asp-validation-for="@Model.Category.Type" class="text-danger"></span>
-                <div id="inputHolder">
-                    <h3>Type DropDown</h3>
+                <div id="crud-input">
+                    <select asp-for="@Model.Category.Type">
+                        <option class="font-monospace" selected disabled>Choose Type</option>
+                        <option class="font-monospace" value="Income">Income</option>
+                        <option class="font-monospace" value="Expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-button">
+                    <div class="submit-button">
+                        <button type="submit">Confirm</button>
+                    </div>
+                    <div class="cancel-button">
+                        <a asp-action="Index">Cancel</a>
+                    </div>
                 </div>
             </form>
         </div>

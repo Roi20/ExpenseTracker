@@ -4,7 +4,8 @@
 
 @section CustomStyles {
 
-  
+    <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
+
 
 }
 
@@ -12,6 +13,71 @@
     ViewData["CurrentPage"] = "Create";
 }
 
+<div class="create-main-container">
+    <div class="wrapper">
+        <div class="create-title row mb-2">
+            <h5 class="text-light">Create New Transaction</h5>
+            <!--p class="text-secondary">by login your account here</!--p-->
+        </div>
+        <div class="crud-form">
+            <form id="create-form" asp-action="Create" method="post">
+                @Html.AntiForgeryToken()
+                <label asp-for="Transaction.Date"></label>
+                <span asp-validation-for="Transaction.Date" class="text-danger"></span>
+                <div id="crud-input">
+                    <input asp-for="Transaction.Date" type="date" placeholder="" />
+                </div>
+                <label asp-for="Transaction.CategoryId"></label>
+                <span asp-validation-for="Transaction.CategoryId" class="text-danger"></span>
+                <div id="crud-input">
+                    <select asp-for="Transaction.CategoryId">
+                        <option class="font-monospace" selected disabled>Choose Category</option>
+                        @foreach (var i in Model.Categories)
+                        {
+                            <option class="font-monospace" value="@i.CategoryId">
+                                @i.Title
+                            </option>
+                        }
+                    </select>
+                </div>
+                <label asp-for="Transaction.Amount"></label>
+                <span asp-validation-for="Transaction.Amount" class="text-danger"></span>
+                <div id="crud-input">
+                    <input asp-for="Transaction.Amount" type="date" placeholder="Amount" min="0" type="number" />
+                </div>
+                <label asp-for="Transaction.Note"></label>
+                <span asp-validation-for="Transaction.Note" class="text-danger"></span>
+                <div id="crud-input">
+                    <textarea asp-for="Transaction.Note" rows="2"></textarea>
+                </div>
+                <div class="form-button">
+                    <div class="submit-button">
+                        <button type="submit">Confirm</button>
+                    </div>
+                    <div class="cancel-button">
+                        <a asp-action="Index">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+}
+
+
+
+
+
+
+
+@*
 <div class="row d-flex justify-content-center m-auto p-2" style="height: 100%; width: 100%">
     <div class="col-md-5 bg-dark main-container m-auto">
         <div class="text-center mt-2" id="title-holder">
@@ -58,12 +124,4 @@
     </div>
 </div>
 
-
-@section CustomScripts{
-    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
-}
-
-@section Scripts {
-
-    <partial name="_ValidationScriptsPartial" />
-}
+*@
