@@ -25,7 +25,10 @@ namespace ExpenseTracker.Repository
             var Income = await TotalIncome(startDate, endDate, userId);
             var Expense = await TotalExpense(startDate, endDate, userId);
 
-            return Income - Expense;
+
+            var result = Income - Expense;
+
+            return result <= 0 ? 0 : result;
 
         }
 
@@ -151,6 +154,14 @@ namespace ExpenseTracker.Repository
             }).ToList();
 
             return LineChartData;
+        }
+
+        public async Task<IEnumerable<Transaction>> GetAllTransaction(string userId)
+        {
+            return await _transaction
+                                     .Include(c => c.Category)
+                                     .Where(x => x.User_Id == userId)
+                                     .ToListAsync();
         }
     }
 }

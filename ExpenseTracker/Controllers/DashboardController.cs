@@ -32,8 +32,8 @@ namespace ExpenseTracker.Controllers
                 {
                     TotalIncome = await _repo.TotalIncome(StartDate, EndDate, currentUserId),
                     TotalExpense = await _repo.TotalExpense(StartDate, EndDate, currentUserId),
-                    Balance = await _repo.Balance(StartDate, EndDate, currentUserId)
-                    
+                    Balance = await _repo.Balance(StartDate, EndDate, currentUserId),
+                    Transactions = await _repo.GetAllTransaction(currentUserId)
                 };
             
                 var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1, currentUserId);

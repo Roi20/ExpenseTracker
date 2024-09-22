@@ -15,6 +15,6 @@ namespace ExpenseTracker.Contracts
         Task<Dictionary<string, int>> IncomeSummary(DateOnly startDate, DateOnly endDate, string userId);
         Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate, string userId);
         Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range, string userId);
-
+        Task<IEnumerable<Transaction>> GetAllTransaction(string userId);
     }
 }

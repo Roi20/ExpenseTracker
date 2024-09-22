@@ -179,6 +179,7 @@
     background: none;
     color: #FFFFFF;
     outline-color: none;
+
     
 }
 
@@ -193,7 +194,54 @@
     font-size: 0.6em;
     font-style: italic;
     color: #FFFFFF;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    letter-spacing: 2px;
    
+}
+canvas {
+    width: 100% !important;
+    height: 100% !important;
+    font-variant: small-caps !important;
+}
+
+
+.latest-div{
+    width: 100%;
+    padding: 15px;
+}
+
+.dashboard-table {
+    background: #121212;
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.dashboard-table-content {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.dashboard-table #latest-title{
+    color: #FFFFFF;
+    padding-left: 15px;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    font-weight: 500;
+}
+
+.dashboard-table-content thead tr {
+    color: #FFFFFF;
+    letter-spacing: 2px;
+    font-size: 1em;
+}
+
+.dashboard-table-content th,
+.dashboard-table-content td {
+    padding: 10px 15px;
+    font-size: .8em;
+    color: #FFFFFF;
 }
 
 
@@ -211,11 +259,3 @@
     #chart-container {
     }
 
-canvas{
- 
-    width: 100% !important;
-    height: 100% !important;
-    font-variant: small-caps !important;
-
- 
-}

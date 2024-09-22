@@ -33,8 +33,8 @@ var myLineChart = new Chart(ctx, {
                 backgroundColor: '#4CB140',
                 borderWidth: 2,
                 fill: false,
-                lineTension: 0.4,
-                pointRadius: 0
+                lineTension: 0,
+                pointRadius: 1
             },
             {
                 label: 'Expense',
@@ -43,8 +43,8 @@ var myLineChart = new Chart(ctx, {
                 backgroundColor: '#C9190B',
                 borderWidth: 2,
                 fill: false, 
-                lineTension: 0.4,
-                pointRadius: 0,
+                lineTension: 0,
+                pointRadius: 1,
 
             }
         ]
@@ -60,6 +60,7 @@ var myLineChart = new Chart(ctx, {
                 top: 0
             }
         },
+
         plugins: {
             legend: {
                 position: 'bottom', 
