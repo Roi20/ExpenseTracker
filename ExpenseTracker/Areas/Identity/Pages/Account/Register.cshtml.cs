@@ -19,6 +19,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using ExpenseTracker.Contracts;
 
 namespace ExpenseTracker.Areas.Identity.Pages.Account
 {
@@ -30,13 +31,16 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<AppIdentityUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly IEmailServiceAsync _emailServiceAsync;
+
 
         public RegisterModel(
             UserManager<AppIdentityUser> userManager,
             IUserStore<AppIdentityUser> userStore,
             SignInManager<AppIdentityUser> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            IEmailServiceAsync emailServiceAsync)
         {
             _userManager = userManager;
             _userStore = userStore;
@@ -44,6 +48,7 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _emailServiceAsync = emailServiceAsync;
         }
 
         /// <summary>
@@ -151,7 +156,7 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
+                    await _emailServiceAsync.EmailSendAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)

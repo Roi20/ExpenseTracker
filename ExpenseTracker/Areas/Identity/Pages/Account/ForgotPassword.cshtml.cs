@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using ExpenseTracker.Contracts;
 
 namespace ExpenseTracker.Areas.Identity.Pages.Account
 {
@@ -21,11 +22,13 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
     {
         private readonly UserManager<AppIdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
+        private readonly IEmailServiceAsync _emailServiceAsync;
 
-        public ForgotPasswordModel(UserManager<AppIdentityUser> userManager, IEmailSender emailSender)
+        public ForgotPasswordModel(UserManager<AppIdentityUser> userManager, IEmailSender emailSender, IEmailServiceAsync emailServiceAsync)
         {
             _userManager = userManager;
             _emailSender = emailSender;
+            _emailServiceAsync = emailServiceAsync;
         }
 
         /// <summary>
@@ -71,7 +74,7 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
                     values: new { area = "Identity", code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
+                await _emailServiceAsync.EmailSendAsync(
                     Input.Email,
                     "Reset Password",
                     $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
