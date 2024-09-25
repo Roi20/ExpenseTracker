@@ -37,6 +37,7 @@ namespace ExpenseTracker.Controllers
 
 
                     entities.SearchKeyword = request.SearchKeyword;
+                    ViewBag.User = await _repo.GetUserInfo(userId);
                     return View(entities);
 
                 }

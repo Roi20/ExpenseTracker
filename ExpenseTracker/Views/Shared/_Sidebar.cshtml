@@ -1,5 +1,12 @@
-﻿
-<div class="sidebarToggle bg-warning float-end p-0" id="" style="z-index: 9999;">
+﻿@{
+    var user = ViewBag.User;
+}
+<div class="sidebar-wrapper">
+    <div class="profile-image">
+        <p class="text-light">@user.FirstName</p>
+        <p class="text-light">@user.LastName</p>
+        <p class="text-light">@user.Email</p>
+    </div>
 </div>
 
 

@@ -1,9 +1,10 @@
 ﻿using ExpenseTracker.Common;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 
 namespace ExpenseTracker.Contracts
 {
-    public interface IDashboardRepository
+    public interface IDashboardRepository 
     {
 
         Task <IEnumerable<Transaction>> GetData(DateOnly StartDate, DateOnly EndDate, string userId);
@@ -16,5 +17,6 @@ namespace ExpenseTracker.Contracts
         Task<Dictionary<string, int>> ExpenseSummary(DateOnly startDate, DateOnly endDate, string userId);
         Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range, string userId);
         Task<IEnumerable<Transaction>> GetAllTransaction(string userId);
+        Task<AppIdentityUser> GetUserInfo(string userId);
     }
 }

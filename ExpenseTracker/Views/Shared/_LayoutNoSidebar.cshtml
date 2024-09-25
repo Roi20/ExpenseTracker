@@ -16,9 +16,6 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="sideBar" id="sideBar" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "display: none" : "" )">
-           <partial name="_Sidebar" />
-        </div>
         <div id="main-layout" class="main-layout">
             @RenderBody()
         </div>
@@ -30,3 +27,4 @@
     @RenderSection("CustomScripts", required: false)
 </body>
 </html>
+

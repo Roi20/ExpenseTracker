@@ -1,4 +1,6 @@
-﻿namespace ExpenseTracker.Common
+﻿using ExpenseTracker.Data;
+
+namespace ExpenseTracker.Common
 {
     public class PaginatedResult<T>
     {

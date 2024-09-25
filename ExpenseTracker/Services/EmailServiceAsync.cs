@@ -18,7 +18,6 @@ namespace ExpenseTracker.Services
             _emailSettings = option.Value;
         }
 
-
         public async Task EmailSendAsync(string email, string subject, string body)
         {
             var message = new MimeMessage();

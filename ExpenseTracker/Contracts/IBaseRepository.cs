@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Common;
+using ExpenseTracker.Data;
 using System.Linq.Expressions;
 
 namespace ExpenseTracker.Contracts
@@ -12,7 +13,7 @@ namespace ExpenseTracker.Contracts
         Task Delete(object id);
         Task <PaginatedResult<T>> GetPaginated(int page, int pageSize, Expression<Func<T, bool>> condition);
         Task<IEnumerable<T>> GetAllUserData(string userId);
-
+        Task<AppIdentityUser> GetUserInfo(string userId);
 
     }
 }

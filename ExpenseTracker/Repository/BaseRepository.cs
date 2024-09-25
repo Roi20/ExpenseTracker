@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.EJ2.Linq;
@@ -14,11 +15,13 @@ namespace ExpenseTracker.Repository
 
         private readonly DbContext _db;
         protected readonly DbSet<T> _table;
+        private readonly DbSet<AppIdentityUser> _user;
 
         public BaseRepository(ExpenseTrackerDbContext db)
         {
             _db = db;
             _table = _db.Set<T>();
+            _user = _db.Set<AppIdentityUser>();
 
         }
 
@@ -133,6 +136,11 @@ namespace ExpenseTracker.Repository
         public async Task<IEnumerable<T>> GetAllUserData(string userId)
         {
             return await _table.Where(x => x.User_Id == userId).ToListAsync();
+        }
+
+        public async Task<AppIdentityUser> GetUserInfo(string userId)
+        {
+            return await _user.FirstOrDefaultAsync(x => x.Id == userId);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -77,9 +78,9 @@ namespace ExpenseTracker.Repository
                 TotalPage = (int)Math.Ceiling(totalCount / (double)pageSize)
             };
 
-
-
         }
+
+       
 
     }
 }
