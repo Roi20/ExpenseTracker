@@ -94,7 +94,7 @@ namespace ExpenseTracker.Controllers
 
                 TempData["Message"] = $"{viewModel.Title}, Created Successfully";
 
-                return Redirect("Index");
+                return RedirectToAction("Index");
 
             }
             catch (DbUpdateException ex)

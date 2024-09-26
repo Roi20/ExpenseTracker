@@ -27,8 +27,12 @@ namespace ExpenseTracker.Data
         [StringLength(100), Display(Name = "Other Source Of Income")]
         public string? SourceOfIncome { get; set; }
 
+        [MaxLength]
+        public string? ProfilePicturePath { get; set; }
+
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
+        
 
     }
 }

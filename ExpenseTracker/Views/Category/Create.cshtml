@@ -28,6 +28,8 @@
 
 @{
     ViewData["CurrentPage"] = "Create";
+
+    Layout = "_LayoutNoSidebar";
 }
 
 
@@ -37,6 +39,10 @@
             <h5 class="text-light">Create New Category</h5>
             <!--p class="text-secondary">by login your account here</!--p-->
         </div>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="text-center"><span class="text-danger small">@TempData["ErrorMessage"]</span></div>
+        }
         <div class="crud-form">
             <form id="create-form" asp-action="Create" method="post">
                 @Html.AntiForgeryToken()

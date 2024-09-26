@@ -49,6 +49,7 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ICategoryRepository,  CategoryRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
+builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 
 //EmailService Dependency
 builder.Services.AddScoped<IEmailServiceAsync, EmailServiceAsync>();
@@ -85,7 +86,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{controller=UploadProfilePicture}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

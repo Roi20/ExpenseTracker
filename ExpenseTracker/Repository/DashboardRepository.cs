@@ -42,8 +42,8 @@ namespace ExpenseTracker.Repository
 
             var Data = await _transaction.Include(x => x.Category)
                                          .Where(t => t.Date >= StartDate && 
-                                                     t.Date <= EndDate && 
-                                                     t.User_Id == userId)
+                                                     t.Date <= EndDate &&
+                                                     t.Category.User_Id == userId)
                                                       .ToListAsync();
 
             return Data;
@@ -58,7 +58,7 @@ namespace ExpenseTracker.Repository
             var Data = await GetData(startDate, endDate, userId);
 
             var totalExpense = Data.Where(x => x.Category.Type == "Expense")
-                                                .Sum(x => x.Amount);
+                                   .Sum(x => x.Amount);
 
             return totalExpense;
         }
@@ -69,7 +69,7 @@ namespace ExpenseTracker.Repository
             var Data = await GetData(startDate, endDate, userId);
 
             var totalIncome = Data.Where(x => x.Category.Type == "Income")
-                                               .Sum(x => x.Amount);
+                                  .Sum(x => x.Amount);
 
             return totalIncome;
         }
@@ -151,8 +151,8 @@ namespace ExpenseTracker.Repository
             var LineChartData = days.Select(day => new LineChartData
             {
                 NumberOfDays = day,
-                Income = incomeData.ContainsKey(day) ? incomeData[day] : default,
-                Expense = expenseData.ContainsKey(day) ? expenseData[day] : default,
+                Income = incomeData.ContainsKey(day) ? incomeData[day] : 0,
+                Expense = expenseData.ContainsKey(day) ? expenseData[day] : 0,
 
             }).ToList();
 

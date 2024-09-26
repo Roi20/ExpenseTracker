@@ -29,15 +29,18 @@
 
 @{
     ViewData["CurrentPage"] = "Update";
+    Layout = "_LayoutNoSidebar";
 }
-
 
 <div class="create-main-container">
     <div class="wrapper">
         <div class="create-title row mb-2">
             <h5 class="text-light">Edit Category</h5>
-            <!--p class="text-secondary">by login your account here</!--p-->
         </div>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="text-center"><span class="text-danger small">@TempData["ErrorMessage"]</span></div>
+        }
         <div class="crud-form">
             <form id="create-form" asp-action="Update" method="post">
                 @Html.AntiForgeryToken()

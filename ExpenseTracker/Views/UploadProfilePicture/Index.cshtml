@@ -1,0 +1,23 @@
+﻿@model ProfilePicture
+
+@{
+    ViewData["CurrentPage"] = "UploadProfile";
+    Layout = "_LayoutNoSidebar";
+}
+
+
+
+
+<form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="ProfileImage"></label>
+        <input asp-for="ProfileImage" class="form-control" type="file" />
+        <span asp-validation-for="ProfileImage" class="text-danger"></span>
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+</form>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}
