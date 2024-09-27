@@ -3,21 +3,103 @@
 @{
     ViewData["CurrentPage"] = "UploadProfile";
     Layout = "_LayoutNoSidebar";
+    var user = ViewBag.User;
 }
 
 
+@section CustomStyles{
+    <link rel="stylesheet" href="@Url.Content("~/css/user.css")"/>
+}
 
 
-<form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
-    <div class="form-group">
-        <label asp-for="ProfileImage"></label>
-        <input asp-for="ProfileImage" class="form-control" type="file" />
-        <span asp-validation-for="ProfileImage" class="text-danger"></span>
+<div class="wrapper-container">
+    <div class="wrapper">
+        <div class="content">
+            <div class="profile-title">
+                <h3>Profile Settings</h3>
+                <p>Here you can edit your profile picture and update your personal information.</p>
+            </div>
+            <div class="profile-container">
+                <div class="profile-image-container">
+                    @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+                    {
+                        <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture"/>
+                    }
+                    else
+                    {
+                        <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" style="border: 2px solid #FFFFFF"/>
+                    }
+                    <form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
+                        <span asp-validation-for="ProfileImage" class="text-danger"></span>
+                        <span id="max-text">Max file size is 2MB</span>
+                        <div class="input-holder">
+                            <input asp-for="ProfileImage" type="file" id="input-file" onchange="updateFileName()" />
+                            <span class="file-name" id="file-name">Upload Photo</span>
+                        </div>
+                        <div class="submit-image">
+                            <button type="submit" class="btn btn-primary">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
-</form>
+</div>
+
+
 
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
 }
+
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+}
+
+
+
+
+
+
+
+
+
+@*
+<div class="main-wrapper">
+    <div class="image-container">
+        <img src="~/@user.ProfilePicturePath" alt="@user.FirstName" class="profile-picture rounded-image" />
+    </div>
+
+
+  
+    <div class="profile-div">
+    @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+    {
+
+
+    }
+    else
+    {
+    <img src="" alt="@user.FirstName" class="profile-picture" />
+    }
+    </div>
+
+
+    <div>
+        <form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="ProfileImage"></label>
+                <input asp-for="ProfileImage" class="form-control" type="file" />
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>
+    *@
+
+
+

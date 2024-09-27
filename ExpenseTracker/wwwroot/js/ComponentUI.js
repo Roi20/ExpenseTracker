@@ -30,3 +30,17 @@ function submitForm() {
 
 
 
+
+
+function updateFileName() {
+    const input = document.getElementById('input-file');
+    const fileText = document.getElementById('file-name');
+
+    if (input.files.length > 0) {
+        fileText.textContent = input.files[0].name;
+    }
+    else {
+        fileText.textContent = 'Upload Photo';
+    }
+
+}

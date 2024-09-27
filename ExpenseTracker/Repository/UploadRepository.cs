@@ -46,7 +46,7 @@ namespace ExpenseTracker.Repository
                 const long maxSize = 2 * 1024 * 1024;
                 if(file.Length > maxSize)
                 {
-                    throw new Exception();
+                    throw new Exception("The file size must be less than 2MB.");
                 }
 
                 var uniqueFileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
@@ -56,7 +56,8 @@ namespace ExpenseTracker.Repository
                 await file.CopyToAsync(stream);
 
                 var user = await GetUser(userId);
-                user.ProfilePicturePath = filePath;
+                var relativePath = Path.Combine("uploads", uniqueFileName);
+                user.ProfilePicturePath = relativePath;
                 await UpdateUser(user);
                 
             }

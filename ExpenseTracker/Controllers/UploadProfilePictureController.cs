@@ -18,8 +18,13 @@ namespace ExpenseTracker.Controllers
         }
 
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
+
+            var currentUserId = GetUserId();
+
+            
+            ViewBag.User = await _repo.GetUser(currentUserId);
             return View();
         }
 

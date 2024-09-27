@@ -1,4 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.DotNet.Scaffolding.Shared.Messaging;
+using Newtonsoft.Json.Serialization;
+using System.ComponentModel.DataAnnotations;
 
 namespace ExpenseTracker.Models
 {
