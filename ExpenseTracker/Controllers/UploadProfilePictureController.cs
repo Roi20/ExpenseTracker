@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -30,12 +31,16 @@ namespace ExpenseTracker.Controllers
 
 
        [HttpPost]
-        public async Task<IActionResult> UploadProfile(ProfilePicture model)
+        public async Task<IActionResult> UploadProfile(UserViewModel userModel)
         {
 
             var currentUserId = GetUserId();
             try
             {
+
+                var model = userModel.ProfilePicture;
+                
+
                 ViewBag.User = await _repo.GetUser(currentUserId);
                 await _repo.UploadProfilePicture(model, currentUserId);
                 return RedirectToAction("Index");
@@ -43,13 +48,20 @@ namespace ExpenseTracker.Controllers
             }
             catch (DbUpdateException ex)
             {
-                throw new Exception($"Error Message: {ex.Message} | StackTrace: {ex.StackTrace}");
+                TempData["ErrorMessage"] = ex.Message;
+                return View("Index");
+            }
+            catch(ArgumentException ex)
+            {
+                TempData["ErrorMessage"] = ex.Message;
+                return View("Index");
+
             }
             catch (Exception ex)
             {
-               
-                return View("Error", new ErrorViewModel { Message = ex.Message });
 
+                return StatusCode(500, "Oops an error occure while trying to update your profile.");
+               
             }
 
 

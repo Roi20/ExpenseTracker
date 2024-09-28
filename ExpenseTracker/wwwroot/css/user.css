@@ -11,10 +11,10 @@
 
 .wrapper {
     background: #17181d;
-    height: 100%;
+    height: 85%;
     width: 70%;
     padding: 12px;
-    padding: 70px 70px 0 70px;
+    padding: 20px 70px 0 70px;
     border-radius: 24px;
 
 }
@@ -51,7 +51,7 @@
 }
 
 .profile-container{
-    padding-top: 50px;
+    padding-top: 30px;
     display: flex;
     justify-content: space-evenly;
 }
@@ -68,12 +68,12 @@
 
 }
 .profile-image-container img {
-    height: 120px;
-    width: 120px;
+    height: 130px;
+    width: 130px;
     border-radius: 50%;
     object-fit: cover;
     display: block;
-    border: 2px solid #FFFFFF;
+   // border: 2px solid #FFFFFF;
 }
 
 .profile-image-container form{
@@ -93,7 +93,7 @@
     height: 42px;
     border-radius: 12px;
     overflow: hidden;
-    margin-bottom: 10px;
+    margin-bottom: 3px;
     border: 2px solid #9FA6B2;
     transition: all .3s ease-in-out;
 }
@@ -103,7 +103,7 @@
 }
 
 .file-name{
-    display: inline-flex;
+    display: flex;
     width: 100%;
     height: 100%;
     margin: auto;
@@ -113,6 +113,8 @@
     align-items: center;
     font-size: .8em;
     letter-spacing: 1px;
+    overflow: hidden;
+    text-align: center;
 }
 
 
@@ -138,7 +140,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 10px;
+    padding-top: 3px;
 }
 
 .submit-image button{
@@ -155,20 +157,50 @@
     font-size: .7em;
     padding-bottom: 2px;
     padding-left: 5px;
-    letter-spacing: 1px;
+    letter-spacing: 2px;
     color: #9FA6B2;
+    font-weight: 500;
 }
+
+.personal-info-container {
+    padding-top: 30px;
+}
+
+#personal-info-form{
+    background: blue;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    overflow: hidden;
+    flex-direction: column;
+}
+
+.info-div{
+    display: flex;
+    background: green;
+    width: 100%;
+    justify-content: space-evenly;
+    padding-bottom: 50px;
+}
+
+.info-div input{
+    width: 45%;
+    height: 42px;
+}
+
+
+
 
 
 
 @media screen and (max-width: 768px){
     .wrapper {
         width: 100%;
-        padding: 70px 20px 0 20px;
+        padding: 20px 20px 0 20px;
     }
 
     .profile-container {
-        padding-top: 50px;
+        padding-top: 30px;
         
     }
 

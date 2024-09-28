@@ -35,12 +35,18 @@ function submitForm() {
 function updateFileName() {
     const input = document.getElementById('input-file');
     const fileText = document.getElementById('file-name');
+    const saveBtn = document.getElementById('save-upload');
 
     if (input.files.length > 0) {
         fileText.textContent = input.files[0].name;
+        saveBtn.disabled = false;
     }
     else {
-        fileText.textContent = 'Upload Photo';
+        fileText.textContent = 'Change Profile';
+        saveBtn.disabled = true;
     }
 
+    input.addEventListener('change', handleFileChange)
+
 }
+

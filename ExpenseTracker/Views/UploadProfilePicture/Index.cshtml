@@ -1,4 +1,4 @@
-﻿@model ProfilePicture
+﻿@model UserViewModel
 
 @{
     ViewData["CurrentPage"] = "UploadProfile";
@@ -30,19 +30,41 @@
                         <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" style="border: 2px solid #FFFFFF"/>
                     }
                     <form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
-                        <span asp-validation-for="ProfileImage" class="text-danger"></span>
-                        <span id="max-text">Max file size is 2MB</span>
+                        @Html.AntiForgeryToken()
+                        <span id="max-text">Max file size is 2MB </span>
                         <div class="input-holder">
-                            <input asp-for="ProfileImage" type="file" id="input-file" onchange="updateFileName()" />
-                            <span class="file-name" id="file-name">Upload Photo</span>
+                            <input asp-for="@Model.ProfilePicture.ProfileImage" type="file" id="input-file" accept="image/*" onchange="updateFileName()" />
+                            <span class="file-name" id="file-name">Change Profile</span>
                         </div>
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="text-center"><span class="text-danger" id="errorSpan" style="font-size: .6em; padding: 0; margin: 0">@TempData["ErrorMessage"]</span></div>
+                        }
                         <div class="submit-image">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary " id="save-upload" disabled>
                                 Save
                             </button>
                         </div>
                     </form>
                 </div>
+            </div>
+            <div class="personal-info-container">
+                <form id="personal-info-form">
+                    @Html.AntiForgeryToken()
+                    <div class="info-div first-div">
+                        <input type="text" id="" onchange="" placeholder="Email" disabled/>
+                        <input type="text" id="" onchange="" placeholder="Firstname" />
+                    </div>
+                    <div class="info-div second-div">
+                        <input type="text" id="" onchange="" placeholder="Lastname" />
+                        <input type="text" id="" onchange="" placeholder="source of income" />
+                    </div>
+                    <div>
+                        <button class="btn btn-primary w-100">
+                            update
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

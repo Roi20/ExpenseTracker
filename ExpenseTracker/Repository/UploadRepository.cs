@@ -4,6 +4,7 @@ using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using SQLitePCL;
+using Syncfusion.EJ2.Spreadsheet;
 
 namespace ExpenseTracker.Repository
 {
@@ -27,26 +28,42 @@ namespace ExpenseTracker.Repository
             return await _user.FirstOrDefaultAsync(x => x.Id == userId);
         }
 
+        
         public async Task UpdateUser(AppIdentityUser userModel)
         {
-
-
-
-            _user.Entry(userModel).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-       
-       
+            try
+            {
+                _user.Entry(userModel).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateException)
+            {
+                throw new Exception("Unable to update Database");
+            }
+            catch (Exception)
+            {
+                throw new Exception("An error occured while trying to update the user profile.");
+            }
         }
 
         public async Task UploadProfilePicture(ProfilePicture model, string userId)
         {
+
+            
             var file = model.ProfileImage;
             if(file != null && file.Length > 0)
             {
                 const long maxSize = 2 * 1024 * 1024;
                 if(file.Length > maxSize)
                 {
-                    throw new Exception("The file size must be less than 2MB.");
+                    throw new ArgumentException("The file size should not exceed 2MB.");
+                }
+
+                var allowedExtension = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+                var fileExtension = Path.GetExtension(file.FileName);
+                if (!allowedExtension.Contains(fileExtension))
+                {
+                    throw new ArgumentException("Invalid file extension, Only image are allowed");
                 }
 
                 var uniqueFileName = $"{Path.GetFileNameWithoutExtension(file.FileName)}_{Guid.NewGuid()}{Path.GetExtension(file.FileName)}";
@@ -60,6 +77,10 @@ namespace ExpenseTracker.Repository
                 user.ProfilePicturePath = relativePath;
                 await UpdateUser(user);
                 
+            }
+            else
+            {
+                throw new Exception("Error occur, Can't update profile");
             }
         }
     }
