@@ -46,6 +46,7 @@ namespace ExpenseTracker.Repository
             }
         }
 
+
         public async Task UploadProfilePicture(ProfilePicture model, string userId)
         {
 
@@ -83,5 +84,18 @@ namespace ExpenseTracker.Repository
                 throw new Exception("Error occur, Can't update profile");
             }
         }
+        
+        public async Task UpdateUserInfo(string userId, object model)
+        {
+            
+            var user = await GetUser(userId);
+
+            _user.Entry(user).CurrentValues.SetValues(model);
+
+            await _context.SaveChangesAsync();
+
+        }
+        
+
     }
 }

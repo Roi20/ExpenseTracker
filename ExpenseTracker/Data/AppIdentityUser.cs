@@ -24,7 +24,7 @@ namespace ExpenseTracker.Data
         [StringLength(100)]
         public string? Business { get; set; }
 
-        [StringLength(100), Display(Name = "Other Source Of Income")]
+        [StringLength(100), Display(Name = "Income/Occupation")]
         public string? SourceOfIncome { get; set; }
 
         [MaxLength]

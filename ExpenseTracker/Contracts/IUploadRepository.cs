@@ -11,5 +11,7 @@ namespace ExpenseTracker.Contracts
         Task UpdateUser(AppIdentityUser userModel);
 
         Task <AppIdentityUser> GetUser(string userId);
+
+        Task UpdateUserInfo(string userId, object model);
     }
 }

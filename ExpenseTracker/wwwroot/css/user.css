@@ -11,12 +11,11 @@
 
 .wrapper {
     background: #17181d;
-    height: 85%;
     width: 70%;
     padding: 12px;
     padding: 20px 70px 0 70px;
     border-radius: 24px;
-
+    padding-bottom: 20px;
 }
 
 .content{
@@ -73,7 +72,6 @@
     border-radius: 50%;
     object-fit: cover;
     display: block;
-   // border: 2px solid #FFFFFF;
 }
 
 .profile-image-container form{
@@ -154,39 +152,113 @@
     transition: background .3s ease-in-out;
 }
 #max-text {
-    font-size: .7em;
+    font-size: .6em;
     padding-bottom: 2px;
     padding-left: 5px;
     letter-spacing: 2px;
-    color: #9FA6B2;
+    color: #FFFFFF;
     font-weight: 500;
 }
 
 .personal-info-container {
-    padding-top: 30px;
+    padding-top: 25px;
 }
 
 #personal-info-form{
-    background: blue;
     width: 100%;
     height: 100%;
     display: flex;
     overflow: hidden;
     flex-direction: column;
+    padding-bottom: 20px;
 }
 
 .info-div{
     display: flex;
-    background: green;
     width: 100%;
     justify-content: space-evenly;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
+    padding-top: 10px;
+
 }
 
-.info-div input{
-    width: 45%;
-    height: 42px;
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 5px;
+    color: #FFFFFF;
+    font-size: .9em;
+    letter-spacing: 1px;
+
 }
+
+.info-div input {
+    width: 45%;
+    height: 45px;
+    border-radius: 5px;
+    border: none;
+    padding: 0 10px 0 10px;
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: bold;
+    width: 100%;
+    color: #4d4d4d;
+}
+
+#readonly {
+    color: #9FA6B2;
+}
+
+.info-div input:focus{
+    outline: none;
+}
+
+.update-info{
+    display: flex;
+    justify-content: center;
+    padding: 10px 0 10px 0;
+    align-items: center;
+}
+
+.update-info button{
+
+    border: none; 
+    width: 30%;
+    height: 35px;
+    border-radius: 5px;
+    font-size: .9em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+
+}
+
+#validation-text {
+    font-size: .8em;
+    letter-spacing: 1px;
+    color: #DC4C64;
+}
+
+#exit-btn-span{
+    text-align: end;
+    padding: 0;
+}
+#exit-btn-span a{
+    text-decoration: none;
+    color: #FFFFFF;
+    font-size: 1.5em;
+    font-weight: 500;
+}
+
+#exit-btn-span a:hover{
+   color: #9FA6B2;
+}
+
+
+
+
+
 
 
 
@@ -196,11 +268,11 @@
 @media screen and (max-width: 768px){
     .wrapper {
         width: 100%;
-        padding: 20px 20px 0 20px;
+        padding: 20px 20px 20px 20px;
     }
 
     .profile-container {
-        padding-top: 30px;
+        padding-top: 10px;
         
     }
 

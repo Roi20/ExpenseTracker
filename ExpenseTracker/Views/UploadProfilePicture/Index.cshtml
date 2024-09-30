@@ -15,6 +15,9 @@
 <div class="wrapper-container">
     <div class="wrapper">
         <div class="content">
+            <span id="exit-btn-span">
+                <a asp-controller="Dashboard" asp-action="Index" id="exit-btn">&times;</a>
+            </span>
             <div class="profile-title">
                 <h3>Profile Settings</h3>
                 <p>Here you can edit your profile picture and update your personal information.</p>
@@ -49,19 +52,34 @@
                 </div>
             </div>
             <div class="personal-info-container">
-                <form id="personal-info-form">
+                <form asp-action="UpdateUserInfo" method="post" id="personal-info-form">
                     @Html.AntiForgeryToken()
                     <div class="info-div first-div">
-                        <input type="text" id="" onchange="" placeholder="Email" disabled/>
-                        <input type="text" id="" onchange="" placeholder="Firstname" />
+                        <div class="input-wrapper">
+                            <span asp-validation-for="@Model.User.FirstName" id="validation-text"></span>
+                            <label asp-for="@Model.User.FirstName"></label>
+                            <input type="text" asp-for="@Model.User.FirstName" placeholder="@Model.User.FirstName" />
+                        </div>
+                        <div class="input-wrapper">
+                            <span asp-validation-for="@Model.User.LastName" id="validation-text"></span>
+                            <label asp-for="@Model.User.LastName"></label>
+                            <input type="text" asp-for="@Model.User.LastName" placeholder="@Model.User.LastName" />
+                        </div>
                     </div>
                     <div class="info-div second-div">
-                        <input type="text" id="" onchange="" placeholder="Lastname" />
-                        <input type="text" id="" onchange="" placeholder="source of income" />
+                        <div class="input-wrapper">
+                            <span asp-validation-for="@Model.User.SourceOfIncome" id="validation-text"></span>
+                            <label asp-for="@Model.User.SourceOfIncome"></label>
+                            <input type="text" asp-for="@Model.User.SourceOfIncome" placeholder="@Model.User.SourceOfIncome" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label asp-for="@Model.User.Email"></label>
+                            <input type="text" onchange="" value="@Model.User.Email" id="readonly" readonly/>
+                        </div>
                     </div>
-                    <div>
-                        <button class="btn btn-primary w-100">
-                            update
+                    <div class="update-info">
+                        <button class="update-btn btn-primary" type="submit">
+                           Update
                         </button>
                     </div>
                 </form>
