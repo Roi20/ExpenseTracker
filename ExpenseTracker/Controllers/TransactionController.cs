@@ -33,8 +33,11 @@ namespace ExpenseTracker.Controllers
                         request.PageNumber,
                         PaginatedRequest.ITEMS_PER_PAGE,
                         request.SortOrder,
-                        userId);
+                        userId, request.SearchKeyword?? string.Empty);
 
+
+                    entities.SearchKeyword = request.SearchKeyword;
+                    ViewBag.User = await _repo.GetUserInfo(userId);
                     return View(entities);
 
                 }

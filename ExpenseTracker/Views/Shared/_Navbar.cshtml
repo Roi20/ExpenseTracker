@@ -1,0 +1,43 @@
+﻿<div class="navBar" id="navBar">
+    <ul class="navUl">
+        <li>
+            <a asp-controller="Home" asp-action="Index">
+                <span><i class="fa-solid fa-house"></i> Home</span>
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Dashboard" asp-action="Index">
+                <span>
+                    <i class="fa-solid fa-chart-line"></i> Dashboard
+                </span>
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Category" asp-action="Index">
+                <span>
+                    <i class="fa-solid fa-list"></i> Category
+                </span>
+            </a>
+        </li>
+        <li>
+            <a asp-controller="Transaction" asp-action="Index">
+                <span>
+                    <i class="fa-solid fa-list"></i> Transactions
+                </span>
+            </a>
+        </li>
+        <li>
+            <button type="button" onclick="sidebarOnclick()"  id="toggle-btn">
+                <span>
+                    <i class="fa-solid fa-circle-arrow-right"></i>  Sidebar
+                </span>
+            </button>
+        </li>
+    </ul>
+</div>
+
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <script src="@Url.Content("~/js/site.js")"></script>
+
+}

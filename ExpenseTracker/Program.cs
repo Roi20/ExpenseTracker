@@ -4,6 +4,8 @@ using ExpenseTracker.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ExpenseTracker.Data;
+using ExpenseTracker.Common;
+using ExpenseTracker.Services;
 //ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,11 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 
 
 });
+
+
+//EmailSettings - Email Sender Service
+builder.Services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
+
 
 // Sql Dependency
 builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
@@ -42,6 +49,10 @@ builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ICategoryRepository,  CategoryRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
+builder.Services.AddScoped<IUploadRepository, UploadRepository>();
+
+//EmailService Dependency
+builder.Services.AddScoped<IEmailServiceAsync, EmailServiceAsync>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -75,7 +86,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Category}/{action=Index}/{id?}");
+    pattern: "{controller=UploadProfilePicture}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 

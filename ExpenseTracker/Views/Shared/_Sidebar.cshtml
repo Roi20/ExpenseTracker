@@ -1,10 +1,12 @@
-﻿
-<div class="sidebarToggle float-end p-0" id="" style="z-index: 9999;">
-   @*<button class="text-light mt-3" type="button" id="hide-sidebar">
-        <span class="fs-4">
-            <i class="fa-solid fa-circle-xmark"></i>
-        </span>
-    </button>*@
+﻿@{
+    var user = ViewBag.User;
+}
+<div class="sidebar-wrapper">
+    <div class="profile-image">
+        <p class="text-light">@user.FirstName</p>
+        <p class="text-light">@user.LastName</p>
+        <p class="text-light">@user.Email</p>
+    </div>
 </div>
 
 

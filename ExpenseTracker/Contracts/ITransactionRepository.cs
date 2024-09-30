@@ -8,8 +8,8 @@ namespace ExpenseTracker.Contracts
     {
 
         Task <IEnumerable<Category>> GetAllCategoriesAsync(string userId);
-        Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, int searchAmount);
-        Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId);
+      //  Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, int searchAmount);
+        Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId, string keyword);
         Task <IEnumerable<Transaction>> GetAllTransaction();
 
     }

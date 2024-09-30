@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,12 +12,14 @@ namespace ExpenseTracker.Repository
 
         private readonly DbContext _db;
         private readonly DbSet<Transaction> _transaction;
+        private readonly DbSet<AppIdentityUser> _user;
 
 
         public DashboardRepository(ExpenseTrackerDbContext db)
         {
             _db = db;
             _transaction = _db.Set<Transaction>();
+            _user = _db.Set<AppIdentityUser>();
         }
 
         public async Task<int> Balance(DateOnly startDate, DateOnly endDate, string userId)
@@ -25,7 +28,10 @@ namespace ExpenseTracker.Repository
             var Income = await TotalIncome(startDate, endDate, userId);
             var Expense = await TotalExpense(startDate, endDate, userId);
 
-            return Income - Expense;
+
+            var result = Income - Expense;
+
+            return result <= 0 ? 0 : result;
 
         }
 
@@ -36,8 +42,8 @@ namespace ExpenseTracker.Repository
 
             var Data = await _transaction.Include(x => x.Category)
                                          .Where(t => t.Date >= StartDate && 
-                                                     t.Date <= EndDate && 
-                                                     t.User_Id == userId)
+                                                     t.Date <= EndDate &&
+                                                     t.Category.User_Id == userId)
                                                       .ToListAsync();
 
             return Data;
@@ -52,7 +58,7 @@ namespace ExpenseTracker.Repository
             var Data = await GetData(startDate, endDate, userId);
 
             var totalExpense = Data.Where(x => x.Category.Type == "Expense")
-                                                .Sum(x => x.Amount);
+                                   .Sum(x => x.Amount);
 
             return totalExpense;
         }
@@ -63,7 +69,7 @@ namespace ExpenseTracker.Repository
             var Data = await GetData(startDate, endDate, userId);
 
             var totalIncome = Data.Where(x => x.Category.Type == "Income")
-                                               .Sum(x => x.Amount);
+                                  .Sum(x => x.Amount);
 
             return totalIncome;
         }
@@ -145,12 +151,25 @@ namespace ExpenseTracker.Repository
             var LineChartData = days.Select(day => new LineChartData
             {
                 NumberOfDays = day,
-                Income = incomeData.ContainsKey(day) ? incomeData[day] : default,
-                Expense = expenseData.ContainsKey(day) ? expenseData[day] : default,
+                Income = incomeData.ContainsKey(day) ? incomeData[day] : 0,
+                Expense = expenseData.ContainsKey(day) ? expenseData[day] : 0,
 
             }).ToList();
 
             return LineChartData;
+        }
+
+        public async Task<IEnumerable<Transaction>> GetAllTransaction(string userId)
+        {
+            return await _transaction
+                                     .Include(c => c.Category)
+                                     .Where(x => x.User_Id == userId)
+                                     .ToListAsync();
+        }
+
+        public async Task<AppIdentityUser> GetUserInfo(string userId)
+        {
+            return await _user.FirstOrDefaultAsync(x => x.Id == userId);
         }
     }
 }

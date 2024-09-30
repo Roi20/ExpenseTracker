@@ -13,6 +13,7 @@ namespace ExpenseTracker.Common
         [FromQuery(Name = "s")]
         public string? SearchKeyword { get; set; }
 
+        [FromQuery(Name = "sort")]
         public string SortOrder { get; set; }
     }
 }

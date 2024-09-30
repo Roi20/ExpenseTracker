@@ -23,14 +23,75 @@
 
 @section CustomStyles {
 
-    <link rel="stylesheet" href="@Url.Content("~/css/bsoverride.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
 
 }
 
 @{
     ViewData["CurrentPage"] = "Update";
+    Layout = "_LayoutNoSidebar";
 }
 
+<div class="create-main-container">
+    <div class="wrapper">
+        <div class="create-title row mb-2">
+            <h5 class="text-light">Edit Category</h5>
+        </div>
+        @if (TempData["ErrorMessage"] != null)
+        {
+            <div class="text-center"><span class="text-danger small">@TempData["ErrorMessage"]</span></div>
+        }
+        <div class="crud-form">
+            <form id="create-form" asp-action="Update" method="post">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(x => x.Category.CategoryId)
+                <label asp-for="@Model.Category.Title"></label>
+                <span asp-validation-for="@Model.Category.Title" class="text-danger"></span>
+                <div id="crud-input">
+                    <input asp-for="@Model.Category.Title" placeholder="Title" />
+                </div>
+                <label asp-for="@Model.Category.Icon"></label>
+                <span asp-validation-for="@Model.Category.Icon" class="text-danger"></span>
+                <div id="crud-input">
+                    <select asp-for="@Model.Category.Icon">
+                        <option class="font-monospace" selected disabled>Choose Icon</option>
+                        @foreach (var i in emojis)
+                        {
+                            <option class="font-monospace" value="@i ">
+                                @i
+                            </option>
+                        }
+                    </select>
+                </div>
+                <label asp-for="@Model.Category.Type"></label>
+                <span asp-validation-for="@Model.Category.Type" class="text-danger"></span>
+                <div id="crud-input">
+                    <select asp-for="@Model.Category.Type">
+                        <option class="font-monospace" selected disabled>Choose Type</option>
+                        <option class="font-monospace" value="Income">Income</option>
+                        <option class="font-monospace" value="Expense">Expense</option>
+                    </select>
+                </div>
+                <div class="form-button">
+                    <div class="submit-button">
+                        <button type="submit">Save</button>
+                    </div>
+                    <div class="cancel-button">
+                        <a asp-action="Index">Cancel</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+
+@*
 <div class="row d-flex justify-content-center m-auto p-2" style="height: 100%; width: 100%">
     <div class="col-md-5 bg-dark main-container m-auto">
         <div class="text-center mt-2 pt-5" id="title-holder">
@@ -77,8 +138,4 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-
-    <partial name="_ValidationScriptsPartial" />
-}
+*@

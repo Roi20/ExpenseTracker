@@ -1,0 +1,145 @@
+﻿@model UserViewModel
+
+@{
+    ViewData["CurrentPage"] = "UploadProfile";
+    Layout = "_LayoutNoSidebar";
+    var user = ViewBag.User;
+}
+
+
+@section CustomStyles{
+    <link rel="stylesheet" href="@Url.Content("~/css/user.css")"/>
+}
+
+
+<div class="wrapper-container">
+    <div class="wrapper">
+        <div class="content">
+            <span id="exit-btn-span">
+                <a asp-controller="Dashboard" asp-action="Index" id="exit-btn">&times;</a>
+            </span>
+            <div class="profile-title">
+                <h3>Profile Settings</h3>
+                <p>Here you can edit your profile picture and update your personal information.</p>
+            </div>
+            <div class="profile-container">
+                <div class="profile-image-container">
+                    @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+                    {
+                        <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture"/>
+                    }
+                    else
+                    {
+                        <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" style="border: 2px solid #FFFFFF"/>
+                    }
+                    <form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
+                        @Html.AntiForgeryToken()
+                        <span id="max-text">Max file size is 2MB </span>
+                        <div class="input-holder">
+                            <input asp-for="@Model.ProfilePicture.ProfileImage" type="file" id="input-file" accept="image/*" onchange="updateFileName()" />
+                            <span class="file-name" id="file-name">Change Profile</span>
+                        </div>
+                        @if (TempData["ErrorMessage"] != null)
+                        {
+                            <div class="text-center"><span class="text-danger" id="errorSpan" style="font-size: .6em; padding: 0; margin: 0">@TempData["ErrorMessage"]</span></div>
+                        }
+                        <div class="submit-image">
+                            <button type="submit" class="btn btn-primary " id="save-upload" disabled>
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="personal-info-container">
+                <form asp-action="UpdateUserInfo" method="post" id="personal-info-form">
+                    @Html.AntiForgeryToken()
+                    <div class="info-div first-div">
+                        <div class="input-wrapper">
+                            <span asp-validation-for="@Model.User.FirstName" id="validation-text"></span>
+                            <label asp-for="@Model.User.FirstName"></label>
+                            <input type="text" asp-for="@Model.User.FirstName" placeholder="@Model.User.FirstName" />
+                        </div>
+                        <div class="input-wrapper">
+                            <span asp-validation-for="@Model.User.LastName" id="validation-text"></span>
+                            <label asp-for="@Model.User.LastName"></label>
+                            <input type="text" asp-for="@Model.User.LastName" placeholder="@Model.User.LastName" />
+                        </div>
+                    </div>
+                    <div class="info-div second-div">
+                        <div class="input-wrapper">
+                            <span asp-validation-for="@Model.User.SourceOfIncome" id="validation-text"></span>
+                            <label asp-for="@Model.User.SourceOfIncome"></label>
+                            <input type="text" asp-for="@Model.User.SourceOfIncome" placeholder="@Model.User.SourceOfIncome" />
+                        </div>
+                        <div class="input-wrapper">
+                            <label asp-for="@Model.User.Email"></label>
+                            <input type="text" onchange="" value="@Model.User.Email" id="readonly" readonly/>
+                        </div>
+                    </div>
+                    <div class="update-info">
+                        <button class="update-btn btn-primary" type="submit">
+                           Update
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+}
+
+
+
+
+
+
+
+
+
+@*
+<div class="main-wrapper">
+    <div class="image-container">
+        <img src="~/@user.ProfilePicturePath" alt="@user.FirstName" class="profile-picture rounded-image" />
+    </div>
+
+
+  
+    <div class="profile-div">
+    @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+    {
+
+
+    }
+    else
+    {
+    <img src="" alt="@user.FirstName" class="profile-picture" />
+    }
+    </div>
+
+
+    <div>
+        <form asp-action="UploadProfile" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label asp-for="ProfileImage"></label>
+                <input asp-for="ProfileImage" class="form-control" type="file" />
+                <span asp-validation-for="ProfileImage" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+</div>
+    *@
+
+
+

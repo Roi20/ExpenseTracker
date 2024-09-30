@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
@@ -20,12 +21,66 @@ namespace ExpenseTracker.Repository
             return await _table.AnyAsync(condition);
         }
 
-        public async Task<PaginatedResult<Category>> GetPaginated(int page, int pageSize, string keyword, string userId)
+        public async Task<PaginatedResult<Category>> GetPaginated(int page, 
+                                                                  int pageSize, 
+                                                                  string keyword, 
+                                                                  string userId, 
+                                                                  string sortOrder)
         {
-            return await GetPaginated(page, pageSize, 
-                                      t => t.Title.Contains(keyword ?? string.Empty) 
-                                      && t.User_Id == userId);
+            Expression<Func<Category, bool>> condition = x => x.Title.Contains(keyword ?? string.Empty) && x.User_Id == userId;
+
+            var totalCount = await _table.Where(condition).CountAsync();
+
+            var records = _table.Where(condition);
+
+
+
+            switch (sortOrder)
+            {
+                case "Icon":
+                    records = records.OrderBy(x => x.Icon);
+                    break;
+                case "Icon_Desc":
+                    records = records.OrderByDescending(x => x.Icon);
+                    break;
+
+                case "Title":
+                    records = records.OrderBy(x => x.Title);
+                    break;
+                case "Title_Desc":
+                    records = records.OrderByDescending(x => x.Title);
+                    break;
+
+                case "Type":
+                    records = records.OrderBy(x => x.Type);
+                    break;
+                case "Type_Desc":
+                    records = records.OrderByDescending(x => x.Type);
+                    break;
+
+                default:
+                    records = records.OrderBy(x => x.CategoryId);
+                    break;
+                
+                   
+            }
+
+
+            var paginatedRecords = await records.Skip((page - 1) * pageSize)
+                                                .Take(pageSize)
+                                                .ToListAsync();
+
+
+            return new PaginatedResult<Category>
+            {
+                Result = paginatedRecords,
+                Page = page,
+                TotalPage = (int)Math.Ceiling(totalCount / (double)pageSize)
+            };
+
         }
+
+       
 
     }
 }

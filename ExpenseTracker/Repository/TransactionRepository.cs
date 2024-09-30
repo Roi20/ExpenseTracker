@@ -5,6 +5,7 @@ using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
+using System.Linq.Expressions;
 
 namespace ExpenseTracker.Repository
 {
@@ -23,20 +24,30 @@ namespace ExpenseTracker.Repository
 
         }
 
-        //Not in Use Method
-        public async Task<PaginatedResult<Transaction>> GetPaginated(int page, int pageSize, int searchAmount)
+        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId, string keyword)
         {
-            return await GetPaginated(page, pageSize, t => t.Amount == searchAmount);
-        }
 
 
-        public async Task<PaginatedResult<Transaction>> GetPagination(int page, int pageSize, string sortOrder, string userId)
-        {
-            var count = await _table.Include(t => t.Category).CountAsync();
+            Expression<Func<Transaction, bool>> condition = x => x.User_Id == userId && x
+                                                                  .Category.Title
+                                                                  .Contains(keyword ?? string.Empty) || x
+                                                                  .Amount.ToString()
+                                                                  .Contains(keyword ?? string.Empty) && x
+                                                                  .User_Id == userId || x
+                                                                  .Note.Contains(keyword ?? string.Empty) && x
+                                                                  .User_Id == userId || x
+                                                                  .Date.ToString()
+                                                                  .Contains(keyword ?? string.Empty) && x
+                                                                  .User_Id == userId;
 
-            IQueryable<Transaction> records = _table.Where(x => x.User_Id == userId)
-                                                    .Include(i => i.Category);
-                                                   
+
+
+            var count = await _table.Where(condition).Include(t => t.Category).CountAsync();
+
+
+            IQueryable<Transaction> records = _table.Where(condition).Include(i => i.Category);
+
+
 
 
             switch (sortOrder)
@@ -61,6 +72,10 @@ namespace ExpenseTracker.Repository
                     records = records.OrderByDescending(i => i.Date);
                     break;
 
+                case "Date":
+                    records = records.OrderBy(t => t.Date);
+                    break;
+
                 default:
                     records = records.OrderBy(t => t.Date);
                     break;
@@ -76,7 +91,7 @@ namespace ExpenseTracker.Repository
             {
                 Result = paginatedRecords,
                 Page = page,
-                TotalCount = (int)Math.Ceiling(count / (double)pageSize)
+                TotalPage = (int)Math.Ceiling(count / (double)pageSize)
 
             };
 

@@ -5,16 +5,21 @@
 @section CustomStyles {
 
     <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
 
 }
 
 
 @{
     ViewData["CurrentPage"] = "Dashboard";
+
 }
 
 <div class="main p-0" id="dash-main-div">
     <div class="row firstDiv" id="first-div">
+        <div class="navbar">
+            <partial name="_Navbar" />
+        </div>
         <div class="row" id="DataHolder">
             <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
                 <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">
@@ -77,6 +82,31 @@
             </div>
         </div>
     </div>
+    <div class="latest-div">
+        <div class="dashboard-table">
+            <span id="latest-title">Recent Transactions</span>
+            <table class="dashboard-table-content">
+                <thead>
+                    <tr>
+                        <th>Category</th>
+                        <th>Note</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Transactions.TakeLast(5).Reverse())
+                    {
+                        <tr>
+                            <td>@item.Category.Title</td>
+                            <td>@item.Note</td>
+                            <td>@item.Date</td>
+                            <td style="@(item.FormattedAmount.StartsWith('+') ? "color: #198754" : "color: #dc3545" )">@item.FormattedAmount</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+    </div>
     @if (ViewBag.DayRange == 7)
     {
         <span id="dataDisplayText" class="ps-2 p-0 m-0">Data Shown: Past 7 days</span>
@@ -101,29 +131,11 @@
         window.chartData = JSON.parse('@Html.Raw(ViewBag.DoughnutChart)');
         var LineChartData = @Html.Raw(ViewBag.LineChart)
 
-        /*
-          var selectElement =  document.getElementById('dataDisplaySelect');
-
-          function changeSelectedText(){
-              var selectedOption = selectElement.options[selectElement.selectedIndex];
-              
-              if(selectedOption.value){
-                  selectedOption.text = "Data Shown: " + selectedOption.text;
-                  console.log(selectedOption.text = "Data Shown: " + selectedOption.text);
-              }
-          }
-
-        changeSelectedText();
-
-        selectElement.addEventListener('change', function () {
-            changeSelectedText();
-            console.log(changeSelectedText());
-        });
-        */
     </script>
    
     <script src="@Url.Content("~/js/doughnutChart.js")"></script>
-
     <script src="@Url.Content("~/js/LineChart.js")"></script>
+    <script src="@Url.Content("~/js/site.js")"></script>
+
 }
 
