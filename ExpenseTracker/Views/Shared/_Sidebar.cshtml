@@ -2,11 +2,66 @@
     var user = ViewBag.User;
 }
 <div class="sidebar-wrapper">
-    <div class="profile-image">
-        <p class="text-light">@user.FirstName</p>
-        <p class="text-light">@user.LastName</p>
-        <p class="text-light">@user.Email</p>
+    <div class="profile-img-holder">
+        <div class="sidebar-profile-image">
+            @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+            {
+                <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
+            }
+            else
+            {
+                <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" style="border: 2px solid #FFFFFF" />
+            }
+        </div>
     </div>
+    <div class="sidebar-name-occupation">
+       <div class="name-occupation">
+           <span class="name">@user.FirstName @user.LastName</span>
+           <span class="occupation">@user.SourceOfIncome</span>
+       </div>
+    </div>
+    <div class="sidebar-menu">
+        <span class="main-menu-text">Main Menu</span>
+        <ul class="sidebar-menu-list">
+            <li>
+                <span>
+                    <i class="fa-solid fa-house"></i> Home
+                </span>
+            </li>
+            <li>
+               <span>
+                    <i class="fa-solid fa-chart-simple"></i> Dashboard
+               </span> 
+             </li>
+            <li>
+                <span>
+                    <i class="fa-solid fa-table-list"></i> Category
+                </span>
+            </li>
+            <li>
+                <span>
+                    <i class="fa-solid fa-file-contract"></i> Transaction
+                </span>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-settings">
+        <span class="profile-setting-text">Account Settings</span>
+        <ul class="sidebar-profile-setting">
+            <li>
+                <span>
+                    <i class="fa-solid fa-id-badge"></i> Profile Settings
+                </span>
+            </li>
+            <li>
+                <span>
+                    <i class="fa-solid fa-right-from-bracket"></i>  Logout
+                </span>
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <span class="text-secondary" style="display: flex; padding: 10px; justify-content: center; align-items: center; letter-spacing: 1px; font-size:.9em">Expense Tracker App</span>
 </div>
 
 

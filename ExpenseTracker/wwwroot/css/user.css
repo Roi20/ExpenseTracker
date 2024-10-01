@@ -193,6 +193,12 @@
 
 }
 
+.input-wrapper label{
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+
 .info-div input {
     width: 45%;
     height: 45px;
@@ -258,14 +264,6 @@
 #exit-btn-span a:hover{
    color: #9FA6B2;
 }
-
-
-
-
-
-
-
-
 
 
 

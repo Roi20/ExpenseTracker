@@ -65,7 +65,7 @@
 
 
 .navBar .navUl li:last-child{
-   display: none;
+   display: block;
 }
 
 
@@ -260,6 +260,7 @@
     margin-top: 2px;
     margin-bottom: 0;
     padding-bottom: 0;
+   
 }
 
 .table-content .action-button a{
@@ -268,11 +269,12 @@
 }
 
 
-.table-content{
+.table-content {
     width: 100%;
     padding: 20px;
     border-radius: 8px 8px 0 0;
     overflow: hidden;
+    max-width: 100%;
 }
 
 .table-content thead tr{
@@ -293,7 +295,7 @@
 
 .table-content th,
 .table-content td{
-    padding: 10px 15px;
+    padding: 1em .2em;
 }
 
 .table-content tbody tr{
@@ -329,6 +331,8 @@
 .pagination-div {
     margin-top: 0;
     padding: 0 10px 0px 10px;
+    display: block;
+    
 }
 
 .pagination-content {
@@ -518,13 +522,6 @@ ulList li.disabled a {
 }
 
 
-
-
-
-
-
-
-
 /*Success Modal Customization*/
 .overlay
 {
@@ -630,11 +627,12 @@ ulList li.disabled a {
 
     .table-content th,
     .table-content td {
-        padding: 8px .2em;
+        padding: 15px .2em;
         font-size: .8em;
     }
-
-
+    .title-container{
+        padding-top: 40px;
+    }
 }
 
 @media only screen and (width > 768px){

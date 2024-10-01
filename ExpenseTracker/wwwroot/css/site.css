@@ -37,15 +37,6 @@ html, body {
 }
 
 
-.sideBar {
-    width: 220px;
-    z-index: 999;
-    background: #17181d;
-    opacity: 1;
-    transition: all .5s ease-in;
-    display: block;
-}
-
 .main-layout{
     flex: 1;
     overflow-y: scroll;
@@ -59,6 +50,131 @@ body {
     padding: 0;
     height: 100vh;
 }
+
+
+/*SideBar Start*/
+.sideBar {
+    width: 220px;
+    z-index: 999;
+    background: #090909; /*#17181d*/
+    opacity: 1;
+    transition: all .5s ease-in;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 40px 10px 20px 10px;
+}
+
+.sidebar-wrapper{
+    display: flex; 
+    flex-direction: column;
+}
+
+.sidebar-wrapper hr{
+    color: #FFFFFF;
+}
+
+.profile-img-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.sidebar-profile-image{
+    border: 2px solid #FFFFFF;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-profile-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.sidebar-name-occupation{
+    padding: 15px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #FFFFFF;
+
+}
+
+.name-occupation{
+    display: flex;
+    flex-direction: column;
+}
+
+.name-occupation .occupation{
+    color: #9FA6B2;
+    font-size: .8em;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.name-occupation .name{
+    text-align: center;
+}
+
+.sidebar-menu{
+    padding-top: 12px;
+}
+.sidebar-settings{
+    padding-top: 5px;
+}
+
+.sidebar-menu .main-menu-text,
+.sidebar-settings .profile-setting-text{
+    color: #FFFFFF;
+    font-size: .8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.sidebar-menu-list,
+.sidebar-profile-setting {
+    text-decoration: none;
+    color: #FFFFFF;
+    list-style: none;
+    padding-top: 12px;
+}
+
+.sidebar-menu-list li,
+.sidebar-profile-setting li{
+    padding: 10px 5px 10px 5px;
+    border-radius: 5px;
+}
+
+.sidebar-menu-list li:hover,
+.sidebar-profile-setting li:hover{
+    background: #17181d;
+}
+
+.sidebar-menu-list li span,
+.sidebar-profile-setting li span{
+    display: flex;
+    align-items: center;
+    font-size: .8em;
+    letter-spacing: 2px;
+   // font-weight: bold;
+
+}
+
+.sidebar-menu-list li .fa-solid,
+.sidebar-profile-setting li .fa-solid{
+    padding-right: 15px;
+    font-size: 1.5em !important;
+}
+
 
 @media screen and (max-width: 768px) {
     /* For mobile phones: */
@@ -77,6 +193,7 @@ body {
 
     .main-layout {
         margin-left: 0;
+        
     }
 }
 
