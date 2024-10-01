@@ -49,6 +49,7 @@ namespace ExpenseTracker.Controllers
 
                 ViewBag.User = await _repo.GetUser(currentUserId);
                 await _repo.UploadProfilePicture(model, currentUserId);
+                TempData["SuccessMessage"] = "Profile";
                 return RedirectToAction("Index");
 
             }
@@ -92,6 +93,7 @@ namespace ExpenseTracker.Controllers
                                                         userModel.User.LastName, 
                                                         userModel.User.SourceOfIncome});
 
+                TempData["SuccessMessage"] = "Personal Information";
                 return RedirectToAction("Index");
 
             }

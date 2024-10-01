@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="@Url.Content("~/css/user.css")"/>
 }
 
-
 <div class="wrapper-container">
     <div class="wrapper">
         <div class="content">
@@ -22,6 +21,10 @@
                 <h3>Profile Settings</h3>
                 <p>Here you can edit your profile picture and update your personal information.</p>
             </div>
+            @*if(TempData["SuccessMessage"] != null)
+            {
+              
+            }*@
             <div class="profile-container">
                 <div class="profile-image-container">
                     @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
@@ -56,21 +59,21 @@
                     @Html.AntiForgeryToken()
                     <div class="info-div first-div">
                         <div class="input-wrapper">
-                            <span asp-validation-for="@Model.User.FirstName" id="validation-text"></span>
                             <label asp-for="@Model.User.FirstName"></label>
                             <input type="text" asp-for="@Model.User.FirstName" placeholder="@Model.User.FirstName" />
+                            <span asp-validation-for="@Model.User.FirstName" id="validation-text"></span>
                         </div>
                         <div class="input-wrapper">
-                            <span asp-validation-for="@Model.User.LastName" id="validation-text"></span>
                             <label asp-for="@Model.User.LastName"></label>
                             <input type="text" asp-for="@Model.User.LastName" placeholder="@Model.User.LastName" />
+                            <span asp-validation-for="@Model.User.LastName" id="validation-text"></span>
                         </div>
                     </div>
                     <div class="info-div second-div">
                         <div class="input-wrapper">
-                            <span asp-validation-for="@Model.User.SourceOfIncome" id="validation-text"></span>
                             <label asp-for="@Model.User.SourceOfIncome"></label>
                             <input type="text" asp-for="@Model.User.SourceOfIncome" placeholder="@Model.User.SourceOfIncome" />
+                            <span asp-validation-for="@Model.User.SourceOfIncome" id="validation-text"></span>
                         </div>
                         <div class="input-wrapper">
                             <label asp-for="@Model.User.Email"></label>

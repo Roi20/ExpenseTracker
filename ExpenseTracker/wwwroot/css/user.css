@@ -238,11 +238,15 @@
     font-size: .8em;
     letter-spacing: 1px;
     color: #DC4C64;
+    display: flex;
+    padding-top: 2px;
+    justify-content: center;
 }
 
 #exit-btn-span{
     text-align: end;
     padding: 0;
+
 }
 #exit-btn-span a{
     text-decoration: none;
