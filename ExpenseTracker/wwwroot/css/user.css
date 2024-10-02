@@ -190,17 +190,22 @@
     color: #FFFFFF;
     font-size: .9em;
     letter-spacing: 1px;
+    align-items: center;
 
 }
 
 .input-wrapper label{
     font-size: .9em;
     letter-spacing: 1px;
+    display: flex;
+    padding: 3px;
+    width: 80%;
+    
+
 }
 
 
 .info-div input {
-    width: 45%;
     height: 45px;
     border-radius: 5px;
     border: none;
@@ -208,8 +213,9 @@
     font-size: .9em;
     letter-spacing: 1px;
     font-weight: bold;
-    width: 100%;
+    width: 80%;
     color: #4d4d4d;
+
 }
 
 #readonly {

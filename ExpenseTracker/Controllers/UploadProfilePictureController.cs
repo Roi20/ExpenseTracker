@@ -94,7 +94,7 @@ namespace ExpenseTracker.Controllers
                                                         userModel.User.SourceOfIncome});
 
                 TempData["SuccessMessage"] = "Personal Information";
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Dashboard");
 
             }
             catch(DbUpdateException ex)

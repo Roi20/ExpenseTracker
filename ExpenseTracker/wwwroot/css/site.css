@@ -62,7 +62,7 @@ body {
     display: block;
     overflow-x: hidden;
     overflow-y: scroll;
-    padding: 40px 10px 20px 10px;
+    padding: 15px 10px 20px 10px;
 }
 
 .sidebar-wrapper{
@@ -116,7 +116,7 @@ body {
 
 .name-occupation .occupation{
     color: #9FA6B2;
-    font-size: .8em;
+    font-size: .7em;
     letter-spacing: 1px;
     text-align: center;
 }
@@ -174,6 +174,13 @@ body {
     padding-right: 15px;
     font-size: 1.5em !important;
 }
+
+.sidebar-menu-list li a,
+.sidebar-profile-setting li a{
+   text-decoration: none;
+   color: #FFFFFF;
+}
+
 
 
 @media screen and (max-width: 768px) {

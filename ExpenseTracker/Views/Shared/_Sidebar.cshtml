@@ -1,5 +1,15 @@
-﻿@{
+﻿
+@{
     var user = ViewBag.User;
+
+    if(user == null)
+    {
+        user.Profile.PicturePath = "~/Images/defaultprofile.jpg";
+        user.FirstName = "Add Your Firstname";
+        user.LastName = "Add Your Lastname";
+        user.SourceOfIncome = "No source of income";
+    }
+
 }
 <div class="sidebar-wrapper">
     <div class="profile-img-holder">
@@ -7,10 +17,6 @@
             @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
             {
                 <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
-            }
-            else
-            {
-                <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" style="border: 2px solid #FFFFFF" />
             }
         </div>
     </div>
@@ -24,24 +30,32 @@
         <span class="main-menu-text">Main Menu</span>
         <ul class="sidebar-menu-list">
             <li>
-                <span>
-                    <i class="fa-solid fa-house"></i> Home
-                </span>
+                <a asp-controller="Home" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-house"></i> Home
+                    </span>
+                </a>
             </li>
             <li>
-               <span>
-                    <i class="fa-solid fa-chart-simple"></i> Dashboard
-               </span> 
+               <a asp-controller="Dashboard" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-chart-simple"></i> Dashboard
+                    </span>
+                </a>
              </li>
             <li>
-                <span>
-                    <i class="fa-solid fa-table-list"></i> Category
-                </span>
+               <a asp-controller="Category" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-table-list"></i> Category
+                    </span>
+               </a>
             </li>
             <li>
-                <span>
-                    <i class="fa-solid fa-file-contract"></i> Transaction
-                </span>
+               <a asp-controller="Transaction" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-file-contract"></i> Transaction
+                    </span>
+               </a>
             </li>
         </ul>
     </div>
@@ -49,19 +63,35 @@
         <span class="profile-setting-text">Account Settings</span>
         <ul class="sidebar-profile-setting">
             <li>
-                <span>
-                    <i class="fa-solid fa-id-badge"></i> Profile Settings
-                </span>
+                <a asp-controller="UploadProfilePicture" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-id-badge"></i> Profile Settings
+                    </span>
+               </a>
             </li>
             <li>
-                <span>
-                    <i class="fa-solid fa-right-from-bracket"></i>  Logout
-                </span>
+                <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" asp-route-returnUrl="@Url.Page("/", new { area = "" })">
+                    <span>
+                        <i class="fa-solid fa-shield-halved"></i> Change Password
+                    </span>
+                </a>
+            </li>
+            <li>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <span>
+                            <button type="submit">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </span>
+                    </form>
+                }
             </li>
         </ul>
     </div>
     <hr />
-    <span class="text-secondary" style="display: flex; padding: 10px; justify-content: center; align-items: center; letter-spacing: 1px; font-size:.9em">Expense Tracker App</span>
+    <span class="text-secondary" style="display: flex; padding: 10px; justify-content: center; align-items: center; letter-spacing: 1px; font-size:.7em">Expense Tracker App</span>
 </div>
 
 
