@@ -1,6 +1,43 @@
-﻿<div class="navBar" id="navBar">
+﻿@{
+    var user = ViewBag.User;
+}
+
+<div class="navBar" id="navBar">
     <ul class="navUl">
+        <li class="toggle-btn">
+            <button type="button" onclick="sidebarOnclick()" id="toggle-btn">
+                <span>
+                    <i class="fa-solid fa-angles-right" id="right-arrow"></i>
+                </span>
+            </button>
+        </li>
         <li>
+            <div class="navbar-profile">
+                @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+                {
+                   <a asp-action="Index" asp-controller="Dashboard">
+                        <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
+                   </a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-controller="Dashboard">
+                        <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" />
+                    </a>
+                }
+            </div>
+        </li>
+    </ul>
+</div>
+
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <script src="@Url.Content("~/js/site.js")"></script>
+
+}
+
+@*
+       <li>
             <a asp-controller="Home" asp-action="Index">
                 <span><i class="fa-solid fa-house"></i> Home</span>
             </a>
@@ -33,11 +70,4 @@
                 </span>
             </button>
         </li>
-    </ul>
-</div>
-
-@section CustomScripts {
-    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
-    <script src="@Url.Content("~/js/site.js")"></script>
-
-}
+*@

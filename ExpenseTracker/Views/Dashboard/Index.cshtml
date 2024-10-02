@@ -6,7 +6,6 @@
 
     <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
     <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
-
 }
 
 
@@ -17,9 +16,7 @@
 
 <div class="main p-0" id="dash-main-div">
     <div class="row firstDiv" id="first-div">
-        <div class="navbar">
-            <partial name="_Navbar" />
-        </div>
+        <partial name="_Navbar" />
         <div class="row" id="DataHolder">
             <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
                 <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">

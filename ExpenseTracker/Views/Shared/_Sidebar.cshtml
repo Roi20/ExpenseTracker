@@ -1,15 +1,6 @@
 ﻿
 @{
     var user = ViewBag.User;
-
-    if(user == null)
-    {
-        user.Profile.PicturePath = "~/Images/defaultprofile.jpg";
-        user.FirstName = "Add Your Firstname";
-        user.LastName = "Add Your Lastname";
-        user.SourceOfIncome = "No source of income";
-    }
-
 }
 <div class="sidebar-wrapper">
     <div class="profile-img-holder">
@@ -17,6 +8,10 @@
             @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
             {
                 <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
+            }
+            else
+            {
+                <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" />
             }
         </div>
     </div>
@@ -70,16 +65,16 @@
                </a>
             </li>
             <li>
-                <a asp-area="Identity" asp-page="/Account/Manage/ChangePassword" asp-route-returnUrl="@Url.Page("/", new { area = "" })">
+                <a  asp-area="Identity" asp-page="/Account/ForgotPassword">
                     <span>
-                        <i class="fa-solid fa-shield-halved"></i> Change Password
+                        <i class="fa-solid fa-shield-halved"></i>Password
                     </span>
                 </a>
             </li>
             <li>
                 @if (SignInManager.IsSignedIn(User))
                 {
-                    <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                    <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
                         <span>
                             <button type="submit">
                                 <i class="fa-solid fa-right-from-bracket"></i> Logout
