@@ -127,7 +127,7 @@ body {
 }
 
 .sidebar-menu{
-    padding-top: 12px;
+    padding-top: 8px;
 }
 .sidebar-settings{
     padding-top: 5px;
@@ -232,7 +232,7 @@ body {
     height: 50px;
     width: 50px;
     overflow: hidden;
-    border: 1px solid #FFFFFF;
+    border: 2px solid #FFFFFF;
     border-radius: 50%;
 
 }

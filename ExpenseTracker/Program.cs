@@ -42,6 +42,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Identity
 builder.Services.AddDefaultIdentity<AppIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+       .AddRoles<IdentityRole>()
        .AddEntityFrameworkStores<ExpenseTrackerDbContext>();
 
 // Repository Dependency
@@ -86,8 +87,52 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Category}/{action=Index}/{id?}");
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapRazorPages();
+
+//Seeding roles
+using var scope = app.Services.CreateScope();
+var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+
+var roles = new[] {"Admin", "Moderator", "User"};
+
+foreach(var role in roles)
+{
+
+    if (!await roleManager.RoleExistsAsync(role))
+        await roleManager.CreateAsync(new IdentityRole(role));
+
+}
+
+//Adding Admin Role
+using var adminScope = app.Services.CreateScope();
+
+var userManager = adminScope.ServiceProvider.GetRequiredService<UserManager<AppIdentityUser>>();
+
+var email = "admin123@admin.com";
+var password = "@AdminPassword123";
+
+var userEmail = await userManager.FindByEmailAsync(email);
+
+if(userEmail == null)
+{
+    var user = new AppIdentityUser
+    {
+        FirstName = "Admin",
+        LastName = "Admin",
+        Email = email,
+        UserName = email,
+        EmailConfirmed = true
+
+
+    };
+
+    await userManager.CreateAsync(user, password);
+    await userManager.AddToRoleAsync(user, "Admin");
+
+}
+  
+
 
 app.Run();

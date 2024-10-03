@@ -15,7 +15,7 @@
             <div class="navbar-profile">
                 @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
                 {
-                   <a asp-action="Index" asp-controller="Dashboard">
+                   <a asp-action="Index" asp-controller="UploadProfilePicture">
                         <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
                    </a>
                 }
