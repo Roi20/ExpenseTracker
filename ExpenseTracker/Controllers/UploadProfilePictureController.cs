@@ -1,7 +1,7 @@
-﻿using ExpenseTracker.Common;
-using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

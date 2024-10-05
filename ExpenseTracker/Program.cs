@@ -51,6 +51,7 @@ builder.Services.AddScoped<ICategoryRepository,  CategoryRepository>();
 builder.Services.AddScoped<ITransactionRepository, TransactionRepository>();
 builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
+builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 
 //EmailService Dependency
 builder.Services.AddScoped<IEmailServiceAsync, EmailServiceAsync>();

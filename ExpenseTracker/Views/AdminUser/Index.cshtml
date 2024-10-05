@@ -1,7 +1,188 @@
-﻿
+﻿@model PaginatedResult<AppIdentityUser>
+
+
 @{
-    Layout = "_LayoutNoSidebar";
+    Layout = "_LayoutAdmin";
 }
 
 
-<h1 class="text-light">Admin User List</h1>
+@section CustomStyles
+{
+    <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
+}
+
+@{
+    ViewData["CurrentPage"] = "Index";
+    ViewData["Title"] = "AdminUser";
+    
+    var currentPage = Model.Page;
+    var totalPageCount = Model.TotalPage;
+    var maxPageDisplay = 5;
+    var startPage = Math.Max(1, currentPage - maxPageDisplay / 2);
+    var endPage = Math.Min(totalPageCount, startPage + maxPageDisplay - 1);
+
+    if (endPage - currentPage < maxPageDisplay && startPage > 1)
+        {
+        startPage = Math.Max(1, endPage - maxPageDisplay - 1);
+    }
+    
+}
+
+<div class="crud-main-container">
+    @if (TempData["Message"] != null)
+    {
+        <partial name="_PopUpSuccessModal" />
+    }
+    <div class="crud-content">
+        <partial name="_Navbar" />
+        <div class="title-container">
+            <span class="title">
+                List of Users
+            </span>
+            <a class="btn btn-primary" asp-action="Create">
+                <span class="">
+                    <i class="fa-solid fa-plus"></i> Add User
+                </span>
+            </a>
+        </div>
+        <div class="search-bar-holder">
+            <form asp-action="Index" method="get" class="searchForm">
+                @Html.AntiForgeryToken();
+                <input type="text"
+                       placeholder="Search.."
+                       name="s"
+                       value="@Model.SearchKeyword" />
+                <button type="submit">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </span>
+                </button>
+            </form>
+            <div class="filter-transaction">
+                <div>
+                    <span> <i class="fa-solid fa-rotate"></i> Order by: </span>
+                </div>
+                <div class="filter-name-transaction">
+                    <form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Category" ? "Category Desc" : "Category")" />
+                        <button class="" type="submit">Category</button>
+                    </form>
+                </div>
+                <div class="filter-name-transaction">
+                    <form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Amount" ? "Amount Desc" : "Amount")" />
+                        <button class="" type="submit">Amount</button>
+                    </form>
+                </div>
+                <div class="filter-name-transaction">
+                    <<form asp-action="Index" method="get">
+                        @Html.AntiForgeryToken();
+                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Date" ? "Date Desc" : "Date")" />
+                        <button class="" type="submit">Date</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="table">
+            <table class="table-content" id="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Source of Income</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Result)
+                    {
+                        <tr>
+                            <td>@user.Email</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>@user.SourceOfIncome</td>
+                            <td>
+                                <div class="text-start">
+                                    <a asp-action="Update" asp-route-id="@user.Id" class="text-warning text-decoration-none me-1"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Update">
+                                        <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@user.Id" class="text-danger text-decoration-none ms-1"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Delete">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="pagination-div">
+            <div class="pagination-content">
+                <div class="pagination">
+                    <ul class="ulList">
+                        <li class="page-item @(Model.Page == 1 || Model.TotalPage == 0 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.Page == 1)"
+                               asp-route-sort="@ViewBag.SortOrder)">
+                                <span>
+                                    First
+                                </span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.Page == 1  || Model.TotalPage == 0 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.Page - 1)"
+                               asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </span>
+                            </a>
+                        </li>
+                        @for (var pageNumber = startPage; pageNumber <= endPage; pageNumber++)
+                        {
+                            <li class="page-item @(pageNumber == currentPage ? "active" : "")">
+                                <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                                   asp-route-p="@(pageNumber)"
+                                   asp-route-sort="@ViewBag.SortOrder">
+                                    @pageNumber
+                                </a>
+                            </li>
+                        }
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0  ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.Page + 1)"
+                               asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.TotalPage)"
+                               asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    Last
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section CustomScripts {
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <script src="@Url.Content("~/js/site.js")"></script>
+
+}

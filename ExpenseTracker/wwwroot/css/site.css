@@ -243,6 +243,20 @@ body {
     object-fit: cover;
 }
 
+/*Admin Side*/
+
+#admin-sidebar {
+    width: 220px;
+    z-index: 999;
+    background: #17181d;
+    opacity: 1;
+    transition: all .5s ease-in;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 15px 10px 20px 10px;
+}
+
 
 
 

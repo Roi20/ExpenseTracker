@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 
-namespace ExpenseTracker.Common
+namespace ExpenseTracker.ViewModel
 {
     public class UserViewModel
     {

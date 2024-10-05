@@ -1,12 +1,16 @@
-﻿using ExpenseTracker.Models;
+﻿using ExpenseTracker.Contracts;
+using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Policy;
 
 namespace ExpenseTracker.Data
 {
-    public class AppIdentityUser : IdentityUser
+    public class AppIdentityUser : IdentityUser, IBaseModel
     {
+        [NotMapped]
+        public string User_Id { get; set; }
 
         [Required(ErrorMessage = "First Name is Required")]
         [Display(Name = "First Name")]
@@ -32,7 +36,6 @@ namespace ExpenseTracker.Data
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
-        
-
+       
     }
 }

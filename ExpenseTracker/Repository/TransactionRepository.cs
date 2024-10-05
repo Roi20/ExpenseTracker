@@ -28,17 +28,20 @@ namespace ExpenseTracker.Repository
         {
 
 
-            Expression<Func<Transaction, bool>> condition = x => x.User_Id == userId && x
-                                                                  .Category.Title
-                                                                  .Contains(keyword ?? string.Empty) || x
-                                                                  .Amount.ToString()
-                                                                  .Contains(keyword ?? string.Empty) && x
-                                                                  .User_Id == userId || x
-                                                                  .Note.Contains(keyword ?? string.Empty) && x
-                                                                  .User_Id == userId || x
-                                                                  .Date.ToString()
-                                                                  .Contains(keyword ?? string.Empty) && x
-                                                                  .User_Id == userId;
+            Expression<Func<Transaction, bool>> condition = x => x.User_Id == userId && 
+                                         (
+                                            x
+                                            .Category.Title
+                                            .Contains(keyword ?? string.Empty) || x
+                                            .Amount.ToString()
+                                            .Contains(keyword ?? string.Empty) && x
+                                            .User_Id == userId || x
+                                            .Note.Contains(keyword ?? string.Empty) && x
+                                            .User_Id == userId || x
+                                            .Date.ToString()
+                                            .Contains(keyword ?? string.Empty) && x
+                                            .User_Id == userId
+                                         );
 
 
 

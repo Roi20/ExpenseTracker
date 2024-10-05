@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
+using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -33,7 +34,7 @@ namespace ExpenseTracker.Controllers
                     ViewBag.SortOrder = request.SortOrder;
 
                     var entities = await _repo.GetPaginated(
-                     request.PageNumber,
+                     request.TotalPageCount,
                      PaginatedRequest.ITEMS_PER_PAGE,
                      request.SearchKeyword ?? string.Empty,
                      userId, request.SortOrder
