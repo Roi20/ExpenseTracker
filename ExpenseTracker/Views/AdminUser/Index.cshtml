@@ -8,10 +8,11 @@
 
 @section CustomStyles
 {
-    <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
+       <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")"/>
 }
 
 @{
+
     ViewData["CurrentPage"] = "Index";
     ViewData["Title"] = "AdminUser";
     
@@ -22,20 +23,34 @@
     var endPage = Math.Min(totalPageCount, startPage + maxPageDisplay - 1);
 
     if (endPage - currentPage < maxPageDisplay && startPage > 1)
-        {
+    {
         startPage = Math.Max(1, endPage - maxPageDisplay - 1);
     }
     
 }
 
-<div class="crud-main-container">
+<div class="admin-main-container">
     @if (TempData["Message"] != null)
     {
         <partial name="_PopUpSuccessModal" />
     }
-    <div class="crud-content">
-        <partial name="_Navbar" />
-        <div class="title-container">
+    <partial name="_Navbar" />
+    <div class="col-sm-4 search-bar">
+        <form asp-action="Index" method="get" class="searchForm bg-dark">
+            @Html.AntiForgeryToken()
+            <input type="text"
+                   placeholder="Search.."
+                   name="s"
+                   value="@Model.SearchKeyword" />
+            <button type="submit">
+                <span>
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                </span>
+            </button>
+        </form>
+    </div>
+    <div class="admin-content">
+        <div class="title-container pt-0">
             <span class="title">
                 List of Users
             </span>
@@ -45,54 +60,18 @@
                 </span>
             </a>
         </div>
-        <div class="search-bar-holder">
-            <form asp-action="Index" method="get" class="searchForm">
-                @Html.AntiForgeryToken();
-                <input type="text"
-                       placeholder="Search.."
-                       name="s"
-                       value="@Model.SearchKeyword" />
-                <button type="submit">
-                    <span>
-                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    </span>
-                </button>
-            </form>
+        <div class="col-12 search-bar-holder">
             <div class="filter-transaction">
-                <div>
-                    <span> <i class="fa-solid fa-rotate"></i> Order by: </span>
-                </div>
-                <div class="filter-name-transaction">
-                    <form asp-action="Index" method="get">
-                        @Html.AntiForgeryToken();
-                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Category" ? "Category Desc" : "Category")" />
-                        <button class="" type="submit">Category</button>
-                    </form>
-                </div>
-                <div class="filter-name-transaction">
-                    <form asp-action="Index" method="get">
-                        @Html.AntiForgeryToken();
-                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Amount" ? "Amount Desc" : "Amount")" />
-                        <button class="" type="submit">Amount</button>
-                    </form>
-                </div>
-                <div class="filter-name-transaction">
-                    <<form asp-action="Index" method="get">
-                        @Html.AntiForgeryToken();
-                        <input type="hidden" name="sort" value="@(ViewBag.SortOrder == "Date" ? "Date Desc" : "Date")" />
-                        <button class="" type="submit">Date</button>
-                    </form>
-                </div>
+              
             </div>
         </div>
-        <div class="table">
-            <table class="table-content" id="transaction-table">
+        <div class="col-12 table-div table-responsive">
+            <table class="table table-dark table-borderless" id="ntransaction-table">
                 <thead>
                     <tr>
                         <th>Email</th>
                         <th>Firstname</th>
                         <th>Lastname</th>
-                        <th>Source of Income</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -103,7 +82,6 @@
                             <td>@user.Email</td>
                             <td>@user.FirstName</td>
                             <td>@user.LastName</td>
-                            <td>@user.SourceOfIncome</td>
                             <td>
                                 <div class="text-start">
                                     <a asp-action="Update" asp-route-id="@user.Id" class="text-warning text-decoration-none me-1"
@@ -125,7 +103,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="pagination-div">
+        <div class="col pagination-div mt-0 pt-0">
             <div class="pagination-content">
                 <div class="pagination">
                     <ul class="ulList">

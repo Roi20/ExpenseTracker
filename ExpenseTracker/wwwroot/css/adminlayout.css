@@ -1,0 +1,157 @@
+﻿
+.admin-main-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.admin-content{
+
+    padding: 0 10px 2px 10px;
+}
+
+.search-bar{
+    padding: 0px 8px 2px 8px;
+}
+
+.search-bar form{
+    padding: 0 10px 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+   
+}
+
+.search-bar form input{
+    width: 82%;
+    border: none;
+    height: 42px;
+    background: none;
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #FFFFFF;
+
+}
+
+.search-bar form input:focus{
+    outline: none;
+}
+
+
+.search-bar form button{
+    width: 10%;
+    border: none;
+    background: none;
+    color: #FFFFFF;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+
+.title-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.title-container a{
+    font-size: .8em;
+}
+
+
+.table-div{
+    padding-top: 8px;
+}
+
+
+.table-div .table thead tr th {
+    font-weight: bold;
+}
+
+.table-div .table thead tr th,
+.table-div .table tbody tr td {
+    padding: .8em .5em;
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+.table{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+/*Pagination*/
+.pagination-div {
+    margin-top: 0;
+    padding: 0 10px 0px 10px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: red;
+    display: flex;    
+}
+
+.pagination-content {
+    background: #212b38;
+    padding: 10px;
+    border-radius: 0px 0px 8px 8px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination {
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+
+.ulList{
+   
+    padding: 0;
+    margin-left: 0;
+    margin: auto;
+}
+
+.ulList li{
+    list-style: none;
+    list-style-type: none;
+    margin-left: 10px;
+    display: inline-block;
+    border-radius: 50%;
+   
+}
+
+.ulList li a{
+    color: #a5a9ae;
+    font-weight: bold;
+    font-size: .9em;
+    letter-spacing: 2px;
+}
+.ulList li a:hover{
+    color: #FFFFFF;
+}
+
+.ulList li.active a{
+    font-size: 1.1em;
+}
+
+.ulList li.disabled a span{
+    color: #17181d !important;
+}
+
+
+.ulList li a,
+ulList li.disabled a {
+    border: none;
+    background: none !important;
+}
