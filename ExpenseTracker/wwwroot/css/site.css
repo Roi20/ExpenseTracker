@@ -1,4 +1,16 @@
 ﻿
+::-webkit-scrollbar {
+    width: 5px; /* Change this value to your desired width */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #212b38; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Optional: Rounded corners */
+}
+
+::-webkit-scrollbar-track {
+    background: #000000; /* Background of the scrollbar track */
+} 
 
 html {
   font-size: 14px;

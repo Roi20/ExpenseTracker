@@ -1,4 +1,19 @@
-﻿
+﻿::-webkit-scrollbar {
+    width: 5px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #212b38; 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #000000; 
+} 
+
+
+
+
 .admin-main-container{
     display: flex;
     flex-direction: column;
@@ -10,30 +25,57 @@
     padding: 0 10px 2px 10px;
 }
 
-.search-bar{
-    padding: 0px 8px 2px 8px;
+.search-bar {
+    
+    padding: 10px 8px 10px 8px;
+    width: 100%;
+    align-items: center;
 }
 
-.search-bar form{
+.search-bar .searchForm{
     padding: 0 10px 0px 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-radius: 5px;
     overflow: hidden;
-   
+    border: 3px solid #4a5660;
 }
 
+.searchForm .search-form{
+    width: 100%;
+    padding: 0 0px 0 16px;
+}
+
+.sortForm{
+   margin-left: auto;
+}
+
+.sortForm form{
+    height: 100%;
+
+}
+.sortForm form select{
+    font-size: .8em !important;
+    height: 40px;
+    letter-spacing: 1px;
+}
+
+
 .search-bar form input{
-    width: 82%;
+    width: 85%;
     border: none;
-    height: 42px;
+    height: 36px;
     background: none;
     font-size: .9em;
     letter-spacing: 1px;
     font-weight: bold;
     color: #FFFFFF;
 
+}
+
+.search-bar form input::placeholder{
+    letter-spacing: 1px;
 }
 
 .search-bar form input:focus{
@@ -92,10 +134,9 @@
 /*Pagination*/
 .pagination-div {
     margin-top: 0;
-    padding: 0 10px 0px 10px;
+    padding: 0 0px 0px 0px;
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
-    background: red;
     display: flex;    
 }
 
@@ -106,7 +147,9 @@
     color: #FFFFFF;
     display: flex;
     align-items: center;
+    width: 100%;
     justify-content: center;
+   
 }
 
 .pagination {
@@ -120,6 +163,9 @@
     padding: 0;
     margin-left: 0;
     margin: auto;
+    display: flex;
+    width: 100%;
+    font-size: .9em;
 }
 
 .ulList li{
@@ -154,4 +200,10 @@
 ulList li.disabled a {
     border: none;
     background: none !important;
+}
+
+@media screen and (max-width: 768px){
+    .pagination-content{
+        overflow-x: scroll;
+    }
 }

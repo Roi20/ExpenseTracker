@@ -35,19 +35,31 @@
         <partial name="_PopUpSuccessModal" />
     }
     <partial name="_Navbar" />
-    <div class="col-sm-4 search-bar">
-        <form asp-action="Index" method="get" class="searchForm bg-dark">
-            @Html.AntiForgeryToken()
-            <input type="text"
-                   placeholder="Search.."
-                   name="s"
-                   value="@Model.SearchKeyword" />
-            <button type="submit">
-                <span>
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                </span>
-            </button>
-        </form>
+    <div class="search-bar">
+        <div class="searchForm col-sm-4 p-0 float-start">
+            <form asp-action="Index" method="get" class="bg-dark search-form">
+                @Html.AntiForgeryToken()
+                <input type="text"
+                       placeholder="Search.."
+                       name="s"
+                       value="@Model.SearchKeyword" />
+                <button type="submit">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="col-sm-3 sortForm p-0">
+            <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
+                <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">
+                    <option value="" class="font-monospace" disabled selected>Sort By</option>
+                    <option value="Email" class="font-monospace">Email</option>
+                    <option value="FirstName" class="font-monospace">Firstname</option>
+                    <option value="LastName" class="font-monospace">Lastname</option>
+                </select>
+            </form>
+        </div>
     </div>
     <div class="admin-content">
         <div class="title-container pt-0">
@@ -66,7 +78,7 @@
             </div>
         </div>
         <div class="col-12 table-div table-responsive">
-            <table class="table table-dark table-borderless" id="ntransaction-table">
+            <table class="table table-dark table-striped table-hover" id="ntransaction-table">
                 <thead>
                     <tr>
                         <th>Email</th>
