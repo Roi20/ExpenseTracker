@@ -33,13 +33,6 @@ namespace ExpenseTracker.Repository
 
             switch (sortOrder)
             {
-                case "UserName":
-                    records = records.OrderBy(i => i.UserName);
-                    break;
-
-                case "UserName Desc":
-                    records = records.OrderByDescending(i => i.UserName);
-                    break;
 
                 case "Email":
                     records = records.OrderBy(i => i.Email);
@@ -49,20 +42,20 @@ namespace ExpenseTracker.Repository
                     records = records.OrderByDescending(i => i.Email);
                     break;
 
-                case "FirstName":
+                case "Firstname":
                     records = records.OrderBy(i => i.FirstName);
                     break;
 
-                case "FirstName Desc":
+                case "Firstname Desc":
                     records = records.OrderByDescending(i => i.FirstName);
                     break;
 
-                case "LastName":
+                case "Lastname":
                     records = records.OrderBy(t => t.LastName);
                     break;
 
 
-                case "LastName Desc":
+                case "Lastname Desc":
                     records = records.OrderByDescending(i => i.LastName);
                     break;
 

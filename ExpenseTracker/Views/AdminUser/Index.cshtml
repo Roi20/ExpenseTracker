@@ -50,13 +50,16 @@
                 </button>
             </form>
         </div>
-        <div class="col-sm-3 sortForm p-0">
+        <div class="col-2 sortForm p-0">
+            <span id="sort-icon">
+                <i class="fa-solid fa-arrow-down-a-z"></i>
+            </span>
             <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
-                <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">
-                    <option value="" class="font-monospace" disabled selected>Sort By</option>
-                    <option value="Email" class="font-monospace">Email</option>
-                    <option value="FirstName" class="font-monospace">Firstname</option>
-                    <option value="LastName" class="font-monospace">Lastname</option>
+                <select class="form-select bg-dark" name="sort" onchange="this.form.submit()" id="dataDisplaySelect">
+                    <option value="" class="font-monospace" disabled selected>@(string.IsNullOrEmpty(ViewBag.SortOrder) ? "Sort by" : ViewBag.SortOrder)</option>
+                    <option value="@(ViewBag.SortOrder == "Email" ? "Email Desc" : "Email")" class="font-monospace">Email</option>
+                    <option value="@(ViewBag.SortOrder == "Firstname" ? "Firstname Desc" : "Firstname")" class="font-monospace">Firstname</option>
+                    <option value="@(ViewBag.SortOrder == "Lastname" ? "Lastname Desc" : "Lastname")" class="font-monospace">Lastname</option>
                 </select>
             </form>
         </div>
@@ -84,6 +87,7 @@
                         <th>Email</th>
                         <th>Firstname</th>
                         <th>Lastname</th>
+                        <th>Assign Role</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -94,6 +98,17 @@
                             <td>@user.Email</td>
                             <td>@user.FirstName</td>
                             <td>@user.LastName</td>
+                            <td>
+                                <div class="role-select" id="role-select">
+                                    <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
+                                        <select class="form-select bg-dark" name="sort" onchange="this.form.submit()" id="dataDisplaySelect">
+                                            <option value="" class="font-monospace" disabled selected>@(string.IsNullOrEmpty(ViewBag.SortOrder) ? "Role" : ViewBag.SortOrder)</option>
+                                            <option value="@(ViewBag.SortOrder == "Email" ? "Email Desc" : "Email")" class="font-monospace">Moderator</option>
+                                            <option value="@(ViewBag.SortOrder == "FirstName" ? "FirstName Desc" : "FirstName")" class="font-monospace">User</option>
+                                        </select>
+                                    </form>
+                                </div>
+                            </td>
                             <td>
                                 <div class="text-start">
                                     <a asp-action="Update" asp-route-id="@user.Id" class="text-warning text-decoration-none me-1"

@@ -2,6 +2,7 @@
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using ExpenseTracker.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +12,13 @@ namespace ExpenseTracker.Controllers
     {
 
         private readonly IUploadRepository _repo;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
 
-        public UploadProfilePictureController(IUploadRepository repo)
+        public UploadProfilePictureController(IUploadRepository repo, UserManager<AppIdentityUser> userManager)
         {
             _repo = repo;
+            _userManager = userManager;
         }
 
 
@@ -92,6 +95,7 @@ namespace ExpenseTracker.Controllers
                 await _repo.UpdateUserInfo(userId, new {userModel.User.FirstName, 
                                                         userModel.User.LastName, 
                                                         userModel.User.SourceOfIncome});
+
 
                 TempData["SuccessMessage"] = "Personal Information";
                 return RedirectToAction("Index", "Dashboard");

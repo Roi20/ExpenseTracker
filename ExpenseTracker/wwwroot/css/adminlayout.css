@@ -30,6 +30,7 @@
     padding: 10px 8px 10px 8px;
     width: 100%;
     align-items: center;
+    
 }
 
 .search-bar .searchForm{
@@ -39,7 +40,7 @@
     align-items: center;
     border-radius: 5px;
     overflow: hidden;
-    border: 3px solid #4a5660;
+   
 }
 
 .searchForm .search-form{
@@ -47,25 +48,44 @@
     padding: 0 0px 0 16px;
 }
 
-.sortForm{
-   margin-left: auto;
+.sortForm {
+    margin-left: auto;
+    display: flex;
+   
+}
+
+.sortForm #sort-icon{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9em;
+    color: #FFFFFF;
 }
 
 .sortForm form{
     height: 100%;
-
+    background: none;
+    width: 80%;
+    margin-left: auto;
 }
 .sortForm form select{
-    font-size: .8em !important;
-    height: 40px;
+    font-size: .7em !important;
+    height: 36px;
     letter-spacing: 1px;
+    display: flex;
+    text-align: center;
+    padding: 0;
+    justify-content: center;
+    border: none;
+    color: #FFFFFF;
 }
 
 
 .search-bar form input{
     width: 85%;
     border: none;
-    height: 36px;
+    height: 38px;
     background: none;
     font-size: .9em;
     letter-spacing: 1px;
@@ -131,6 +151,21 @@
     overflow: hidden;
     margin-bottom: 0;
 }
+
+.table .role-select{
+    width: 70%;
+   
+}
+
+.table .role-select form select{
+     height: 32px;
+     border: none;
+     color: #FFFFFF;
+     font-size: .8em;
+     letter-spacing: 1px;
+}
+
+
 /*Pagination*/
 .pagination-div {
     margin-top: 0;
@@ -206,4 +241,14 @@ ulList li.disabled a {
     .pagination-content{
         overflow-x: scroll;
     }
+
+    sortForm {
+        gap: 10px;
+        display: flex;
+    }
+
+    .sortForm #sort-icon{
+        padding-right: 10px;
+    }
+
 }
