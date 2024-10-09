@@ -86,9 +86,6 @@ app.UseRouting();
 app.UseAuthorization();
 //app.UseAuthentication();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.MapRazorPages();
 
@@ -133,7 +130,10 @@ if(userEmail == null)
     await userManager.AddToRoleAsync(user, "Admin");
 
 }
-  
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+
 
 
 app.Run();

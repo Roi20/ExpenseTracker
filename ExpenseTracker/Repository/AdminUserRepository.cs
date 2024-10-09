@@ -2,6 +2,7 @@
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -12,10 +13,11 @@ namespace ExpenseTracker.Repository
     public class AdminUserRepository : BaseRepository<AppIdentityUser>, IAdminUserRepository
     {
 
+        private readonly UserManager<AppIdentityUser> _userManager;
 
-        public AdminUserRepository(ExpenseTrackerDbContext db): base(db)
+        public AdminUserRepository(ExpenseTrackerDbContext db, UserManager<AppIdentityUser> userManager): base(db)
         {
-           
+            _userManager = userManager;
         }
 
         public async Task<PaginatedResult<AppIdentityUser>> GetPagination(int page, int pageSize, string sortOrder, string keyword)
@@ -59,16 +61,6 @@ namespace ExpenseTracker.Repository
                     records = records.OrderByDescending(i => i.LastName);
                     break;
 
-
-                case "SourceOfIncome":
-                    records = records.OrderBy(i => i.SourceOfIncome);
-                    break;
-
-
-                case "SourceOfIncome Desc":
-                    records = records.OrderByDescending(i => i.SourceOfIncome);
-                    break;
-
                 default:
                     records = records.OrderBy(t => t.FirstName);
                     break;
@@ -90,5 +82,16 @@ namespace ExpenseTracker.Repository
 
 
         }
+
+        public async Task<AppIdentityUser> GetUser(string userId)
+        {
+            return await _table.FirstOrDefaultAsync(x => x.Id == userId);
+        }
+
+        public async Task AssignRoleAsync(AppIdentityUser user, string role)
+        {
+             await _userManager.AddToRoleAsync(user, role);
+        }
+
     }
 }

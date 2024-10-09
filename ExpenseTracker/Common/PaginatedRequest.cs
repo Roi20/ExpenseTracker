@@ -15,5 +15,8 @@ namespace ExpenseTracker.Common
 
         [FromQuery(Name = "sort")]
         public string SortOrder { get; set; }
+
+      //  [FromQuery (Name = "role")]
+       // public string Role { get; set; }
     }
 }

@@ -100,12 +100,14 @@
                             <td>@user.LastName</td>
                             <td>
                                 <div class="role-select" id="role-select">
-                                    <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
-                                        <select class="form-select bg-dark" name="sort" onchange="this.form.submit()" id="dataDisplaySelect">
-                                            <option value="" class="font-monospace" disabled selected>@(string.IsNullOrEmpty(ViewBag.SortOrder) ? "Role" : ViewBag.SortOrder)</option>
-                                            <option value="@(ViewBag.SortOrder == "Email" ? "Email Desc" : "Email")" class="font-monospace">Moderator</option>
-                                            <option value="@(ViewBag.SortOrder == "FirstName" ? "FirstName Desc" : "FirstName")" class="font-monospace">User</option>
+                                    <form method="post" asp-controller="AdminUser" asp-action="AssignRole" class="mb-0" id="dataDisplay">
+                                        @Html.AntiForgeryToken()
+                                        <select class="form-select bg-dark" name="role" onchange="this.form.submit()" id="dataDisplaySelect">
+                                            <option value="" class="font-monospace" disabled selected>Role</option>
+                                            <option value="Moderator" class="font-monospace">Moderator</option>
+                                            <option value="User" class="font-monospace">User</option>
                                         </select>
+                                        <input type="hidden" name="userId" value="@user.Id" />
                                     </form>
                                 </div>
                             </td>
