@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
+using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -45,25 +46,36 @@ namespace ExpenseTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignRole(string userId, string role)
         {
-            //var currentUser = GetUserId();
-
-
-            if (string.IsNullOrEmpty(userId))
-            {
-                return NotFound("User Not Found");
-            }
-
             var user = await _repo.GetUser(userId);
-
-            if(user == null)
+            try
             {
-                return NotFound("User Not Found");
+                if (string.IsNullOrEmpty(userId))
+                {
+                    return NotFound("User Not Found");
+                }
+
+                if (user == null)
+                {
+                    return NotFound("User Not Found");
+                }
+
+                await _repo.AssignRoleAsync(user, role);
+                TempData["RoleSuccessMessage"] = $"{user.FirstName} assigned as {role}";
+                return RedirectToAction("Index");
+
+            }
+            catch(ArgumentException)
+            {
+                var isModerator = await _userManager.IsInRoleAsync(user, "Moderator");
+                TempData["RoleConflictMessage"] = $"{user.FirstName} already assigned as {(isModerator ? "Moderator" : "User")}";
+                return RedirectToAction("Index");
+            }
+            catch(Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
 
-            await _repo.AssignRoleAsync(user, role);
-
-
-            return RedirectToAction("Index");
+           
         }
 
     }

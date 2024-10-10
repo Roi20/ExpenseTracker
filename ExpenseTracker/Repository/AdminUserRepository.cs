@@ -90,7 +90,15 @@ namespace ExpenseTracker.Repository
 
         public async Task AssignRoleAsync(AppIdentityUser user, string role)
         {
-             await _userManager.AddToRoleAsync(user, role);
+            if(!await _userManager.IsInRoleAsync(user, "User") && !await _userManager.IsInRoleAsync(user, "Moderator"))
+            {
+                await _userManager.AddToRoleAsync(user, role);
+            }
+            else
+            {
+                throw new ArgumentException($"User already assigned as {role}");
+            }
+            
         }
 
     }
