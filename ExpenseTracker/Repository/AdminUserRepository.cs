@@ -2,7 +2,10 @@
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
+using ExpenseTracker.Exceptions;
+using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Linq.Dynamic.Core;
@@ -90,7 +93,13 @@ namespace ExpenseTracker.Repository
 
         public async Task AssignRoleAsync(AppIdentityUser user, string role)
         {
-            if(!await _userManager.IsInRoleAsync(user, "User") && !await _userManager.IsInRoleAsync(user, "Moderator"))
+            var roleCount = await _userManager.GetUsersInRoleAsync("Moderator");
+
+            if (roleCount.Count() >= 5)
+                throw new RoleCountExceedException();
+
+
+            if (!await _userManager.IsInRoleAsync(user, "User") && !await _userManager.IsInRoleAsync(user, "Moderator"))
             {
                 await _userManager.AddToRoleAsync(user, role);
             }
@@ -98,8 +107,12 @@ namespace ExpenseTracker.Repository
             {
                 throw new ArgumentException($"User already assigned as {role}");
             }
-            
+
         }
 
+        public async Task<bool> CheckIfExist(Expression<Func<AppIdentityUser, bool>> condition)
+        {
+            return await _table.AnyAsync(condition);
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace ExpenseTracker.Common
         public string? SortOrder { get; set; }
         public int? SearchAmount { get; set; }
         public IEnumerable<T>? Result { get; set; }
+        public T Entity { get; set; }
 
     }
 }

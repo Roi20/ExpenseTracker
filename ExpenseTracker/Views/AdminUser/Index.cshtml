@@ -30,23 +30,8 @@
     
 }
 
-@if (TempData["RoleConflictMessage"] != null)
-{
-    <script>
-        alert("@TempData["RoleConflictMessage"]");
-    </script>    
-}
-@if (TempData["RoleSuccessMessage"] != null)
-{
-    <script>
-        alert("@TempData["RoleSuccessMessage"]");
-    </script>
-}
+<partial name="_RoleAlertMessage" />
 <div class="admin-main-container">
-    @if (TempData["Message"] != null)
-    {
-        <partial name="_PopUpSuccessModal" />
-    }
     <partial name="_Navbar" />
     <div class="search-bar">
         <div class="searchForm col-sm-4 p-0 float-start">
@@ -82,7 +67,7 @@
             <span class="title">
                 List of Users
             </span>
-            <a class="btn btn-primary" asp-action="Create">
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
                 <span class="">
                     <i class="fa-solid fa-plus"></i> Add User
                 </span>
@@ -206,6 +191,58 @@
         </div>
     </div>
 </div>
+<!--Create Modal-->
+<div class="modal fade" id="createModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <form asp-action="Create" method="post" id="createForm">
+                @Html.AntiForgeryToken()
+            <div class="modal-header">
+                <h1 class="modal-title" id="exampleModalLabel">Create</h1>
+                    <button type="button" class="cancel-btn" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                    <label asp-for="@Model.Entity.Email"></label>
+                    <span asp-validation-for="@Model.Entity.Email" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.Email" autocomplete="username" aria-required="true" placeholder="Email" />
+                    </div>
+                    <label asp-for="@Model.Entity.FirstName"></label>
+                    <span asp-validation-for="@Model.Entity.FirstName" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.FirstName" autocomplete="firstname" aria-required="true" placeholder="First Name" />
+                    </div>
+                    <label asp-for="@Model.Entity.LastName"></label>
+                    <span asp-validation-for="@Model.Entity.LastName" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.LastName" autocomplete="lastname" aria-required="true" placeholder="Last Name" />
+                    </div>
+                    <label asp-for="@Model.Entity.SourceOfIncome"></label>
+                    <span asp-validation-for="@Model.Entity.SourceOfIncome" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.SourceOfIncome" autocomplete="occupation" aria-required="true" placeholder="Source of income" />
+                    </div>
+                    <label>Password</label>
+                    <span asp-validation-for="@Model.Entity.PasswordHash" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.PasswordHash" autocomplete="new-password" aria-required="true" placeholder="Password" />
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
 @section CustomScripts {
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
     <script src="@Url.Content("~/js/site.js")"></script>
