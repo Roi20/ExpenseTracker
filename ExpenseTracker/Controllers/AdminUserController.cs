@@ -95,16 +95,20 @@ namespace ExpenseTracker.Controllers
             try
             {
 
-                var ifExist = await _repo.CheckIfExist(x => x.Email == userModel.Email);
+                var ifExist = await _userManager.FindByEmailAsync(userModel.Email);
                                                           
-               
-                if (ifExist)
+                if (ifExist != null)
                 {
-                    TempData["ErrorMessage"] = $"Email '{userModel.Email}' Already Exist.";
+                    TempData["ErrorMessage"] = $@"Email: {userModel.Email} Already Exist.";
                     return RedirectToAction("Index");
                 }
 
-                await _repo.Create(userModel);
+                userModel.EmailConfirmed = true;
+                userModel.UserName = model.Entity.Email;
+                userModel.NormalizedEmail = model.Entity.Email;
+                userModel.NormalizedUserName = model.Entity.Email;
+
+                await _userManager.CreateAsync(userModel, userModel.Password);
 
                 TempData["Message"] = $"{userModel.FirstName}, Created Successfully";
 
@@ -133,10 +137,10 @@ namespace ExpenseTracker.Controllers
             try
             {
 
-                var ifExist = await _repo.CheckIfExist(x => x.Email == model.Email);
+                var ifExist = await _userManager.FindByEmailAsync(model.Email);
 
 
-                if (ifExist)
+                if (ifExist != null)
                 {
                     TempData["ErrorMessage"] = $"Email '{model.Email}' Already Exist.";
                     return RedirectToAction("Index");
@@ -144,7 +148,7 @@ namespace ExpenseTracker.Controllers
 
                 await _repo.Update(id, new {model.Email, model.FirstName, model.LastName, model.SourceOfIncome, model.PasswordHash});
 
-                TempData["Message"] = $"{model.FirstName}, Created Successfully";
+                TempData["Message"] = $"{model.FirstName}, Updated Successfully";
 
                 return RedirectToAction("Index");
 

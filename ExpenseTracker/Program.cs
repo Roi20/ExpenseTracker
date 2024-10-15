@@ -41,7 +41,17 @@ builder.Services.AddDbContext<ExpenseTrackerDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 //Identity
-builder.Services.AddDefaultIdentity<AppIdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
+         {
+             options.SignIn.RequireConfirmedAccount = true;
+             options.Password.RequiredLength = 8;
+             options.Password.RequireDigit = true;
+             options.Password.RequiredUniqueChars = 1;
+             options.Password.RequireLowercase = true;
+             options.Password.RequireUppercase = true;
+             options.Password.RequireNonAlphanumeric = false;
+
+         })
        .AddRoles<IdentityRole>()
        .AddEntityFrameworkStores<ExpenseTrackerDbContext>();
 
@@ -122,8 +132,6 @@ if(userEmail == null)
         Email = email,
         UserName = email,
         EmailConfirmed = true
-
-
     };
 
     await userManager.CreateAsync(user, password);

@@ -2,10 +2,6 @@
 var toggleButton = document.getElementById('toggle-btn');
 var mainLayout = document.getElementById('main-layout');
 
-
-
-
-
 function sidebarOnclick() {
     const sidebarComputedStyle = window.getComputedStyle(sideBar);
     const screenSize = window.innerWidth;
@@ -27,7 +23,6 @@ function sidebarOnclick() {
     else if (sidebarComputedStyle.display === 'none' && screenSize > 768) {
 
         sideBar.style.display = 'block';
-       // toggleButton.style.paddingLeft = '0'
         console.log('clicked show')
 
         setTimeout(() => {
@@ -37,7 +32,6 @@ function sidebarOnclick() {
     else {
 
         sideBar.style.opacity = '0';
-       // toggleButton.style.marginLeft = '0'
         console.log('clicked hide');
 
         setTimeout(() => {

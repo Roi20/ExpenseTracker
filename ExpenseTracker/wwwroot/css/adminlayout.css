@@ -266,6 +266,7 @@ ulList li.disabled a {
 #createForm{
     background: none;
     padding: 20px;
+    overflow-y: scroll;
 
 }
 
@@ -280,13 +281,28 @@ ulList li.disabled a {
     height: 45px;
     border: none;
     border-radius: 5px;
-    padding: 10px;
+    padding: 10px 10px 10px 10px;
     letter-spacing: 1px;
     font-size: .9em;
 }
 
 #createForm input:focus{
     outline: none;
+}
+
+#createForm button:not(.cancel-btn){
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+}
+
+#createForm span{
+    display: flex;
+    font-size: .9em;
+    justify-content: center;
+    letter-spacing: 1px;
+    padding-bottom: 1px;
 }
 
 

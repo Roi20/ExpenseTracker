@@ -12,6 +12,13 @@ namespace ExpenseTracker.Data
         [NotMapped]
         public string User_Id { get; set; }
 
+        [Required(ErrorMessage = "Email is Required.")]
+        public override string? Email { get => base.Email; set => base.Email = value; }
+
+        [Required]
+        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 8)]
+        public string Password { get; set; }
+
         [Required(ErrorMessage = "First Name is Required")]
         [Display(Name = "First Name")]
         [StringLength(100)]
