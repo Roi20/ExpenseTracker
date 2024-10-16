@@ -222,11 +222,13 @@ body {
 
 .navUl{
     list-style: none;
-    padding: 5px 10px 10px 5px;
+    padding: 5px 10px 0px 5px;
     transition: all .8s ease-in-out;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0;
 }
 
 .navUl #toggle-btn{

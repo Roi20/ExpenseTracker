@@ -53,7 +53,7 @@
                 </div>
             </div>
             <div class="personal-info-container">
-                <form asp-controller="@(await UserManager.IsInRoleAsync(userEmail, "Admin") ? "AdminUser" : "Dashboard")" asp-action="Index" method="post" id="personal-info-form">
+                <form  asp-action="UpdateUserInfo" method="post" id="personal-info-form">
                     @Html.AntiForgeryToken()
                     <div class="info-div first-div">
                         <div class="input-wrapper">

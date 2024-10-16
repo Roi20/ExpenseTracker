@@ -129,41 +129,51 @@ namespace ExpenseTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Update(PaginatedResult<AppIdentityUser> user, string id)
+        public async Task<IActionResult> UpdateUser(PaginatedResult<AppIdentityUser> model)
+        {
+            /*
+            var userModel = model.Entity;
+
+            var user = await _userManager.FindByIdAsync(userModel.Id);
+
+            if (user == null)
+                return Json(new {success = false, message = "User Not Found."});
+
+            
+            user.Email = userModel.Email;
+            user.FirstName = userModel.FirstName;
+            user.LastName = userModel.LastName;
+            user.SourceOfIncome = userModel.SourceOfIncome;
+            user.Password = userModel.Password;
+
+            var result = await _userManager.UpdateAsync(user);
+
+            if (result.Succeeded)
+            {
+                return Json(new { success = true, message = "User updated successfully." }); 
+            }
+
+            return Json(new { success = false, message = "Error updating user." });
+            */
+
+            return View("Index");
+        }
+   
+        public async Task<IActionResult> Update(string id)
         {
 
-            var model = user.Entity;
+            var user = await _userManager.FindByIdAsync(id);
 
-            try
+            if (user == null)
+                return NotFound();
+
+            var userModel = new PaginatedResult<AppIdentityUser> 
             {
+               Entity = user
+            };
 
-                var ifExist = await _userManager.FindByEmailAsync(model.Email);
-
-
-                if (ifExist != null)
-                {
-                    TempData["ErrorMessage"] = $"Email '{model.Email}' Already Exist.";
-                    return RedirectToAction("Index");
-                }
-
-                await _repo.Update(id, new {model.Email, model.FirstName, model.LastName, model.SourceOfIncome, model.PasswordHash});
-
-                TempData["Message"] = $"{model.FirstName}, Updated Successfully";
-
-                return RedirectToAction("Index");
-
-            }
-            catch (DbUpdateException ex)
-            {
-                ModelState.AddModelError("", "An error occured while trying to save your todo item");
-                return View("Error", new ErrorViewModel { Message = ex.Message });
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new ErrorViewModel { Message = ex.Message });
-            }
-
-
+            return View(userModel);
+       
         }
 
         public async Task<IActionResult> ConfirmedDelete(AppIdentityUser user)

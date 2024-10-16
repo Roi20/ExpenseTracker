@@ -96,9 +96,13 @@ namespace ExpenseTracker.Controllers
                                                         userModel.User.LastName, 
                                                         userModel.User.SourceOfIncome});
 
-
                 TempData["SuccessMessage"] = "Personal Information";
-                return RedirectToAction("Index", "Dashboard");
+
+                var currentUser = await _repo.GetUser(userId);
+
+                var selectController = await _userManager.IsInRoleAsync(currentUser, "Admin") ? "AdminUser" : "Dashboard";
+
+                return RedirectToAction("Index", selectController);
 
             }
             catch(DbUpdateException ex)

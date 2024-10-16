@@ -263,20 +263,21 @@ ulList li.disabled a {
 }
 
 
-#createForm{
+#createForm, 
+#updateForm{
     background: none;
     padding: 20px;
-    overflow-y: scroll;
-
 }
 
-#createForm label{
+#createForm label,
+#updateForm label{
     letter-spacing: 1px;
     font-size: .9em;
     padding: 15px 0 5px 5px;
 }
 
-#createForm input{
+#createForm input,
+#updateForm input{
     width: 100%;
     height: 45px;
     border: none;
@@ -286,18 +287,21 @@ ulList li.disabled a {
     font-size: .9em;
 }
 
-#createForm input:focus{
+#createForm input:focus,
+#updateForm input:focus{
     outline: none;
 }
 
-#createForm button:not(.cancel-btn){
+#createForm button:not(.cancel-btn),
+#updateForm button:not(.cancel-btn){
     font-size: .9em;
     letter-spacing: 1px;
     font-weight: 500;
     font-variant-caps: all-small-caps;
 }
 
-#createForm span{
+#createForm span,
+#updateForm span{
     display: flex;
     font-size: .9em;
     justify-content: center;
@@ -319,5 +323,7 @@ ulList li.disabled a {
     .sortForm #sort-icon{
         padding-right: 10px;
     }
-
+    #createForm {
+        overflow-y: scroll;
+    }
 }
