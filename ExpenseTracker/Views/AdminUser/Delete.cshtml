@@ -1,0 +1,43 @@
+﻿@model PaginatedResult<AppIdentityUser>
+
+@{
+    Layout = "_LayoutNoSidebar";
+}
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")" />
+}
+
+<div class="modal fade" id="deleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="ConfirmedDelete" method="post" asp-route-id="@Model.Entity.Id" id="deleteForm">
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Delete</h1>
+                    <a type="button" asp-action="Index" class="cancel-btn">&times;</a>
+                </div>
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Entity.Id)
+                    <p>Are you sure you want to delete <strong>@Model.Entity.Email</strong> ?</p>
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="Index" class="btn btn-secondary" id="delete-cancel">Close</a>
+                    <button type="submit" class="btn btn-danger" id="delete-confirm">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+@section CustomScripts {
+
+    <script src="@Url.Content("~/js/adminmodalcrud.js")"></script>
+}

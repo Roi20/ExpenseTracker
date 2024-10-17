@@ -7,6 +7,7 @@ using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.EJ2.Linq;
 using System.Security.Claims;
 
 namespace ExpenseTracker.Controllers
@@ -110,7 +111,7 @@ namespace ExpenseTracker.Controllers
 
                 await _userManager.CreateAsync(userModel, userModel.Password);
 
-                TempData["Message"] = $"{userModel.FirstName}, Created Successfully";
+                TempData["Message"] = $"{userModel.Email}, Created Successfully";
 
                 return RedirectToAction("Index");
 
@@ -129,34 +130,51 @@ namespace ExpenseTracker.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateUser(PaginatedResult<AppIdentityUser> model)
+        public async Task<IActionResult> Update(PaginatedResult<AppIdentityUser> model)
         {
-            /*
+            
             var userModel = model.Entity;
 
-            var user = await _userManager.FindByIdAsync(userModel.Id);
-
-            if (user == null)
-                return Json(new {success = false, message = "User Not Found."});
-
-            
-            user.Email = userModel.Email;
-            user.FirstName = userModel.FirstName;
-            user.LastName = userModel.LastName;
-            user.SourceOfIncome = userModel.SourceOfIncome;
-            user.Password = userModel.Password;
-
-            var result = await _userManager.UpdateAsync(user);
-
-            if (result.Succeeded)
+            try
             {
-                return Json(new { success = true, message = "User updated successfully." }); 
+                var user = await _userManager.FindByIdAsync(userModel.Id);
+
+                if (user == null)
+                    return NotFound();
+
+                user.Email = userModel.Email;
+                user.FirstName = userModel.FirstName;
+                user.LastName = userModel.LastName;
+                user.SourceOfIncome = userModel.SourceOfIncome;
+                user.Password = userModel.Password;
+                user.UserName = userModel.Email;
+                user.NormalizedEmail = userModel.Email;
+                user.NormalizedUserName = userModel.Email;
+                user.EmailConfirmed = true;
+
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    TempData["Message"] = $"{userModel.Email}, Updated Successfully";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+
+                    TempData["ResultErrorMessage"] = result.Errors.FirstOrDefault()?.Description.ToString();
+
+                    return RedirectToAction("Update");
+                }                 
+
             }
-
-            return Json(new { success = false, message = "Error updating user." });
-            */
-
-            return View("Index");
+            catch (Exception ex)
+            {
+                _userManager.Logger.LogError(ex, "Unable to update User");
+                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again.");
+                return View(model);
+            }
+            
         }
    
         public async Task<IActionResult> Update(string id)
@@ -176,13 +194,50 @@ namespace ExpenseTracker.Controllers
        
         }
 
-        public async Task<IActionResult> ConfirmedDelete(AppIdentityUser user)
+        public async Task<IActionResult> Delete(string id)
         {
+
+            
+
+            var user = await _userManager.FindByIdAsync(id);
+
+          
+            if (user == null)
+                return NotFound();
+
+            if (await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                TempData["AdminMessage"] = "Unable to delete user, You are trying to delete a user with admin role.";
+                return RedirectToAction("Index");
+            }
+                
+
+            var userModel = new PaginatedResult<AppIdentityUser>
+            {
+                Entity = user
+            };
+
+            return View(userModel);
+        }
+
+
+
+        public async Task<IActionResult> ConfirmedDelete(PaginatedResult<AppIdentityUser> model)
+        {
+
+            var userModel = model.Entity;
+
             try
             {
-                await _repo.Delete(user.Id);
+                var user = await _userManager.FindByIdAsync(userModel.Id);
+
+                if (user == null)
+                    return NotFound();
+
+                await _userManager.DeleteAsync(user);
                 TempData["Message"] = $"Deleted Successfully";
                 return RedirectToAction("Index");
+
 
             }
             catch (DbUpdateException ex)

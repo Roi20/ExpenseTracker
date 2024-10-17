@@ -9,7 +9,7 @@
 
 @section CustomStyles
 {
-       <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")"/>
+    <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")"/>
 }
 
 @{
@@ -28,6 +28,10 @@
         startPage = Math.Max(1, endPage - maxPageDisplay - 1);
     }
     
+}
+@if(TempData["Message"] != null)
+{
+    <partial name="_PopUpSuccessModal" />
 }
 <partial name="_FormModals" />
 <partial name="_RoleAlertMessage" />
@@ -200,9 +204,7 @@
 
 @section CustomScripts {
 
-    <script src="@Url.Content("~/js/adminmodalcrud")"></script>
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
-    <script src="@Url.Content("~/js/site.js")"></script>
-    
+    <!--script src="@Url.Content("~/js/site.js")"></!--script-->    
 
 }

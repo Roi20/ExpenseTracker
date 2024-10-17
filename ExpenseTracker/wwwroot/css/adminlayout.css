@@ -299,15 +299,178 @@ ulList li.disabled a {
     font-weight: 500;
     font-variant-caps: all-small-caps;
 }
+/*Update Form*/
+#updateForm #update-cancel{
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+}
+
+#updateForm .cancel-btn{
+    text-decoration: none;
+}
+/*Update Form*/
+
+ #updateForm .cancel-btn:hover,
+ #createForm .cancel-btn:hover{
+     color: #6c757d;
+ }
+
 
 #createForm span,
-#updateForm span{
-    display: flex;
-    font-size: .9em;
-    justify-content: center;
-    letter-spacing: 1px;
-    padding-bottom: 1px;
+#updateForm span {
+     display: flex;
+     font-size: .9em;
+     justify-content: center;
+     letter-spacing: 1px;
+     padding-bottom: 1px;
+
 }
+
+/*Delete Form/Modal*/
+
+
+#deleteModal .modal-content{
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#deleteModal #deleteForm{
+    width: 100%;
+    height: 100%;
+    padding: 0 10px 0 10px;
+}
+
+#deleteModal .cancel-btn{
+    text-decoration: none;
+}
+
+#deleteModal .cancel-btn:hover{
+    color: #6c757d;
+}
+
+
+#deleteModal #deleteForm p{
+    text-align: center;
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+
+#deleteModal .modal-body{
+    justify-content: center;
+}
+
+#deleteModal .modal-header,
+#deleteModal .modal-footer{
+    border: none;
+}
+
+#deleteForm #delete-confirm,
+#deleteForm #delete-cancel{
+    font-size: .9em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+}
+
+
+
+
+/*Success Modal Customization*/
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+    .overlay .popup {
+        background: #1F1B24;
+        margin: auto;
+        max-width: 400px;
+        min-width: 30%;
+        border-radius: 5px;
+        padding: 20px;
+        transition: all 1s ease-in-out;
+        animation: popup;
+        animation-duration: 2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-timing-function: ease-in-out;
+        -moz-animation-duration: 2s;
+        -webkit-animation-duration: 2s;
+        -moz-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-timing-function: ease-in-out;
+    }
+/*Modal popup animation*/
+@keyframes popup {
+    from {
+        -moz-transform: translate(-0%, -100%) scale(0.1);
+        -webkit-transform: translate(-0%, -100%) scale(0.1);
+        -ms-transform: translate(-0%, -100%) scale(0.1);
+    }
+
+    to {
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+    }
+}
+
+
+/*Modal popup animation - End*/
+.overlay .popup img {
+    width: 100px;
+    margin-top: -65px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.overlay .popup h2 {
+    margin-top: 10px;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+}
+
+.overlay .popup p {
+    margin-top: 10px;
+    color: #FFFFFF;
+    word-wrap: break-word;
+    width: 100%;
+    text-align: center;
+}
+
+.overlay .popup button {
+    border-radius: 20px/50px;
+    border: none;
+    background-color: #81F580;
+    margin-top: 30px;
+    width: 40%;
+    height: 40px;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+    transition: background-color .5s ease-in-out;
+}
+
+    .overlay .popup button:hover {
+        background-color: #B00020;
+    }
+
+
 
 
 @media screen and (max-width: 768px){
