@@ -53,21 +53,26 @@ namespace ExpenseTracker.Controllers
                 ViewBag.User = await _repo.GetUser(currentUserId);
                 await _repo.UploadProfilePicture(model, currentUserId);
                 TempData["SuccessMessage"] = "Profile";
-                return RedirectToAction("Index");
+
+                var user = await _repo.GetUser(currentUserId);
+
+                var controller = await _userManager.IsInRoleAsync(user, "Admin") ? "AdminUser" : "Dashboard";
+
+                return RedirectToAction("Index", controller);
 
             }
             catch (DbUpdateException ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
-                return View("Index");
+                return RedirectToAction("Index");
             }
             catch(ArgumentException ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
-                return View("Index");
+                return RedirectToAction("Index");
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 return StatusCode(500, "Oops an error occur while trying to update your profile.");

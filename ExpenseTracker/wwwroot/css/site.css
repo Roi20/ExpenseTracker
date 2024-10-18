@@ -95,8 +95,8 @@ body {
 }
 .sidebar-profile-image{
     border: 2px solid #FFFFFF;
-    width: 120px;
-    height: 120px;
+    width: 100px;
+    height: 100px;
     overflow: hidden;
     border-radius: 50%;
     display: flex;
@@ -159,6 +159,7 @@ body {
     color: #FFFFFF;
     list-style: none;
     padding-top: 12px;
+    margin-bottom: 0;
 }
 
 .sidebar-menu-list li,
@@ -176,7 +177,7 @@ body {
 .sidebar-profile-setting li span{
     display: flex;
     align-items: center;
-    font-size: .8em;
+    font-size: .7em;
     letter-spacing: 2px;
 
 }
@@ -184,7 +185,7 @@ body {
 .sidebar-menu-list li .fa-solid,
 .sidebar-profile-setting li .fa-solid{
     padding-right: 15px;
-    font-size: 1.5em !important;
+    font-size: 1em !important;
 }
 
 .sidebar-menu-list li a,
@@ -214,6 +215,7 @@ body {
     font-size: 1em;
     color: #FFFFFF;
     letter-spacing: 2px;
+    padding-left: 0;
 }
 
 .navBar {
@@ -222,11 +224,10 @@ body {
 
 .navUl{
     list-style: none;
-    padding: 5px 10px 0px 5px;
+    padding: 10px 10px 10px 5px;
     transition: all .8s ease-in-out;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     align-items: center;
     margin-bottom: 0;
 }
@@ -257,6 +258,20 @@ body {
     object-fit: cover;
 }
 
+.navUl #notif-bell{
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.navUl #notif-bell button{
+    color: #FFFFFF;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+}
+
+
+
 /*Admin Side*/
 
 #admin-sidebar {
@@ -272,83 +287,6 @@ body {
 }
 
 
-
-
-
-
-/*navbar start
-.navBar {
-    background: none;
-    height: 45px;
-    margin-bottom: 4px;
-    border-radius: 0 0 3px 3px;
-    display: flex;
-    padding: 0 10px 0 10px;
-    overflow: hidden;
-}
-
-.navBar .navUl{
-    display: flex;
-    list-style-type: none;
-    list-style: none;
-    background: none;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 100%;
-    text-align: center;
-    padding: 5px 0 5px 0;
-    justify-content: flex-start;
-    overflow: hidden;
-    color: #FFFFFF;
-}
-
-
-
-.navBar .navUl li{
-    
-    background: none;
-    padding-bottom: 0;
-    display: flex;
-    align-items: center;
-    padding: 0 15px 0 0px;
-    font-size: .7em;
-    font-weight: 500;
-}
-
-.navBar .navUl li a{
-    text-decoration: none;
-    color: #FFFFFF;
-    font-weight: 500;
-}
-
-
-.navBar .navUl li a:hover, 
-.navBar .navUl button:hover {
-    color: #db4b43;
-}
-
-
-.navBar .navUl button{
-    background: none;
-    width: 100%;
-    border: none;
-    font-weight: 500;
-    color: #FFFFFF;
-    font-size: 1em !important;
-
-}
-
-
-.navBar .navUl li:last-child{
-   display: block;
-}
-
-/*Navbar End*/
-
-
-
-
-
 @media screen and (max-width: 768px) {
     /* For mobile phones: */
 
@@ -359,9 +297,9 @@ body {
         transition: all .5s ease-in;
     }
     #admin-sidebar {
-        display: none;
-        opacity: 0;
-        transition: all .5s ease-in;
+      // display: none;
+      // opacity: 0;
+      // transition: all .5s ease-in;
     }
 
 }

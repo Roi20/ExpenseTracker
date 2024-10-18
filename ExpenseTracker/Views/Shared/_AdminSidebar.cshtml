@@ -2,7 +2,56 @@
 
 
 @{
-   
+   <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")"/>
 }
 
-<h1>Sample</h1>
+<div class="admin-sidebar-wrapper">
+    <div class="sidebar-title">
+        <h3>Expense Tracker</h3>
+    </div>
+    <hr />
+    <div class="sidebar-content">
+        <ul class="sidebar-list">
+            <li>
+                <a asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-chart-line"></i> Dashboard
+                    </span>
+                </a>
+            </li>
+              <li>
+                <a asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-list-check"></i> Manage Roles
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-bell"></i> Send Notification
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-clipboard"></i> Logs
+                    </span>
+                </a>
+            </li>
+            <li id="admin-logout">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <span>
+                            <button type="submit">
+                                <i class="fa-solid fa-right-from-bracket"></i>Logout
+                            </button>
+                        </span>
+                    </form>
+                }
+            </li>
+        </ul>
+    </div>
+</div>

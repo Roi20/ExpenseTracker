@@ -17,7 +17,7 @@
     </div>
     <div class="sidebar-name-occupation">
        <div class="name-occupation">
-           <span class="name">@user.FirstName @user.LastName</span>
+           <span class="name">@user.FirstName</span>
            <span class="occupation">@user.SourceOfIncome</span>
        </div>
     </div>
@@ -71,7 +71,7 @@
                     </span>
                 </a>
             </li>
-            <li>
+            <li id="logout-btn">
                 @if (SignInManager.IsSignedIn(User))
                 {
                     <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

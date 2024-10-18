@@ -3,8 +3,8 @@
 console.log(LineChartData);
 
 var label = LineChartData.map(x => x.NumberOfDays);
-var Income = LineChartData.map(x => x.Income);
-var Expense = LineChartData.map(x => x.Expense);
+var Income = LineChartData.map(x => x.Income == 0 ? null : x.Income);
+var Expense = LineChartData.map(x => x.Expense == 0 ? null : x.Expense);
 
 
 
@@ -33,8 +33,9 @@ var myLineChart = new Chart(ctx, {
                 backgroundColor: '#4CB140',
                 borderWidth: 2,
                 fill: false,
-                lineTension: 0,
-                pointRadius: 1
+                lineTension: 0.5,
+                pointRadius: 1,
+                spanGaps: true
             },
             {
                 label: 'Expense',
@@ -43,8 +44,9 @@ var myLineChart = new Chart(ctx, {
                 backgroundColor: '#C9190B',
                 borderWidth: 2,
                 fill: false, 
-                lineTension: 0,
+                lineTension: 0.5,
                 pointRadius: 1,
+                spanGaps: true
 
             }
         ]
