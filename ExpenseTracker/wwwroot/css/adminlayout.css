@@ -473,7 +473,7 @@ form span button
 
 .sidebar-list li:hover {
     background: #212b38;
-    padding: 3px;
+    padding: 0 5px 0 5px;
     border-radius: 5px;
 }
 

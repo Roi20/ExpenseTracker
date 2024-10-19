@@ -1,0 +1,45 @@
+﻿@model AdminViewModel
+
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/admindashboard.css")"/>
+}
+
+<div class="container admin-dashboard-wrapper">
+    <div class="row first-section">
+        <div class="first-box col-sm">
+            <div class="r-users" id="user-div">
+                <span>
+                    <i class="fa-solid fa-users"></i> Registered Users
+                </span>
+                <h6 class="r-user-total">
+                    @Model.RegisteredUsersCount
+                </h6>
+            </div>
+        </div>
+        <div class="second-box col-sm">
+            <div class="a-users" id="user-div">
+                <span>
+                    <i class="fa-solid fa-users"></i> Active Users
+                </span>
+                <h6 class="a-user-total">
+                    20
+                </h6>
+            </div>
+        </div>
+        <div class="third-box col-sm">
+            <div class="i-users" id="user-div">
+                <span>
+                    <i class="fa-solid fa-users"></i> Inactive Users
+                </span>
+                <h6 class="i-user-total">
+                    20
+                </h6>
+            </div>
+        </div>
+    </div>
+</div>

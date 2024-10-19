@@ -1,0 +1,52 @@
+﻿
+.admin-dashboard-wrapper{
+    height: 100%;
+    width: 100%;
+    padding: 15px 20px 15px 20px;
+
+}
+
+.first-section{
+    gap: 2px;
+}
+
+.first-section .col-sm{
+    padding: 0;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+#user-div {
+    background: #2d3250;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+#user-div span{
+    font-size: .9em;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+    display: flex;
+    align-items: center;
+}
+
+#user-div span .fa-solid{
+    padding-right: 4px;
+    font-size: 1.2em;
+}
+
+#user-div h6{
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-weight: 500;
+
+}

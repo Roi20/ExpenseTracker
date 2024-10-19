@@ -1,13 +1,14 @@
 ﻿
 @{
     var user = ViewBag.User;
+
 }
 <div class="sidebar-wrapper">
     <div class="profile-img-holder">
         <div class="sidebar-profile-image">
-            @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+            @if (!string.IsNullOrEmpty(Model.User.ProfilePicturePath))
             {
-                <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
+                <img src="~/@Model.User.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
             }
             else
             {
@@ -17,8 +18,8 @@
     </div>
     <div class="sidebar-name-occupation">
        <div class="name-occupation">
-           <span class="name">@user.FirstName</span>
-           <span class="occupation">@user.SourceOfIncome</span>
+           <span class="name">@Model.User.FirstName</span>
+           <span class="occupation">@Model.User.SourceOfIncome</span>
        </div>
     </div>
     <div class="sidebar-menu">

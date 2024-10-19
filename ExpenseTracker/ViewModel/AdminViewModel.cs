@@ -11,6 +11,10 @@ namespace ExpenseTracker.ViewModel
         public Transaction Transaction { get; set; }
         public IEnumerable<AppIdentityUser> Users { get; set; }
         public AppIdentityUser User { get; set; }
+        public int RegisteredUsersCount { get; set; }
+        public int ActiveUsersCount { get; set; }
+        public int InactiveUsersCount { get; set; }
+
 
     }
 }

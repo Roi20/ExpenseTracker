@@ -1,7 +1,9 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using ExpenseTracker.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.Controllers
@@ -10,10 +12,12 @@ namespace ExpenseTracker.Controllers
     {
 
         private readonly IDashboardRepository _repo;
-      
-        public DashboardController(IDashboardRepository repo)
+        private readonly UserManager<AppIdentityUser> _userManager;
+
+        public DashboardController(IDashboardRepository repo, UserManager<AppIdentityUser> userManager)
         {
             _repo = repo;
+            _userManager = userManager;
            
         }
 
@@ -34,7 +38,8 @@ namespace ExpenseTracker.Controllers
                     TotalIncome = await _repo.TotalIncome(StartDate, EndDate, currentUserId),
                     TotalExpense = await _repo.TotalExpense(StartDate, EndDate, currentUserId),
                     Balance = await _repo.Balance(StartDate, EndDate, currentUserId),
-                    Transactions = await _repo.GetAllTransaction(currentUserId),  
+                    Transactions = await _repo.GetAllTransaction(currentUserId), 
+                    User = await _repo.GetUserInfo(currentUserId)
                 };
             
                 var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1, currentUserId);

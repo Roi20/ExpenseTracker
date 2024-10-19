@@ -13,7 +13,14 @@
     <div class="sidebar-content">
         <ul class="sidebar-list">
             <li>
-                <a asp-action="Index">
+                <a asp-action="Index" asp-controller="AdminUser">
+                    <span>
+                        <i class="fa-solid fa-list"></i> List of Users
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="Index" asp-controller="AdminDashboard">
                     <span>
                         <i class="fa-solid fa-chart-line"></i> Dashboard
                     </span>

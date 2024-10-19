@@ -39,6 +39,7 @@ namespace ExpenseTracker.Controllers
 
             userEntities.SearchKeyword = request.SearchKeyword;
             ViewBag.User = await _repo.GetUserInfo(userId);
+            userEntities.User = await _repo.GetUserInfo(userId);
             ViewBag.SortOrder = request.SortOrder;
 
           
