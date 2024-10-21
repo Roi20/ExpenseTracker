@@ -1,4 +1,5 @@
-﻿using ExpenseTracker.Data;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 
 namespace ExpenseTracker.ViewModel
@@ -14,6 +15,7 @@ namespace ExpenseTracker.ViewModel
         public int RegisteredUsersCount { get; set; }
         public int ActiveUsersCount { get; set; }
         public int InactiveUsersCount { get; set; }
+        public FinancialTrendData FinancialTrendData { get; set; }
 
 
     }

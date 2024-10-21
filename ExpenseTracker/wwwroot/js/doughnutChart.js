@@ -1,10 +1,5 @@
 ﻿Chart.register(ChartDataLabels);
 
-
-
-
-
-
 if (window.chartData) {
 
     var labels = chartData.map(item => item.CategoryName);

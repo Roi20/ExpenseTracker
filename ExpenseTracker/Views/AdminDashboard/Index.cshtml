@@ -42,4 +42,18 @@
             </div>
         </div>
     </div>
+    <div class="row second-section">
+        <div class="col">
+            <canvas width="400" height="300" id="adminFinancialChart"></canvas>
+        </div>
+    </div>
 </div>
+
+@section CustomScripts{
+    <!--script>
+      //  var financialTrendData = @Html.Raw(ViewBag.LineChart)
+    </!--script-->
+
+    <script src="@Url.Content("~/js/adminFinancialTrendChart.js")"></script>
+
+}

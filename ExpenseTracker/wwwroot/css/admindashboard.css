@@ -3,7 +3,6 @@
     height: 100%;
     width: 100%;
     padding: 15px 20px 15px 20px;
-
 }
 
 .first-section{
@@ -49,4 +48,10 @@
     letter-spacing: 1px;
     font-weight: 500;
 
+}
+
+.second-section {
+    background: #2d3250;
+    margin-top: 5px;
+    border-radius: 8px;
 }
