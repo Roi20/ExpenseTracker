@@ -55,6 +55,10 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
        .AddRoles<IdentityRole>()
        .AddEntityFrameworkStores<ExpenseTrackerDbContext>();
 
+//builder.Services.AddScoped<UserManager<AppIdentityUser>>();
+//builder.Services.AddSingleton<IServiceScopeFactory, ServiceScopeFactory>();
+
+
 // Repository Dependency
 builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
 builder.Services.AddScoped<ICategoryRepository,  CategoryRepository>();
@@ -139,6 +143,9 @@ if(userEmail == null)
     await userManager.AddToRoleAsync(user, "Admin");
 
 }
+
+app.UseMiddleware<ActivityMiddlerware>();
+
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");

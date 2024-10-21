@@ -40,6 +40,7 @@ namespace ExpenseTracker.Data
 
         [MaxLength]
         public string? ProfilePicturePath { get; set; }
+        public DateTime? LastActivityDate { get; set; }
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }

@@ -13,6 +13,24 @@ namespace ExpenseTracker.Repository
             _userManager = userManager;
         }
 
+        public int ActiveUsersCount()
+        {
+            var activeUserCount =  _userManager.Users
+                                               .Where(x => x.LastActivityDate >= DateTime.UtcNow.AddDays(-30))
+                                               .Count();
+
+            return activeUserCount;
+        }
+
+        public int InActiveUsersCount()
+        {
+            var inactiveUsersCount = _userManager.Users
+                                                 .Where(x => x.LastActivityDate <= DateTime.UtcNow.AddDays(-30) || x.LastActivityDate == null)
+                                                 .Count();
+
+            return inactiveUsersCount;
+        }
+
         public int RegisteredUsersCount()
         {
 

@@ -4,6 +4,9 @@
     {
 
         int RegisteredUsersCount();
+        int ActiveUsersCount();
+        int InActiveUsersCount();
+
 
     }
 }

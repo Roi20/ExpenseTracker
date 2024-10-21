@@ -23,7 +23,10 @@ namespace ExpenseTracker.Controllers
                 var model = new AdminViewModel
                 {
 
-                    RegisteredUsersCount =  _repo.RegisteredUsersCount()
+                    RegisteredUsersCount = _repo.RegisteredUsersCount(),
+                    ActiveUsersCount = _repo.ActiveUsersCount(),
+                    InactiveUsersCount = _repo.InActiveUsersCount(),
+
 
                 };
 

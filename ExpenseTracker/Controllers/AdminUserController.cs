@@ -153,7 +153,9 @@ namespace ExpenseTracker.Controllers
                 user.NormalizedUserName = userModel.Email;
                 user.EmailConfirmed = true;
 
-                var result = await _userManager.UpdateAsync(user);
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var result = await _userManager.ResetPasswordAsync(user, token, userModel.Password);
+
 
                 if (result.Succeeded)
                 {
