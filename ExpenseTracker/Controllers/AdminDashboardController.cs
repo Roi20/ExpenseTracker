@@ -2,6 +2,7 @@
 using ExpenseTracker.Models;
 using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace ExpenseTracker.Controllers
 {
@@ -26,16 +27,26 @@ namespace ExpenseTracker.Controllers
                     RegisteredUsersCount = _repo.RegisteredUsersCount(),
                     ActiveUsersCount = _repo.ActiveUsersCount(),
                     InactiveUsersCount = _repo.InActiveUsersCount(),
+                    FinancialTrendData = await _repo.GetFinancialTrendData(),
 
 
                 };
 
+               // if(model.)
+
+
                 return View(model);
 
             }
-            catch(Exception ex)
+            catch(ArgumentException ex)
             {
                 return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch(Exception ex)
+            {
+                // return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+                //return BadRequest();
             }
 
 

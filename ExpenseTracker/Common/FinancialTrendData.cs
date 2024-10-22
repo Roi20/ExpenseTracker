@@ -2,8 +2,17 @@
 {
     public class FinancialTrendData
     {
-        public DateTime Month { get; set; }
-        public int Income { get; set; }
-        public int Expense { get; set; }
+        public string Month { get; set; }
+        public double AverageIncome { get; set; }
+        public double AverageExpense { get; set; }
     }
+
+
+    public class GetMonthData()
+    {
+        public int? Year { get; set; }
+        public string? Month { get; set; }
+
+    }
+
 }

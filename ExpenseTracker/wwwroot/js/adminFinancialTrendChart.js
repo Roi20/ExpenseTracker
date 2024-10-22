@@ -1,17 +1,19 @@
 ﻿
 
-
+var Labels = financialTrendData.map(m => m.Month);
+var averageIncome = financialTrendData.map(item => item.AverageIncome)
+var averageExpense = financialTrendData.map(item => item.AverageExpense)
 
 var ctx = document.getElementById('adminFinancialChart').getContext('2d');
 
 var myLineChart = new Chart(ctx, {
     type: 'line',
     data: {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        labels: Labels,
         datasets: [
             {
                 label: 'Average Income',
-                data: [10000, 30300, 404300, 59200, 63200, 2000, 3000, 80000, 11000, 10500, 21400, 112300],
+                data: averageIncome,
                 borderColor: '#4CB140',
                 backgroundColor: '#4CB140',
                 borderWidth: 2,
@@ -22,7 +24,7 @@ var myLineChart = new Chart(ctx, {
             },
             {
                 label: 'Average Expense',
-                data: [144000, 30010, 40000, 5200, 63200, 20030, 30040, 80300, 114000, 10000, 21400, 13400],
+                data: averageExpense,
                 borderColor: '#C9190B',
                 backgroundColor: '#C9190B',
                 borderWidth: 2,

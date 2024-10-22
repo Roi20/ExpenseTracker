@@ -51,8 +51,6 @@ namespace ExpenseTracker.Repository
             IQueryable<Transaction> records = _table.Where(condition).Include(i => i.Category);
 
 
-
-
             switch (sortOrder)
             {
                 case "Category":

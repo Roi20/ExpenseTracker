@@ -50,9 +50,9 @@
 </div>
 
 @section CustomScripts{
-    <!--script>
-      //  var financialTrendData = @Html.Raw(ViewBag.LineChart)
-    </!--script-->
+    <script>
+        var financialTrendData = @Html.Raw(JsonConvert.SerializeObject(Model.FinancialTrendData))
+    </script>
 
     <script src="@Url.Content("~/js/adminFinancialTrendChart.js")"></script>
 
