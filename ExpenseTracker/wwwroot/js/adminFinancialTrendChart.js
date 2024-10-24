@@ -1,8 +1,8 @@
 ﻿
 
 var Labels = financialTrendData.map(m => m.Month);
-var averageIncome = financialTrendData.map(item => item.AverageIncome)
-var averageExpense = financialTrendData.map(item => item.AverageExpense)
+var averageIncome = financialTrendData.map(item => item.AverageIncome);
+var averageExpense = financialTrendData.map(item => item.AverageExpense);
 
 var ctx = document.getElementById('adminFinancialChart').getContext('2d');
 
@@ -16,7 +16,7 @@ var myLineChart = new Chart(ctx, {
                 data: averageIncome,
                 borderColor: '#4CB140',
                 backgroundColor: '#4CB140',
-                borderWidth: 2,
+                borderWidth: 1,
                 fill: false,
                 lineTension: 0.4,
                 pointRadius: 0,
@@ -27,7 +27,7 @@ var myLineChart = new Chart(ctx, {
                 data: averageExpense,
                 borderColor: '#C9190B',
                 backgroundColor: '#C9190B',
-                borderWidth: 2,
+                borderWidth: 1,
                 fill: false,
                 lineTension: 0.4,
                 pointRadius: 0,

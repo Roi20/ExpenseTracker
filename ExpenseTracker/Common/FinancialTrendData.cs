@@ -8,11 +8,13 @@
     }
 
 
-    public class GetMonthData()
+    public class ModeData()
     {
-        public int? Year { get; set; }
-        public string? Month { get; set; }
 
+        public string Month { get; set; }
+        public double ModeIncome { get; set; }
+        public double ModeExpense { get; set; }
+        public string Key { get; set; }
     }
 
 }

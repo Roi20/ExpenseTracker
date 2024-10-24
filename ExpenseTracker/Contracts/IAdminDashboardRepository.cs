@@ -8,8 +8,8 @@ namespace ExpenseTracker.Contracts
         int RegisteredUsersCount();
         int ActiveUsersCount();
         int InActiveUsersCount();
-       // IEnumerable<GetMonthData> Last12Months();
         Task <IEnumerable<FinancialTrendData>> GetFinancialTrendData();
+        Task<IEnumerable<ModeData>> GetModeData();
 
 
 

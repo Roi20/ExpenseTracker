@@ -52,17 +52,12 @@ namespace ExpenseTracker.Repository
         {
 
             var months = Enumerable.Range(0, 12)
-                                   .Select(s => DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(s)).ToString("MMM/yy"))
+                                   .Select(s => DateTime.UtcNow.AddMonths(-s))
+                                   .OrderBy(d => d)
+                                   .Select(x => x.ToString("MMM/yyyy"))
                                    .ToArray();
 
 
-            /*
-            var last12Months = Enumerable.Range(0, 12)
-                                         .Select(i => DateTime.UtcNow.AddMonths(-i))
-                                         .OrderBy(x => x.Year).ThenBy(d => d.Month)
-                                         .Select(x => new GetMonthData{ Year = x.Year, Month = x.ToString("MMM/yy") })
-                                         .ToArray();
-            */
             return months;
             
         }
@@ -81,13 +76,8 @@ namespace ExpenseTracker.Repository
 
                     Month = s,
                     AverageIncome = averageIncome.ContainsKey(s) ? averageIncome[s] : 0,
-                    AverageExpense = averageExpense.ContainsKey(s) ? averageIncome[s] : 0
+                    AverageExpense = averageExpense.ContainsKey(s) ? averageExpense[s] : 0
 
-                    /*
-                    Month = $"{s.Key.Month:00}/{s.Key.Year}",
-                    AverageIncome = s.Where(x => x.Category.Type == "Income").Average(t => t.Amount),
-                    AverageExpense = s.Where(x => x.Category.Type == "Expense").Average(t => t.Amount)
-                    */
                 }).ToList();
 
 
@@ -105,9 +95,9 @@ namespace ExpenseTracker.Repository
             try
             {
                 var data = await _transactions.Include(x => x.Category)
-                                         .Where(t => t.Date >= DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(-12)) &&
-                                         t.Date <= DateOnly.FromDateTime(DateTime.UtcNow))
-                                         .ToListAsync();
+                                              .Where(t => t.Date >= DateOnly.FromDateTime(DateTime.UtcNow.AddMonths(-12)) && t.Date <= DateOnly
+                                              .FromDateTime(DateTime.UtcNow))
+                                              .ToListAsync();
 
                 return data;
             }
@@ -126,10 +116,10 @@ namespace ExpenseTracker.Repository
                 var data = await GetTransactionData();
 
                 var expenseSummary = data.Where(x => x.Category.Type == "Expense")
-                                         .GroupBy(g => g.Date)
+                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id })
                                          .ToDictionary(g =>
 
-                                             g.Key.ToString("MMM/yy"),
+                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
                                              g => g.Average(a => a.Amount)
 
                                          );
@@ -149,10 +139,10 @@ namespace ExpenseTracker.Repository
                 var data = await GetTransactionData();
 
                 var incomeSummary = data.Where(x => x.Category.Type == "Income")
-                                         .GroupBy(g => g.Date)
+                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id })
                                          .ToDictionary(g =>
 
-                                             g.Key.ToString("MMM/yy"),
+                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
                                              g => g.Average(a => a.Amount)
 
                                          );
@@ -164,6 +154,80 @@ namespace ExpenseTracker.Repository
             }
         }
 
+        public async Task<IEnumerable<ModeData>> GetModeData()
+        {
+            try
+            {
+                var months = Last12Months();
+                var modeIncome = await ModeIncomeSummary();
+                var modeExpense = await ModeExpenseSummary();
+
+                var data = months.Select(s => new ModeData
+                {
+
+                    Month = s,
+                    ModeIncome = modeIncome.ContainsKey(s) ? modeIncome[s] : 0,
+                    ModeExpense = modeExpense.ContainsKey(s) ? modeExpense[s] : 0
+
+                }).ToList();
+
+
+                return data;
+            }
+            catch
+            {
+                throw;
+            }
+        }
+        public async Task<Dictionary<string, double>> ModeIncomeSummary()
+        {
+            try
+            {
+                var data = await GetTransactionData();
+
+                var modeIncome = data.Where(x => x.Category.Type == "Income")
+                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id})
+                                         .ToDictionary(g =>
+
+                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
+                                             g => g.GroupBy(t => (double)t.Amount)
+                                                   .OrderByDescending(x => x.Count())
+                                                   .Select(x => x.Key)
+                                                   .FirstOrDefault()
+
+                                         );
+                return modeIncome;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+        }
+
+        public async Task<Dictionary<string, double>> ModeExpenseSummary()
+        {
+            try
+            {
+                var data = await GetTransactionData();
+
+                var modeIncome = data.Where(x => x.Category.Type == "Expense")
+                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id })
+                                         .ToDictionary(g =>
+
+                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
+                                             g => g.GroupBy(t => (double)t.Amount)
+                                                   .OrderByDescending(x => x.Count())
+                                                   .Select(x => x.Key)
+                                                   .FirstOrDefault()
+
+                                         );
+                return modeIncome;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+        }
 
 
     }

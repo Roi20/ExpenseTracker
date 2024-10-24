@@ -29,10 +29,12 @@ namespace ExpenseTracker.Controllers
                     InactiveUsersCount = _repo.InActiveUsersCount(),
                     FinancialTrendData = await _repo.GetFinancialTrendData(),
 
-
                 };
 
-               // if(model.)
+                model.ModeDataSummary = await _repo.GetModeData();
+
+                if (model.ModeDataSummary != null)
+                    return Json(model.ModeDataSummary);
 
 
                 return View(model);
@@ -44,9 +46,9 @@ namespace ExpenseTracker.Controllers
             }
             catch(Exception ex)
             {
-                // return View("Error", new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
                 return View("Error", new ErrorViewModel { Message = ex.Message });
-                //return BadRequest();
+
             }
 
 
