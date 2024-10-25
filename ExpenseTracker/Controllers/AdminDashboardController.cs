@@ -27,14 +27,9 @@ namespace ExpenseTracker.Controllers
                     RegisteredUsersCount = _repo.RegisteredUsersCount(),
                     ActiveUsersCount = _repo.ActiveUsersCount(),
                     InactiveUsersCount = _repo.InActiveUsersCount(),
-                    FinancialTrendData = await _repo.GetFinancialTrendData(),
+                    FinancialTrendData = await _repo.GetOveraAllMonthlyAverages(),
 
                 };
-
-                model.ModeDataSummary = await _repo.GetModeData();
-
-                if (model.ModeDataSummary != null)
-                    return Json(model.ModeDataSummary);
 
 
                 return View(model);

@@ -62,33 +62,6 @@ namespace ExpenseTracker.Repository
             
         }
 
-        public async Task<IEnumerable<FinancialTrendData>> GetFinancialTrendData()
-        {
-
-            try
-            {
-                var months = Last12Months();
-                var averageIncome = await AverageIncomeSummary();
-                var averageExpense = await AverageExpenseSummary();
-
-                var data = months.Select(s => new FinancialTrendData
-                {
-
-                    Month = s,
-                    AverageIncome = averageIncome.ContainsKey(s) ? averageIncome[s] : 0,
-                    AverageExpense = averageExpense.ContainsKey(s) ? averageExpense[s] : 0
-
-                }).ToList();
-
-
-                return data;
-            }
-            catch
-            {
-                throw;
-            }
-
-        }
 
         public async Task<IEnumerable<Transaction>> GetTransactionData()
         {
@@ -108,7 +81,99 @@ namespace ExpenseTracker.Repository
            
         }
 
+        public async Task<IEnumerable<UserMonthlyAverage>> GetUserMonthlyAverages()
+        {
+            try
+            {
+                var data = await GetTransactionData();
 
+                var userMonthlyAverages = data
+                                             .GroupBy(g => new { g.User_Id, Month = g.Date.ToString("MMM/yyyy") })
+                                             .Select(g => new UserMonthlyAverage
+                                             {
+                                                 UserId = g.Key.User_Id,
+                                                 Month = g.Key.Month,
+                                                 MonthlyAverageIncome = g.Where(x => x.Category.Type == "Income").Select(t => (double)t.Amount).DefaultIfEmpty(0).Average(),
+                                                 MonthlyAverageExpense = g.Where(x => x.Category.Type == "Expense").Select(t => (double)t.Amount).DefaultIfEmpty(0).Average()
+                                                 
+                                             }).ToList();
+
+                return userMonthlyAverages;
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+           
+        }
+
+        public async Task<IEnumerable<FinancialTrendData>> GetOveraAllMonthlyAverages()
+        {
+
+            try
+            {
+                /*
+                var months = Last12Months();
+                var averageIncome = await AverageIncomeSummary();
+                var averageExpense = await AverageExpenseSummary();
+
+                var data = months.Select(s => new FinancialTrendData
+                {
+
+                    Month = s,
+                    AverageIncome = averageIncome.ContainsKey(s) ? averageIncome[s] : 0,
+                    AverageExpense = averageExpense.ContainsKey(s) ? averageExpense[s] : 0
+
+                }).ToList();
+
+
+                return data;
+                */
+
+                var userMonthAverages = await GetUserMonthlyAverages();
+
+                var months = Last12Months();
+
+                var overAllMonthlyAverages = userMonthAverages
+                                                              .GroupBy(u => u.Month)
+                                                              .ToDictionary(
+                                                                 g => g.Key,
+                                                                 g => new FinancialTrendData
+                                                                 {
+                                                                     Month = g.Key,
+
+                                                                     AverageIncome = g.Where(x => x.MonthlyAverageIncome > 0).Any() ?
+                                                                                     g.Where(x => x.MonthlyAverageIncome > 0).Average(x => x.MonthlyAverageIncome) : 0,
+
+                                                                     AverageExpense = g.Where(x => x.MonthlyAverageExpense > 0).Any() ?
+                                                                                      g.Where(x => x.MonthlyAverageExpense > 0).Average(x => x.MonthlyAverageExpense) : 0
+                                                                 }
+                                                               );
+
+                var result = months.Select(month => overAllMonthlyAverages.ContainsKey(month) ?
+                                                    overAllMonthlyAverages[month] : new FinancialTrendData
+                                                    {
+                                                        Month = month,
+                                                        AverageExpense = 0,
+                                                        AverageIncome = 0
+
+                                                    }).ToList();
+
+                return result;
+            }
+            catch
+            {
+                throw;
+            }
+
+        }
+
+
+        /*
         public async Task<Dictionary<string, double>> AverageExpenseSummary()
         {
             try
@@ -153,7 +218,7 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
-
+        /*
         public async Task<IEnumerable<ModeData>> GetModeData()
         {
             try
@@ -164,9 +229,9 @@ namespace ExpenseTracker.Repository
 
                 var data = months.Select(s => new ModeData
                 {
-
+                    /*
                     Month = s,
-                    ModeIncome = modeIncome.ContainsKey(s) ? modeIncome[s] : 0,
+                    ModeIncome = modeIncome,
                     ModeExpense = modeExpense.ContainsKey(s) ? modeExpense[s] : 0
 
                 }).ToList();
@@ -228,7 +293,7 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
-
+        */
 
     }
 

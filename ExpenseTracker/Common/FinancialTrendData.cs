@@ -17,4 +17,12 @@
         public string Key { get; set; }
     }
 
+    public class UserMonthlyAverage
+    {
+        public string UserId { get; set; }
+        public string Month { get; set; }
+        public double MonthlyAverageIncome { get; set; }
+        public double MonthlyAverageExpense { get; set; }
+    }
+
 }
