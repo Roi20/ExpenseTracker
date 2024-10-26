@@ -1,38 +1,35 @@
 ﻿
 
-var Labels = financialTrendData.map(m => m.Month);
-var averageIncome = financialTrendData.map(item => item.AverageIncome);
-var averageExpense = financialTrendData.map(item => item.AverageExpense);
 
-var ctx = document.getElementById('adminFinancialChart').getContext('2d');
+var Labels = modeData.map(m => m.Month);
+var modeIncome = modeData.map(item => item.ModeIncome);
+var modeExpense = modeData.map(item => item.ModeExpense);
+
+
+var ctx = document.getElementById('adminModeChart').getContext('2d');
 
 var myChart = new Chart(ctx, {
-    type: 'line',
+    type: 'bar',
     data: {
-        labels: Labels,
+        labels: Labels, 
         datasets: [
             {
-                label: 'Average Income',
-                data: averageIncome,
-                borderColor: 'rgba(75, 192, 192, 0.6)',
-                backgroundColor: 'rgba(75, 192, 192, .5)',
+                label: 'Mode Income',
+                backgroundColor: 'rgba(75, 192, 192, 0.6)',
+                borderColor: 'rgba(75, 192, 192, 1)',
                 borderWidth: 2,
-                fill: true,
-                lineTension: 0.4,
-                pointRadius: 0,
-                spanGaps: true
+                hoverBackgroundColor: 'rgba(75, 192, 192, 0.8)',
+                hoverBorderColor: 'rgba(75, 192, 192, 1)',
+                data: modeIncome
             },
             {
-                label: 'Average Expense',
-                data: averageExpense,
-                borderColor: 'rgba(255, 99, 132, 0.6)',
-                backgroundColor: 'rgba(255, 99, 132, .5)',
+                label: 'Mode Expense',
+                backgroundColor: 'rgba(255, 99, 132, 0.6)',
+                borderColor: 'rgba(255, 99, 132, 1)',
                 borderWidth: 2,
-                fill: true,
-                lineTension: 0.4,
-                pointRadius: 0,
-                spanGaps: true
-
+                hoverBackgroundColor: 'rgba(255, 99, 132, 0.8)',
+                hoverBorderColor: 'rgba(255, 99, 132, 1)',
+                data: modeExpense
             }
         ]
     },
@@ -47,21 +44,17 @@ var myChart = new Chart(ctx, {
                 top: 0
             }
         },
-
         plugins: {
             legend: {
                 position: 'bottom',
                 labels: {
                     font: {
-                        size: '10',
-                       
+                        size: 10,
                     },
                     usePointStyle: true,
                     pointStyle: 'star',
                     color: '#FFFFFF',
-
                 },
-
             },
             title: {
                 display: false,
@@ -75,13 +68,12 @@ var myChart = new Chart(ctx, {
                     size: 18
                 },
             },
-
             datalabels: {
                 color: '#FFFFFF',
-                align: 'end',  // Aligns the label towards the end of the data point
-                anchor: 'end', // Anchors the label to the end of the data point
+                align: 'end',
+                anchor: 'end',
                 font: {
-                    size: 8,  // Adjust the font size to align better
+                    size: 8,
                 },
                 padding: {
                     top: 0,
@@ -89,24 +81,22 @@ var myChart = new Chart(ctx, {
                 },
                 display: false,
                 formatter: function (value) {
-                    return formatter.format(value)
+                    return formatter.format(value);
                 },
             }
         },
         scales: {
             y: {
-
-                beginAtZero: false,
-                position: 'left', // Align y-axis labels on the left side
+                beginAtZero: true,
+                position: 'left',
                 ticks: {
-                    padding: 5, // Add padding between ticks and labels
+                    padding: 5,
                     font: {
-                        size: 10,  // Adjust the font size
+                        size: 10,
                     },
                     color: '#FFFFFF'
                 },
                 grid: {
-
                     drawOnChartArea: true,
                     drawTicks: false,
                     display: true,
@@ -118,15 +108,14 @@ var myChart = new Chart(ctx, {
                 }
             },
             x: {
-                position: 'bottom', // Align x-axis labels at the bottom
+                position: 'bottom',
                 ticks: {
-                    padding: 10, // Add padding between ticks and labels
+                    padding: 10,
                     font: {
-                        size: 10  // Adjust the font size
+                        size: 10,
                     },
-                    maxRotation: 0,  // Prevent label rotation
-                    minRotation: 0,  // Ensure labels are horizontal
-
+                    maxRotation: 0,
+                    minRotation: 0,
                     color: '#FFFFFF'
                 },
                 grid: {
@@ -134,7 +123,6 @@ var myChart = new Chart(ctx, {
                     drawTicks: false,
                     display: true,
                     color: 'rgba(255, 255, 255, 0.2)',
-
                 }
             }
         },

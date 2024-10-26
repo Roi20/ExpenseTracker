@@ -14,7 +14,6 @@
         public string Month { get; set; }
         public double ModeIncome { get; set; }
         public double ModeExpense { get; set; }
-        public string Key { get; set; }
     }
 
     public class UserMonthlyAverage
@@ -23,6 +22,15 @@
         public string Month { get; set; }
         public double MonthlyAverageIncome { get; set; }
         public double MonthlyAverageExpense { get; set; }
+    }
+
+    public class UserMonthlyMode
+    {
+        public string UserId { get; set; }
+        public string Month { get; set; }
+        public double ModeIncome { get; set; }
+        public double ModeExpense { get; set; }
+
     }
 
 }

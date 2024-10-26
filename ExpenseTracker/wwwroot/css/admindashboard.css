@@ -17,7 +17,7 @@
 }
 
 #user-div {
-    background: #2d3250;
+    background: #1F1B24;
     height: 100%;
     width: 100%;
     padding: 10px;
@@ -51,13 +51,31 @@
 }
 
 .second-section {
-    background: #2d3250;
+    background: #1F1B24;
     margin-top: 5px;
     border-radius: 8px;
 }
 
+.second-section h5,
+.third-section h5{
+    padding: 15px 10px 0px 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.second-section p,
+.third-section p{
+    font-size: .7em;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+}
+
 .third-section {
-    background: #2d3250;
+    background: #1F1B24;
     margin-top: 5px;
     border-radius: 8px;
 }

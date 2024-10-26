@@ -9,7 +9,7 @@ namespace ExpenseTracker.Contracts
         int ActiveUsersCount();
         int InActiveUsersCount();
         Task <IEnumerable<FinancialTrendData>> GetOveraAllMonthlyAverages();
-      //  Task<IEnumerable<ModeData>> GetModeData();
+        Task<IEnumerable<ModeData>> GetOverallMonthlyMode();
 
 
 

@@ -28,9 +28,9 @@ namespace ExpenseTracker.Controllers
                     ActiveUsersCount = _repo.ActiveUsersCount(),
                     InactiveUsersCount = _repo.InActiveUsersCount(),
                     FinancialTrendData = await _repo.GetOveraAllMonthlyAverages(),
+                    ModeDataSummary = await _repo.GetOverallMonthlyMode(),
 
                 };
-
 
                 return View(model);
 

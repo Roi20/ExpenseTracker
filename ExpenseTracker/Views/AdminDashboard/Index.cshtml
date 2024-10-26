@@ -43,22 +43,28 @@
         </div>
     </div>
     <div class="row second-section">
+        <h5>Financial Trends</h5>
+        <p>Monthly Average</p>
         <div class="col">
             <canvas width="400" height="300" id="adminFinancialChart"></canvas>
         </div>
     </div>
     <div class="row third-section">
-        <div class="col-5">
-            <canvas width="400" height="300" id="adminModeChart"></canvas>
+        <h5>Monthly Mode</h5>
+        <p>Income and Expense</p>
+        <div class="col-6">
+            <canvas width="250" height="200" id="adminModeChart"></canvas>
         </div>
     </div>
 </div>
 
 @section CustomScripts{
     <script>
-        var financialTrendData = @Html.Raw(JsonConvert.SerializeObject(Model.FinancialTrendData))
+        var financialTrendData = @Html.Raw(JsonConvert.SerializeObject(Model.FinancialTrendData));
+        var modeData = @Html.Raw(JsonConvert.SerializeObject(Model.ModeDataSummary));
     </script>
 
     <script src="@Url.Content("~/js/adminFinancialTrendChart.js")"></script>
+    <script src="@Url.Content("~/js/adminModeChart.js")"></script>
 
 }
