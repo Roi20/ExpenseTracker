@@ -2,7 +2,7 @@
 .admin-dashboard-wrapper{
     height: 100%;
     width: 100%;
-    padding: 15px 20px 15px 20px;
+    padding: 15px 20px 30px 20px;
 }
 
 .first-section{
@@ -12,12 +12,12 @@
 .first-section .col-sm{
     padding: 0;
     height: 100px;
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
 }
 
 #user-div {
-    background: #1F1B24;
+    background: #17181d;
     height: 100%;
     width: 100%;
     padding: 10px;
@@ -51,8 +51,16 @@
 }
 
 .second-section {
-    background: #1F1B24;
+    background: #17181d;
     margin-top: 5px;
+    border-radius: 12px;
+    padding: 10px;
+    gap: 2px;
+}
+
+.financial-trend-wrapper{
+    padding: 0;
+    background: #272e36;
     border-radius: 8px;
 }
 
@@ -75,7 +83,25 @@
 }
 
 .third-section {
-    background: #1F1B24;
+    background: #17181d;
     margin-top: 5px;
+    border-radius: 12px;
+    padding: 10px 10px 10px 10px;
+}
+
+.mode-chart-wrapper {
+    padding: 0;
+    background: #272e36;
     border-radius: 8px;
+}
+
+.mode-chart-wrapper .mode-chart{
+    padding-bottom: 5px;
+}
+
+.category-chart-wrapper {
+    padding: 0;
+    background: #272e36;
+    border-radius: 8px;
+    margin-left: auto;
 }

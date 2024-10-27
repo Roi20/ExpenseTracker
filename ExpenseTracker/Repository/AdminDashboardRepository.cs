@@ -3,6 +3,7 @@ using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.EJ2.Linq;
@@ -13,12 +14,14 @@ namespace ExpenseTracker.Repository
     {
         private readonly DbContext _db;
         private readonly DbSet<Transaction> _transactions;
+        private readonly DbSet<Category> _category;
         private readonly UserManager<AppIdentityUser> _userManager;
 
         public AdminDashboardRepository(UserManager<AppIdentityUser> userManager, ExpenseTrackerDbContext db)
         {
             _db = db;
             _transactions =  _db.Set<Transaction>();
+            _category = _db.Set<Category>();
             _userManager = userManager;
         }
 
@@ -48,7 +51,7 @@ namespace ExpenseTracker.Repository
             return confirmedUserCount;
         }
 
-        public string[] Last12Months()
+        public string[] Last6Months()
         {
 
             var months = Enumerable.Range(0, 6)
@@ -119,7 +122,7 @@ namespace ExpenseTracker.Repository
                 
                 var userMonthAverages = await GetUserMonthlyAverages();
 
-                var months = Last12Months();
+                var months = Last6Months();
 
                 var overAllMonthlyAverages = userMonthAverages
                                                               .GroupBy(u => u.Month)
@@ -204,7 +207,7 @@ namespace ExpenseTracker.Repository
             {
                 var userMonthlyMode = await GetUserMonthlyMode();
 
-                var months = Last12Months();
+                var months = Last6Months();
 
                 var overallMonthlyMode = userMonthlyMode.GroupBy(g => g.Month)
                                                         .ToDictionary(g => g.Key, g => new ModeData
@@ -245,6 +248,25 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
+
+        public async Task<IEnumerable<TopListCategories>> TopCategories()
+        {
+            var data = await _category
+                                      .GroupBy(g => g.Title)
+                                      .OrderByDescending(x => x.Count())
+                                      .Take(5)
+                                      .Select(s => new TopListCategories
+                                      {
+                                          CategoryName = s.Key,
+                                          CategoryCount = s.Count()
+
+
+                                      }).ToListAsync();
+
+            return data;
+
+        }
+
 
 
 

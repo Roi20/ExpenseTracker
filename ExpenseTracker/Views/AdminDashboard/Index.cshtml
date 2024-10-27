@@ -43,17 +43,28 @@
         </div>
     </div>
     <div class="row second-section">
-        <h5>Financial Trends</h5>
-        <p>Monthly Average</p>
-        <div class="col">
-            <canvas width="400" height="300" id="adminFinancialChart"></canvas>
+        <div class="col-md-7 mode-chart-wrapper">
+            <h5>Monthly Mode</h5>
+            <p>Income and Expense</p>
+            <div class="mode-chart">
+                <canvas width="250" height="200" id="adminModeChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md category-chart-wrapper">
+            <h5>Categories</h5>
+            <p>Top Categories</p>
+            <div class="doughnut-chart">
+                <canvas width="300" height="250" id="adminDoughnutChart"></canvas>
+            </div>
         </div>
     </div>
     <div class="row third-section">
-        <h5>Monthly Mode</h5>
-        <p>Income and Expense</p>
-        <div class="col-6">
-            <canvas width="250" height="200" id="adminModeChart"></canvas>
+        <div class="financial-trend-wrapper">
+            <h5>Financial Trends</h5>
+            <p>Monthly Average</p>
+            <div>
+                <canvas width="400" height="300" id="adminFinancialChart"></canvas>
+            </div>
         </div>
     </div>
 </div>
@@ -62,9 +73,11 @@
     <script>
         var financialTrendData = @Html.Raw(JsonConvert.SerializeObject(Model.FinancialTrendData));
         var modeData = @Html.Raw(JsonConvert.SerializeObject(Model.ModeDataSummary));
+        var topCategoryData = @Html.Raw(JsonConvert.SerializeObject(Model.TopListCategories));
     </script>
 
     <script src="@Url.Content("~/js/adminFinancialTrendChart.js")"></script>
     <script src="@Url.Content("~/js/adminModeChart.js")"></script>
+    <script src="@Url.Content("~/js/adminDoughnutChart.js")"></script>
 
 }

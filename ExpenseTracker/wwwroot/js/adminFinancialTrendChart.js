@@ -15,22 +15,22 @@ var myChart = new Chart(ctx, {
                 label: 'Average Income',
                 data: averageIncome,
                 borderColor: 'rgba(75, 192, 192, 1)',
-                backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                backgroundColor: 'rgba(75, 192, 192, 0.3)',
                 borderWidth: 2,
                 fill: true,
                 lineTension: 0.4,
-                pointRadius: 0,
+                pointRadius: 1,
                 spanGaps: true
             },
             {
                 label: 'Average Expense',
                 data: averageExpense,
                 borderColor: 'rgba(255, 99, 132, 1)',
-                backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                backgroundColor: 'rgba(255, 99, 132, 0.3)',
                 borderWidth: 2,
                 fill: true,
                 lineTension: 0.4,
-                pointRadius: 0,
+                pointRadius: 1,
                 spanGaps: true
 
             }
