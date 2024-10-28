@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Common;
+using ExpenseTracker.Models;
 
 namespace ExpenseTracker.Contracts
 {
@@ -11,6 +12,8 @@ namespace ExpenseTracker.Contracts
         Task <IEnumerable<FinancialTrendData>> GetOveraAllMonthlyAverages();
         Task<IEnumerable<ModeData>> GetOverallMonthlyMode();
         Task<IEnumerable<TopListCategories>> TopCategories();
+        Task<IEnumerable<Transaction>> RecentBiggestTransactions();
+        Task<IEnumerable<Transaction>> RecentLowestTransactions();
 
 
 

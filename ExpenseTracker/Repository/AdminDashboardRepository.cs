@@ -5,6 +5,7 @@ using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Humanizer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.EJ2.Linq;
 
@@ -37,7 +38,7 @@ namespace ExpenseTracker.Repository
         public int InActiveUsersCount()
         {
             var inactiveUsersCount = _userManager.Users
-                                                 .Where(x => x.LastActivityDate <= DateTime.UtcNow.AddDays(-30) || x.LastActivityDate == null)
+                                                 .Where(x => x.LastActivityDate <= DateTime.UtcNow.AddDays(-30) || x.LastActivityDate == null && x.EmailConfirmed == true)
                                                  .Count();
 
             return inactiveUsersCount;
@@ -251,7 +252,10 @@ namespace ExpenseTracker.Repository
 
         public async Task<IEnumerable<TopListCategories>> TopCategories()
         {
-            var data = await _category
+            try
+            {
+
+                var data = await _category
                                       .GroupBy(g => g.Title)
                                       .OrderByDescending(x => x.Count())
                                       .Take(5)
@@ -263,134 +267,69 @@ namespace ExpenseTracker.Repository
 
                                       }).ToListAsync();
 
-            return data;
-
-        }
-
-
-
-
-        /*
-        public async Task<Dictionary<string, double>> AverageExpenseSummary()
-        {
-            try
-            {
-                var data = await GetTransactionData();
-
-                var expenseSummary = data.Where(x => x.Category.Type == "Expense")
-                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id })
-                                         .ToDictionary(g =>
-
-                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
-                                             g => g.Average(a => a.Amount)
-
-                                         );
-                return expenseSummary;
-            }
-            catch
-            {
-                throw;
-            }
-           
-        }
-
-        public async Task<Dictionary<string, double>> AverageIncomeSummary()
-        {
-            try
-            {
-                var data = await GetTransactionData();
-
-                var incomeSummary = data.Where(x => x.Category.Type == "Income")
-                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id })
-                                         .ToDictionary(g =>
-
-                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
-                                             g => g.Average(a => a.Amount)
-
-                                         );
-                return incomeSummary;
-            }
-            catch(ArgumentException)
-            {
-                throw;
-            }
-        }
-        /*
-        public async Task<IEnumerable<ModeData>> GetModeData()
-        {
-            try
-            {
-                var months = Last12Months();
-                var modeIncome = await ModeIncomeSummary();
-                var modeExpense = await ModeExpenseSummary();
-
-                var data = months.Select(s => new ModeData
-                {
-                    /*
-                    Month = s,
-                    ModeIncome = modeIncome,
-                    ModeExpense = modeExpense.ContainsKey(s) ? modeExpense[s] : 0
-
-                }).ToList();
-
-
                 return data;
+
             }
-            catch
+            catch (ArgumentException)
+            {
+                throw;
+
+            }
+            catch (Exception)
             {
                 throw;
             }
         }
-        public async Task<Dictionary<string, double>> ModeIncomeSummary()
+
+        public async Task<IEnumerable<Transaction>> RecentBiggestTransactions()
         {
             try
             {
-                var data = await GetTransactionData();
-
-                var modeIncome = data.Where(x => x.Category.Type == "Income")
-                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id})
-                                         .ToDictionary(g =>
-
-                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
-                                             g => g.GroupBy(t => (double)t.Amount)
-                                                   .OrderByDescending(x => x.Count())
-                                                   .Select(x => x.Key)
-                                                   .FirstOrDefault()
-
-                                         );
-                return modeIncome;
+                var result = await _transactions
+                                                .Include(x => x.Category)
+                                                .Where(x => x.Amount > 100000)
+                                                .OrderByDescending(x => x.Amount)
+                                                .ThenByDescending(x => x.Date)
+                                                .Take(5)
+                                                .ToListAsync();
+                return result;
             }
             catch (ArgumentException)
             {
                 throw;
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
-        public async Task<Dictionary<string, double>> ModeExpenseSummary()
+        public async Task<IEnumerable<Transaction>> RecentLowestTransactions() 
         {
             try
             {
-                var data = await GetTransactionData();
 
-                var modeIncome = data.Where(x => x.Category.Type == "Expense")
-                                         .GroupBy(g => new { g.Date.Year, g.Date.Month, g.User_Id })
-                                         .ToDictionary(g =>
+                var result = await _transactions
+                                          .Include(x => x.Category)
+                                          .Where(a => a.Amount < 5000)
+                                          .OrderBy(x => x.Amount)
+                                          .ThenByDescending(x => x.Date)
+                                          .Take(5)
+                                          .ToListAsync();
 
-                                             $"{new DateTime(g.Key.Year, g.Key.Month, 1):MMM/yyyy}/{g.Key.User_Id}",
-                                             g => g.GroupBy(t => (double)t.Amount)
-                                                   .OrderByDescending(x => x.Count())
-                                                   .Select(x => x.Key)
-                                                   .FirstOrDefault()
+                return result;
 
-                                         );
-                return modeIncome;
+
             }
             catch (ArgumentException)
             {
                 throw;
             }
+            catch (Exception)
+            {
+                throw;
+            }
         }
-        */
 
     }
 

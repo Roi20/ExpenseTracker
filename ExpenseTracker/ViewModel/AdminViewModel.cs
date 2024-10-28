@@ -8,7 +8,8 @@ namespace ExpenseTracker.ViewModel
     {
         public IEnumerable<Category> Categories { get; set; }
         public Category Category { get; set; }
-        public IEnumerable<Transaction> Transactions { get; set; }
+        public IEnumerable<Transaction> HighestTransactions { get; set; }
+        public IEnumerable<Transaction> LowestTransactions { get; set; }
         public Transaction Transaction { get; set; }
         public IEnumerable<AppIdentityUser> Users { get; set; }
         public int RegisteredUsersCount { get; set; }

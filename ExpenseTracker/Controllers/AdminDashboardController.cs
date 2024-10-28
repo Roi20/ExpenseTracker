@@ -30,6 +30,8 @@ namespace ExpenseTracker.Controllers
                     FinancialTrendData = await _repo.GetOveraAllMonthlyAverages(),
                     ModeDataSummary = await _repo.GetOverallMonthlyMode(),
                     TopListCategories = await _repo.TopCategories(),
+                    HighestTransactions = await _repo.RecentBiggestTransactions(),
+                    LowestTransactions = await _repo.RecentLowestTransactions()
 
                 };
 

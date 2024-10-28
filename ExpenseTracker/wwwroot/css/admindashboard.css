@@ -105,3 +105,46 @@
     border-radius: 8px;
     margin-left: auto;
 }
+
+.fourth-section {
+    background: #17181d;
+    margin-top: 5px;
+    border-radius: 12px;
+    padding: 10px;
+    gap: 2px;
+}
+
+.recent-biggest-transactions,
+.recent-lowest-transactions{
+    background: #272e36;
+    border-radius: 8px;
+    padding: 0;
+    
+}
+
+.recent-biggest-transactions h5,
+.recent-lowest-transactions h5{
+
+    color: #FFFFFF;
+    padding: 20px 0 10px 10px;
+    text-align: center;
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+.highest-transaction-table,
+.lowest-transaction-table{
+    padding: 0 10px 10px 10px;
+}
+
+.admindashboard-table-content th,
+.admindashboard-table-content td {
+    padding: 10px 15px;
+    font-size: .8em;
+    color: #FFFFFF;
+}
+
+
+.fourth-section table{
+    width: 100%;
+}

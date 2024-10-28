@@ -22,8 +22,8 @@
 }
 
 .firstDiv .row{
-    column-gap: 8px;
-    row-gap: 8px;
+    column-gap: 5px;
+    row-gap: 5px;
     padding: 2px 1rem;   
 }
 
