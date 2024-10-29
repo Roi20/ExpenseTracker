@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using ExpenseTracker.Data;
 using ExpenseTracker.Common;
 using ExpenseTracker.Services;
+using ExpenseTracker.Hubs;
 //ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
 
@@ -69,12 +70,15 @@ builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 builder.Services.AddScoped<IAdminDashboardRepository, AdminDashboardRepository>();
 
 //EmailService Dependency
-builder.Services.AddScoped<IEmailServiceAsync, EmailServiceAsync>();
+builder.Services.AddSingleton<IEmailServiceAsync, EmailServiceAsync>();
+
+//SignalR
+builder.Services.AddSignalR();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
+//Razor Pages 
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
@@ -151,5 +155,5 @@ app.MapControllerRoute(
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 
-
+app.MapHub<NotificationHub>("/notification");
 app.Run();

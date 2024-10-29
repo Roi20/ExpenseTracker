@@ -211,6 +211,7 @@ canvas {
 .latest-div{
     width: 100%;
     padding: 15px;
+    padding-top: 3px;
 }
 
 .dashboard-table {
