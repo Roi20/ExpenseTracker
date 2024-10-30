@@ -2,7 +2,6 @@
 using ExpenseTracker.Contracts;
 using Microsoft.Extensions.Options;
 using MimeKit;
-//using System.Net.Mail;
 using MailKit.Net.Smtp;
 using MailKit.Security;
 
