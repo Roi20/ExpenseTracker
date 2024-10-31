@@ -1,9 +1,11 @@
 ﻿@model UserViewModel
-
 @{
     ViewData["CurrentPage"] = "UploadProfile";
     Layout = "_LayoutNoSidebar";
     var user = ViewBag.User;
+
+    //var userEmail = await UserManager.FindByEmailAsync(Model.User.Email?? string.Empty);
+    
 }
 
 
@@ -15,16 +17,12 @@
     <div class="wrapper">
         <div class="content">
             <span id="exit-btn-span">
-                <a asp-controller="Dashboard" asp-action="Index" id="exit-btn">&times;</a>
+                <a asp-controller="@(await UserManager.IsInRoleAsync(Model.User, "Admin") ? "AdminUser" : "Dashboard")" asp-action="Index" id="exit-btn">&times;</a>
             </span>
             <div class="profile-title">
                 <h3>Profile Settings</h3>
                 <p>Here you can edit your profile picture and update your personal information.</p>
             </div>
-            @*if(TempData["SuccessMessage"] != null)
-            {
-              
-            }*@
             <div class="profile-container">
                 <div class="profile-image-container">
                     @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
@@ -55,7 +53,7 @@
                 </div>
             </div>
             <div class="personal-info-container">
-                <form asp-action="UpdateUserInfo" method="post" id="personal-info-form">
+                <form  asp-action="UpdateUserInfo" method="post" id="personal-info-form">
                     @Html.AntiForgeryToken()
                     <div class="info-div first-div">
                         <div class="input-wrapper">

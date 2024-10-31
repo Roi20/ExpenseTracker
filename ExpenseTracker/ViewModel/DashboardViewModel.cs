@@ -1,7 +1,8 @@
-﻿using ExpenseTracker.Data;
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 
-namespace ExpenseTracker.Common
+namespace ExpenseTracker.ViewModel
 {
     public class DashboardViewModel
     {
@@ -12,6 +13,6 @@ namespace ExpenseTracker.Common
         public IEnumerable<Transaction> Transactions { get; set; }
         public LineChartData LineChartData { get; set; }
         public AppIdentityUser User { get; set; }
-        
+
     }
 }

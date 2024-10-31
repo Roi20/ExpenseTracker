@@ -1,0 +1,150 @@
+﻿
+.admin-dashboard-wrapper{
+    height: 100%;
+    width: 100%;
+    padding: 15px 20px 30px 20px;
+}
+
+.first-section{
+    gap: 2px;
+}
+
+.first-section .col-sm{
+    padding: 0;
+    height: 100px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+#user-div {
+    background: #17181d;
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+}
+
+#user-div span{
+    font-size: .9em;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+    display: flex;
+    align-items: center;
+}
+
+#user-div span .fa-solid{
+    padding-right: 4px;
+    font-size: 1.2em;
+}
+
+#user-div h6{
+    height: 70%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #FFFFFF;
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-weight: 500;
+
+}
+
+.second-section {
+    background: #17181d;
+    margin-top: 5px;
+    border-radius: 12px;
+    padding: 10px;
+    gap: 2px;
+}
+
+.financial-trend-wrapper{
+    padding: 0;
+    background: #272e36;
+    border-radius: 8px;
+}
+
+.second-section h5,
+.third-section h5{
+    padding: 15px 10px 0px 10px;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.second-section p,
+.third-section p{
+    font-size: .7em;
+    text-align: center;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+}
+
+.third-section {
+    background: #17181d;
+    margin-top: 5px;
+    border-radius: 12px;
+    padding: 10px 10px 10px 10px;
+}
+
+.mode-chart-wrapper {
+    padding: 0;
+    background: #272e36;
+    border-radius: 8px;
+}
+
+.mode-chart-wrapper .mode-chart{
+    padding-bottom: 5px;
+}
+
+.category-chart-wrapper {
+    padding: 0;
+    background: #272e36;
+    border-radius: 8px;
+    margin-left: auto;
+}
+
+.fourth-section {
+    background: #17181d;
+    margin-top: 5px;
+    border-radius: 12px;
+    padding: 10px;
+    gap: 2px;
+}
+
+.recent-biggest-transactions,
+.recent-lowest-transactions{
+    background: #272e36;
+    border-radius: 8px;
+    padding: 0;
+    
+}
+
+.recent-biggest-transactions h5,
+.recent-lowest-transactions h5{
+
+    color: #FFFFFF;
+    padding: 20px 0 10px 10px;
+    text-align: center;
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+.highest-transaction-table,
+.lowest-transaction-table{
+    padding: 0 10px 10px 10px;
+}
+
+.admindashboard-table-content th,
+.admindashboard-table-content td {
+    padding: 10px 15px;
+    font-size: .8em;
+    color: #FFFFFF;
+}
+
+
+.fourth-section table{
+    width: 100%;
+}

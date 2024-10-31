@@ -1,0 +1,212 @@
+﻿@model PaginatedResult<AppIdentityUser>
+
+
+@{
+    Layout = "_LayoutAdmin";
+
+    ViewData["Admin"] = "Admin";
+
+}
+
+
+@section CustomStyles
+{
+    <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")"/>
+}
+
+@{
+
+    ViewData["CurrentPage"] = "AdminUserIndex";
+    ViewData["Title"] = "AdminUser";
+    
+    var currentPage = Model.Page;
+    var totalPageCount = Model.TotalPage;
+    var maxPageDisplay = 5;
+    var startPage = Math.Max(1, currentPage - maxPageDisplay / 2);
+    var endPage = Math.Min(totalPageCount, startPage + maxPageDisplay - 1);
+
+    if (endPage - currentPage < maxPageDisplay && startPage > 1)
+    {
+        startPage = Math.Max(1, endPage - maxPageDisplay - 1);
+    }
+    
+}
+@if(TempData["Message"] != null)
+{
+    <partial name="_PopUpSuccessModal" />
+}
+<partial name="_FormModals" />
+<partial name="_RoleAlertMessage" />
+<div class="admin-main-container">
+    <partial name="_Navbar" />
+    <div class="search-bar">
+        <div class="searchForm col-sm-4 p-0 float-start">
+            <form asp-action="Index" method="get" class="bg-dark search-form">
+                @Html.AntiForgeryToken()
+                <input type="text"
+                       placeholder="Search.."
+                       name="s"
+                       value="@Model.SearchKeyword" />
+                <button type="submit">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="col-2 sortForm p-0">
+            <span id="sort-icon">
+                <i class="fa-solid fa-arrow-down-a-z"></i>
+            </span>
+            <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
+                <select class="form-select bg-dark" name="sort" onchange="this.form.submit()" id="dataDisplaySelect">
+                    <option value="" class="font-monospace" disabled selected>@(string.IsNullOrEmpty(ViewBag.SortOrder) ? "Sort by" : ViewBag.SortOrder)</option>
+                    <option value="@(ViewBag.SortOrder == "Email" ? "Email Desc" : "Email")" class="font-monospace">Email</option>
+                    <option value="@(ViewBag.SortOrder == "Firstname" ? "Firstname Desc" : "Firstname")" class="font-monospace">Firstname</option>
+                    <option value="@(ViewBag.SortOrder == "Lastname" ? "Lastname Desc" : "Lastname")" class="font-monospace">Lastname</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="admin-content">
+        <div class="title-container pt-0">
+            <span class="title">
+                List of Users
+            </span>
+            <a class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createModal">
+                <span class="">
+                    <i class="fa-solid fa-plus"></i> Add User
+                </span>
+            </a>
+        </div>
+        <div class="col-12 search-bar-holder">
+            <div class="filter-transaction">
+              
+            </div>
+        </div>
+        <div class="col-12 table-div table-responsive">
+            <table class="table table-dark table-striped table-hover" id="ntransaction-table">
+                <thead>
+                    <tr>
+                        <th>Email</th>
+                        <th>Firstname</th>
+                        <th>Lastname</th>
+                        <th>Assign Role</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model.Result)
+                    {
+                        <tr>
+                            <td>@user.Email</td>
+                            <td>@user.FirstName</td>
+                            <td>@user.LastName</td>
+                            <td>
+                                <div class="role-select" id="role-select">
+                                    <form method="post" asp-controller="AdminUser" asp-action="AssignRole" class="mb-0" id="dataDisplay">
+                                        @Html.AntiForgeryToken()                                     
+                                        <select class="form-select bg-dark" name="role" onchange="this.form.submit()" id="dataDisplaySelect">
+                                            @{
+
+                                                var isModerator = await UserManager.IsInRoleAsync(user, "Moderator");
+                                                var isUser = await UserManager.IsInRoleAsync(user, "User");
+                                            }
+                                            <option value="" class="font-monospace" disabled selected>@(isModerator ? "Moderator" : isUser ? "User" : "Select Role")</option>
+                                            <option value="Moderator" class="font-monospace">Moderator</option>
+                                            <option value="User" class="font-monospace">User</option>
+                                        </select>
+                                        <input type="hidden" name="userId" value="@user.Id" />
+                                    </form>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="text-start">
+                                    <a asp-action="Update" asp-route-id="@user.Id" class="text-warning text-decoration-none me-1 update-user"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Update">
+                                        <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@user.Id" class="text-danger text-decoration-none ms-1 delete-user"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Delete">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col pagination-div mt-0 pt-0">
+            <div class="pagination-content">
+                <div class="pagination">
+                    <ul class="ulList">
+                        <li class="page-item @(Model.Page == 1 || Model.TotalPage == 0 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.Page == 1)"
+                               asp-route-sort="@ViewBag.SortOrder)">
+                                <span>
+                                    First
+                                </span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.Page == 1  || Model.TotalPage == 0 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.Page - 1)"
+                               asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    <i class="fa-solid fa-angles-left"></i>
+                                </span>
+                            </a>
+                        </li>
+                        @for (var pageNumber = startPage; pageNumber <= endPage; pageNumber++)
+                        {
+                            <li class="page-item @(pageNumber == currentPage ? "active" : "")">
+                                <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                                   asp-route-p="@(pageNumber)"
+                                   asp-route-sort="@ViewBag.SortOrder">
+                                    @pageNumber
+                                </a>
+                            </li>
+                        }
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0  ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.Page + 1)"
+                               asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    <i class="fa-solid fa-angles-right"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li class="page-item @(Model.Page == Model.TotalPage || Model.TotalPage == 0 ? "disabled" : "")">
+                            <a class="page-link" asp-route-s="@(Model.SearchKeyword)"
+                               asp-route-p="@(Model.TotalPage)"
+                               asp-route-sort="@ViewBag.SortOrder">
+                                <span>
+                                    Last
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}
+
+@section CustomScripts {
+
+    <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <!--script src="@Url.Content("~/js/site.js")"></!--script-->    
+
+}

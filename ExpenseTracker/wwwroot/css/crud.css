@@ -2,74 +2,6 @@
     letter-spacing: 1px;
 }
 
-.navBar {
-    background: none;
-    height: 45px;
-    margin-bottom: 4px;
-    border-radius: 0 0 3px 3px;
-    display: flex;
-    padding: 0 10px 0 10px;
-    overflow: hidden;
-}
-
-.navBar .navUl{
-    display: flex;
-    list-style-type: none;
-    list-style: none;
-    background: none;
-    margin-top: auto;
-    margin-bottom: auto;
-    width: 100%;
-    text-align: center;
-    padding: 5px 0 5px 0;
-    justify-content: flex-start;
-    overflow: hidden;
-    color: #FFFFFF;
-}
-
-
-
-.navBar .navUl li{
-    
-    background: none;
-    padding-bottom: 0;
-    display: flex;
-    align-items: center;
-    padding: 0 15px 0 0px;
-    font-size: .7em;
-    font-weight: 500;
-}
-
-.navBar .navUl li a{
-    text-decoration: none;
-    color: #FFFFFF;
-    font-weight: 500;
-}
-
-
-.navBar .navUl li a:hover, 
-.navBar .navUl button:hover {
-    color: #db4b43;
-}
-
-
-.navBar .navUl button{
-    background: none;
-    width: 100%;
-    border: none;
-    font-weight: 500;
-    color: #FFFFFF;
-    font-size: 1em !important;
-
-}
-
-
-.navBar .navUl li:last-child{
-   display: none;
-}
-
-
-
 .title-container{
     color: #e0e0e0;
     display: flex;
@@ -260,6 +192,7 @@
     margin-top: 2px;
     margin-bottom: 0;
     padding-bottom: 0;
+   
 }
 
 .table-content .action-button a{
@@ -268,11 +201,12 @@
 }
 
 
-.table-content{
+.table-content {
     width: 100%;
     padding: 20px;
     border-radius: 8px 8px 0 0;
     overflow: hidden;
+    max-width: 100%;
 }
 
 .table-content thead tr{
@@ -293,7 +227,7 @@
 
 .table-content th,
 .table-content td{
-    padding: 10px 15px;
+    padding: 1em .2em;
 }
 
 .table-content tbody tr{
@@ -329,6 +263,8 @@
 .pagination-div {
     margin-top: 0;
     padding: 0 10px 0px 10px;
+    display: block;
+    
 }
 
 .pagination-content {
@@ -518,13 +454,6 @@ ulList li.disabled a {
 }
 
 
-
-
-
-
-
-
-
 /*Success Modal Customization*/
 .overlay
 {
@@ -630,11 +559,12 @@ ulList li.disabled a {
 
     .table-content th,
     .table-content td {
-        padding: 8px .2em;
+        padding: 15px .2em;
         font-size: .8em;
     }
-
-
+    .title-container{
+        padding-top: 20px;
+    }
 }
 
 @media only screen and (width > 768px){

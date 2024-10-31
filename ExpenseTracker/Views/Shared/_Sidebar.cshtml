@@ -1,12 +1,93 @@
-﻿@{
+﻿
+@{
     var user = ViewBag.User;
+
 }
 <div class="sidebar-wrapper">
-    <div class="profile-image">
-        <p class="text-light">@user.FirstName</p>
-        <p class="text-light">@user.LastName</p>
-        <p class="text-light">@user.Email</p>
+    <div class="profile-img-holder">
+        <div class="sidebar-profile-image">
+            @if (!string.IsNullOrEmpty(Model.User.ProfilePicturePath))
+            {
+                <img src="~/@Model.User.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
+            }
+            else
+            {
+                <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" />
+            }
+        </div>
     </div>
+    <div class="sidebar-name-occupation">
+       <div class="name-occupation">
+           <span class="name">@Model.User.FirstName</span>
+           <span class="occupation">@Model.User.SourceOfIncome</span>
+       </div>
+    </div>
+    <div class="sidebar-menu">
+        <span class="main-menu-text">Main Menu</span>
+        <ul class="sidebar-menu-list">
+            <li>
+                <a asp-controller="Home" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-house"></i> Home
+                    </span>
+                </a>
+            </li>
+            <li>
+               <a asp-controller="Dashboard" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-chart-simple"></i> Dashboard
+                    </span>
+                </a>
+             </li>
+            <li>
+               <a asp-controller="Category" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-table-list"></i> Category
+                    </span>
+               </a>
+            </li>
+            <li>
+               <a asp-controller="Transaction" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-file-contract"></i> Transaction
+                    </span>
+               </a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-settings">
+        <span class="profile-setting-text">Account Settings</span>
+        <ul class="sidebar-profile-setting">
+            <li>
+                <a asp-controller="UploadProfilePicture" asp-action="Index">
+                    <span>
+                        <i class="fa-solid fa-id-badge"></i> Profile Settings
+                    </span>
+               </a>
+            </li>
+            <li>
+                <a  asp-area="Identity" asp-page="/Account/ForgotPassword">
+                    <span>
+                        <i class="fa-solid fa-shield-halved"></i>Password
+                    </span>
+                </a>
+            </li>
+            <li id="logout-btn">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                        <span>
+                            <button type="submit">
+                                <i class="fa-solid fa-right-from-bracket"></i> Logout
+                            </button>
+                        </span>
+                    </form>
+                }
+            </li>
+        </ul>
+    </div>
+    <hr />
+    <span class="text-secondary" style="display: flex; padding: 10px; justify-content: center; align-items: center; letter-spacing: 1px; font-size:.7em">Expense Tracker App</span>
 </div>
 
 

@@ -1,37 +1,38 @@
-﻿<div class="navBar" id="navBar">
+﻿@{
+    var user = ViewBag.User;
+}
+
+<div class="navBar" id="navBar">
     <ul class="navUl">
-        <li>
-            <a asp-controller="Home" asp-action="Index">
-                <span><i class="fa-solid fa-house"></i> Home</span>
-            </a>
-        </li>
-        <li>
-            <a asp-controller="Dashboard" asp-action="Index">
+        <li class="toggle-btn" style="@(ViewData["Admin"]?.ToString() == "Admin"? "display: none" : "")">
+            <button type="button" onclick="sidebarOnclick()" id="toggle-btn">
                 <span>
-                    <i class="fa-solid fa-chart-line"></i> Dashboard
-                </span>
-            </a>
-        </li>
-        <li>
-            <a asp-controller="Category" asp-action="Index">
-                <span>
-                    <i class="fa-solid fa-list"></i> Category
-                </span>
-            </a>
-        </li>
-        <li>
-            <a asp-controller="Transaction" asp-action="Index">
-                <span>
-                    <i class="fa-solid fa-list"></i> Transactions
-                </span>
-            </a>
-        </li>
-        <li>
-            <button type="button" onclick="sidebarOnclick()"  id="toggle-btn">
-                <span>
-                    <i class="fa-solid fa-circle-arrow-right"></i>  Sidebar
+                    <i class="fa-solid fa-angles-right" id="right-arrow"></i>
                 </span>
             </button>
+        </li>
+        <li id="notif-bell">
+             <button>
+                 <span>
+                    <i class="fa-solid fa-bell"></i>
+                 </span>
+             </button>
+        </li>
+        <li>
+            <div class="navbar-profile">
+                @if (!string.IsNullOrEmpty(user.ProfilePicturePath))
+                {
+                   <a asp-action="Index" asp-controller="UploadProfilePicture">
+                        <img src="~/@user.ProfilePicturePath" alt="Profile Picture" class="profile-picture" />
+                   </a>
+                }
+                else
+                {
+                    <a asp-action="Index" asp-controller="UploadProfilePicture">
+                        <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" />
+                    </a>
+                }
+            </div>
         </li>
     </ul>
 </div>
@@ -41,3 +42,4 @@
     <script src="@Url.Content("~/js/site.js")"></script>
 
 }
+

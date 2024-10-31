@@ -1,0 +1,592 @@
+﻿::-webkit-scrollbar {
+    width: 5px; 
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #212b38; 
+    border-radius: 10px; 
+}
+
+::-webkit-scrollbar-track {
+    background: #000000; 
+} 
+
+
+
+
+.admin-main-container{
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.admin-content{
+
+    padding: 0 10px 2px 10px;
+}
+
+.search-bar {
+    
+    padding: 10px 8px 10px 8px;
+    width: 100%;
+    align-items: center;
+    
+}
+
+.search-bar .searchForm{
+    padding: 0 10px 0px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+   
+}
+
+.searchForm .search-form{
+    width: 100%;
+    padding: 0 0px 0 16px;
+}
+
+.sortForm {
+    margin-left: auto;
+    display: flex;
+   
+}
+
+.sortForm #sort-icon{
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: .9em;
+    color: #FFFFFF;
+}
+
+.sortForm form{
+    height: 100%;
+    background: none;
+    width: 80%;
+    margin-left: auto;
+}
+.sortForm form select{
+    font-size: .7em !important;
+    height: 36px;
+    letter-spacing: 1px;
+    display: flex;
+    text-align: center;
+    padding: 0;
+    justify-content: center;
+    border: none;
+    color: #FFFFFF;
+}
+
+
+.search-bar form input{
+    width: 85%;
+    border: none;
+    height: 38px;
+    background: none;
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: bold;
+    color: #FFFFFF;
+
+}
+
+.search-bar form input::placeholder{
+    letter-spacing: 1px;
+}
+
+.search-bar form input:focus{
+    outline: none;
+}
+
+
+.search-bar form button{
+    width: 10%;
+    border: none;
+    background: none;
+    color: #FFFFFF;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+
+.title-container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: .9em;
+}
+
+.title-container a{
+    font-size: .8em;
+}
+
+
+.table-div{
+    padding-top: 8px;
+}
+
+
+.table-div .table thead tr th {
+    font-weight: bold;
+}
+
+.table-div .table thead tr th,
+.table-div .table tbody tr td {
+    padding: .8em .5em;
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+.table{
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+.table .role-select{
+    width: 70%;
+   
+}
+
+.table .role-select form select{
+     height: 32px;
+     border: none;
+     color: #FFFFFF;
+     font-size: .8em;
+     letter-spacing: 1px;
+}
+
+
+/*Pagination*/
+.pagination-div {
+    margin-top: 0;
+    padding: 0 0px 0px 0px;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    display: flex;    
+}
+
+.pagination-content {
+    background: #212b38;
+    padding: 10px;
+    border-radius: 0px 0px 8px 8px;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    justify-content: center;
+   
+}
+
+.pagination {
+    align-items: center;
+    text-align: center;
+    padding: 0;
+}
+
+.ulList{
+   
+    padding: 0;
+    margin-left: 0;
+    margin: auto;
+    display: flex;
+    width: 100%;
+    font-size: .9em;
+}
+
+.ulList li{
+    list-style: none;
+    list-style-type: none;
+    margin-left: 10px;
+    display: inline-block;
+    border-radius: 50%;
+   
+}
+
+.ulList li a{
+    color: #a5a9ae;
+    font-weight: bold;
+    font-size: .9em;
+    letter-spacing: 2px;
+}
+.ulList li a:hover{
+    color: #FFFFFF;
+}
+
+.ulList li.active a{
+    font-size: 1.1em;
+}
+
+.ulList li.disabled a span{
+    color: #17181d !important;
+}
+
+
+.ulList li a,
+ulList li.disabled a {
+    border: none;
+    background: none !important;
+}
+
+.modal{
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    border-radius: 12px;
+}
+.modal-content{
+    border-radius: 10px;
+    background: #1d1d1d;
+    padding: 0;
+}
+
+.modal-header .cancel-btn{
+    color: #FFFFFF;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.modal-title{
+    font-size: 1.5em;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+
+#createForm, 
+#updateForm{
+    background: none;
+    padding: 20px;
+}
+
+#createForm label,
+#updateForm label{
+    letter-spacing: 1px;
+    font-size: .9em;
+    padding: 15px 0 5px 5px;
+}
+
+#createForm input,
+#updateForm input{
+    width: 100%;
+    height: 45px;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 10px 10px 10px;
+    letter-spacing: 1px;
+    font-size: .9em;
+}
+
+#createForm input:focus,
+#updateForm input:focus{
+    outline: none;
+}
+
+#createForm button:not(.cancel-btn),
+#updateForm button:not(.cancel-btn){
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+}
+/*Update Form*/
+#updateForm #update-cancel{
+    font-size: .9em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    font-variant-caps: all-small-caps;
+}
+
+#updateForm .cancel-btn{
+    text-decoration: none;
+}
+/*Update Form*/
+
+ #updateForm .cancel-btn:hover,
+ #createForm .cancel-btn:hover{
+     color: #6c757d;
+ }
+
+
+#createForm span,
+#updateForm span {
+     display: flex;
+     font-size: .9em;
+     justify-content: center;
+     letter-spacing: 1px;
+     padding-bottom: 1px;
+
+}
+
+/*Delete Form/Modal*/
+
+
+#deleteModal .modal-content{
+    min-height: 250px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+#deleteModal #deleteForm{
+    width: 100%;
+    height: 100%;
+    padding: 0 10px 0 10px;
+}
+
+#deleteModal .cancel-btn{
+    text-decoration: none;
+}
+
+#deleteModal .cancel-btn:hover{
+    color: #6c757d;
+}
+
+
+#deleteModal #deleteForm p{
+    text-align: center;
+    font-size: .9em;
+    letter-spacing: 1px;
+}
+
+
+#deleteModal .modal-body{
+    justify-content: center;
+}
+
+#deleteModal .modal-header,
+#deleteModal .modal-footer{
+    border: none;
+}
+
+#deleteForm #delete-confirm,
+#deleteForm #delete-cancel{
+    font-size: .9em;
+    font-weight: 500;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+}
+
+/*End Delete form*/
+
+/*Admin SideBar*/
+
+.admin-sidebar-wrapper{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 50px 10px 5px 5px;
+}
+
+.admin-sidebar-wrapper .sidebar-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.admin-sidebar-wrapper .sidebar-title h3{
+    font-size: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+}
+
+.admin-sidebar-wrapper hr{
+   border: 1px solid #FFFFFF; 
+   margin-top: 20px;
+}
+
+.admin-sidebar-wrapper .sidebar-content{
+    padding: 0;
+}
+
+.admin-sidebar-wrapper 
+.sidebar-content
+.sidebar-list{
+    list-style: none;
+    margin-bottom: 0;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    padding-left: 0;
+}
+
+.admin-sidebar-wrapper 
+.sidebar-content
+.sidebar-list li:not(:last-child){
+    margin-bottom: 30px;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    font-size: .8em;
+}
+
+.sidebar-list #admin-logout form span{
+    display: flex;
+}
+.sidebar-list 
+#admin-logout 
+form span button{
+    background: none;
+    padding-left: 0;
+    border: none;
+    color: #FFFFFF;
+    letter-spacing: 1px;
+    font-size: .8em;
+}
+
+.sidebar-list li span .fa-solid{
+    padding-right: 15px;
+    color: #FFFFFF;
+}
+
+
+.sidebar-list
+#admin-logout
+form span button
+.fa-solid {
+    padding-right: 12px;
+    color: #FFFFFF;
+}
+
+.sidebar-list li a{
+    text-decoration: none;
+    color: #FFFFFF;
+}
+.sidebar-list li{
+    transition: all .3s ease-in-out;
+}
+
+
+.sidebar-list li:hover {
+    background: #212b38;
+    padding: 0 5px 0 5px;
+    border-radius: 5px;
+}
+
+
+
+
+
+/*Success Modal Customization*/
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+    .overlay .popup {
+        background: #1F1B24;
+        margin: auto;
+        max-width: 400px;
+        min-width: 30%;
+        border-radius: 5px;
+        padding: 20px;
+        transition: all 1s ease-in-out;
+        animation: popup;
+        animation-duration: 2s;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-timing-function: ease-in-out;
+        -moz-animation-duration: 2s;
+        -webkit-animation-duration: 2s;
+        -moz-animation-timing-function: ease-in-out;
+        animation-timing-function: ease-in-out;
+        -webkit-animation-timing-function: ease-in-out;
+    }
+/*Modal popup animation*/
+@keyframes popup {
+    from {
+        -moz-transform: translate(-0%, -100%) scale(0.1);
+        -webkit-transform: translate(-0%, -100%) scale(0.1);
+        -ms-transform: translate(-0%, -100%) scale(0.1);
+    }
+
+    to {
+        -moz-transform: scale(1);
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+    }
+}
+
+
+/*Modal popup animation - End*/
+.overlay .popup img {
+    width: 100px;
+    margin-top: -65px;
+    box-shadow: 0 2px 5px rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+}
+
+.overlay .popup h2 {
+    margin-top: 10px;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+}
+
+.overlay .popup p {
+    margin-top: 10px;
+    color: #FFFFFF;
+    word-wrap: break-word;
+    width: 100%;
+    text-align: center;
+}
+
+.overlay .popup button {
+    border-radius: 20px/50px;
+    border: none;
+    background-color: #81F580;
+    margin-top: 30px;
+    width: 40%;
+    height: 40px;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+    transition: background-color .5s ease-in-out;
+}
+
+    .overlay .popup button:hover {
+        background-color: #B00020;
+    }
+
+
+
+
+@media screen and (max-width: 768px){
+    .pagination-content{
+        overflow-x: scroll;
+    }
+
+    sortForm {
+        gap: 10px;
+        display: flex;
+    }
+
+    .sortForm #sort-icon{
+        padding-right: 10px;
+    }
+    #createForm {
+        overflow-y: scroll;
+    }
+}

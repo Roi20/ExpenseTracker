@@ -1,4 +1,16 @@
 ﻿
+::-webkit-scrollbar {
+    width: 5px; /* Change this value to your desired width */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #212b38; /* Color of the scrollbar thumb */
+    border-radius: 10px; /* Optional: Rounded corners */
+}
+
+::-webkit-scrollbar-track {
+    background: #000000; /* Background of the scrollbar track */
+} 
 
 html {
   font-size: 14px;
@@ -37,18 +49,10 @@ html, body {
 }
 
 
-.sideBar {
-    width: 220px;
-    z-index: 999;
-    background: #17181d;
-    opacity: 1;
-    transition: all .5s ease-in;
-    display: block;
-}
-
 .main-layout{
     flex: 1;
     overflow-y: scroll;
+    transition: all .8s ease-in-out;
 }
 
 
@@ -60,6 +64,229 @@ body {
     height: 100vh;
 }
 
+
+/*SideBar Start*/
+.sideBar {
+    width: 220px;
+    z-index: 999;
+    background: #090909; /*#17181d*/
+    opacity: 1;
+    transition: all .5s ease-in;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 15px 10px 20px 10px;
+}
+
+.sidebar-wrapper{
+    display: flex; 
+    flex-direction: column;
+}
+
+.sidebar-wrapper hr{
+    color: #FFFFFF;
+}
+
+.profile-img-holder {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+.sidebar-profile-image{
+    border: 2px solid #FFFFFF;
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sidebar-profile-image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+.sidebar-name-occupation{
+    padding: 15px 10px 10px 10px;
+    display: flex;
+    justify-content: center;
+    font-size: 1em;
+    letter-spacing: 1px;
+    font-weight: 500;
+    color: #FFFFFF;
+
+}
+
+.name-occupation{
+    display: flex;
+    flex-direction: column;
+}
+
+.name-occupation .occupation{
+    color: #9FA6B2;
+    font-size: .7em;
+    letter-spacing: 1px;
+    text-align: center;
+}
+
+.name-occupation .name{
+    text-align: center;
+}
+
+.sidebar-menu{
+    padding-top: 8px;
+}
+.sidebar-settings{
+    padding-top: 5px;
+}
+
+.sidebar-menu .main-menu-text,
+.sidebar-settings .profile-setting-text{
+    color: #FFFFFF;
+    font-size: .8em;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+.sidebar-menu-list,
+.sidebar-profile-setting {
+    text-decoration: none;
+    color: #FFFFFF;
+    list-style: none;
+    padding-top: 12px;
+    margin-bottom: 0;
+}
+
+.sidebar-menu-list li,
+.sidebar-profile-setting li{
+    padding: 10px 5px 10px 5px;
+    border-radius: 5px;
+}
+
+.sidebar-menu-list li:hover,
+.sidebar-profile-setting li:hover{
+    background: #17181d;
+}
+
+.sidebar-menu-list li span,
+.sidebar-profile-setting li span{
+    display: flex;
+    align-items: center;
+    font-size: .7em;
+    letter-spacing: 2px;
+
+}
+
+.sidebar-menu-list li .fa-solid,
+.sidebar-profile-setting li .fa-solid{
+    padding-right: 15px;
+    font-size: 1em !important;
+}
+
+.sidebar-menu-list li a,
+.sidebar-profile-setting li a{
+   text-decoration: none;
+   color: #FFFFFF;
+}
+
+.sidebar-profile-setting .form{
+    display: flex;
+    align-items: center;
+}
+
+.sidebar-profile-setting .form span{
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    align-items: center;
+}
+
+.sidebar-profile-setting .form span button{
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    font-size: 1em;
+    color: #FFFFFF;
+    letter-spacing: 2px;
+    padding-left: 0;
+}
+
+.navBar {
+    transition: all .8s ease-in-out;
+}
+
+.navUl{
+    list-style: none;
+    padding: 10px 10px 10px 5px;
+    transition: all .8s ease-in-out;
+    display: flex;
+    align-items: center;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.navUl #toggle-btn{
+    background: none;
+    border: none;
+    transition: all .8s ease-in-out;
+    color: #FFFFFF;
+    font-size: .9em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all .8s ease-in-out;
+}
+
+.navUl .navbar-profile{
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border: 2px solid #FFFFFF;
+    border-radius: 50%;
+
+}
+
+.navUl .navbar-profile img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.navUl #notif-bell{
+    margin-left: auto;
+    padding-right: 10px;
+}
+
+.navUl #notif-bell button{
+    color: #FFFFFF;
+    background: none;
+    border: none;
+    font-size: 1.2em;
+}
+
+
+
+/*Admin Side*/
+
+#admin-sidebar {
+    width: 220px;
+    z-index: 999;
+    background: #17181d;
+    opacity: 1;
+    transition: all .5s ease-in;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    padding: 15px 10px 20px 10px;
+}
+
+
 @media screen and (max-width: 768px) {
     /* For mobile phones: */
 
@@ -69,7 +296,11 @@ body {
         opacity: 0;
         transition: all .5s ease-in;
     }
-
+    #admin-sidebar {
+      // display: none;
+      // opacity: 0;
+      // transition: all .5s ease-in;
+    }
 
 }
 
@@ -77,6 +308,7 @@ body {
 
     .main-layout {
         margin-left: 0;
+        
     }
 }
 

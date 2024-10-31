@@ -1,0 +1,76 @@
+﻿@model PaginatedResult<AppIdentityUser>
+
+@{
+    Layout = "_LayoutNoSidebar";
+}
+
+@section CustomStyles{
+    <link rel="stylesheet" href="@Url.Content("~/css/adminlayout.css")"/>
+}
+
+@if (TempData["ResultErrorMessage"] != null)
+{
+    <script>
+        var message = JSON.parse('@Html.Raw(Json.Serialize(TempData["ResultErrorMessage"]))');
+        alert(message);
+    </script>
+}
+
+<div class="modal fade" id="updateModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <form asp-action="Update" method="post" asp-route-id="@Model.Entity.Id" id="updateForm">
+                @Html.AntiForgeryToken()
+                <div class="modal-header">
+                    <h1 class="modal-title" id="exampleModalLabel">Update</h1>
+                    <a type="button" asp-action="Index" class="cancel-btn">&times;</a>
+                </div>
+                <div class="modal-body">
+                    @Html.HiddenFor(x => x.Entity.Id)
+                    <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+                    <label asp-for="@Model.Entity.Email"></label>
+                    <span asp-validation-for="@Model.Entity.Email" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.Email" autocomplete="username" id="email" aria-required="true" placeholder="Email" />
+                    </div>
+                    <label asp-for="@Model.Entity.FirstName"></label>
+                    <span asp-validation-for="@Model.Entity.FirstName" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.FirstName" autocomplete="firstname" id="firstname" aria-required="true" placeholder="First Name" />
+                    </div>
+                    <label asp-for="@Model.Entity.LastName"></label>
+                    <span asp-validation-for="@Model.Entity.LastName" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.LastName" autocomplete="lastname" id="lastname" aria-required="true" placeholder="Last Name" />
+                    </div>
+                    <label asp-for="@Model.Entity.SourceOfIncome"></label>
+                    <span asp-validation-for="@Model.Entity.SourceOfIncome" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.SourceOfIncome" id="sourceofincome" autocomplete="occupation" aria-required="true" placeholder="Source of income" />
+                    </div>
+                    <label>Password</label>
+                    <span asp-validation-for="@Model.Entity.Password" class="text-danger"></span>
+                    <div class="create-input">
+                        <input asp-for="@Model.Entity.Password" id="password" autocomplete="" aria-required="true" placeholder="Password" type="password" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a asp-action="Index" class="btn btn-secondary" id="update-cancel">Close</a>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+@section CustomScripts{
+
+    <script src="@Url.Content("~/js/adminmodalcrud.js")"></script>
+}

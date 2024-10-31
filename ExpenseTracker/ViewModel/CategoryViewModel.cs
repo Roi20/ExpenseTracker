@@ -1,7 +1,7 @@
 ﻿using ExpenseTracker.Models;
 using System.Security.Policy;
 
-namespace ExpenseTracker.Common
+namespace ExpenseTracker.ViewModel
 {
     public class CategoryViewModel
     {

@@ -52,6 +52,7 @@ namespace ExpenseTracker.Repository
 
             
             var file = model.ProfileImage;
+
             if(file != null && file.Length > 0)
             {
                 const long maxSize = 2 * 1024 * 1024;

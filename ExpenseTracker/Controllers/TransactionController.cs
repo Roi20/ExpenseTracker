@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
+using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection.Metadata.Ecma335;
@@ -30,7 +31,7 @@ namespace ExpenseTracker.Controllers
                     ViewBag.SortOrder = request.SortOrder;
 
                     var entities = await _repo.GetPagination(
-                        request.PageNumber,
+                        request.TotalPageCount,
                         PaginatedRequest.ITEMS_PER_PAGE,
                         request.SortOrder,
                         userId, request.SearchKeyword?? string.Empty);
@@ -38,6 +39,7 @@ namespace ExpenseTracker.Controllers
 
                     entities.SearchKeyword = request.SearchKeyword;
                     ViewBag.User = await _repo.GetUserInfo(userId);
+                    entities.User = await _repo.GetUserInfo(userId);
                     return View(entities);
 
                 }

@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="sideBar" id="sideBar" style="@(ViewData["CurrentPage"]?.ToString() != "Index" && ViewData["CurrentPage"]?.ToString() != "Dashboard" ? "display: none" : "" )">
+        <div class="sideBar" id="sideBar">
            <partial name="_Sidebar" />
         </div>
         <div id="main-layout" class="main-layout">

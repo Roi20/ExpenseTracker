@@ -1,0 +1,137 @@
+﻿@model AdminViewModel
+
+
+@{
+    Layout = "_LayoutAdmin";
+}
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/admindashboard.css")"/>
+}
+
+<div class="container admin-dashboard-wrapper">
+    <div class="row first-section">
+        <div class="first-box col-sm">
+            <div class="r-users" id="user-div">
+                <span>
+                    <i class="fa-solid fa-users"></i> Registered Users
+                </span>
+                <h6 class="r-user-total">
+                    @Model.RegisteredUsersCount
+                </h6>
+            </div>
+        </div>
+        <div class="second-box col-sm">
+            <div class="a-users" id="user-div">
+                <span>
+                    <i class="fa-solid fa-users"></i> Active Users
+                </span>
+                <h6 class="a-user-total">
+                    @Model.ActiveUsersCount
+                </h6>
+            </div>
+        </div>
+        <div class="third-box col-sm">
+            <div class="i-users" id="user-div">
+                <span>
+                    <i class="fa-solid fa-users"></i> Inactive Users
+                </span>
+                <h6 class="i-user-total">
+                   @Model.InactiveUsersCount
+                </h6>
+            </div>
+        </div>
+    </div>
+    <div class="row second-section">
+        <div class="col-sm mode-chart-wrapper">
+            <h5>Monthly Mode</h5>
+            <p>Income and Expense</p>
+            <div class="mode-chart">
+                <canvas width="250" height="200" id="adminModeChart"></canvas>
+            </div>
+        </div>
+        <div class="col-sm category-chart-wrapper">
+            <h5>Categories</h5>
+            <p>Top Categories</p>
+            <div class="doughnut-chart">
+                <canvas width="300" height="250" id="adminDoughnutChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row third-section">
+        <div class="financial-trend-wrapper">
+            <h5>Financial Trends</h5>
+            <p>Monthly Average</p>
+            <div>
+                <canvas width="400" height="300" id="adminFinancialChart"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="row fourth-section">
+        <div class="col-sm recent-biggest-transactions">
+            <h5>Highest Transactions</h5>
+            <div class="highest-transaction-table table-responsive">
+                <table class="admindashboard-table-content">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.HighestTransactions)
+                        {
+                            <tr>
+                                <td>@item.Category.Title</td>
+                                <td>@item.Category.Type</td>
+                                <td>@item.Date</td>
+                                <td style="@(item.FormattedAmount.StartsWith('+') ? "color: #198754" : "color: #dc3545" )">@item.FormattedAmount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm recent-lowest-transactions">
+            <h5>Lowest Transactions</h5>
+            <div class="lowest-transaction-table table-responsive">
+                <table class="admindashboard-table-content">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Type</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.LowestTransactions)
+                        {
+                            <tr>
+                                <td>@item.Category.Title</td>
+                                <td>@item.Category.Type</td>
+                                <td>@item.Date</td>
+                                <td style="@(item.FormattedAmount.StartsWith('+') ? "color: #198754" : "color: #dc3545" )">@item.FormattedAmount</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section CustomScripts{
+    <script>
+        var financialTrendData = @Html.Raw(JsonConvert.SerializeObject(Model.FinancialTrendData));
+        var modeData = @Html.Raw(JsonConvert.SerializeObject(Model.ModeDataSummary));
+        var topCategoryData = @Html.Raw(JsonConvert.SerializeObject(Model.TopListCategories));
+    </script>
+
+    <script src="@Url.Content("~/js/adminFinancialTrendChart.js")"></script>
+    <script src="@Url.Content("~/js/adminModeChart.js")"></script>
+    <script src="@Url.Content("~/js/adminDoughnutChart.js")"></script>
+
+}

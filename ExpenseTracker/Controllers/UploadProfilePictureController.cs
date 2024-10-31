@@ -1,7 +1,8 @@
-﻿using ExpenseTracker.Common;
-using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,11 +12,13 @@ namespace ExpenseTracker.Controllers
     {
 
         private readonly IUploadRepository _repo;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
 
-        public UploadProfilePictureController(IUploadRepository repo)
+        public UploadProfilePictureController(IUploadRepository repo, UserManager<AppIdentityUser> userManager)
         {
             _repo = repo;
+            _userManager = userManager;
         }
 
 
@@ -50,21 +53,26 @@ namespace ExpenseTracker.Controllers
                 ViewBag.User = await _repo.GetUser(currentUserId);
                 await _repo.UploadProfilePicture(model, currentUserId);
                 TempData["SuccessMessage"] = "Profile";
-                return RedirectToAction("Index");
+
+                var user = await _repo.GetUser(currentUserId);
+
+                var controller = await _userManager.IsInRoleAsync(user, "Admin") ? "AdminUser" : "Dashboard";
+
+                return RedirectToAction("Index", controller);
 
             }
             catch (DbUpdateException ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
-                return View("Index");
+                return RedirectToAction("Index");
             }
             catch(ArgumentException ex)
             {
                 TempData["ErrorMessage"] = ex.Message;
-                return View("Index");
+                return RedirectToAction("Index");
 
             }
-            catch (Exception ex)
+            catch (Exception )
             {
 
                 return StatusCode(500, "Oops an error occur while trying to update your profile.");
@@ -94,7 +102,12 @@ namespace ExpenseTracker.Controllers
                                                         userModel.User.SourceOfIncome});
 
                 TempData["SuccessMessage"] = "Personal Information";
-                return RedirectToAction("Index");
+
+                var currentUser = await _repo.GetUser(userId);
+
+                var selectController = await _userManager.IsInRoleAsync(currentUser, "Admin") ? "AdminUser" : "Dashboard";
+
+                return RedirectToAction("Index", selectController);
 
             }
             catch(DbUpdateException ex)

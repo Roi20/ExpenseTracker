@@ -1,0 +1,21 @@
+﻿using ExpenseTracker.Common;
+using ExpenseTracker.Models;
+
+namespace ExpenseTracker.Contracts
+{
+    public interface IAdminDashboardRepository
+    {
+
+        int RegisteredUsersCount();
+        int ActiveUsersCount();
+        int InActiveUsersCount();
+        Task <IEnumerable<FinancialTrendData>> GetOveraAllMonthlyAverages();
+        Task<IEnumerable<ModeData>> GetOverallMonthlyMode();
+        Task<IEnumerable<TopListCategories>> TopCategories();
+        Task<IEnumerable<Transaction>> RecentBiggestTransactions();
+        Task<IEnumerable<Transaction>> RecentLowestTransactions();
+
+
+
+    }
+}

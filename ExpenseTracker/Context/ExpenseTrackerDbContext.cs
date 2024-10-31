@@ -31,6 +31,7 @@ namespace ExpenseTracker.Context
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
     }
 }
