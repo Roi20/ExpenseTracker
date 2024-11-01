@@ -5,5 +5,20 @@
     Layout = "_LayoutNoSidebar";
 }
 
-<h1>@ViewData["Title"]</h1>
-<partial name="_StatusMessage" model="Model.StatusMessage" />
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/loginAndregister.css")" />
+}
+
+<div class="main-confirm-email">
+    <div class="confirm-email-wrapper">
+        <h1 class="text-light">@ViewData["Title"]</h1>
+        <partial name="_StatusMessage" model="Model.StatusMessage" />
+        <a asp-page="./Login">
+            <span>
+                Back to Login
+            </span>
+        </a>
+    </div>
+</div>
+
+

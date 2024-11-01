@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Text.Encodings.Web;
+using ExpenseTracker.Contracts;
+using ExpenseTracker.Services;
 
 namespace ExpenseTracker.Areas.Identity.Pages.Account
 {
@@ -20,11 +23,13 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
     {
         private readonly UserManager<AppIdentityUser> _userManager;
         private readonly IEmailSender _sender;
+        private readonly IEmailServiceAsync _emailService;
 
-        public RegisterConfirmationModel(UserManager<AppIdentityUser> userManager, IEmailSender sender)
+        public RegisterConfirmationModel(UserManager<AppIdentityUser> userManager, IEmailSender sender, IEmailServiceAsync emailService)
         {
             _userManager = userManager;
             _sender = sender;
+            _emailService = emailService;
         }
 
         /// <summary>
@@ -59,7 +64,24 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
                 return NotFound($"Unable to load user with email '{email}'.");
             }
 
+            
             Email = email;
+
+            var userId = await _userManager.GetUserIdAsync(user);
+            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
+            EmailConfirmationUrl = Url.Page(
+                "/Account/ConfirmEmail",
+                pageHandler: null,
+                values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+            protocol: Request.Scheme);
+
+            await _emailService.EmailSendAsync(Email, "Confirm your email",
+                       $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(EmailConfirmationUrl)}'>clicking here</a>.");
+
+
+
+            /*
             // Once you add a real email sender, you should remove this code that lets you confirm the account
             DisplayConfirmAccountLink = true;
             if (DisplayConfirmAccountLink)
@@ -73,7 +95,7 @@ namespace ExpenseTracker.Areas.Identity.Pages.Account
                     values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                     protocol: Request.Scheme);
             }
-
+            */
             return Page();
         }
     }
