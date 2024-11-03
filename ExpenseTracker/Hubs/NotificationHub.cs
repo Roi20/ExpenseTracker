@@ -18,7 +18,7 @@ namespace ExpenseTracker.Hubs
             _notification = _db.Set<Notification>();
         }
 
-        public async Task SendNotification(string userId, string title, string message, bool IsRead, DateTime timeStamp)
+        public async Task SendNotification(string userId, string title, string message, DateTime timeStamp)
         {
             try
             {
@@ -28,14 +28,14 @@ namespace ExpenseTracker.Hubs
                     UserId = userId,
                     Title = title,
                     Message = message,
-                    IsRead = IsRead,
+                    IsRead = false,
                     TimeStamp = timeStamp
                 };
 
                 _notification.Add(notification);
                 await _db.SaveChangesAsync();
 
-                await Clients.User(userId).ReceiveNotification(title, message, timeStamp);
+                await Clients.User(userId).ReceiveNotification(title, message, timeStamp, false);
 
 
             }

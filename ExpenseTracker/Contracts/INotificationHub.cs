@@ -2,6 +2,6 @@
 {
     public interface INotificationHub
     {
-        Task ReceiveNotification(string title, string message, DateTime timeStamp);
+        Task ReceiveNotification(string title, string message, DateTime timeStamp, bool isRead);
     }
 }
