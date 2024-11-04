@@ -1,0 +1,34 @@
+﻿@model AdminSendNotificationViewModel
+
+@{
+    ViewData["Title"] = "AdminSendNotification";
+    Layout = "_LayoutNoSidebar";
+   
+}
+
+<partial name="_RoleAlertMessage" />
+<div class="notification-wrapper">
+    <form method="post" asp-action="CreateNotification">
+        @Html.AntiForgeryToken()
+        <div>
+            <label asp-for="@Model.Notification.Title"></label>
+            <span asp-validation-for="@Model.Notification.Title" class="text-danger"></span>
+            <input asp-for="@Model.Notification.Title" placeholder="Title" />
+        </div>
+        <div>
+            <label asp-for="@Model.Notification.Message"></label>
+            <span asp-validation-for="@Model.Notification.Message" class="text-danger"></span>
+            <input asp-for="@Model.Notification.Message" placeholder="Message" />
+        </div>
+        <div class="btn-submit">
+            <button type="submit">
+                Send
+            </button>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,10 +1,12 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
+using ExpenseTracker.Hubs;
 using ExpenseTracker.Models;
 using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 
 namespace ExpenseTracker.Controllers
 {
@@ -13,11 +15,13 @@ namespace ExpenseTracker.Controllers
 
         private readonly IDashboardRepository _repo;
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly IHubContext<NotificationHub, INotificationHub> _hub;
 
-        public DashboardController(IDashboardRepository repo, UserManager<AppIdentityUser> userManager)
+        public DashboardController(IDashboardRepository repo, UserManager<AppIdentityUser> userManager, IHubContext<NotificationHub, INotificationHub> hub)
         {
             _repo = repo;
             _userManager = userManager;
+            _hub = hub;
            
         }
 
@@ -45,7 +49,7 @@ namespace ExpenseTracker.Controllers
                 var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1, currentUserId);
 
                 var data = await _repo.DoughnutChartData(StartDate, EndDate, currentUserId);
-
+               // await _hub.Clients.All.ReceiveNotification(model.Notification.Title, model.Notification.Message, model.Notification.TimeStamp, model.Notification.IsRead);
                 ViewBag.LineChart = Newtonsoft.Json.JsonConvert.SerializeObject(LineChartData);
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
                 ViewBag.DayRange = dayRange;

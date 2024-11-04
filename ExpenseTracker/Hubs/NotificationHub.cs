@@ -18,26 +18,30 @@ namespace ExpenseTracker.Hubs
             _notification = _db.Set<Notification>();
         }
 
-        public async Task SendNotification(string userId, string title, string message, DateTime timeStamp)
+        public async Task SendNotification(string title, string message, DateTime timeStamp)
         {
             try
             {
 
                 var notification = new Notification
                 {
-                    UserId = userId,
+                    //UserId = userId,
                     Title = title,
                     Message = message,
                     IsRead = false,
-                    TimeStamp = timeStamp
+                    TimeStamp = timeStamp,
                 };
 
                 _notification.Add(notification);
                 await _db.SaveChangesAsync();
 
-                await Clients.User(userId).ReceiveNotification(title, message, timeStamp, false);
+                await Clients.All.ReceiveNotification(title, message, timeStamp, false);
 
 
+            }
+            catch (DbUpdateException)
+            {
+                throw;
             }
             catch (ArgumentException)
             {

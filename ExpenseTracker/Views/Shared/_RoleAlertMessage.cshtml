@@ -28,4 +28,10 @@
         alert("@TempData["AdminMessage"]");
     </script>
 }
+@if (TempData["SendNotificationSuccess"] != null)
+{
+    <script>
+        alert("@TempData["SendNotificationSuccess"]");
+    </script>
+}
 
