@@ -50,7 +50,7 @@ namespace ExpenseTracker.Controllers
                 await _db.SaveChangesAsync();
                 await _hubContext.Clients.All.ReceiveNotification(model.Notification.Title, model.Notification.Message, model.Notification.TimeStamp, model.Notification.IsRead);
                 TempData["SendNotificationSuccess"] = "Message Send Successfuly.";
-                return Content("");
+                return RedirectToAction("Create");
 
             }
             catch (DbUpdateException ex)

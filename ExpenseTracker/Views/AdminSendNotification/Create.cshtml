@@ -21,7 +21,7 @@
             <input asp-for="@Model.Notification.Message" placeholder="Message" />
         </div>
         <div class="btn-submit">
-            <button type="submit">
+            <button type="submit" id="send-notif-btn">
                 Send
             </button>
         </div>
@@ -31,4 +31,9 @@
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
+    <script src="~/lib/jquery/microsoft/signalr/dist/browser/signalr.min.js"></script>
+}
+
+@section CustomScripts{
+    <script src="@Url.Content("~/js/adminsendnotification.js")"></script>
 }
