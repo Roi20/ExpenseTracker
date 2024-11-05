@@ -46,11 +46,11 @@ namespace ExpenseTracker.Controllers
                     TimeStamp = DateTime.Now,
                 };
 
-                _notif.Add(model.Notification);
-                await _db.SaveChangesAsync();
+           //     _notif.Add(model.Notification);
+            //    await _db.SaveChangesAsync();
                 await _hubContext.Clients.All.ReceiveNotification(model.Notification.Title, model.Notification.Message, model.Notification.TimeStamp, model.Notification.IsRead);
                 TempData["SendNotificationSuccess"] = "Message Send Successfuly.";
-                return RedirectToAction("Create");
+                return View();
 
             }
             catch (DbUpdateException ex)

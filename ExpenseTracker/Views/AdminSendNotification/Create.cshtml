@@ -6,7 +6,6 @@
    
 }
 
-<partial name="_RoleAlertMessage" />
 <div class="notification-wrapper">
     <form method="post" asp-action="CreateNotification">
         @Html.AntiForgeryToken()
@@ -26,14 +25,14 @@
             </button>
         </div>
     </form>
+    <div class="drop-down bg-danger text-light d-flex flex-column" id="notif-dropdown">
+        
+    </div>
 </div>
-
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/js/realtime.js"></script>
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/lib/jquery/microsoft/signalr/dist/browser/signalr.min.js"></script>
-}
-
-@section CustomScripts{
-    <script src="@Url.Content("~/js/adminsendnotification.js")"></script>
+   
 }

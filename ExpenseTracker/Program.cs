@@ -157,5 +157,5 @@ app.MapControllerRoute(
     pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 
-app.MapHub<NotificationHub>("/notification");
+app.MapHub<NotificationHub>("/notificationHub");
 app.Run();
