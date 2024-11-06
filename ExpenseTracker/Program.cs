@@ -70,6 +70,7 @@ builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 builder.Services.AddScoped<IAdminDashboardRepository, AdminDashboardRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 //EmailService Dependency
 builder.Services.AddSingleton<IEmailServiceAsync, EmailServiceAsync>();

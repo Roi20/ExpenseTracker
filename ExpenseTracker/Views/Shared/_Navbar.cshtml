@@ -17,15 +17,6 @@
                     <i class="fa-solid fa-bell"></i>
                  </span>
              </button>
-             <div class="drop-down" id="notif-dropdown">
-                 <ul id="notif-uldd">
-                     <li>
-                         <span>
-                             sample
-                         </span>
-                     </li>
-                 </ul>
-             </div>
         </li>
         <li>
             <div class="navbar-profile">
@@ -48,13 +39,12 @@
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
-    <script src="~/lib/jquery/microsoft/signalr/dist/browser/signalr.min.js"></script>
+   
 }
 @section CustomScripts {
 
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
     <script src="@Url.Content("~/js/site.js")"></script>
-    <script src="@Url.Content("~/js/adminsendnotification.js")"></script>
 
 }
 

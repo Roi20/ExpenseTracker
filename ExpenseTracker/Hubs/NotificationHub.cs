@@ -9,50 +9,50 @@ namespace ExpenseTracker.Hubs
 {
     public class NotificationHub : Hub<INotificationHub>
     {
-        private readonly DbContext _db;
-        private readonly DbSet<Notification> _notification;
+       /*
+       private readonly DbContext _db;
+       private readonly DbSet<Notification> _notification;
 
-        public NotificationHub(ExpenseTrackerDbContext db)
-        {
-            _db = db;
-            _notification = _db.Set<Notification>();
-        }
+       public NotificationHub(ExpenseTrackerDbContext db)
+       {
+           _db = db;
+           _notification = _db.Set<Notification>();
+       }
+       public async Task SendNotification(string title, string message, DateTime timeStamp)
+       {
+           try
+           {
 
-        public async Task SendNotification(string title, string message, DateTime timeStamp)
-        {
-            try
-            {
+               var notification = new Notification
+               {
+                   //UserId = userId,
+                   Title = title,
+                   Message = message,
+                   IsRead = false,
+                   TimeStamp = timeStamp,
+               };
 
-                var notification = new Notification
-                {
-                    //UserId = userId,
-                    Title = title,
-                    Message = message,
-                    IsRead = false,
-                    TimeStamp = timeStamp,
-                };
+               _notification.Add(notification);
+               await _db.SaveChangesAsync();
 
-                _notification.Add(notification);
-                await _db.SaveChangesAsync();
-
-                await Clients.All.ReceiveNotification(title, message, timeStamp, false);
+               await Clients.All.ReceiveNotification(title, message, timeStamp, false);
 
 
-            }
-            catch (DbUpdateException)
-            {
-                throw;
-            }
-            catch (ArgumentException)
-            {
-                throw;
-            }
-            catch (Exception)
-            {
-                throw;
-            }
-        }
-
+           }
+           catch (DbUpdateException)
+           {
+               throw;
+           }
+           catch (ArgumentException)
+           {
+               throw;
+           }
+           catch (Exception)
+           {
+               throw;
+           }
+       }
+       */
 
     }
 }
