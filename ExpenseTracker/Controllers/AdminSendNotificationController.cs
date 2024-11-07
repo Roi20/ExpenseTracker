@@ -20,9 +20,15 @@ namespace ExpenseTracker.Controllers
             _repo = repo;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index(AdminSendNotificationViewModel model)
         {
-            return View();
+
+            model.AdminNotifications =  await _repo.GetAllAdminNotifications();
+
+            if (model.AdminNotifications == null)
+                return NotFound();
+
+            return View(model);
         }
 
         public IActionResult Create()
@@ -35,30 +41,28 @@ namespace ExpenseTracker.Controllers
         {
             try
             {
-                model.Notification = new Notification
+                model.AdminNotification = new AdminNotification
                 {
-                    Title = model.Notification.Title,
-                    Message = model.Notification.Message,
-                    IsRead = false,
-                    TimeStamp = DateTime.Now,
+                    Title = model.AdminNotification.Title,
+                    Message = model.AdminNotification.Message,
                 };
 
-                await _repo.SendNotificationAsync(model.Notification.Title, model.Notification.Message);
+                await _repo.SendNotificationAsync(model.AdminNotification.Title, model.AdminNotification.Message);
 
                 TempData["SendNotificationSuccess"] = "Message Send Successfuly.";
-                return Ok("Send to user notif");
+                return RedirectToAction("Index");
 
             }
             catch (DbUpdateException ex)
             {
 
-                ModelState.AddModelError("", "An error occured while trying to save your data");
+                ModelState.AddModelError("", "An error occured while trying to save your notification.");
                 TempData["SendNotificationSuccess"] = "Unable to send message.";
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (ArgumentException ex)
             {
-                ModelState.AddModelError("", "An error occured while trying to save your data");
+                ModelState.AddModelError("", "An error occured while trying to save your notification");
                 TempData["SendNotificationSuccess"] = "Unable to send message.";
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
@@ -69,5 +73,68 @@ namespace ExpenseTracker.Controllers
             }
 
         }
+
+        public async Task<IActionResult> UpdateNotification()
+        {
+            try
+            {
+
+                await _repo.UpdateNotificationAsync(1, "My New Title 101010", "My New Message 101011");
+
+                return RedirectToAction("Index");
+                 
+
+            }
+            catch (DbUpdateException ex)
+            {
+
+                ModelState.AddModelError("", "An error occured while trying to update your notification.");
+                TempData["SendNotificationSuccess"] = "Unable to send message.";
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("", "An error occured while trying to update your notification");
+                TempData["SendNotificationSuccess"] = "Unable to update message.";
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                TempData["SendNotificationSuccess"] = "Unable to update message.";
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+        public async Task<IActionResult> DeleteNotification()
+        {
+            try
+            {
+
+                await _repo.DeleteNotificationAsync(2);
+
+                return RedirectToAction("Index");
+
+
+            }
+            catch (DbUpdateException ex)
+            {
+
+                ModelState.AddModelError("", "An error occured while trying to save your notification.");
+                TempData["SendNotificationSuccess"] = "Unable to delete message.";
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (ArgumentException ex)
+            {
+                ModelState.AddModelError("", "An error occured while trying to delete your notification");
+                TempData["SendNotificationSuccess"] = "Unable to send message.";
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                TempData["SendNotificationSuccess"] = "Unable to delete message.";
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
     }
 }

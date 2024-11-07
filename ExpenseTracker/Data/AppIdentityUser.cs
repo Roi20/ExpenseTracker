@@ -41,7 +41,6 @@ namespace ExpenseTracker.Data
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
-        public virtual ICollection<Notification> Notifications { get; set; }
        
     }
 }

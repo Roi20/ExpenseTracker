@@ -1,0 +1,64 @@
+﻿@model AdminSendNotificationViewModel
+
+
+@{
+    ViewData["Title"] = "AdminSendNotification";
+    Layout = "_LayoutNoSidebar";
+
+}
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/adminsendnotification.css")" />
+}
+
+
+<div class="main-wrapper">
+    <div class="table-wrapper">
+        <div class="upper-section">
+            <a asp-action="Create" class="btn btn-primary">
+                <span>
+                    <i class="fa-solid fa-plus"></i> New Notification
+                </span>
+            </a>
+        </div>
+        <div class="admin-notif-table table-responsive">
+            <table class="adminnotif-table-content">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Message</th>
+                        <th>Time Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.AdminNotifications)
+                    {
+                        <tr>
+                            <td>@item.Title</td>
+                            <td>@item.Message</td>
+                            <td>@item.TimeStamp.ToString("f")</td>
+                            <td>
+                                <div class="action-button">
+                                    <a asp-action="Update" asp-route-id="@item.AdminNotificationId" class=""
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Update">
+                                        <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.AdminNotificationId" class="text-danger"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Delete">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

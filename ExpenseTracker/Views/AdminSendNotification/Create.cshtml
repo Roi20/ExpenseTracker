@@ -10,14 +10,14 @@
     <form method="post" asp-action="CreateNotification">
         @Html.AntiForgeryToken()
         <div>
-            <label asp-for="@Model.Notification.Title"></label>
-            <span asp-validation-for="@Model.Notification.Title" class="text-danger"></span>
-            <input asp-for="@Model.Notification.Title" placeholder="Title" />
+            <label asp-for="@Model.AdminNotification.Title"></label>
+            <span asp-validation-for="@Model.AdminNotification.Title" class="text-danger"></span>
+            <input asp-for="@Model.AdminNotification.Title" placeholder="Title" />
         </div>
         <div>
-            <label asp-for="@Model.Notification.Message"></label>
-            <span asp-validation-for="@Model.Notification.Message" class="text-danger"></span>
-            <input asp-for="@Model.Notification.Message" placeholder="Message" />
+            <label asp-for="@Model.AdminNotification.Message"></label>
+            <span asp-validation-for="@Model.AdminNotification.Message" class="text-danger"></span>
+            <input asp-for="@Model.AdminNotification.Message" placeholder="Message" />
         </div>
         <div class="btn-submit">
             <button type="submit" id="send-notif-btn">

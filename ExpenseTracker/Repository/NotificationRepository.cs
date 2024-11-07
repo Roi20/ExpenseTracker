@@ -12,12 +12,14 @@ namespace ExpenseTracker.Repository
     {
         private readonly DbContext _db;
         private readonly DbSet<Notification> _notification;
+        private readonly DbSet<AdminNotification> _adminNotification;
         private readonly IHubContext<NotificationHub, INotificationHub> _hub;
 
         public NotificationRepository(ExpenseTrackerDbContext db, IHubContext<NotificationHub, INotificationHub> hub)
         {
             _db = db;
             _notification = _db.Set<Notification>();
+            _adminNotification = _db.Set<AdminNotification>();
             _hub = hub;
         }
         public async Task SendNotificationAsync(string title, string message)
@@ -25,6 +27,18 @@ namespace ExpenseTracker.Repository
 
             try
             {
+
+                var adminNotification = new AdminNotification
+                {
+                    Title = title,
+                    Message = message
+
+                };
+
+                _adminNotification.Add(adminNotification);
+                await _db.SaveChangesAsync();
+
+
                 var users = await _db.Set<AppIdentityUser>().ToListAsync();
 
                 foreach(var user in users)
@@ -40,6 +54,7 @@ namespace ExpenseTracker.Repository
                         Message = message,
                         IsRead = false,
                         TimeStamp = DateTime.Now,
+                        AdminNotificationId = adminNotification.AdminNotificationId
                     };
 
                     _notification.Add(notification);
@@ -64,19 +79,51 @@ namespace ExpenseTracker.Repository
             }
         }
 
-        public async Task UpdateNotificationAsync(int notificationId, string newTitle, string newMessage)
+        public async Task<AdminNotification> GetAdminNotificationId(int id)
         {
             try
             {
-                var notifications = await _notification.Where(x => x.Id == notificationId).ToListAsync();
 
-                foreach (var notification in notifications)
+               return await _adminNotification.FindAsync(id);
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
+        public async Task UpdateNotificationAsync(int adminNotificationId, string newTitle, string newMessage)
+        {
+            try
+            {
+                var adminNotification = await _adminNotification.FindAsync(adminNotificationId);
+
+                if (adminNotification == null) 
+                    throw new ArgumentException("Notification not found.");
+
+                adminNotification.Title = newTitle;
+                adminNotification.Message = newMessage;
+
+                await _db.SaveChangesAsync();
+
+                var notifications = await _notification.Where(x => x.AdminNotificationId == adminNotificationId).ToListAsync();
+
+                foreach(var notification in notifications)
                 {
+
                     notification.Title = newTitle;
                     notification.Message = newMessage;
+
                 }
 
                 await _db.SaveChangesAsync();
+
             }
             catch (DbUpdateException)
             {
@@ -91,5 +138,57 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
+
+        public async Task DeleteNotificationAsync(int adminNotificationId)
+        {
+            try
+            {
+
+                var adminNotification = await _adminNotification.FindAsync(adminNotificationId);
+
+                if(adminNotification == null) 
+                    throw new ArgumentException("Notification not found.");
+
+                var notifications = await _notification.Where(x => x.AdminNotificationId == adminNotificationId).ToListAsync();
+
+                foreach(var notification in notifications)
+                {
+                    _notification.Remove(notification);
+                }
+
+                 _adminNotification.Remove(adminNotification);
+
+                await _db.SaveChangesAsync();
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<IEnumerable<AdminNotification>> GetAllAdminNotifications()
+        {
+            try
+            {
+
+                return await _adminNotification.OrderByDescending(x => x.TimeStamp).ToListAsync();
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }
