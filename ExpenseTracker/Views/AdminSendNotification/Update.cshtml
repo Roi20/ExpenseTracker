@@ -1,21 +1,22 @@
 ﻿@model AdminSendNotificationViewModel
 
+
 @{
     ViewData["Title"] = "AdminSendNotification";
     Layout = "_LayoutNoSidebar";
-   
+
 }
 
 @section CustomStyles {
     <link rel="stylesheet" href="@Url.Content("~/css/adminsendnotification.css")" />
 }
 
-
 <div class="create-notif-wrapper">
     <div class="notification-wrapper">
         <span class="title">Send Notification</span>
-        <form method="post" asp-action="CreateNotification">
+        <form method="post" asp-action="UpdateNotification">
             @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.AdminNotification.AdminNotificationId)
             <div id="input-text" class="create-update-input">
                 <label asp-for="@Model.AdminNotification.Title"></label>
                 <div id="input-wrapper">
@@ -35,7 +36,7 @@
                     Close
                 </a>
                 <button type="submit" id="send-notif-btn" class="btn btn-primary">
-                    Send
+                    Update
                 </button>
             </div>
         </form>
@@ -46,5 +47,10 @@
 @section Scripts {
 
     <partial name="_ValidationScriptsPartial" />
-   
+
 }
+
+
+
+
+

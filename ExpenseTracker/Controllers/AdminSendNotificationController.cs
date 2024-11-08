@@ -49,7 +49,8 @@ namespace ExpenseTracker.Controllers
 
                 await _repo.SendNotificationAsync(model.AdminNotification.Title, model.AdminNotification.Message);
 
-                TempData["SendNotificationSuccess"] = "Message Send Successfuly.";
+                TempData["SendNotificationSuccess"] = "Message sent successfully.";
+                TempData["Message"] = "Message sent successfully.";
                 return RedirectToAction("Index");
 
             }
@@ -74,13 +75,45 @@ namespace ExpenseTracker.Controllers
 
         }
 
-        public async Task<IActionResult> UpdateNotification()
+        public async Task<IActionResult> Update(int id)
+        {
+            try
+            {
+                
+                
+                var adminNotificationId = await _repo.GetAdminNotificationId(id);
+
+                if (adminNotificationId == null)
+                    return NotFound("Notification not found.");
+
+
+                var viewModel = new AdminSendNotificationViewModel
+                {
+                    AdminNotification = adminNotificationId
+                };
+             
+
+                return View(viewModel);
+
+            }
+            catch(ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch(Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateNotification(AdminSendNotificationViewModel model)
         {
             try
             {
 
-                await _repo.UpdateNotificationAsync(1, "My New Title 101010", "My New Message 101011");
-
+                await _repo.UpdateNotificationAsync(model.AdminNotification.AdminNotificationId, model.AdminNotification.Title, model.AdminNotification.Message);
+                TempData["Message"] = "Message updated successfully.";
                 return RedirectToAction("Index");
                  
 
@@ -105,13 +138,45 @@ namespace ExpenseTracker.Controllers
             }
         }
 
-        public async Task<IActionResult> DeleteNotification()
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
 
-                await _repo.DeleteNotificationAsync(2);
 
+                var adminNotificationId = await _repo.GetAdminNotificationId(id);
+
+                if (adminNotificationId == null)
+                    return NotFound("Notification not found.");
+
+
+                var viewModel = new AdminSendNotificationViewModel
+                {
+                    AdminNotification = adminNotificationId
+                };
+
+
+                return View(viewModel);
+
+            }
+            catch (ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+
+        public async Task<IActionResult> DeleteNotification(AdminSendNotificationViewModel model)
+        {
+            try
+            {
+
+                await _repo.DeleteNotificationAsync(model.AdminNotification.AdminNotificationId);
+                TempData["Message"] = "Message deleted successfully.";
                 return RedirectToAction("Index");
 
 

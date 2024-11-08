@@ -49,7 +49,6 @@ namespace ExpenseTracker.Controllers
                 var LineChartData = await _repo.GetLineChartData(StartDate, EndDate,  dayRange + 1, currentUserId);
 
                 var data = await _repo.DoughnutChartData(StartDate, EndDate, currentUserId);
-               // await _hub.Clients.All.ReceiveNotification(model.Notification.Title, model.Notification.Message, model.Notification.TimeStamp, model.Notification.IsRead);
                 ViewBag.LineChart = Newtonsoft.Json.JsonConvert.SerializeObject(LineChartData);
                 ViewBag.DoughnutChart = Newtonsoft.Json.JsonConvert.SerializeObject(data);
                 ViewBag.DayRange = dayRange;
