@@ -40,6 +40,7 @@ namespace ExpenseTracker.Repository
 
 
                 var users = await _db.Set<AppIdentityUser>().ToListAsync();
+                var notifications = new List<Notification>();
 
                 foreach(var user in users)
                 {
@@ -57,10 +58,14 @@ namespace ExpenseTracker.Repository
                         AdminNotificationId = adminNotification.AdminNotificationId
                     };
 
-                    _notification.Add(notification);
+                    notifications.Add(notification);
                 }
 
-                await _db.SaveChangesAsync();
+                if (notifications.Any())
+                {
+                    _notification.AddRange(notifications);
+                    await _db.SaveChangesAsync();
+                }
 
                 await _hub.Clients.All.ReceiveNotification(title, message, $"{DateTime.Now:f}", false);
                 

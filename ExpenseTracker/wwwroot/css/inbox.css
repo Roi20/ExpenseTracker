@@ -1,0 +1,59 @@
+﻿
+.modal-dialog .modal-content {
+    background: #17181d;
+    padding: 15px;
+}
+
+.inbox-table {
+    background: #272e36;
+    border-radius: 5px;
+    padding: 15px 15px 30px 15px;
+}
+
+.inbox-table-content th,
+.inbox-table-content td {
+    padding: 15px 20px;
+    font-size: .8em;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+.title-close-holder{
+    display: flex;
+    align-items: center;
+}
+
+.inbox-title{
+    padding: 10px 5px 10px 5px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+}
+
+.title-close-holder #close-btn{
+    margin-left: auto;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-right: 5px;
+    background: none;
+    border: none;
+}
+
+.title-close-holder #close-btn:hover{
+    color: #9FA6B2
+}
+
+
+
+.unread{
+    background: #92a1c2;
+    overflow: hidden;
+  
+}
+.read {
+    background: none;
+}

@@ -18,5 +18,6 @@ namespace ExpenseTracker.Contracts
         Task<List<LineChartData>> GetLineChartData(DateOnly startDate, DateOnly endDate, int Range, string userId);
         Task<IEnumerable<Transaction>> GetAllTransaction(string userId);
         Task<AppIdentityUser> GetUserInfo(string userId);
+        Task<IEnumerable<Notification>> GetAllUserNotification(string userId);
     }
 }

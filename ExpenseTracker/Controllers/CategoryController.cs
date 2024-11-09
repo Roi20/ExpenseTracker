@@ -44,6 +44,7 @@ namespace ExpenseTracker.Controllers
                     entities.SearchKeyword = request.SearchKeyword;
                     ViewBag.User = await _repo.GetUserInfo(userId);
                     entities.User = await _repo.GetUserInfo(userId);
+                    entities.Notifications = await _repo.GetAllUserNotification(userId);
                     return View(entities);
                 }
 

@@ -1,0 +1,46 @@
+﻿<!--Inbox Modal-->
+<div class="modal fade" id="inboxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+           <div class="title-close-holder">
+                <span class="inbox-title">Notifications</span>
+                <button type="button" data-bs-dismiss="modal" id="close-btn">&times;</button>
+           </div>
+            <div class="inbox-table table-responsive">
+                <table class="inbox-table-content table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Message</th>
+                            <th>Received Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Notifications)
+                        {
+                            <tr class="@(item.IsRead ? "read" : "unread")">
+                                <td>@item.Title</td>
+                                <td>@item.Message</td>
+                                <td>@item.TimeStamp.ToString("g")</td>
+                                <td>@(item.IsRead ? "Read" : "Unread")</td>
+                                <td>
+                                    <div class="action-button">
+                                        <a asp-action="Delete" asp-route-id="@item" class="text-danger"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="left"
+                                           title="Delete">
+                                            <i class="fa-solid fa-circle-xmark"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Inbox Modal-->

@@ -16,6 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\inbox.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\loginAndregister.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\modal.css" />
     <_ContentIncludedByDefault Remove="wwwroot\js\ComponentUI.js" />

@@ -6,12 +6,12 @@
 
     <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
     <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/inbox.css")" />
 }
 
 
 @{
     ViewData["CurrentPage"] = "Dashboard";
-
 }
 
 <div class="main p-0" id="dash-main-div">
@@ -20,7 +20,7 @@
         <div class="row" id="DataHolder">
             <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
                 <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">
-                    <option value="" class="font-monospace" disabled selected>Data Shown</option>
+                    <option value="" class="font-monospace" disabled selected>@(ViewBag.DayRange != null ? $"Past {ViewBag.DayRange} days" : "Data Shown" )</option>
                     <option value="7" class="font-monospace">Past 7 Days</option>
                     <option value="14" class="font-monospace">Past 15 days</option>
                     <option value="30" class="font-monospace">Past 30 days</option>
@@ -110,7 +110,7 @@
     }
     else if(ViewBag.DayRange == 14)
     {
-        <span id="dataDisplayText" class="ps-2 p-0 m-0">Data Shown: Past 15 days</span>
+        <span id="dataDisplayText" class="ps-2 p-0 m-0">Data Shown: Past 14 days</span>
     }
     else if (ViewBag.DayRange == 30)
     {
@@ -122,6 +122,8 @@
     }
 </div>
 </div>
+
+<partial name="_NotificationInboxModal" />
 
 @section CustomScripts {
   

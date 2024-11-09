@@ -15,6 +15,28 @@
     height: 100%;
 }
 
+.table-wrapper #exit-btn{
+    color: #FFFFFF;
+    text-decoration: none;
+    padding-top: 5px;
+    transition: all .3s ease-in-out;
+}
+.table-wrapper #exit-btn:hover{
+    color: #9FA6B2;
+}
+
+.table-wrapper .fa-right-to-bracket{
+    margin-right: 3px;
+}
+
+.table-wrapper #exit-btn span{
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+    padding: 5px;
+}
+
+
 .upper-section{
     display: flex;
     padding: 5px 0 5px 0;

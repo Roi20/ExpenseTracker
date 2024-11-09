@@ -4,6 +4,7 @@ using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.EntityFrameworkCore;
+using System.Runtime.CompilerServices;
 
 namespace ExpenseTracker.Repository
 {
@@ -13,6 +14,8 @@ namespace ExpenseTracker.Repository
         private readonly DbContext _db;
         private readonly DbSet<Transaction> _transaction;
         private readonly DbSet<AppIdentityUser> _user;
+        private readonly DbSet<Notification> _notification;
+
 
 
         public DashboardRepository(ExpenseTrackerDbContext db)
@@ -20,6 +23,7 @@ namespace ExpenseTracker.Repository
             _db = db;
             _transaction = _db.Set<Transaction>();
             _user = _db.Set<AppIdentityUser>();
+            _notification = _db.Set<Notification>();
         }
 
         public async Task<int> Balance(DateOnly startDate, DateOnly endDate, string userId)
@@ -171,5 +175,11 @@ namespace ExpenseTracker.Repository
         {
             return await _user.FirstOrDefaultAsync(x => x.Id == userId);
         }
+
+        public async Task<IEnumerable<Notification>> GetAllUserNotification(string userId)
+        {
+            return await _notification.Where(x => x.UserId == userId).ToListAsync();
+        }
+
     }
 }
