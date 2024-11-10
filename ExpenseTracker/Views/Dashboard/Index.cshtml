@@ -12,6 +12,7 @@
 
 @{
     ViewData["CurrentPage"] = "Dashboard";
+    ViewData["CurrentController"] = "Dashboard";
 }
 
 <div class="main p-0" id="dash-main-div">
@@ -122,7 +123,6 @@
     }
 </div>
 </div>
-
 <partial name="_NotificationInboxModal" />
 
 @section CustomScripts {
@@ -134,6 +134,7 @@
    
     <script src="@Url.Content("~/js/doughnutChart.js")"></script>
     <script src="@Url.Content("~/js/LineChart.js")"></script>
+    <script src="@Url.Content("~/js/inbox.js")"></script>
     <script src="@Url.Content("~/js/site.js")"></script>
 
 }

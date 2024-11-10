@@ -181,5 +181,32 @@ namespace ExpenseTracker.Repository
             return await _notification.Where(x => x.UserId == userId).ToListAsync();
         }
 
+        public async Task<Notification> MarkAsReadUserNotification(int id)
+        {
+            try
+            {
+                var notificationId = await _notification.FindAsync(id);
+
+                if (notificationId == null)
+                    throw new ArgumentException("Notification not found.");
+
+
+                notificationId.IsRead = true;
+                await _db.SaveChangesAsync();
+
+                return notificationId;
+
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
     }
 }

@@ -11,6 +11,7 @@
 @{
     ViewData["CurrentPage"] = "Index";
     ViewData["Title"] = "Transaction";
+    ViewData["CurrentController"] = "Transaction";
 
     var currentPage = Model.Page;
     var totalPageCount = Model.TotalPage;
@@ -181,6 +182,7 @@
 <partial name="_NotificationInboxModal" />
 @section CustomScripts {
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <script src="@Url.Content("~/js/inbox.js")"></script>
     <script src="@Url.Content("~/js/site.js")"></script>
 
 }

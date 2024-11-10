@@ -10,6 +10,7 @@ namespace ExpenseTracker.Controllers
     [Authorize]
     public class BaseController : Controller
     {
+
         protected string GetUserId()
         {
             return User.FindFirstValue(ClaimTypes.NameIdentifier) ?? string.Empty;
@@ -26,6 +27,9 @@ namespace ExpenseTracker.Controllers
                 model.User_Id = userId;
             }
         }
+
+        
+
 
     }
 }

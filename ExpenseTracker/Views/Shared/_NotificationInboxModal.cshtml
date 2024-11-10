@@ -1,6 +1,27 @@
-﻿<!--Inbox Modal-->
+﻿@{
+
+    var controllerName = "";
+
+    if (ViewData["CurrentController"]?.ToString() == "Category")
+    {
+        controllerName = "Category";
+    }
+    else if (ViewData["CurrentController"]?.ToString() == "Dashboard")
+    {
+        controllerName = "Dashboard";
+    }
+    else if (ViewData["CurrentController"]?.ToString() == "Transaction")
+    {
+        controllerName = "Transaction";
+    }
+}
+
+
+
+
+<!--Inbox Modal-->
 <div class="modal fade" id="inboxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
         <div class="modal-content">
            <div class="title-close-holder">
                 <span class="inbox-title">Notifications</span>
@@ -20,11 +41,21 @@
                     <tbody>
                         @foreach (var item in Model.Notifications)
                         {
-                            <tr class="@(item.IsRead ? "read" : "unread")">
+                            <tr class="@(item.IsRead ? "read" : "unread")"
+                                data-controller="@controllerName"
+                                data-id="@item.Id"
+                                data-title="@item.Title"
+                                data-message="@item.Message"
+                                data-timestamp="@item.TimeStamp"
+                                data-isread="@(item.IsRead ? "Read" : "Unread")"
+                                data-bs-target="#inboxModal2"
+                                data-bs-toggle="modal" 
+                                data-bs-dismiss="modal">
+
                                 <td>@item.Title</td>
                                 <td>@item.Message</td>
                                 <td>@item.TimeStamp.ToString("g")</td>
-                                <td>@(item.IsRead ? "Read" : "Unread")</td>
+                                <td class="status">@(item.IsRead ? "Read" : "Unread")</td>
                                 <td>
                                     <div class="action-button">
                                         <a asp-action="Delete" asp-route-id="@item" class="text-danger"
@@ -44,3 +75,16 @@
     </div>
 </div>
 <!--Inbox Modal-->
+<!--Second Inbox Modal-->
+<div class="modal fade" id="inboxModal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal2-btn-holder">
+                <button id="second-inbox-closeBtn" type="button" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Second Inbox Modal-->

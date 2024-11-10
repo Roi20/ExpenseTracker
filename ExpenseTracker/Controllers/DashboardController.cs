@@ -68,6 +68,31 @@ namespace ExpenseTracker.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> MarkAsRead(int id)
+        {
+            try
+            {
+                var userNotificationId = await _repo.MarkAsReadUserNotification(id);
+
+                if (userNotificationId == null)
+                    return NotFound("Notification not found.");
+
+                return Ok();
+
+            }
+            catch (ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+
+
 
 
 

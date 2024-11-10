@@ -9,5 +9,6 @@ namespace ExpenseTracker.Contracts
         Task DeleteNotificationAsync(int adminNotificationId);
         Task<AdminNotification> GetAdminNotificationId(int id);
         Task<IEnumerable<AdminNotification>> GetAllAdminNotifications();
+
     }
 }
