@@ -16,15 +16,12 @@
     }
 }
 
-
-
-
 <!--Inbox Modal-->
 <div class="modal fade" id="inboxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
            <div class="title-close-holder">
-                <span class="inbox-title">Notifications</span>
+                <span class="inbox-title">Notification Inbox</span>
                 <button type="button" data-bs-dismiss="modal" id="close-btn">&times;</button>
            </div>
             <div class="inbox-table table-responsive">
@@ -42,27 +39,27 @@
                         @foreach (var item in Model.Notifications)
                         {
                             <tr class="@(item.IsRead ? "read" : "unread")"
+                                data-caller="tr-inboxModal"
                                 data-controller="@controllerName"
                                 data-id="@item.Id"
                                 data-title="@item.Title"
                                 data-message="@item.Message"
                                 data-timestamp="@item.TimeStamp"
-                                data-isread="@(item.IsRead ? "Read" : "Unread")"
-                                data-bs-target="#inboxModal2"
-                                data-bs-toggle="modal" 
-                                data-bs-dismiss="modal">
+                                data-isread="@(item.IsRead ? "Read" : "Unread")">
 
                                 <td>@item.Title</td>
                                 <td>@item.Message</td>
                                 <td>@item.TimeStamp.ToString("g")</td>
                                 <td class="status">@(item.IsRead ? "Read" : "Unread")</td>
-                                <td>
+                                <td data-id="@item.Id"
+                                    data-title="@item.Title">
                                     <div class="action-button">
-                                        <a asp-action="Delete" asp-route-id="@item" class="text-danger"
+                                        <a class="text-danger"
                                            data-bs-toggle="tooltip"
                                            data-bs-placement="left"
-                                           title="Delete">
-                                            <i class="fa-solid fa-circle-xmark"></i>
+                                           title="Delete" 
+                                           id="delete-message-btn">
+                                            Delete
                                         </a>
                                     </div>
                                 </td>
@@ -75,7 +72,8 @@
     </div>
 </div>
 <!--Inbox Modal-->
-<!--Second Inbox Modal-->
+
+<!--Read Message Modal-->
 <div class="modal fade" id="inboxModal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -87,4 +85,23 @@
         </div>
     </div>
 </div>
-<!--Second Inbox Modal-->
+<!--Read Message Modal-->
+
+<!--Delete Message Modal-->
+<div class="modal fade" id="deleteMessageModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal3-btn-holder">
+                <button id="third-inbox-closeBtn" type="button" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+            <div id="delete-confirmed" class="delete-confirmed">
+                <button id="cancel-confirmed-btn" data-bs-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                <button id="delete-confirmed-btn" type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Delete Message Modal-->

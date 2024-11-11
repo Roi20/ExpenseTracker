@@ -1,6 +1,6 @@
 ﻿
 
-$('tr[data-bs-toggle="modal"]').on('click', function () {
+$('tr[data-caller="tr-inboxModal"]').on('click', function (e) {
     var $row = $(this);
     var notificationId = $row.data('id');
     var title = $row.data('title');
@@ -10,6 +10,43 @@ $('tr[data-bs-toggle="modal"]').on('click', function () {
     var controllerName = $row.data('controller');
     var actionName = 'MarkAsread';
     var dynamicUrl = `/${controllerName}/${actionName}`;
+
+    if ($(e.target).closest('td').index() === $row.children().length - 1) {
+
+        $('#deleteMessageModal .modal-body').html
+            (`
+               <h6>Delete Message</h6>
+               <span>Are you sure you want to delete &nbsp;<strong>${title} ? </strong> </span>
+
+           `)
+        console.log('delete was clicked');
+
+        $('#deleteMessageModal').modal('show');
+
+        $('#delete-confirmed-btn').off('click').on('click', function () {
+
+            var confirmedDeleteAction = 'ConfirmedDeleteNotification';
+
+            $.ajax({
+
+                type: 'POST',
+                url: `/${controllerName}/${confirmedDeleteAction}`,
+                data: { id: notificationId },
+                success: function () {
+                    console.log('Message deleted successfully.');
+                    $('#deleteMessageModal').modal('hide');
+                    $row.remove();
+                },
+                error: function (error) {
+                    console.error('Error deleting the message.', error);
+                }
+
+            });
+
+        });
+
+        return;
+    }
 
 
     $.ajax({
@@ -35,4 +72,11 @@ $('tr[data-bs-toggle="modal"]').on('click', function () {
            <span>${message}</span>
            <p>${timeStamp}</p>
         `);
+
+    $('#inboxModal2').modal('show');
 });
+
+
+
+
+   

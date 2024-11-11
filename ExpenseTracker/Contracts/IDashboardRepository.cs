@@ -20,5 +20,6 @@ namespace ExpenseTracker.Contracts
         Task<AppIdentityUser> GetUserInfo(string userId);
         Task<IEnumerable<Notification>> GetAllUserNotification(string userId);
         Task<Notification> MarkAsReadUserNotification(int id);
+        Task DeleteUserNotification(int id);
     }
 }

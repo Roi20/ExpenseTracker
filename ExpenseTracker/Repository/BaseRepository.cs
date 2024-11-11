@@ -148,7 +148,9 @@ namespace ExpenseTracker.Repository
 
         public async Task<IEnumerable<Notification>> GetAllUserNotification(string userId)
         {
-            return await _notification.Where(x => x.UserId == userId).ToListAsync();
+            return await _notification.Where(x => x.UserId == userId)
+                                      .OrderByDescending(x => x.TimeStamp)
+                                      .ToListAsync();
         }
         public async Task<Notification> MarkAsReadUserNotification(int id)
         {
@@ -177,5 +179,29 @@ namespace ExpenseTracker.Repository
             }
 
         }
+        public async Task DeleteUserNotification(int id)
+        {
+            try
+            {
+                var notificationId = await _notification.FindAsync(id);
+
+                if (notificationId == null)
+                    throw new ArgumentException("Notification not found.");
+
+
+                _notification.Remove(notificationId);
+                await _db.SaveChangesAsync();
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
     }
 }

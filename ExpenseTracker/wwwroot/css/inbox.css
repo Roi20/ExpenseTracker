@@ -47,13 +47,24 @@
     color: #9FA6B2
 }
 
-.unread{
+.unread td:not(:last-child){
     background: #92a1c2;
     overflow: hidden;
-  
 }
 .read {
     background: none;
+}
+
+.inbox-table .action-button{
+    z-index: 1;
+}
+
+.inbox-table #delete-message-btn{
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+    z-index: 9999;
 }
 
 /*Inbox Modal 2*/
@@ -108,4 +119,68 @@
 
 #second-inbox-closeBtn:hover{
     color: #9FA6B2
+}
+
+/*Delete Message Modal*/
+
+
+#deleteMessageModal .modal-body{
+    color: #FFFFFF;
+}
+
+
+#deleteMessageModal .modal-body h6 {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5px;
+    color: #FFFFFF:
+}
+
+#deleteMessageModal .modal-body span {
+    font-weight: 400;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 15px 5px 5px 5px;
+    color: #FFFFFF;
+    font-size: .9em;
+    letter-spacing: 1px;
+    padding-bottom: 30px;
+}
+
+.modal3-btn-holder {
+    display: flex;
+    justify-content: right;
+    padding: 6px;
+}
+
+
+#third-inbox-closeBtn{
+   background: none;
+   border: none;
+   color: #FFFFFF;
+   font-weight: bold;
+   font-size: 1em;
+}
+
+#third-inbox-closeBtn:hover{
+    color: #9FA6B2
+}
+
+.delete-confirmed{
+    padding: 15px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    column-gap: 5px;
+}
+
+#delete-confirmed-btn,
+#cancel-confirmed-btn{
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
 }

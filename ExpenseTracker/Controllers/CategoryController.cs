@@ -223,6 +223,28 @@ namespace ExpenseTracker.Controllers
         }
 
 
+        [HttpPost]
+        public async Task<IActionResult> ConfirmedDeleteNotification(int id)
+        {
+            try
+            {
+                await _repo.DeleteUserNotification(id);
+
+
+                return Ok();
+
+            }
+            catch (ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+
 
 
 
