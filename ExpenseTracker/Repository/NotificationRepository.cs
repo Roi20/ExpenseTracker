@@ -194,6 +194,21 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
-       
+
+        public async Task<IEnumerable<Notification>> GetAllUserNotification(string userId)
+        {
+            try
+            {
+                return await _notification.Where(x => x.UserId == userId).ToListAsync();
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+        }
     }
 }
