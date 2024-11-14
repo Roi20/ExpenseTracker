@@ -1,8 +1,10 @@
 ﻿
+
 var connection = new signalR.HubConnectionBuilder().withUrl('/notificationHub').build();
 
 
 connection.on('ReceiveNotification', function (title, message, timeStamp, isRead) {
+    location.reload();
     document.getElementById('notif-bell').classList.add('has-notifications');
     localStorage.setItem('hasNotifications', 'true');
     console.log('Notification Received.')

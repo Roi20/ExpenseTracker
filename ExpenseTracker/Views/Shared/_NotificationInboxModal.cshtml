@@ -17,7 +17,7 @@
 }
 
 <!--Inbox Modal-->
-<div class="modal fade" id="inboxModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="inboxModal" data-controller-name="@controllerName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
         <div class="modal-content">
            <div class="title-close-holder">
@@ -35,7 +35,7 @@
                             <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="notificationTableBody">
                         @foreach (var item in Model.Notifications)
                         {
                             <tr class="@(item.IsRead ? "read" : "unread")"
@@ -57,7 +57,7 @@
                                         <a class="text-danger"
                                            data-bs-toggle="tooltip"
                                            data-bs-placement="left"
-                                           title="Delete" 
+                                           title="Delete"
                                            id="delete-message-btn">
                                             Delete
                                         </a>

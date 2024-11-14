@@ -182,7 +182,9 @@ namespace ExpenseTracker.Repository
             try
             {
 
-                return await _adminNotification.OrderByDescending(x => x.TimeStamp).ToListAsync();
+                return await _adminNotification.OrderByDescending(x => x.TimeStamp)
+                                               .Take(20)
+                                               .ToListAsync();
 
             }
             catch (ArgumentException)

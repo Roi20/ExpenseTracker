@@ -150,6 +150,7 @@ namespace ExpenseTracker.Repository
         {
             return await _notification.Where(x => x.UserId == userId)
                                       .OrderByDescending(x => x.TimeStamp)
+                                      .Take(20)
                                       .ToListAsync();
         }
         public async Task<Notification> MarkAsReadUserNotification(int id)

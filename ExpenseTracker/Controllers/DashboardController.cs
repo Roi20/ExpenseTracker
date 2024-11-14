@@ -1,5 +1,4 @@
-﻿using ExpenseTracker.Common;
-using ExpenseTracker.Contracts;
+﻿using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Hubs;
 using ExpenseTracker.Models;
@@ -24,8 +23,6 @@ namespace ExpenseTracker.Controllers
             _hub = hub;
            
         }
-
-
         public async Task<IActionResult> Index(int dayRange = 7)
         {
 
@@ -66,7 +63,6 @@ namespace ExpenseTracker.Controllers
 
        
         }
-
 
         [HttpPost]
         public async Task<IActionResult> MarkAsRead(int id)
@@ -111,12 +107,6 @@ namespace ExpenseTracker.Controllers
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
         }
-
-
-
-
-
-
 
     }
 }
