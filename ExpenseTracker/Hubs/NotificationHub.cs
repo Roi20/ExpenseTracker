@@ -32,7 +32,7 @@ namespace ExpenseTracker.Hubs
             {
                 UserNotifications[connection] = true;
             }
-            await Clients.All.ReceiveNotification(title, message, $"{DateTime.Now:f}", false);
+            await Clients.All.ReceiveNotification(title, message, $"{DateTime.Now.ToString("g")}", false);
         }
 
         public async Task ClearNotification()

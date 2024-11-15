@@ -47,6 +47,13 @@
                     </span>
                 </a>
             </li>
+            <li>
+                <a asp-action="AdminManagePassword" asp-controller="AdminUser">
+                    <span>
+                        <i class="fa-solid fa-lock"></i> Manage Password
+                    </span>
+                </a>
+            </li>
             <li id="admin-logout">
                 @if (SignInManager.IsSignedIn(User))
                 {

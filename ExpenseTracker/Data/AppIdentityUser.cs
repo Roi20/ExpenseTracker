@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Contracts;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Policy;
@@ -38,9 +39,14 @@ namespace ExpenseTracker.Data
         [MaxLength]
         public string? ProfilePicturePath { get; set; }
         public DateTime? LastActivityDate { get; set; }
-
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Transaction> Transactions { get; set; }
-       
+
+        [NotMapped, StringLength(100), DisplayName("Confirm Password")]
+        public string? ConfirmPassword { get; set; }
+
+        [NotMapped, StringLength(100), DisplayName("Current Password")]
+        public string CurrentPassword { get; set; }
+
     }
 }

@@ -44,7 +44,22 @@ function sidebarOnclick() {
 };
 
 
+document.getElementById('show-password-checkbox').addEventListener('change', function () {
+    var passwordInput = document.getElementById('admin-password');
+    var confirmPasswordInput = document.getElementById('admin-confirm-password');
 
+    if (this.checked) {
+        passwordInput.type = 'text';
+        confirmPasswordInput.type = 'text';
+        console.log('type=text')
+    }
+    else {
+        passwordInput.type = 'password';
+        confirmPasswordInput.type = 'password';
+        console.log('type=password')
+    }
+
+});
 
 
 

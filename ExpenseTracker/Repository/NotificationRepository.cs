@@ -67,7 +67,7 @@ namespace ExpenseTracker.Repository
                     await _db.SaveChangesAsync();
                 }
 
-                await _hub.Clients.All.ReceiveNotification(title, message, $"{DateTime.Now:f}", false);
+                await _hub.Clients.All.ReceiveNotification(title, message, $"{DateTime.Now:g}", false);
                 
             }
             catch (DbUpdateException)

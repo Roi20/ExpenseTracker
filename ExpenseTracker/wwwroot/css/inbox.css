@@ -136,14 +136,14 @@
     justify-content: left;
     align-items: center;
     padding: 5px;
-    color: #FFFFFF:
+    color: #FFFFFF;
 }
 
 #deleteMessageModal .modal-body span {
     font-weight: 400;
     display: flex;
-    justify-content: left;
-    align-items: center;
+    text-align: center;
+    flex-direction: column;
     padding: 15px 5px 5px 5px;
     color: #FFFFFF;
     font-size: .9em;

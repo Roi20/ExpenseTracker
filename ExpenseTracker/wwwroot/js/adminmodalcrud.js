@@ -1,5 +1,5 @@
 ﻿
-
+   
 
 
     $(window).on('load', function () {
@@ -13,6 +13,8 @@
         $('#deleteModal').modal('show')
 
     });
+
+
 
 
 

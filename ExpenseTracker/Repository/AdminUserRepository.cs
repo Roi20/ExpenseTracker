@@ -114,5 +114,18 @@ namespace ExpenseTracker.Repository
         {
             return await _table.AnyAsync(condition);
         }
+
+        public async Task UpdateAdminPassword(string userId, AppIdentityUser adminUser)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+            
+            if (user == null && !await _userManager.IsInRoleAsync(user, "Admin"))
+                throw new ArgumentException("User Not Found.");
+
+
+            await _userManager.ChangePasswordAsync(user, adminUser.CurrentPassword, adminUser.Password);
+
+
+        }
     }
 }

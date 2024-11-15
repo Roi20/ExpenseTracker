@@ -11,9 +11,6 @@
     background: #000000; 
 } 
 
-
-
-
 .admin-main-container{
     display: flex;
     flex-direction: column;
@@ -478,8 +475,128 @@ form span button
 }
 
 
+/*Admin Manage Password*/
+.admin-password-main-wrapper{
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin-password-wrapper {
+    background: #17181d;
+    width: 500px;
+    min-width: 420px;
+    min-height: 250px;
+    padding: 10px;
+    border-radius: 12px;
+}
+
+.admin-password-wrapper .title-holder h4{
+    color: #FFFFFF;
+    font-size: 1em;
+    letter-spacing: 1px;
+    padding: 10px 10px 5px 5px;
+    text-align: center;
+    font-variant-caps: all-small-caps;
+}
+
+.admin-password-wrapper .form-holder form {
+    background:  #272e36;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.admin-password-wrapper .form-holder form input:not([type=checkbox]){
+    height: 45px;
+    width: 100%;
+    border-radius: 5px;
+    border: none;
+    padding: 15px;
+    font-size: .9em;
+    letter-spacing: 1px;
+    background: #17181d;
+    color: #FFFFFF;
+}
+
+.admin-password-wrapper .form-holder form input:focus,
+.admin-password-wrapper .form-holder form input:valid{
+    outline: none;
+    background: #17181d !important;
+    -webkit-text-fill-color: white !important;
+}
+
+input-moz-autofill {
+    background: #17181d
+}
+
+.admin-password-wrapper .form-holder form input::placeholder {
+    font-size: .9em;
+    letter-spacing: 1px;
+}
 
 
+.admin-password-wrapper .form-holder form label{
+    color: #FFFFFF;
+    font-size: .9em;
+    margin-bottom: 5px;
+    padding-left: 5px;
+    padding-top: 20px;
+    letter-spacing: 1px;
+}
+
+.admin-password-wrapper .form-holder form span{
+    display: flex;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+    font-size: .8em;
+    letter-spacing: 1px;
+}
+
+.btn-wrapper{
+    padding: 20px 0 20px 0;
+    display: flex;
+    justify-content: right;
+    gap: 5px;
+}
+
+.btn-wrapper #cancel-btn,
+.btn-wrapper #submit-btn{
+    font-size: .9em;
+    font-variant-caps: all-small-caps;
+    letter-spacing: 1px;
+}
+
+.show-password{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    text-align: left;
+    padding: 5px;
+    color: #FFFFFF;
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+}
+
+#show-password-checkbox {
+   color: #FFFFFF;
+}
+
+
+/*Input*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+    -webkit-text-fill-color: white !important;
+    outline: none;
+    caret-color: #FFFFFF !important;
+}
+/*Input*/
 
 /*Success Modal Customization*/
 .overlay {

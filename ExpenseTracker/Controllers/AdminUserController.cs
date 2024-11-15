@@ -253,6 +253,70 @@ namespace ExpenseTracker.Controllers
             }
         }
 
+        public async Task<IActionResult> AdminManagePassword(AdminViewModel model)
+        {
+
+            try
+            {
+                var userId = GetUserId();
+
+                var user = await _userManager.FindByIdAsync(userId);
+
+                if (!await _userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    throw new Exception("User is not an admin");
+                }
+
+                model.User = user;
+
+                return View(model);
+
+            }
+            catch (DbUpdateException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+
+        }
+
+        public async Task<IActionResult> UpdateAdminPassword(AdminViewModel model)
+        {
+
+            try
+            {
+                var userId = GetUserId();
+
+                if (model.User.ConfirmPassword != model.User.Password)
+                {
+                    TempData["ConfirmPasswordMessage"] = "Password and Confirm Password does not match";
+                    return RedirectToAction("AdminManagePassword");
+                }
+  
+                await _repo.UpdateAdminPassword(userId, model.User);
+
+                TempData["Message"] = "Admin password updated";
+
+                return RedirectToAction("Index");
+
+            }
+            catch(ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (DbUpdateException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
 
     }
 }

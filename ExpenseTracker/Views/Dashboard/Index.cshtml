@@ -23,7 +23,7 @@
                 <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">
                     <option value="" class="font-monospace" disabled selected>@(ViewBag.DayRange != null ? $"Past {ViewBag.DayRange} days" : "Data Shown" )</option>
                     <option value="7" class="font-monospace">Past 7 Days</option>
-                    <option value="14" class="font-monospace">Past 15 days</option>
+                    <option value="14" class="font-monospace">Past 14 days</option>
                     <option value="30" class="font-monospace">Past 30 days</option>
                 </select>
             </form>
@@ -136,7 +136,7 @@
     <script src="@Url.Content("~/js/LineChart.js")"></script>
     <script src="@Url.Content("~/js/realtime.js")"></script>
     <script src="@Url.Content("~/js/inbox.js")"></script>
-    <script src="@Url.Content("~/js/site.js")"></script>
+   
 
 }
 
