@@ -212,5 +212,12 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
+
+        public async Task DeleteNotificationOlderThanAsync(DateTime cutOffDate)
+        {
+            var oldNotification = _notification.Where(x => x.TimeStamp < cutOffDate);
+            _notification.RemoveRange(oldNotification);
+            await _db.SaveChangesAsync();
+        }
     }
 }

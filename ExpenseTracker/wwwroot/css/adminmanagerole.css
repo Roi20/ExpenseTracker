@@ -1,0 +1,97 @@
+﻿.main-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 30px;
+    width: 100%;
+    height: 100%;
+}
+
+.table-wrapper {
+    background: #17181d;
+    width: 100%;
+    padding: 20px;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+    .table-wrapper #exit-btn {
+        color: #FFFFFF;
+        text-decoration: none;
+        padding-top: 5px;
+        transition: all .3s ease-in-out;
+    }
+
+        .table-wrapper #exit-btn:hover {
+            color: #9FA6B2;
+        }
+
+    .table-wrapper .fa-right-to-bracket {
+        margin-right: 3px;
+    }
+
+    .table-wrapper #exit-btn span {
+        font-size: .8em;
+        letter-spacing: 1px;
+        font-variant-caps: all-small-caps;
+        padding: 5px;
+    }
+
+
+.upper-section {
+    display: flex;
+    padding: 5px 0 5px 0;
+}
+
+    .upper-section a {
+        text-decoration: none;
+        font-size: .9em;
+        font-variant-caps: all-small-caps;
+        letter-spacing: 1px;
+        margin-left: auto;
+    }
+
+.table-wrapper table {
+    background: #272e36;
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    height: 100%;
+}
+
+.adminnotif-table-content th,
+.adminnotif-table-content td {
+    padding: 10px 15px;
+    font-size: .8em;
+    color: #FFFFFF;
+    border: none;
+}
+
+.action-button {
+    padding: 5px;
+    display: flex;
+    gap: 15px;
+}
+
+.notif-title {
+    color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 4px 0 4px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 1px;
+}
+
+#remove-btn-holder a {
+    text-decoration: none;
+    font-size: .9em;
+    letter-spacing: 1px;
+    color: #9FA6B2;
+    transition: all .3s ease-in-out;
+}
+
+#remove-btn-holder a:hover{
+    color: #FFFFFF;
+} 

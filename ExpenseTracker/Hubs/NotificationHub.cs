@@ -14,12 +14,12 @@ namespace ExpenseTracker.Hubs
     public class NotificationHub : Hub<INotificationHub>
     {
 
-        private readonly INotificationRepository _repo;
+        private readonly INotificationRepository _notificationRepo;
         private readonly UserManager<AppIdentityUser> _userManager;
 
-        public NotificationHub(INotificationRepository repo, UserManager<AppIdentityUser> userManager)
+        public NotificationHub(INotificationRepository notificationRepo, UserManager<AppIdentityUser> userManager)
         {
-            _repo = repo;
+            _notificationRepo = notificationRepo;
             _userManager = userManager;
         }
 
@@ -58,11 +58,15 @@ namespace ExpenseTracker.Hubs
                 return;
 
 
-            var notifications = await _repo.GetAllUserNotification(userId);
-            
-            var unreadNotification = notifications.Where(x => !x.IsRead).ToList();
+            var notifications = await _notificationRepo.GetAllUserNotification(userId);
 
-            if (!unreadNotification.Any())
+            var displayedNotifications = notifications.OrderByDescending(x => x.TimeStamp)
+                                                      .Take(20)
+                                                      .ToList();
+
+            var unreadNotifications = displayedNotifications.Where(x => !x.IsRead).ToList();
+
+            if (!unreadNotifications.Any())
             {
                 await Clients.User(userId).NotificationCleared();
                 return;

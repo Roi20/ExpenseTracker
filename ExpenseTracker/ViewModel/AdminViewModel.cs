@@ -19,6 +19,7 @@ namespace ExpenseTracker.ViewModel
         public IEnumerable<FinancialTrendData> FinancialTrendData { get; set; }
         public IEnumerable<ModeData> ModeDataSummary { get; set; }
         public IEnumerable<TopListCategories> TopListCategories { get; set; }
+        public IEnumerable<Moderators> Moderators { get; set; }
 
 
     }
