@@ -88,10 +88,81 @@
     text-decoration: none;
     font-size: .9em;
     letter-spacing: 1px;
-    color: #9FA6B2;
     transition: all .3s ease-in-out;
+    cursor: pointer;
 }
 
 #remove-btn-holder a:hover{
+     color: #9FA6B2;
+}
+
+/*remove moderator modal*/
+
+
+#removeModeratorModal .modal-content{
+    background: #17181d;
+}
+
+
+#removeModeratorModal .modal-body {
     color: #FFFFFF;
-} 
+}
+
+
+    #removeModeratorModal .modal-body h6 {
+        font-weight: bold;
+        font-size: 1.2em;
+        display: flex;
+        justify-content: left;
+        align-items: center;
+        padding: 5px;
+        color: #FFFFFF;
+    }
+
+    #removeModeratorModal .modal-body span {
+        font-weight: 400;
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+        padding: 15px 5px 5px 5px;
+        color: #FFFFFF;
+        font-size: .9em;
+        letter-spacing: 1px;
+        padding-bottom: 30px;
+    }
+
+.modal3-btn-holder {
+    display: flex;
+    justify-content: right;
+    padding: 6px;
+}
+
+
+#third-inbox-closeBtn {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-weight: bold;
+    font-size: 1em;
+}
+
+    #third-inbox-closeBtn:hover {
+        color: #9FA6B2
+    }
+
+.remove-confirmed {
+    padding: 15px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    column-gap: 5px;
+}
+
+#remove-confirmed-btn,
+#cancel-confirmed-btn {
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+}
+
+/*remove moderator modal end*/

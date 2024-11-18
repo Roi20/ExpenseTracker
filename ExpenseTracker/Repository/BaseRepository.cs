@@ -3,6 +3,8 @@ using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using Hangfire.Logging;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.EJ2.Linq;
@@ -18,13 +20,19 @@ namespace ExpenseTracker.Repository
         protected readonly DbSet<T> _table;
         private readonly DbSet<AppIdentityUser> _user;
         protected readonly DbSet<Notification> _notification;
+        private readonly IHttpContextAccessor _httpContext;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
-        public BaseRepository(ExpenseTrackerDbContext db)
+        public BaseRepository(ExpenseTrackerDbContext db, 
+                              IHttpContextAccessor httpContext,
+                              UserManager<AppIdentityUser> userManager)
         {
             _db = db;
             _table = _db.Set<T>();
             _user = _db.Set<AppIdentityUser>();
             _notification = _db.Set<Notification>();
+            _httpContext = httpContext;
+            _userManager = userManager;
 
         }
 
@@ -203,6 +211,50 @@ namespace ExpenseTracker.Repository
                 throw;
             }
         }
+
+        public async Task<AppIdentityUser> GetCurrentUser()
+        {
+            try
+            {
+
+                var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext.User);
+
+                if (currentUser == null)
+                    throw new ArgumentException("Current user not found.");
+
+
+                return currentUser;
+                
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task CreateAuditLog(T log)
+        {
+            try
+            {
+                 _table.Add(log);
+                await _db.SaveChangesAsync();
+
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
 
     }
 }

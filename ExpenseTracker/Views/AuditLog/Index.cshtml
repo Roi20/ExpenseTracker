@@ -16,12 +16,7 @@
 <div class="main-wrapper">
     <div class="table-wrapper">
         <div class="upper-section">
-            <span class="notif-title">Moderators</span>
-            <!--a asp-action="Create" class="btn btn-primary">
-                <span>
-                    <i class="fa-solid fa-plus"></i> Add Moderator
-                </span>
-            </a-->
+            <span class="notif-title">Logs</span>
         </div>
         <div class="admin-notif-table table-responsive">
             <table class="adminnotif-table-content table table-hover">
@@ -41,9 +36,8 @@
                             <td>@item.Email</td>
                             <td>@item.Business</td>
                             <td>
-                                <div class="action-button" id="remove-btn-holder"> 
-                                    <a 
-                                       id="remove-action-btn" 
+                                <div class="action-button" id="remove-btn-holder">
+                                    <a id="remove-action-btn"
                                        class="text-danger"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="left"
@@ -52,7 +46,7 @@
                                        data-name="@item.Name"
                                        data-email="@item.Email"
                                        data-business="@item.Business">
-                                       Remove
+                                        Remove
                                     </a>
                                 </div>
                             </td>
@@ -71,6 +65,6 @@
 <partial name="_RemoveModeratorModal" />
 
 @section CustomScripts {
-    
+
     <script src="@Url.Content("~/js/adminmanagerole.js")"></script>
 }

@@ -43,7 +43,6 @@ function sidebarOnclick() {
     
 };
 
-
 document.getElementById('show-password-checkbox').addEventListener('change', function () {
     var passwordInput = document.getElementById('admin-password');
     var confirmPasswordInput = document.getElementById('admin-confirm-password');
@@ -60,6 +59,9 @@ document.getElementById('show-password-checkbox').addEventListener('change', fun
     }
 
 });
+
+
+
 
 
 

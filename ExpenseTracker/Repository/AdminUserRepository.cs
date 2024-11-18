@@ -18,7 +18,9 @@ namespace ExpenseTracker.Repository
 
         private readonly UserManager<AppIdentityUser> _userManager;
 
-        public AdminUserRepository(ExpenseTrackerDbContext db, UserManager<AppIdentityUser> userManager): base(db)
+        public AdminUserRepository(ExpenseTrackerDbContext db, 
+                                   UserManager<AppIdentityUser> userManager,
+                                   IHttpContextAccessor httpContext): base(db, httpContext, userManager)
         {
             _userManager = userManager;
         }

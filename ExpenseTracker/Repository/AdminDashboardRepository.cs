@@ -3,6 +3,7 @@ using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using ExpenseTracker.ViewModel;
 using Humanizer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -11,14 +12,16 @@ using Syncfusion.EJ2.Linq;
 
 namespace ExpenseTracker.Repository
 {
-    public class AdminDashboardRepository : IAdminDashboardRepository
+    public class AdminDashboardRepository : BaseRepository<AuditLog>, IAdminDashboardRepository
     {
         private readonly DbContext _db;
         private readonly DbSet<Transaction> _transactions;
         private readonly DbSet<Category> _category;
         private readonly UserManager<AppIdentityUser> _userManager;
 
-        public AdminDashboardRepository(UserManager<AppIdentityUser> userManager, ExpenseTrackerDbContext db)
+        public AdminDashboardRepository(UserManager<AppIdentityUser> userManager, 
+                                        ExpenseTrackerDbContext db,
+                                        IHttpContextAccessor httpContext) : base(db, httpContext, userManager)
         {
             _db = db;
             _transactions =  _db.Set<Transaction>();
