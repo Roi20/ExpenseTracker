@@ -18,7 +18,14 @@ namespace ExpenseTracker.Contracts
         Task<IEnumerable<Notification>> GetAllUserNotification(string userId);
         Task<Notification> MarkAsReadUserNotification(int id);
         Task DeleteUserNotification(int id);
-        Task CreateAuditLog(T log);
+        Task CreateAuditLog(string userId,
+                            string userName,
+                            string role,
+                            string action,
+                            string timeStamp,
+                            string entityId,
+                            string entityType,
+                            string details);
         Task<AppIdentityUser> GetCurrentUser();
 
     }

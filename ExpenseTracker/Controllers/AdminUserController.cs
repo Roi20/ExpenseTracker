@@ -17,11 +17,13 @@ namespace ExpenseTracker.Controllers
 
         private readonly IAdminUserRepository _repo;
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly IBaseRepository<AuditLog> _baseRepo;
 
-        public AdminUserController(IAdminUserRepository repo, UserManager<AppIdentityUser> userManager)
+        public AdminUserController(IAdminUserRepository repo, UserManager<AppIdentityUser> userManager, IBaseRepository<AuditLog> baseRepo)
         {
             _repo = repo;
             _userManager = userManager;
+            _baseRepo = baseRepo;
         }
 
 
@@ -51,21 +53,38 @@ namespace ExpenseTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignRole(string userId, string role)
         {
+
             var user = await _repo.GetUser(userId);
+
             try
             {
                 if (string.IsNullOrEmpty(userId))
                 {
-                    return NotFound("User Not Found");
+                    return NotFound("User Id cannot be null or empty.");
                 }
 
-                if (user == null)
+                if(user == null)
                 {
-                    return NotFound("User Not Found");
+                    return NotFound("User not found");
                 }
+
 
                 await _repo.AssignRoleAsync(user, role);
                 TempData["RoleSuccessMessage"] = $"{user.FirstName} assigned as {role}";
+
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                              currentUser.UserName ?? currentUser.Email,
+                                              await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                              $"Add user role as {role}.",
+                                              $"{DateTime.UtcNow:g}",
+                                              user.Id,
+                                              "User Role",
+                                              $"Add {user.UserName ?? user.Email} as {role}");
+
+
+
                 return RedirectToAction("Index");
 
             }
@@ -264,13 +283,29 @@ namespace ExpenseTracker.Controllers
 
                 if (!await _userManager.IsInRoleAsync(user, "Admin"))
                 {
-                    throw new Exception("User is not an admin");
+                    throw new UnauthorizedAccessException("User is not an admin");
                 }
 
                 model.User = user;
 
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                            currentUser.UserName ?? currentUser.Email,
+                                            await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                            $"Update Password.",
+                                            $"{DateTime.UtcNow:g}",
+                                            user.Id,
+                                            "Admin Password",
+                                            $"Updated your password");
+
+
                 return View(model);
 
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (DbUpdateException ex)
             {

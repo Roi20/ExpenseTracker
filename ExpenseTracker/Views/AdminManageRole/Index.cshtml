@@ -36,7 +36,7 @@
                 <tbody>
                     @foreach (var item in Model.Moderators)
                     {
-                        <tr>
+                        <tr data-id="@item.UserId" data-email="@item.Email">
                             <td>@item.Name</td>
                             <td>@item.Email</td>
                             <td>@item.Business</td>
@@ -47,11 +47,7 @@
                                        class="text-danger"
                                        data-bs-toggle="tooltip"
                                        data-bs-placement="left"
-                                       title="Remove"
-                                       data-id="@item.UserId"
-                                       data-name="@item.Name"
-                                       data-email="@item.Email"
-                                       data-business="@item.Business">
+                                       title="Remove">
                                        Remove
                                     </a>
                                 </div>

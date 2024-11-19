@@ -22,6 +22,7 @@ namespace ExpenseTracker.Repository
         protected readonly DbSet<Notification> _notification;
         private readonly IHttpContextAccessor _httpContext;
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly DbSet<AuditLog> _auditLog;
 
         public BaseRepository(ExpenseTrackerDbContext db, 
                               IHttpContextAccessor httpContext,
@@ -31,8 +32,10 @@ namespace ExpenseTracker.Repository
             _table = _db.Set<T>();
             _user = _db.Set<AppIdentityUser>();
             _notification = _db.Set<Notification>();
+            _auditLog = _db.Set<AuditLog>();
             _httpContext = httpContext;
             _userManager = userManager;
+            
 
         }
 
@@ -237,11 +240,32 @@ namespace ExpenseTracker.Repository
             }
         }
 
-        public async Task CreateAuditLog(T log)
+        public async Task CreateAuditLog(string userId,
+                                         string userName,
+                                         string role,
+                                         string action,
+                                         string timeStamp,
+                                         string entityId,
+                                         string entityType,
+                                         string details)
         {
             try
             {
-                 _table.Add(log);
+
+
+                var log = new AuditLog
+                {
+                    User_Id = userId,
+                    UserName = userName,
+                    Role = role,
+                    Action = action,
+                    TimeStamp = timeStamp,
+                    EntityId = entityId,
+                    EntityType = entityType,
+                    Details = details
+                };
+
+                 _auditLog.Add(log);
                 await _db.SaveChangesAsync();
 
             }

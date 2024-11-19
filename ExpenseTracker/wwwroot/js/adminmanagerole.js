@@ -1,10 +1,11 @@
 ﻿
 
-$('a[data-bs-toggle=tooltip]').on('click', function () {
+$(document).on('click','#remove-action-btn', function () {
 
-    var $row = $(this);
+    var $row = $(this).closest('tr');
     var userId = $row.data('id');
     var email = $row.data('email'); 
+    var tr = $row.data('tr');
 
     $('#removeModeratorModal .modal-body').html
         (`

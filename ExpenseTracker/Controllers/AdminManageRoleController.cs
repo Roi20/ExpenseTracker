@@ -40,7 +40,7 @@ namespace ExpenseTracker.Controllers
 
                 await _repo.RemoveUserAsModerator(user);
 
-                return RedirectToAction("Index");
+                return Ok("User removed as moderator");
 
             }
             catch(DbUpdateException ex)
