@@ -21,13 +21,13 @@ namespace ExpenseTracker.Repository
             _userManager = userManager;
             _baseRepo = baseRepo;
         }
-        public async Task<IEnumerable<Moderators>> GetUserIsInRoleModerator()
+        public async Task<IEnumerable<Moderator>> GetUserIsInRoleModerator()
         {
             try
             {
                 var usersIsInRoleAsModerator = await _userManager.GetUsersInRoleAsync("Moderator");
 
-                var moderators =  usersIsInRoleAsModerator.Select(x => new Moderators
+                var moderators =  usersIsInRoleAsModerator.Select(x => new Moderator
                 {
                     UserId = x.Id,
                     Name = $"{x.FirstName} {x.LastName}",
@@ -49,17 +49,6 @@ namespace ExpenseTracker.Repository
         {
             try
             {
-                var currentUser = await _baseRepo.GetCurrentUser();
-
-                await _baseRepo.CreateAuditLog(currentUser.Id,
-                                               currentUser.UserName ?? currentUser.Email,
-                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
-                                               "Remove user role as moderator.",
-                                               $"{DateTime.UtcNow:g}",
-                                               user.Id,
-                                               "User Role",
-                                               $"Removed {user.UserName ?? user.Email} as Moderator");
-
 
                 if(await _userManager.IsInRoleAsync(user, "Moderator"))
                 {

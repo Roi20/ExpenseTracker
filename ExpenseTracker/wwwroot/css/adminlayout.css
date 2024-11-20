@@ -282,11 +282,15 @@ ulList li.disabled a {
     padding: 10px 10px 10px 10px;
     letter-spacing: 1px;
     font-size: .9em;
+    background: #17181d !important;
+    color: #FFFFFF;
+    box-sizing: border-box;
 }
 
 #createForm input:focus,
 #updateForm input:focus{
     outline: none;
+    border-radius: 5px;
 }
 
 #createForm button:not(.cancel-btn),
@@ -475,6 +479,8 @@ form span button
 }
 
 
+
+
 /*Admin Manage Password*/
 .admin-password-main-wrapper{
     height: 100%;
@@ -518,17 +524,6 @@ form span button
     letter-spacing: 1px;
     background: #17181d;
     color: #FFFFFF;
-}
-
-.admin-password-wrapper .form-holder form input:focus,
-.admin-password-wrapper .form-holder form input:valid{
-    outline: none;
-    background: #17181d !important;
-    -webkit-text-fill-color: white !important;
-}
-
-input-moz-autofill {
-    background: #17181d
 }
 
 .admin-password-wrapper .form-holder form input::placeholder {
@@ -585,8 +580,22 @@ input-moz-autofill {
    color: #FFFFFF;
 }
 
+input-moz-autofill {
+    background: #17181d !important;
+}
 
-/*Input*/
+
+/*Input*
+
+.admin-password-wrapper .form-holder form input:focus,
+.admin-password-wrapper .form-holder form input:valid{
+    outline: none;
+    background: none !important;
+    -webkit-text-fill-color: white !important;
+}
+
+
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -597,6 +606,40 @@ input:-webkit-autofill:active {
     caret-color: #FFFFFF !important;
 }
 /*Input*/
+
+/*For input field*/
+/* For Firefox (using the pseudo-class selector) */
+input:autofill
+input:autofill:focus,
+input:autofill:hover,
+input:autofill:active {
+     box-shadow: 0 0 0 1000px #17181d inset !important;
+    -moz-box-shadow: 0 0 0 1000px #17181d inset !important;
+    -moz-text-fill-color: #ffffff !important;
+    outline: none !important;
+    caret-color: #FFFFFF !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+/* For Chrome, Safari, and Opera */
+input:-webkit-autofill,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 1000px #17181d inset !important;
+    -webkit-text-fill-color: #ffffff !important;
+    outline: none !important;
+    caret-color: #FFFFFF !important;
+    border-radius: 5px !important;
+    border: none !important;
+}
+
+/*For input field*/
+
+
+
+
 
 /*Success Modal Customization*/
 .overlay {

@@ -2,7 +2,7 @@
 
 namespace ExpenseTracker.Common
 {
-    public class Moderators
+    public class Moderator
     {
         public string UserId { get; set; }
         public string Name { get; set; }

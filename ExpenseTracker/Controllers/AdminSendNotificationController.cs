@@ -1,8 +1,10 @@
 ﻿using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
 using ExpenseTracker.Hubs;
 using ExpenseTracker.Models;
 using ExpenseTracker.ViewModel;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -14,10 +16,16 @@ namespace ExpenseTracker.Controllers
     {
 
         private readonly INotificationRepository _repo;
+        private readonly IBaseRepository<AuditLog> _baseRepo;
+        private readonly UserManager<AppIdentityUser> _userManager;
 
-        public AdminSendNotificationController(INotificationRepository repo)
+        public AdminSendNotificationController(INotificationRepository repo, 
+                                               IBaseRepository<AuditLog> baseRepo, 
+                                               UserManager<AppIdentityUser> userManager)
         {
             _repo = repo;
+            _baseRepo = baseRepo;
+            _userManager = userManager;
         }
 
         public async Task<IActionResult> Index(AdminSendNotificationViewModel model)
@@ -51,6 +59,19 @@ namespace ExpenseTracker.Controllers
 
                 TempData["SendNotificationSuccess"] = "Message sent successfully.";
                 TempData["Message"] = "Message sent successfully.";
+
+                //Create audit log
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               "Create a new notification",
+                                               DateTime.UtcNow.AddHours(8),
+                                               model.AdminNotification.AdminNotificationId.ToString(),
+                                               "Create notification",
+                                               $"Create a new notification title {model.AdminNotification.Title}");
+
                 return RedirectToAction("Index");
 
             }
@@ -114,6 +135,19 @@ namespace ExpenseTracker.Controllers
 
                 await _repo.UpdateNotificationAsync(model.AdminNotification.AdminNotificationId, model.AdminNotification.Title, model.AdminNotification.Message);
                 TempData["Message"] = "Message updated successfully.";
+
+                //Create audit log
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               "Updated the notification",
+                                               DateTime.UtcNow.AddHours(8),
+                                               model.AdminNotification.AdminNotificationId.ToString(),
+                                               "Update Notification",
+                                               $"Update notification titled as {model.AdminNotification.Title}");
+
                 return RedirectToAction("Index");
                  
 
@@ -174,9 +208,23 @@ namespace ExpenseTracker.Controllers
         {
             try
             {
+                var notification = await _repo.GetAdminNotificationId(model.AdminNotification.AdminNotificationId);
+
+                //Create audit log
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               "Delete Notification",
+                                               DateTime.UtcNow.AddHours(8),
+                                               model.AdminNotification.AdminNotificationId.ToString(),
+                                               "Delete Notification",
+                                               $"Delete notification titled as {notification.Title}");
 
                 await _repo.DeleteNotificationAsync(model.AdminNotification.AdminNotificationId);
                 TempData["Message"] = "Message deleted successfully.";
+
                 return RedirectToAction("Index");
 
 

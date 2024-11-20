@@ -22,34 +22,22 @@
             <table class="adminnotif-table-content table table-hover">
                 <thead>
                     <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Business</th>
-                        <th>Actions</th>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                        <th>Details</th>
+                        <th>TimeStamp</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model.Moderators)
+                    @foreach (var item in Model.Logs)
                     {
                         <tr>
-                            <td>@item.Name</td>
-                            <td>@item.Email</td>
-                            <td>@item.Business</td>
-                            <td>
-                                <div class="action-button" id="remove-btn-holder">
-                                    <a id="remove-action-btn"
-                                       class="text-danger"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-placement="left"
-                                       title="Remove"
-                                       data-id="@item.UserId"
-                                       data-name="@item.Name"
-                                       data-email="@item.Email"
-                                       data-business="@item.Business">
-                                        Remove
-                                    </a>
-                                </div>
-                            </td>
+                            <td>@item.Username</td>
+                            <td>@item.Role</td>
+                            <td>@item.Action</td>
+                            <td>@item.Details</td>
+                            <td>@item.TimeStamp</td>
                         </tr>
                     }
                 </tbody>
@@ -62,8 +50,6 @@
         </a>
     </div>
 </div>
-<partial name="_RemoveModeratorModal" />
-
 @section CustomScripts {
 
     <script src="@Url.Content("~/js/adminmanagerole.js")"></script>

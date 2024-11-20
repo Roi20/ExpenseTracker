@@ -7,7 +7,7 @@ namespace ExpenseTracker.Contracts
     public interface IAdminManageRoleRepository : IBaseRepository<AuditLog>
     {
 
-        Task<IEnumerable<Moderators>> GetUserIsInRoleModerator();
+        Task<IEnumerable<Moderator>> GetUserIsInRoleModerator();
         Task RemoveUserAsModerator(AppIdentityUser user);
 
     }

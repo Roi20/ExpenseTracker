@@ -78,7 +78,7 @@ namespace ExpenseTracker.Controllers
                                               currentUser.UserName ?? currentUser.Email,
                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
                                               $"Add user role as {role}.",
-                                              $"{DateTime.UtcNow:g}",
+                                              DateTime.UtcNow.AddHours(8),
                                               user.Id,
                                               "User Role",
                                               $"Add {user.UserName ?? user.Email} as {role}");
@@ -133,6 +133,18 @@ namespace ExpenseTracker.Controllers
 
                 TempData["Message"] = $"{userModel.Email}, Created Successfully";
 
+                //Create Audit Logs
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               $"Create new user",
+                                               DateTime.UtcNow.AddHours(8),
+                                               userModel.Id,
+                                               "Creating User",
+                                               $"Created a new user {userModel.UserName}");
+
                 return RedirectToAction("Index");
 
             }
@@ -179,6 +191,19 @@ namespace ExpenseTracker.Controllers
                 if (result.Succeeded)
                 {
                     TempData["Message"] = $"{userModel.Email}, Updated Successfully";
+
+                    //Create Audit Logs
+                    var currentUser = await _baseRepo.GetCurrentUser();
+
+                    await _baseRepo.CreateAuditLog(currentUser.Id,
+                                                   currentUser.UserName ?? currentUser.Email,
+                                                   await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                                   $"Update user",
+                                                   DateTime.UtcNow.AddHours(8),
+                                                   userModel.Id,
+                                                   "Updating User",
+                                                   $"Updated user {user.UserName} information.");
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -243,7 +268,7 @@ namespace ExpenseTracker.Controllers
         }
 
 
-
+        [HttpPost]
         public async Task<IActionResult> ConfirmedDelete(PaginatedResult<AppIdentityUser> model)
         {
 
@@ -256,8 +281,24 @@ namespace ExpenseTracker.Controllers
                 if (user == null)
                     return NotFound();
 
+                
+
+                //Create Audit Logs
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               $"Delete user",
+                                               DateTime.UtcNow.AddHours(8),
+                                               userModel.Id,
+                                               "Deleting User",
+                                               $"Deleted user {user.UserName}");
+
                 await _userManager.DeleteAsync(user);
                 TempData["Message"] = $"Deleted Successfully";
+
+
                 return RedirectToAction("Index");
 
 
@@ -288,18 +329,6 @@ namespace ExpenseTracker.Controllers
 
                 model.User = user;
 
-                var currentUser = await _baseRepo.GetCurrentUser();
-
-                await _baseRepo.CreateAuditLog(currentUser.Id,
-                                            currentUser.UserName ?? currentUser.Email,
-                                            await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
-                                            $"Update Password.",
-                                            $"{DateTime.UtcNow:g}",
-                                            user.Id,
-                                            "Admin Password",
-                                            $"Updated your password");
-
-
                 return View(model);
 
             }
@@ -318,6 +347,7 @@ namespace ExpenseTracker.Controllers
 
         }
 
+        [HttpPost]
         public async Task<IActionResult> UpdateAdminPassword(AdminViewModel model)
         {
 
@@ -334,6 +364,19 @@ namespace ExpenseTracker.Controllers
                 await _repo.UpdateAdminPassword(userId, model.User);
 
                 TempData["Message"] = "Admin password updated";
+
+                //Create Audit Logs
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                            currentUser.UserName ?? currentUser.Email,
+                                            await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                            $"Update admin password.",
+                                            DateTime.UtcNow.AddHours(8),
+                                            model.User.Id,
+                                            "Admin Password",
+                                            $"Updated the admin password");
+
 
                 return RedirectToAction("Index");
 

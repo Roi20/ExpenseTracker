@@ -13,11 +13,13 @@ namespace ExpenseTracker.Controllers
 
         private readonly IAdminManageRoleRepository _repo;
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly IBaseRepository<AuditLog> _baseRepo;
 
-        public AdminManageRoleController(IAdminManageRoleRepository repo, UserManager<AppIdentityUser> userManager)
+        public AdminManageRoleController(IAdminManageRoleRepository repo, UserManager<AppIdentityUser> userManager, IBaseRepository<AuditLog> baseRepo)
         {
             _repo = repo;
             _userManager = userManager;
+            _baseRepo = baseRepo;
         }
 
         public async Task<IActionResult> Index(AdminViewModel model)
@@ -39,6 +41,19 @@ namespace ExpenseTracker.Controllers
 
 
                 await _repo.RemoveUserAsModerator(user);
+
+                //Create audit log
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               "Remove user role as moderator.",
+                                               DateTime.UtcNow.AddHours(8),
+                                               user.Id,
+                                               "User Role",
+                                               $"Removed {user.UserName ?? user.Email} as Moderator");
+
 
                 return Ok("User removed as moderator");
 

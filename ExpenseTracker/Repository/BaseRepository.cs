@@ -244,7 +244,7 @@ namespace ExpenseTracker.Repository
                                          string userName,
                                          string role,
                                          string action,
-                                         string timeStamp,
+                                         DateTime timeStamp,
                                          string entityId,
                                          string entityType,
                                          string details)
