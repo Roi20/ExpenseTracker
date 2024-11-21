@@ -5,6 +5,8 @@ using ExpenseTracker.Data;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Syncfusion.EJ2.Linq;
+using System.Linq.Expressions;
 
 namespace ExpenseTracker.Repository
 {
@@ -20,20 +22,38 @@ namespace ExpenseTracker.Repository
             _baseRepo = baseRepo;
         }
 
-        public async Task<IEnumerable<ManageAuditLog>> GetAllAuditLog()
+        public async Task<IEnumerable<ManageAuditLog>> GetAllAuditLog(string searchKeyword)
         {
             try
             {
-                var auditLogs = await _table.OrderByDescending(x => x.TimeStamp).Select(s => new ManageAuditLog
-                {
-                    UserId = s.User_Id,
-                    Username = s.UserName,
-                    Role = s.Role,
-                    Action = s.Action,
-                    Details = s.Details,
-                    TimeStamp = s.TimeStamp.ToString("g")
 
-                }).ToListAsync();
+                var records = await _table.ToListAsync();
+
+                if (!string.IsNullOrEmpty(searchKeyword))
+                {
+                    var normalizeKeyword = searchKeyword.ToLower();
+
+                    records = records.Where(x => x.UserName.ToLower().Contains(normalizeKeyword) ||
+                                                                     x.Role.ToLower().Contains(normalizeKeyword) ||
+                                                                     x.Action.ToLower().Contains(normalizeKeyword) ||
+                                                                     x.Details.ToLower().Contains(normalizeKeyword) ||
+                                                                     x.TimeStamp.ToString("g").ToLower().Contains(normalizeKeyword))
+                                                                     .ToList();
+                }
+                                               
+
+                var auditLogs =   records.OrderByDescending(x => x.TimeStamp)
+                                         .Select(s => new ManageAuditLog
+                                         {
+                                             UserId = s.User_Id,
+                                             Username = s.UserName,
+                                             Role = s.Role,
+                                             Action = s.Action,
+                                             Details = s.Details,
+                                             TimeStamp = s.TimeStamp.ToString("g")
+
+                                         }).ToList();
+
 
                 return auditLogs;
             }

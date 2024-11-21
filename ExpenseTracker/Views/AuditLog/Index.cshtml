@@ -6,7 +6,7 @@
 
 
 @section CustomStyles {
-    <link rel="stylesheet" href="@Url.Content("~/css/adminmanagerole.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/auditlog.css")" />
 }
 
 @if (TempData["Message"] != null)
@@ -16,7 +16,19 @@
 <div class="main-wrapper">
     <div class="table-wrapper">
         <div class="upper-section">
-            <span class="notif-title">Logs</span>
+            <span class="notif-title">Log Records</span>
+            <form asp-action="Index" method="get" class="searchForm">
+                @Html.AntiForgeryToken()
+                <input type="text"
+                       placeholder="Search.."
+                       name="search"
+                       value="@Model.SearchKeyword" />
+                <button type="submit" id="submit-search">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </span>
+                </button>
+            </form>
         </div>
         <div class="admin-notif-table table-responsive">
             <table class="adminnotif-table-content table table-hover">

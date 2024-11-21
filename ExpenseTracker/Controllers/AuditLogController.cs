@@ -19,7 +19,7 @@ namespace ExpenseTracker.Controllers
 
             try
             {
-                viewModel.Logs = await _auditRepo.GetAllAuditLog();
+                viewModel.Logs = await _auditRepo.GetAllAuditLog(viewModel.SearchKeyword);
 
                 return View(viewModel);
 

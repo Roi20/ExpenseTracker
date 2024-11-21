@@ -1,6 +1,7 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ExpenseTracker.ViewModel
 {
@@ -21,6 +22,9 @@ namespace ExpenseTracker.ViewModel
         public IEnumerable<TopListCategories> TopListCategories { get; set; }
         public IEnumerable<Moderator> Moderators { get; set; }
         public IEnumerable<ManageAuditLog> Logs { get; set; }
+        
+        [FromQuery(Name = "search")]
+        public string SearchKeyword { get; set; }
 
 
     }
