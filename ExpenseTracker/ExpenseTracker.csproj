@@ -18,6 +18,7 @@
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\css\auditlog.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\home.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\inbox.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\loginAndregister.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\modal.css" />

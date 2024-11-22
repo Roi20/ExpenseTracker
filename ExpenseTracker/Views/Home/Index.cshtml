@@ -3,7 +3,25 @@
     Layout = "_LayoutNoSidebar";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@section CustomStyles{
+    <link rel="stylesheet" href="@Url.Content("~/css/home.css")" />
+}
+
+<div class="home-main-wrapper">
+   <div class="content">
+        <nav class="navbar">
+            <ul>
+                <li>Logo</li>
+                <li>Home</li>
+                <li>Analytics</li>
+                <li>Category</li>
+                <li>Transaction</li>
+                <li>Login</li>
+            </ul>
+        </nav>
+   </div>
+   <div class="second-content">
+       <h1>Second Content</h1>
+   </div>
 </div>

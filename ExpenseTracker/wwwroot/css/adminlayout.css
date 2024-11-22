@@ -288,9 +288,11 @@ ulList li.disabled a {
 }
 
 #createForm input:focus,
-#updateForm input:focus{
+#updateForm input:focus,
+#createForm input:valid,
+#updateForm input:valid{
     outline: none;
-    border-radius: 5px;
+     -webkit-text-fill-color: white !important;
 }
 
 #createForm button:not(.cancel-btn),
@@ -531,6 +533,10 @@ form span button
     letter-spacing: 1px;
 }
 
+.admin-password-wrapper .form-holder form input:focus{
+    outline: none;
+}
+
 
 .admin-password-wrapper .form-holder form label{
     color: #FFFFFF;
@@ -585,12 +591,11 @@ input-moz-autofill {
 }
 
 
-/*Input*
+
 
 .admin-password-wrapper .form-holder form input:focus,
 .admin-password-wrapper .form-holder form input:valid{
     outline: none;
-    background: none !important;
     -webkit-text-fill-color: white !important;
 }
 
@@ -604,25 +609,14 @@ input:-webkit-autofill:active {
     -webkit-text-fill-color: white !important;
     outline: none;
     caret-color: #FFFFFF !important;
+    -webkit-box-shadow: 0 0 0 1000px #17181d inset !important;
+    -webkit-text-fill-color: #ffffff !important;
 }
 /*Input*/
 
-/*For input field*/
-/* For Firefox (using the pseudo-class selector) */
-input:autofill
-input:autofill:focus,
-input:autofill:hover,
-input:autofill:active {
-     box-shadow: 0 0 0 1000px #17181d inset !important;
-    -moz-box-shadow: 0 0 0 1000px #17181d inset !important;
-    -moz-text-fill-color: #ffffff !important;
-    outline: none !important;
-    caret-color: #FFFFFF !important;
-    border-radius: 5px !important;
-    border: none !important;
-}
 
-/* For Chrome, Safari, and Opera */
+
+/* For Chrome, Safari, and Opera 
 input:-webkit-autofill,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:hover,
