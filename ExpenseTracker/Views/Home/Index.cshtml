@@ -11,17 +11,44 @@
 <div class="home-main-wrapper">
    <div class="content">
         <nav class="navbar">
-            <ul>
-                <li>Logo</li>
-                <li>Home</li>
-                <li>Analytics</li>
-                <li>Category</li>
-                <li>Transaction</li>
-                <li>Login</li>
-            </ul>
+            <div class="navbar-holder">
+                <div class="navbarbrand">
+                   <h4>Expense Tracker</h4>
+                </div>
+                <div class="navbar-ul">
+                    <ul id="home-navbar-ul">
+                        <li>
+                            <a asp-action="Index" asp-controller="Home">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Dashboard">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Category">
+                                Category
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Transaction">
+                                Transaction
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button id="home-navbar-toggle" class="navbar-toggle">☰</button>
+            </div>
         </nav>
    </div>
    <div class="second-content">
-       <h1>Second Content</h1>
    </div>
 </div>
+
+@section CustomScripts{
+    <script src="@Url.Content("~/js/homepage.js")"></script>
+}
+
+

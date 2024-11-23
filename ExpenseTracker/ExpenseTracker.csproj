@@ -12,6 +12,7 @@
     <Content Remove="wwwroot\js\adminDoughnutChart.js" />
     <Content Remove="wwwroot\js\ComponentUI.js" />
     <Content Remove="wwwroot\js\doughnutChart.js" />
+    <Content Remove="wwwroot\js\homepage.js" />
     <Content Remove="wwwroot\js\inbox.js" />
     <Content Remove="wwwroot\js\LineChart.js" />
   </ItemGroup>
@@ -24,6 +25,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\css\modal.css" />
     <_ContentIncludedByDefault Remove="wwwroot\js\ComponentUI.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\doughnutChart.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\homepage.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\inbox.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\LineChart.js" />
   </ItemGroup>
@@ -56,6 +58,7 @@
     <None Include="wwwroot\js\ComponentUI.js" />
     <None Include="wwwroot\js\doughnutChart.js" />
     <None Include="wwwroot\js\adminDoughnutChart.js" />
+    <None Include="wwwroot\js\homepage.js" />
     <None Include="wwwroot\js\inbox.js" />
     <None Include="wwwroot\js\LineChart.js" />
   </ItemGroup>
