@@ -8,12 +8,12 @@
     <link rel="stylesheet" href="@Url.Content("~/css/home.css")" />
 }
 
-<div class="home-main-wrapper">
+<div class="navbar-wrapper">
    <div class="content">
         <nav class="navbar">
             <div class="navbar-holder">
                 <div class="navbarbrand">
-                   <h4>Expense Tracker</h4>
+                   <h4><a asp-action="Index" asp-controller="Home">Expense Tracker</a></h4>
                 </div>
                 <div class="navbar-ul">
                     <ul id="home-navbar-ul">
@@ -44,6 +44,14 @@
         </nav>
    </div>
    <div class="second-content">
+       <div class="header-title">
+            <h2>Effortlessly Manage Your Finances</h2>
+            <p>A Comprehensive Solution to Track Expenses, Income, and Save Smartly</p>
+            <div class="home-btn-holder">
+                <button>login</button>
+                <button>Explore</button>
+            </div>
+       </div>
    </div>
 </div>
 
