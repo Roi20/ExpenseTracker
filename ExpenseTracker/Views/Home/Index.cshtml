@@ -48,11 +48,41 @@
             <h2>Effortlessly Manage Your Finances</h2>
             <p>A Comprehensive Solution to Track Expenses, Income, and Save Smartly</p>
             <div class="home-btn-holder">
-                <button>login</button>
-                <button>Explore</button>
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <div class="signout-btn" id="btn-holder"> 
+                                <button type="submit">
+                                    <span>
+                                        Sign Out <i class="fa-solid fa-circle-arrow-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="signin-btn" id="btn-holder">
+                        <a asp-area="Identity" asp-page="/Account/Login">
+                            <span>
+                                Sign In
+                            </span>
+                        </a>
+                    </div>
+                    <div class="signup-btn" id="btn-holder">
+                        <a asp-area="Identity" asp-page="/Account/Register">
+                            <span>
+                                Sign Up
+                            </span>
+                        </a>
+                    </div>
+                }
             </div>
        </div>
    </div>
+</div>
+<div class="">
+    <h1>Second Wrapper Div</h1>
 </div>
 
 @section CustomScripts{
