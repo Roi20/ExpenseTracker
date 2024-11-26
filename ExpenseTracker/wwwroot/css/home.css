@@ -272,6 +272,104 @@
     border-color: #e85d04
 }
 
+.second-main-section {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 40px 20px 40px;
+   // background: linear-gradient(to bottom right,#000000,#040306, #10091d, #4a148c);
+}
+
+.description-holder{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.second-title{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-bottom: 30px;
+}
+.second-title span{
+    font-weight: bold;
+    font-size: 1.2em;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+}
+
+.descriptions,
+.descriptions-2{
+    display: flex;
+    gap: 10px;
+}
+
+.description-1 {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(41, 52, 61, .4)
+}
+
+.description-2 {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(41, 52, 61, .4)
+}
+
+.description-3 {
+    width: 50%;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(41, 52, 61, .4)
+}
+
+.description-4 {
+    flex: 1;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: rgba(41, 52, 61, .4)
+}
+
+
+
+.description-1-content,
+.description-2-content,
+.description-3-content,
+.description-4-content {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    justify-content: center;
+    color: #FFFFFF;
+    align-items: flex-start;
+}
+.description-1-content span,
+.description-2-content span,
+.description-3-content span,
+.description-4-content span{
+    font-size: 1em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    padding-bottom: 10px;
+}
+
+.description-1-content p,
+.description-2-content p,
+.description-3-content p,
+.description-4-content p{
+    letter-spacing: 1px;
+    font-size: .8em;
+    line-height: 1.5;
+}
+
+
+
 
 
 @media (max-width: 768px) {
@@ -305,6 +403,21 @@
         align-items: center;
         font-size: 1.2em;
     }
+
+    .descriptions,
+    .descriptions-2 {
+        flex-direction: column;
+    }
+
+
+
+    .description-1,
+    .description-2,
+    .description-3,
+    .description-4{
+        width: 100%;
+    }
+
 }
 
 #home-navbar-ul.show{

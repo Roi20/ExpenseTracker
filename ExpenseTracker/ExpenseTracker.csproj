@@ -23,6 +23,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\css\inbox.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\loginAndregister.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\modal.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\1-a.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\js\ComponentUI.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\doughnutChart.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\homepage.js" />
