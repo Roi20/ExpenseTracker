@@ -178,7 +178,7 @@ notificationService.ScheduleRecurringJob();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapHub<NotificationHub>("/notificationHub");
 app.Run();

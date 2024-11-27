@@ -31,18 +31,6 @@
     animation: slideDown 1s ease-in-out;
 }
 
-@keyframes slideDown {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
 
 .navbar-holder {
     display: flex;
@@ -163,18 +151,6 @@
 }
 
 
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 .header-title .home-btn-holder{
     padding: 10px;
     display: flex;
@@ -272,6 +248,7 @@
     border-color: #e85d04
 }
 
+/*Benefits Section*/
 .second-main-section {
     display: flex;
     flex-direction: column;
@@ -296,6 +273,8 @@
     font-size: 1.2em;
     letter-spacing: 1px;
     color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000000; 
+    font-variant-caps: all-small-caps;
 }
 
 .descriptions,
@@ -307,33 +286,37 @@
 .description-1 {
     width: 50%;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
-    background: rgba(41, 52, 61, .4)
+    background: rgba(41, 52, 61, .7);
+    animation: slideInLeft 3s ease-in-out;
 }
 
 .description-2 {
     flex: 1;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
-    background: rgba(41, 52, 61, .4)
+    background: rgba(41, 52, 61, .7);
+    animation: slideIn 3s ease-in-out;
 }
 
 .description-3 {
     width: 50%;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
-    background: rgba(41, 52, 61, .4)
+    background: rgba(41, 52, 61, .7);
+    animation: slideInLeft 3s ease-in-out;
 }
 
 .description-4 {
     flex: 1;
     padding: 20px;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
-    background: rgba(41, 52, 61, .4)
+    background: rgba(41, 52, 61, .7);
+    animation: slideIn 3s ease-in-out;
 }
 
 
@@ -356,7 +339,8 @@
     font-size: 1em;
     font-weight: bold;
     letter-spacing: 1px;
-    padding-bottom: 10px;
+    padding-bottom: 15px;
+    padding-top: 10px;
 }
 
 .description-1-content p,
@@ -366,11 +350,170 @@
     letter-spacing: 1px;
     font-size: .8em;
     line-height: 1.5;
+    text-shadow: 1px 1px 2px #000000;
+}
+/*Benefits Section*/
+
+/*Features Section*/
+
+.key-features-holder {
+    padding: 20px 40px 20px 40px;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.key-features-holder .keyfeature-title{
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px 30px 10px;
+    align-items: center;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 2px #000000;
+    animation: slideDown 3s;
+}
+
+.keyfeature-title span {
+    font-size: 1.2em;
+    font-weight: bold;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+}
+
+.feature-descriptions-holder{
+    display: flex;
+    gap: 10px;
+    
+}
+
+#feature-content{
+    background: rgba(41, 52, 61, .7);
+    width:25%;
+    min-height: 200px;
+    border-radius: 5px;
+    padding: 10px 20px 20px 20px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    
 }
 
 
+#feature-content .icon-holder{
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    height: 80px;
+    width: 80px;
+    float: left;
+}
+
+#feature-content .icon-holder img{
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+#content-holder{
+    padding-top: 20px;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+}
+
+#content-holder span{
+    letter-spacing: 1px;
+    font-weight: bold;
+    font-size: .9em;
+    text-shadow: 1px 1px 2px #000000;
+    padding-bottom: 30px;
+}
+
+#content-holder p{
+    letter-spacing: 1px;
+    font-size: .8em;
+    line-height: 1.5;
+    text-shadow: 1px 1px 2px #000000;
+}
+
+.feature-1,
+.feature-3{
+    animation: slideUp 4s ease-in-out;
+}
+.feature-2,
+.feature-4 {
+    animation: slideDown 4s ease-in-out;
+   
+}
+/*Features Section*/
 
 
+/*Animations*/
+@keyframes slideDown {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideInLeft {
+    0% {
+        opacity: 0;
+        transform: translateX(-100%);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/*Animations*/
 
 @media (max-width: 768px) {
     .navbar-ul{
@@ -409,12 +552,18 @@
         flex-direction: column;
     }
 
-
-
     .description-1,
     .description-2,
     .description-3,
     .description-4{
+        width: 100%;
+    }
+
+    .feature-descriptions-holder{
+        flex-direction: column;
+    }
+    #feature-content {
+
         width: 100%;
     }
 
