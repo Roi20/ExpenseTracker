@@ -347,7 +347,7 @@
 .description-2-content p,
 .description-3-content p,
 .description-4-content p{
-    font-size: .8em;
+    font-size: .9em;
     line-height: 1.5;
     color: #9FA6B2; 
 }
@@ -423,13 +423,13 @@
 
 #content-holder span{
     font-weight: bold;
-    font-size: .9em;
+    font-size: 1em;
     text-shadow: 1px 1px 2px #000000;
     padding-bottom: 30px;
 }
 
 #content-holder p{
-    font-size: .8em;
+    font-size: .9em;
     line-height: 1.5;
     color: #9FA6B2; 
 }
@@ -468,14 +468,14 @@
     align-items: center;
     padding-bottom: 16px;
     font-weight: bold;
-    font-size: .9em;
+    font-size: 1em;
     justify-content: flex-start;
     
 }
 
 #footer-section p{
-     color: #FFFFFF;
-     font-size: .8em;
+     color: #9FA6B2;
+     font-size: .9em;
      line-height: 1.5;
 }
 
@@ -485,18 +485,15 @@
     font-size: 1em !important;
 }
 
-.contacts p a{
-
+.contacts p a {
     text-decoration: none;
-    color: #FFFFFF;
+    color: #9FA6B2;
+    
 }
 
 .contacts p a:hover{
     text-decoration: underline;
 }
-
-
-
 
 /*Footer*/
 
