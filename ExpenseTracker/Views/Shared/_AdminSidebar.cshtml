@@ -27,23 +27,30 @@
                 </a>
             </li>
               <li>
-                <a asp-action="Index">
+                <a asp-action="Index" asp-controller="AdminManageRole">
                     <span>
                         <i class="fa-solid fa-list-check"></i> Manage Roles
                     </span>
                 </a>
             </li>
             <li>
-                <a asp-action="Index">
+                <a asp-action="Index" asp-controller="AdminSendNotification">
                     <span>
                         <i class="fa-solid fa-bell"></i> Send Notification
                     </span>
                 </a>
             </li>
             <li>
-                <a asp-action="Index">
+                <a asp-action="Index" asp-controller="AuditLog">
                     <span>
-                        <i class="fa-solid fa-clipboard"></i> Logs
+                        <i class="fa-solid fa-clipboard"></i> Log Record
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a asp-action="AdminManagePassword" asp-controller="AdminUser">
+                    <span>
+                        <i class="fa-solid fa-lock"></i> Manage Password
                     </span>
                 </a>
             </li>

@@ -2,6 +2,9 @@
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
+using ExpenseTracker.Models;
+using Hangfire.Logging;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.EntityFrameworkCore;
 using Syncfusion.EJ2.Linq;
@@ -16,12 +19,23 @@ namespace ExpenseTracker.Repository
         private readonly DbContext _db;
         protected readonly DbSet<T> _table;
         private readonly DbSet<AppIdentityUser> _user;
+        protected readonly DbSet<Notification> _notification;
+        private readonly IHttpContextAccessor _httpContext;
+        private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly DbSet<AuditLog> _auditLog;
 
-        public BaseRepository(ExpenseTrackerDbContext db)
+        public BaseRepository(ExpenseTrackerDbContext db, 
+                              IHttpContextAccessor httpContext,
+                              UserManager<AppIdentityUser> userManager)
         {
             _db = db;
             _table = _db.Set<T>();
             _user = _db.Set<AppIdentityUser>();
+            _notification = _db.Set<Notification>();
+            _auditLog = _db.Set<AuditLog>();
+            _httpContext = httpContext;
+            _userManager = userManager;
+            
 
         }
 
@@ -142,5 +156,129 @@ namespace ExpenseTracker.Repository
         {
             return await _user.FirstOrDefaultAsync(x => x.Id == userId);
         }
+
+        public async Task<IEnumerable<Notification>> GetAllUserNotification(string userId)
+        {
+            return await _notification.Where(x => x.UserId == userId)
+                                      .OrderByDescending(x => x.TimeStamp)
+                                      .Take(20)
+                                      .ToListAsync();
+        }
+        public async Task<Notification> MarkAsReadUserNotification(int id)
+        {
+            try
+            {
+                var notificationId = await _notification.FindAsync(id);
+
+                if (notificationId == null)
+                    throw new ArgumentException("Notification not found.");
+
+
+                notificationId.IsRead = true;
+                await _db.SaveChangesAsync();
+
+                return notificationId;
+
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+        public async Task DeleteUserNotification(int id)
+        {
+            try
+            {
+                var notificationId = await _notification.FindAsync(id);
+
+                if (notificationId == null)
+                    throw new ArgumentException("Notification not found.");
+
+
+                _notification.Remove(notificationId);
+                await _db.SaveChangesAsync();
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<AppIdentityUser> GetCurrentUser()
+        {
+            try
+            {
+
+                var currentUser = await _userManager.GetUserAsync(_httpContext.HttpContext.User);
+
+                if (currentUser == null)
+                    throw new ArgumentException("Current user not found.");
+
+
+                return currentUser;
+                
+
+            }
+            catch (ArgumentException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task CreateAuditLog(string userId,
+                                         string userName,
+                                         string role,
+                                         string action,
+                                         DateTime timeStamp,
+                                         string entityId,
+                                         string entityType,
+                                         string details)
+        {
+            try
+            {
+
+
+                var log = new AuditLog
+                {
+                    User_Id = userId,
+                    UserName = userName,
+                    Role = role,
+                    Action = action,
+                    TimeStamp = timeStamp,
+                    EntityId = entityId,
+                    EntityType = entityType,
+                    Details = details
+                };
+
+                 _auditLog.Add(log);
+                await _db.SaveChangesAsync();
+
+            }
+            catch (DbUpdateException)
+            {
+                throw;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
     }
 }

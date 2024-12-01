@@ -7,6 +7,7 @@ using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Linq;
 using System.Linq.Dynamic.Core;
 using System.Linq.Expressions;
@@ -17,10 +18,15 @@ namespace ExpenseTracker.Repository
     {
 
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly IBaseRepository<AuditLog> _baseRepo;
 
-        public AdminUserRepository(ExpenseTrackerDbContext db, UserManager<AppIdentityUser> userManager): base(db)
+        public AdminUserRepository(ExpenseTrackerDbContext db, 
+                                   UserManager<AppIdentityUser> userManager,
+                                   IHttpContextAccessor httpContext,
+                                   IBaseRepository<AuditLog> baseRepo) : base(db, httpContext, userManager)
         {
             _userManager = userManager;
+            _baseRepo = baseRepo;
         }
 
         public async Task<PaginatedResult<AppIdentityUser>> GetPagination(int page, int pageSize, string sortOrder, string keyword)
@@ -93,6 +99,7 @@ namespace ExpenseTracker.Repository
 
         public async Task AssignRoleAsync(AppIdentityUser user, string role)
         {
+
             var roleCount = await _userManager.GetUsersInRoleAsync("Moderator");
 
             if (roleCount.Count() >= 5)
@@ -101,7 +108,9 @@ namespace ExpenseTracker.Repository
 
             if (!await _userManager.IsInRoleAsync(user, "User") && !await _userManager.IsInRoleAsync(user, "Moderator"))
             {
+                
                 await _userManager.AddToRoleAsync(user, role);
+                
             }
             else
             {
@@ -113,6 +122,19 @@ namespace ExpenseTracker.Repository
         public async Task<bool> CheckIfExist(Expression<Func<AppIdentityUser, bool>> condition)
         {
             return await _table.AnyAsync(condition);
+        }
+
+        public async Task UpdateAdminPassword(string userId, AppIdentityUser adminUser)
+        {
+
+            var user = await _userManager.FindByIdAsync(userId);
+            
+            if (user == null && !await _userManager.IsInRoleAsync(user, "Admin"))
+                throw new ArgumentException("User Not Found.");
+
+
+            await _userManager.ChangePasswordAsync(user, adminUser.CurrentPassword, adminUser.Password);
+
         }
     }
 }

@@ -6,12 +6,13 @@
 
     <link rel="stylesheet" href="@Url.Content("~/css/dashboard.css")" />
     <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/inbox.css")" />
 }
 
 
 @{
     ViewData["CurrentPage"] = "Dashboard";
-
+    ViewData["CurrentController"] = "Dashboard";
 }
 
 <div class="main p-0" id="dash-main-div">
@@ -20,9 +21,9 @@
         <div class="row" id="DataHolder">
             <form method="get" asp-action="Index" class="mb-0" id="dataDisplay">
                 <select class="form-select" name="dayRange" onchange="this.form.submit()" id="dataDisplaySelect">
-                    <option value="" class="font-monospace" disabled selected>Data Shown</option>
+                    <option value="" class="font-monospace" disabled selected>@(ViewBag.DayRange != null ? $"Past {ViewBag.DayRange} days" : "Data Shown" )</option>
                     <option value="7" class="font-monospace">Past 7 Days</option>
-                    <option value="14" class="font-monospace">Past 15 days</option>
+                    <option value="14" class="font-monospace">Past 14 days</option>
                     <option value="30" class="font-monospace">Past 30 days</option>
                 </select>
             </form>
@@ -80,7 +81,7 @@
         </div>
     </div>
     <div class="latest-div">
-        <div class="dashboard-table">
+        <div class="dashboard-table table-responsive">
             <span id="latest-title">Recent Transactions</span>
             <table class="dashboard-table-content">
                 <thead>
@@ -110,7 +111,7 @@
     }
     else if(ViewBag.DayRange == 14)
     {
-        <span id="dataDisplayText" class="ps-2 p-0 m-0">Data Shown: Past 15 days</span>
+        <span id="dataDisplayText" class="ps-2 p-0 m-0">Data Shown: Past 14 days</span>
     }
     else if (ViewBag.DayRange == 30)
     {
@@ -122,6 +123,7 @@
     }
 </div>
 </div>
+<partial name="_NotificationInboxModal" />
 
 @section CustomScripts {
   
@@ -132,7 +134,9 @@
    
     <script src="@Url.Content("~/js/doughnutChart.js")"></script>
     <script src="@Url.Content("~/js/LineChart.js")"></script>
-    <script src="@Url.Content("~/js/site.js")"></script>
+    <script src="@Url.Content("~/js/realtime.js")"></script>
+    <script src="@Url.Content("~/js/inbox.js")"></script>
+   
 
 }
 

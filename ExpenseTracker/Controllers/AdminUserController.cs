@@ -17,11 +17,13 @@ namespace ExpenseTracker.Controllers
 
         private readonly IAdminUserRepository _repo;
         private readonly UserManager<AppIdentityUser> _userManager;
+        private readonly IBaseRepository<AuditLog> _baseRepo;
 
-        public AdminUserController(IAdminUserRepository repo, UserManager<AppIdentityUser> userManager)
+        public AdminUserController(IAdminUserRepository repo, UserManager<AppIdentityUser> userManager, IBaseRepository<AuditLog> baseRepo)
         {
             _repo = repo;
             _userManager = userManager;
+            _baseRepo = baseRepo;
         }
 
 
@@ -51,21 +53,38 @@ namespace ExpenseTracker.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AssignRole(string userId, string role)
         {
+
             var user = await _repo.GetUser(userId);
+
             try
             {
                 if (string.IsNullOrEmpty(userId))
                 {
-                    return NotFound("User Not Found");
+                    return NotFound("User Id cannot be null or empty.");
                 }
 
-                if (user == null)
+                if(user == null)
                 {
-                    return NotFound("User Not Found");
+                    return NotFound("User not found");
                 }
+
 
                 await _repo.AssignRoleAsync(user, role);
                 TempData["RoleSuccessMessage"] = $"{user.FirstName} assigned as {role}";
+
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                              currentUser.UserName ?? currentUser.Email,
+                                              await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                              $"Add user role as {role}.",
+                                              DateTime.UtcNow.AddHours(8),
+                                              user.Id,
+                                              "User Role",
+                                              $"Add {user.UserName ?? user.Email} as {role}");
+
+
+
                 return RedirectToAction("Index");
 
             }
@@ -114,6 +133,18 @@ namespace ExpenseTracker.Controllers
 
                 TempData["Message"] = $"{userModel.Email}, Created Successfully";
 
+                //Create Audit Logs
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               $"Create new user",
+                                               DateTime.UtcNow.AddHours(8),
+                                               userModel.Id,
+                                               "Creating User",
+                                               $"Created a new user {userModel.UserName}");
+
                 return RedirectToAction("Index");
 
             }
@@ -160,6 +191,19 @@ namespace ExpenseTracker.Controllers
                 if (result.Succeeded)
                 {
                     TempData["Message"] = $"{userModel.Email}, Updated Successfully";
+
+                    //Create Audit Logs
+                    var currentUser = await _baseRepo.GetCurrentUser();
+
+                    await _baseRepo.CreateAuditLog(currentUser.Id,
+                                                   currentUser.UserName ?? currentUser.Email,
+                                                   await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                                   $"Update user",
+                                                   DateTime.UtcNow.AddHours(8),
+                                                   userModel.Id,
+                                                   "Updating User",
+                                                   $"Updated user {user.UserName} information.");
+
                     return RedirectToAction("Index");
                 }
                 else
@@ -224,7 +268,7 @@ namespace ExpenseTracker.Controllers
         }
 
 
-
+        [HttpPost]
         public async Task<IActionResult> ConfirmedDelete(PaginatedResult<AppIdentityUser> model)
         {
 
@@ -237,11 +281,109 @@ namespace ExpenseTracker.Controllers
                 if (user == null)
                     return NotFound();
 
+                
+
+                //Create Audit Logs
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                               currentUser.UserName ?? currentUser.Email,
+                                               await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                               $"Delete user",
+                                               DateTime.UtcNow.AddHours(8),
+                                               userModel.Id,
+                                               "Deleting User",
+                                               $"Deleted user {user.UserName}");
+
                 await _userManager.DeleteAsync(user);
                 TempData["Message"] = $"Deleted Successfully";
+
+
                 return RedirectToAction("Index");
 
 
+            }
+            catch (DbUpdateException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+        public async Task<IActionResult> AdminManagePassword(AdminViewModel model)
+        {
+
+            try
+            {
+                var userId = GetUserId();
+
+                var user = await _userManager.FindByIdAsync(userId);
+
+                if (!await _userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    throw new UnauthorizedAccessException("User is not an admin");
+                }
+
+                model.User = user;
+
+                return View(model);
+
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (DbUpdateException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateAdminPassword(AdminViewModel model)
+        {
+
+            try
+            {
+                var userId = GetUserId();
+
+                if (model.User.ConfirmPassword != model.User.Password)
+                {
+                    TempData["ConfirmPasswordMessage"] = "Password and Confirm Password does not match";
+                    return RedirectToAction("AdminManagePassword");
+                }
+  
+                await _repo.UpdateAdminPassword(userId, model.User);
+
+                TempData["Message"] = "Admin password updated";
+
+                //Create Audit Logs
+                var currentUser = await _baseRepo.GetCurrentUser();
+
+                await _baseRepo.CreateAuditLog(currentUser.Id,
+                                            currentUser.UserName ?? currentUser.Email,
+                                            await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                            $"Update admin password.",
+                                            DateTime.UtcNow.AddHours(8),
+                                            model.User.Id,
+                                            "Admin Password",
+                                            $"Updated the admin password");
+
+
+                return RedirectToAction("Index");
+
+            }
+            catch(ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
             }
             catch (DbUpdateException ex)
             {

@@ -1,0 +1,56 @@
+﻿@model AdminSendNotificationViewModel
+
+
+@{
+    ViewData["Title"] = "AdminSendNotification";
+    Layout = "_LayoutNoSidebar";
+
+}
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/adminsendnotification.css")" />
+}
+
+<div class="create-notif-wrapper">
+    <div class="notification-wrapper">
+        <span class="title">Send Notification</span>
+        <form method="post" asp-action="UpdateNotification">
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(x => x.AdminNotification.AdminNotificationId)
+            <div id="input-text" class="create-update-input">
+                <label asp-for="@Model.AdminNotification.Title"></label>
+                <div id="input-wrapper">
+                    <span asp-validation-for="@Model.AdminNotification.Title" class="text-danger"></span>
+                    <input asp-for="@Model.AdminNotification.Title" placeholder="Title" />
+                </div>
+            </div>
+            <div id="input-text" class="create-update-input">
+                <label asp-for="@Model.AdminNotification.Message"></label>
+                <div id="input-wrapper">
+                    <span asp-validation-for="@Model.AdminNotification.Message" class="text-danger"></span>
+                    <textarea asp-for="@Model.AdminNotification.Message" placeholder="Message" rows="3"></textarea>
+                </div>
+            </div>
+            <div class="btn-holder">
+                <a asp-action="Index" class="btn btn-secondary" id="notif-close-btn">
+                    Close
+                </a>
+                <button type="submit" id="send-notif-btn" class="btn btn-primary">
+                    Update
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/js/realtime.js"></script>
+@section Scripts {
+
+    <partial name="_ValidationScriptsPartial" />
+
+}
+
+
+
+
+

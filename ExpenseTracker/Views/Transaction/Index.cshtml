@@ -5,11 +5,13 @@
 @section CustomStyles
 {
     <link rel="stylesheet" href="@Url.Content("~/css/crud.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/css/inbox.css")" />
 }
 
 @{
     ViewData["CurrentPage"] = "Index";
     ViewData["Title"] = "Transaction";
+    ViewData["CurrentController"] = "Transaction";
 
     var currentPage = Model.Page;
     var totalPageCount = Model.TotalPage;
@@ -177,120 +179,13 @@
         </div>
     </div>
 </div>
+<partial name="_NotificationInboxModal" />
 @section CustomScripts {
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
+    <script src="@Url.Content("~/js/realtime.js")"></script>
+    <script src="@Url.Content("~/js/inbox.js")"></script>
     <script src="@Url.Content("~/js/site.js")"></script>
 
 }
 
 
-@*
-<div class="row d-flex justify-content-center m-auto p-2" style="height: 100%; width: 100%">
-    @if (TempData["Message"] != null)
-    {
-        <partial name="_PopUpSuccessModal" />
-    }
-    <div class="col p-2 pt-0 m-auto">
-        <div class="container p-0 mt-0" id="tableHolder">
-            <div class="row w-100 m-auto p-0">
-                <div class="col-6 p-0 mt-4">
-                    <a class="btn bg-success border-outline" asp-action="Create" id="createBtn">
-                        <span class="text-light h-100 w-100">
-                            <i class="fa-solid fa-circle-plus me-2 border-0"></i> Add Transaction
-                        </span>
-                    </a>
-                </div>
-                <div class="col-6 p-0 mt-4">
-                    <form asp-action="Index" method="get" class="p-0 overflow-hidden" id="sortForm">
-                        @Html.AntiForgeryToken()
-                        <div class="input-group mb-0 rounded-0 float-end" id="sortingDiv">
-                            <select class="form-select rounded-0 fs-9 text-success" 
-                                    name="SortOrder" id="inputGroupSelect02" 
-                                    onchange="submitForm()">
-
-                                <option value="" class="fs-8 font-monospace" disabled selected>Sort by</option>
-                                <option value="Category" class="fs-9 font-monospace">Category</option>
-                                <option value="Amount" class="fs-9 font-monospace">Amount</option>
-                                <option value="Date" class="fs-9 font-monospace">Date</option>
-                                <option value="Category Desc" class="fs-9 font-monospace">Category (Desc)</option>
-                                <option value="Amount Desc" class="fs-9 font-monospace">Amount (Desc)</option>
-                                <option value="Date Desc" class="fs-9 font-monospace">Date (Desc)</option>
-
-                            </select>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <table class="table table-sm table-hover pt-0 table-dark mb-0 mt-0 bg-secondary">
-                <thead class="bg-secondary">
-                    <tr class="text-success fs-9">
-                        <th>Category</th>
-                        <th>Note</th>
-                        <th>Date</th>
-                        <th class="">Amount</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model.Result)
-                    {
-                        <tr class="fs-9">
-                            <td>@item.CategoryName</td>
-                            <td>@item.Note</td>
-                            <td>@item.Date</td>
-                            <td style="@(item.FormattedAmount.StartsWith('+') ? "color: #198754" : "color: #dc3545" )">@item.FormattedAmount</td>
-                            <td>
-                                <div class="text-start">
-                                    <a asp-action="Update" asp-route-id="@item.TransactionId" class="text-warning text-decoration-none me-1"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-placement="left"
-                                       title="Update">
-                                        <i class="fa-solid fa-gear" style="color: #74C0FC;"></i>
-                                    </a>
-                                    <a asp-action="Delete" asp-route-id="@item.TransactionId" class="text-danger text-decoration-none ms-1"
-                                       data-bs-toggle="tooltip"
-                                       data-bs-placement="left"
-                                       title="Delete">
-                                        <i class="fa-solid fa-circle-xmark"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        <nav class="pagination-outer" aria-label="Page navigation">
-            <ul class="pagination p-3">
-                <li class="page-item @(Model.Page == 1 ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-p="@(Model.Page - 1)" aria-label="Previous">
-                        <span aria-hidden="true" class="bg-transparent">« Previous</span>
-                    </a>
-                </li>
-                @for (var pageNumber = 1; pageNumber <= Model.TotalPage; pageNumber++)
-                {
-                    if (pageNumber == Model.Page)
-                    {
-                        <li class="page-item">
-                            <span class="page-link bg-transparent border-0 text-light text-xl">@pageNumber</span>
-                        </li>
-                    }
-                    else
-                    {
-                        <li class="page-item">
-                            <a class="page-link" asp-route-p="@pageNumber">
-                                <span>@pageNumber</span>
-                            </a>
-                        </li>
-                    }
-                }
-                <li class="page-item @(Model.Page == Model.TotalPage ? "disabled" : "")" id="nextPrev">
-                    <a class="page-link bg-transparent" asp-route-a="@Model.SearchAmount" asp-route-p="@(Model.Page + 1)" aria-label="Next">
-                        <span aria-hidden="true" class="bg-transparent">Next »</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</div>
-*@

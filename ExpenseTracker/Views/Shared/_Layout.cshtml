@@ -6,7 +6,7 @@
     <title>@ViewData["Title"] - ExpenseTracker</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
-    <link href="https://cdn.syncfusion.com/ej2/26.1.35/bootstrap5-dark.css" rel="stylesheet" />
+    <!--link href="https://cdn.syncfusion.com/ej2/26.1.35/bootstrap5-dark.css" rel="stylesheet" /-->
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/ExpenseTracker.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/3c3b820551.js" crossorigin="anonymous"></script>
@@ -25,6 +25,7 @@
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     @RenderSection("CustomScripts", required: false)

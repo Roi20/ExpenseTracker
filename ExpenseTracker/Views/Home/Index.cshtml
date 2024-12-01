@@ -3,7 +3,202 @@
     Layout = "_LayoutNoSidebar";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+
+@section CustomStyles{
+    <link rel="stylesheet" href="@Url.Content("~/css/home.css")" />
+}
+
+<div class="navbar-wrapper" id="home-section">
+   <div class="content">
+        <nav class="navbar">
+            <div class="navbar-holder">
+                <div class="navbarbrand">
+                   <h4><a asp-action="Index" asp-controller="Home">Expense Tracker</a></h4>
+                </div>
+                <div class="navbar-ul">
+                    <ul id="home-navbar-ul">
+                        <li>
+                            <a asp-action="Index" asp-controller="Home">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Dashboard">
+                                Dashboard
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Category">
+                                Category
+                            </a>
+                        </li>
+                        <li>
+                            <a asp-action="Index" asp-controller="Transaction">
+                                Transaction
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <button id="home-navbar-toggle" class="navbar-toggle">☰</button>
+            </div>
+        </nav>
+   </div>
+   <div class="second-content">
+       <div class="header-title">
+            <h2>Effortlessly Manage Your Finances</h2>
+            <p>A Comprehensive Solution to Track Expenses, Income, and Save Smartly</p>
+            <div class="home-btn-holder">
+                @if (SignInManager.IsSignedIn(User))
+                {
+                    <form class="form" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                            <div class="signout-btn" id="btn-holder"> 
+                                <button type="submit">
+                                    <span>
+                                        Sign Out <i class="fa-solid fa-circle-arrow-right"></i>
+                                    </span>
+                                </button>
+                            </div>
+                    </form>
+                }
+                else
+                {
+                    <div class="signin-btn" id="btn-holder">
+                        <a asp-area="Identity" asp-page="/Account/Login">
+                            <span>
+                                Sign In
+                            </span>
+                        </a>
+                    </div>
+                    <div class="signup-btn" id="btn-holder">
+                        <a asp-area="Identity" asp-page="/Account/Register">
+                            <span>
+                                Sign Up
+                            </span>
+                        </a>
+                    </div>
+                }
+            </div>
+       </div>
+   </div>
 </div>
+<div class="key-features-holder" id="feature-section">
+    <div class="keyfeature-title">
+        <span>Features</span>
+    </div>
+    <div class="feature-descriptions-holder">
+        <div class="feature-1" id="feature-content">
+            <div class="icon-holder">
+                <img src="/assets/icons/key_1.png" />
+            </div>
+            <div id="content-holder">
+                <span>Customizable Categories</span>
+                <p>
+                    <strong>Personalized Categories:</strong> Create, update, and delete custom categories to suit your spending habits.
+                </p>
+                <p>
+                    <strong>Dynamic Selection:</strong> Select from user-defined categories when logging transactions for organized tracking.
+                </p>
+            </div>
+        </div>
+        <div class="feature-2" id="feature-content">
+            <div class="icon-holder">
+                <img src="/assets/icons/edit.png" />
+            </div>
+            <div id="content-holder">
+                <span>Comprehensive Transaction Management</span>
+                <p><strong>Efficient CRUD Operations:</strong> Seamlessly add, edit, and delete transactions for precise records.</p>
+                <p><strong>Automated Entries:</strong> Set up recurring transactions for regular expenses, reducing manual entry.</p>
+            </div>
+        </div>
+        <div class="feature-3" id="feature-content">
+            <div class="icon-holder">
+                <img src="/assets/icons/line_chart.png" />
+            </div>
+            <div id="content-holder">
+                <span>Interactive Analytics</span>
+                <p><strong>Expense Analysis Doughnut Chart:</strong> Visualize spending distribution across categories.</p>
+                <p><strong>Income vs. Expense Line Chart:</strong> Compare earnings and expenditures over time</p>
+                <p><strong>Flexible Time Periods:</strong> Adjust analytics view to 7, 14, or 30 days.</p>
+            </div>
+        </div>
+        <div class="feature-4" id="feature-content">
+            <div class="icon-holder">
+                <img src="/assets/icons/multiple_users.png" />
+            </div>
+            <div id="content-holder">
+                <span>User Profile Customization and Notifications</span>
+                <p><strong>Profile Management:</strong> Update profile image, name, and income sources for a personalized account.</p>
+                <p><strong>Real-Time Notifications:</strong> Receive alerts about system updates and new features.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="second-main-section" id="benefits-section">
+    <div class="second-title">
+        <span>Benefits</span>
+   </div>
+   <div class="description-holder">
+      <div class="descriptions">
+          <div class="description-1">
+              <div class="description-1-content">
+                    <span>Detailed Expense Logging</span>
+                    <p>Keep a precise record of all your expenses, organized by customizable categories such as groceries, utilities, entertainment, and more. This helps you understand your spending patterns.</p>
+              </div>
+          </div>
+          <div class="description-2">
+                <div class="description-2-content">
+                    <span>In-Depth Financial Insights</span>
+                    <p>Our comprehensive analytics tools, including charts and reports, provide valuable insights into your spending habits and financial health. This empowers you to make informed decisions and identify areas for improvement.</p>
+                </div>
+          </div>
+      </div>
+      <div class="descriptions-2">
+          <div class="description-3">
+               <div class="description-3-content">
+                    <span>Personalization and Flexibility</span>
+                    <p>The user profile update feature allows you to personalize your account by updating your profile image, name, and sources of income. This ensures that your profile remains current and relevant.</p>
+               </div>
+          </div>
+          <div class="description-4">
+               <div class="description-4-content">
+                    <span>User-Friendly Experience</span>
+                    <p>Designed with simplicity in mind, the app offers an intuitive interface that makes financial management accessible to everyone, regardless of their technical expertise.</p>
+               </div>
+          </div>
+        </div>
+    </div>
+</div>
+<div class="home-footer">
+    <div class="about-project" id="footer-section">
+        <span>About the Project</span>
+        <p>This Expense Tracker app is a comprehensive portfolio project designed and developed to showcase my full-stack development skills. It encompasses a wide range of functionalities, demonstrating my ability to handle both front-end and back-end development efficiently.</p>
+    </div>
+    <div class="tech-stack" id="footer-section">
+        <span>Text Stack</span>
+        <p>.Net8</p>
+        <p>AspNet MVC</p>
+        <p>Razor</p>
+        <p>MS SQL</p>
+        <p>Entity Framework Core</p>
+        <p>JavaScript</p>
+        <p>CSS</p>
+        <p>BootStrap</p>
+    </div>
+    <div class="contacts" id="footer-section">
+        <span>Contacts</span>
+        <p><i class="fa-solid fa-paper-plane"></i> Email: roiverano20@gmail.com</a></p>
+        <p><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/in/roi-anthony-verano-a806aa124" target="_blank">Linkedin</a></p>
+        <p><i class="fa-brands fa-github"></i><a href="https://github.com/Roi20" target="_blank">Github</a></p>
+    </div>
+    <div class="quick-links" id="footer-section">
+        <span>quick-links</span>
+        <p><a href="#home-section">Home</a></p>
+        <p><a href="#feature-section">Features</a></p>
+        <p><a href="#benefits-section">Benefits</a></p>
+    </div>
+</div>
+@section CustomScripts{
+    <script src="@Url.Content("~/js/homepage.js")"></script>
+}
+
+

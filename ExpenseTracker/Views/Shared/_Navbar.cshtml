@@ -12,11 +12,12 @@
             </button>
         </li>
         <li id="notif-bell">
-             <button>
+             <button data-bs-toggle="modal" data-bs-target="#inboxModal" id="notif-button">
                  <span>
                     <i class="fa-solid fa-bell"></i>
                  </span>
              </button>
+            <span id="notif-indicator" class="bg-danger"></span>
         </li>
         <li>
             <div class="navbar-profile">
@@ -36,8 +37,13 @@
         </li>
     </ul>
 </div>
+@section Scripts {
 
+    <partial name="_ValidationScriptsPartial" />
+   
+}
 @section CustomScripts {
+
     <script src="@Url.Content("~/js/ComponentUI.js")"></script>
     <script src="@Url.Content("~/js/site.js")"></script>
 

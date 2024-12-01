@@ -1,9 +1,10 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Models;
+using ExpenseTracker.ViewModel;
 
 namespace ExpenseTracker.Contracts
 {
-    public interface IAdminDashboardRepository
+    public interface IAdminDashboardRepository : IBaseRepository<AuditLog>
     {
 
         int RegisteredUsersCount();

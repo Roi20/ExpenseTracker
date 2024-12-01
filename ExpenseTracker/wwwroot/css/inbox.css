@@ -1,0 +1,186 @@
+﻿
+.modal-dialog .modal-content {
+    background: #17181d;
+    padding: 15px;
+}
+
+.inbox-table {
+    background: #272e36;
+    border-radius: 5px;
+    padding: 15px 15px 30px 15px;
+}
+
+.inbox-table-content th,
+.inbox-table-content td {
+    padding: 15px 20px;
+    font-size: .8em;
+    color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+
+.title-close-holder{
+    display: flex;
+    align-items: center;
+}
+
+.inbox-title{
+    padding: 10px 5px 10px 5px;
+    font-weight: bold;
+    font-size: 1em;
+    letter-spacing: 1px;
+    color: #FFFFFF;
+    font-variant-caps: all-small-caps;
+}
+
+.title-close-holder #close-btn {
+    margin-left: auto;
+    color: #FFFFFF;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding-right: 5px;
+    background: none;
+    border: none;
+}
+
+.title-close-holder #close-btn:hover{
+    color: #9FA6B2
+}
+
+.unread td:not(:last-child){
+    background: #92a1c2;
+    overflow: hidden;
+}
+.read {
+    background: none;
+}
+
+.inbox-table .action-button{
+    z-index: 1;
+}
+
+.inbox-table #delete-message-btn{
+    text-decoration: none;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+    z-index: 9999;
+}
+
+/*Inbox Modal 2*/
+#inboxModal2 .modal-body{
+
+    color: #FFFFFF;
+    font-size: .9em;
+    letter-spacing: 1px;
+    display: flex;
+    flex-direction: column;
+    padding: 0px 20px 10px 20px;
+}
+
+#inboxModal2 .modal-body p{
+    font-size: .7em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 30px 5px 5px 5px;
+}
+#inboxModal2 .modal-body span{
+    font-weight: 400;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 15px 5px 5px 5px;
+
+}
+
+#inboxModal2 .modal-body h6{
+    font-weight: bold;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5px;
+}
+
+.modal2-btn-holder{
+    display: flex;
+    justify-content: right;
+    padding: 6px;
+}
+
+#second-inbox-closeBtn{
+   background: none;
+   border: none;
+   color: #FFFFFF;
+   font-weight: bold;
+   font-size: 1em;
+}
+
+#second-inbox-closeBtn:hover{
+    color: #9FA6B2
+}
+
+/*Delete Message Modal*/
+
+
+#deleteMessageModal .modal-body{
+    color: #FFFFFF;
+}
+
+
+#deleteMessageModal .modal-body h6 {
+    font-weight: bold;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 5px;
+    color: #FFFFFF;
+}
+
+#deleteMessageModal .modal-body span {
+    font-weight: 400;
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    padding: 15px 5px 5px 5px;
+    color: #FFFFFF;
+    font-size: .9em;
+    letter-spacing: 1px;
+    padding-bottom: 30px;
+}
+
+.modal3-btn-holder {
+    display: flex;
+    justify-content: right;
+    padding: 6px;
+}
+
+
+#third-inbox-closeBtn{
+   background: none;
+   border: none;
+   color: #FFFFFF;
+   font-weight: bold;
+   font-size: 1em;
+}
+
+#third-inbox-closeBtn:hover{
+    color: #9FA6B2
+}
+
+.delete-confirmed{
+    padding: 15px;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    column-gap: 5px;
+}
+
+#delete-confirmed-btn,
+#cancel-confirmed-btn{
+    font-size: .8em;
+    letter-spacing: 1px;
+    font-variant-caps: all-small-caps;
+}

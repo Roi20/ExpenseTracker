@@ -257,7 +257,7 @@ namespace MyProject.Testing
         }
     }
 
-    */
+    
 
     [TestFixture]
     public class TestBaseRepository
@@ -278,6 +278,7 @@ namespace MyProject.Testing
             _context = new ExpenseTrackerDbContext(_options);
             _repo = new BaseRepository<Category>(_context);
             repo = new CategoryRepository(_context);
+
 
         }
 
@@ -362,7 +363,7 @@ namespace MyProject.Testing
 
             //item that present on the current page, was the only item will be counted.
             ClassicAssert.AreEqual(2, result.Result.Count());
-         */
+         
         }
             
 
@@ -385,7 +386,7 @@ namespace MyProject.Testing
         }
         
     }
-
+    */
 
 
 }

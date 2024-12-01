@@ -12,18 +12,29 @@
     <Content Remove="wwwroot\js\adminDoughnutChart.js" />
     <Content Remove="wwwroot\js\ComponentUI.js" />
     <Content Remove="wwwroot\js\doughnutChart.js" />
+    <Content Remove="wwwroot\js\homepage.js" />
+    <Content Remove="wwwroot\js\inbox.js" />
     <Content Remove="wwwroot\js\LineChart.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\auditlog.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\home.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\css\inbox.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\loginAndregister.css" />
     <_ContentIncludedByDefault Remove="wwwroot\css\modal.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\Images\1-a.jpg" />
     <_ContentIncludedByDefault Remove="wwwroot\js\ComponentUI.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\doughnutChart.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\homepage.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\inbox.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\LineChart.js" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Hangfire" Version="1.8.15" />
+    <PackageReference Include="Hangfire.AspNetCore" Version="1.8.15" />
+    <PackageReference Include="Hangfire.SqlServer" Version="1.8.15" />
     <PackageReference Include="MailKit" Version="4.7.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="8.0.8" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.8" />
@@ -48,6 +59,8 @@
     <None Include="wwwroot\js\ComponentUI.js" />
     <None Include="wwwroot\js\doughnutChart.js" />
     <None Include="wwwroot\js\adminDoughnutChart.js" />
+    <None Include="wwwroot\js\homepage.js" />
+    <None Include="wwwroot\js\inbox.js" />
     <None Include="wwwroot\js\LineChart.js" />
   </ItemGroup>
 

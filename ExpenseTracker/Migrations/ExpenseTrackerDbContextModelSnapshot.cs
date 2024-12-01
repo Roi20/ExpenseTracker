@@ -118,6 +118,74 @@ namespace ExpenseTracker.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("ExpenseTracker.Models.AdminNotification", b =>
+                {
+                    b.Property<int>("AdminNotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdminNotificationId"));
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("AdminNotificationId");
+
+                    b.ToTable("AdminNotifications");
+                });
+
+            modelBuilder.Entity("ExpenseTracker.Models.AuditLog", b =>
+                {
+                    b.Property<int>("LogId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("LogId"));
+
+                    b.Property<string>("Action")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Details")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EntityId")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EntityType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("User_Id")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("LogId");
+
+                    b.ToTable("AuditLogs");
+                });
+
             modelBuilder.Entity("ExpenseTracker.Models.Category", b =>
                 {
                     b.Property<int>("CategoryId")
@@ -160,6 +228,9 @@ namespace ExpenseTracker.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("AdminNotificationId")
+                        .HasColumnType("int");
+
                     b.Property<bool>("IsRead")
                         .HasColumnType("bit");
 
@@ -179,6 +250,8 @@ namespace ExpenseTracker.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AdminNotificationId");
 
                     b.ToTable("Notifications");
                 });
@@ -365,6 +438,17 @@ namespace ExpenseTracker.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("ExpenseTracker.Models.Notification", b =>
+                {
+                    b.HasOne("ExpenseTracker.Models.AdminNotification", "AdminNotification")
+                        .WithMany("Notifications")
+                        .HasForeignKey("AdminNotificationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AdminNotification");
+                });
+
             modelBuilder.Entity("ExpenseTracker.Models.Transaction", b =>
                 {
                     b.HasOne("ExpenseTracker.Models.Category", "Category")
@@ -441,6 +525,11 @@ namespace ExpenseTracker.Migrations
                     b.Navigation("Categories");
 
                     b.Navigation("Transactions");
+                });
+
+            modelBuilder.Entity("ExpenseTracker.Models.AdminNotification", b =>
+                {
+                    b.Navigation("Notifications");
                 });
 #pragma warning restore 612, 618
         }

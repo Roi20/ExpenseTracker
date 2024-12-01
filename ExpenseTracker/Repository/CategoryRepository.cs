@@ -3,6 +3,7 @@ using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
 using ExpenseTracker.Data;
 using ExpenseTracker.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -11,7 +12,9 @@ namespace ExpenseTracker.Repository
     public class CategoryRepository : BaseRepository<Category>, ICategoryRepository
     {
 
-        public CategoryRepository(ExpenseTrackerDbContext db) : base(db)
+        public CategoryRepository(ExpenseTrackerDbContext db, 
+                                  UserManager<AppIdentityUser> userManager,
+                                  IHttpContextAccessor httpContext) : base(db, httpContext, userManager)
         {
         
         }

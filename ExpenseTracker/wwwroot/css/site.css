@@ -57,7 +57,6 @@ html, body {
 
 
 body {
-
     background-color: #080808;
     margin: 0;
     padding: 0;
@@ -270,6 +269,48 @@ body {
     font-size: 1.2em;
 }
 
+.navUl .drop-down {
+    background: red;
+    width: 400px;
+    border-radius: 5px;
+    min-height: 50px;
+    overflow-y: scroll;
+    display: flex;
+}
+
+.navUl .drop-down ul{
+    color: #FFFFFF;
+    list-style: none;
+    margin-left: 0;
+    padding-left: 5px;
+    font-size: .9em;
+    background: ;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.navUl .drop-down ul li{
+    padding: 8px 10px;
+}
+
+#notif-bell{
+    position: relative;
+}
+
+#notif-indicator{
+    display: none;
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    top: 0;
+    right: 8px;
+    border-radius: 50%;
+}
+
+#notif-bell.has-notifications #notif-indicator{
+    display: block;
+}
 
 
 /*Admin Side*/

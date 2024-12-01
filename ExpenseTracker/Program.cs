@@ -7,6 +7,8 @@ using ExpenseTracker.Data;
 using ExpenseTracker.Common;
 using ExpenseTracker.Services;
 using ExpenseTracker.Hubs;
+using Hangfire;
+
 //ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,10 +22,10 @@ var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw
 builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 {
 
-    // googleOptions.ClientId = config.GetSection("GoogleAuthentication:ClientId").Value ?? "ClientId Not Found";
-    //googleOptions.ClientSecret = config.GetSection("GoogleAuthentication:ClientSecret").Value?? "ClientSecret Not Found";
     googleOptions.ClientId = builder.Configuration["GoogleAuthentication:ClientId"] ?? "ClientId Not Found";
     googleOptions.ClientSecret = builder.Configuration["GoogleAuthentication:ClientSecret"] ?? "ClientSecret Not Found";
+
+
 });
 
 
@@ -58,8 +60,6 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
        .AddRoles<IdentityRole>()
        .AddEntityFrameworkStores<ExpenseTrackerDbContext>();
 
-//builder.Services.AddScoped<UserManager<AppIdentityUser>>();
-//builder.Services.AddSingleton<IServiceScopeFactory, ServiceScopeFactory>();
 
 
 // Repository Dependency
@@ -70,6 +70,16 @@ builder.Services.AddScoped<IDashboardRepository, DashboardRepository>();
 builder.Services.AddScoped<IUploadRepository, UploadRepository>();
 builder.Services.AddScoped<IAdminUserRepository, AdminUserRepository>();
 builder.Services.AddScoped<IAdminDashboardRepository, AdminDashboardRepository>();
+builder.Services.AddScoped<IAdminManageRoleRepository, AdminManageRoleRepository>();
+builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
+builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
+
+//Add Hangfire server
+builder.Services.AddHangfireServer();
+
+
+//Notification Service Dependency
+builder.Services.AddScoped<NotificationService>();
 
 //EmailService Dependency
 builder.Services.AddSingleton<IEmailServiceAsync, EmailServiceAsync>();
@@ -83,8 +93,13 @@ builder.Services.AddControllersWithViews();
 //Razor Pages 
 builder.Services.AddRazorPages();
 
+//Hangfire
+builder.Services.AddHangfire(options => options.UseSqlServerStorage(CONNECTION_STRING));
+builder.Services.AddHangfireServer();
+
 var app = builder.Build();
 
+    
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -104,8 +119,9 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+
 app.UseAuthorization();
-//app.UseAuthentication();
+
 
 
 app.MapRazorPages();
@@ -152,10 +168,17 @@ if(userEmail == null)
 
 app.UseMiddleware<ActivityMiddlerware>();
 
+app.UseHangfireDashboard();
+
+
+//Hangfire ScheduleRecurringJob NotificationService
+using var scheduleScope = app.Services.CreateScope();
+var notificationService = scheduleScope.ServiceProvider.GetRequiredService<NotificationService>();
+notificationService.ScheduleRecurringJob();
+
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
-
-app.MapHub<NotificationHub>("/notification");
+app.MapHub<NotificationHub>("/notificationHub");
 app.Run();

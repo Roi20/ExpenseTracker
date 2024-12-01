@@ -44,6 +44,7 @@ namespace ExpenseTracker.Controllers
                     entities.SearchKeyword = request.SearchKeyword;
                     ViewBag.User = await _repo.GetUserInfo(userId);
                     entities.User = await _repo.GetUserInfo(userId);
+                    entities.Notifications = await _repo.GetAllUserNotification(userId);
                     return View(entities);
                 }
 
@@ -197,6 +198,54 @@ namespace ExpenseTracker.Controllers
                 return View("Error", new ErrorViewModel { Message = ex.Message });
             }
         }
+
+        [HttpPost]
+        public async Task<IActionResult> MarkAsRead(int id)
+        {
+            try
+            {
+                var userNotificationId = await _repo.MarkAsReadUserNotification(id);
+
+                if (userNotificationId == null)
+                    return NotFound("Notification not found.");
+
+                return Ok();
+
+            }
+            catch (ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> ConfirmedDeleteNotification(int id)
+        {
+            try
+            {
+                await _repo.DeleteUserNotification(id);
+
+
+                return Ok();
+
+            }
+            catch (ArgumentException ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return View("Error", new ErrorViewModel { Message = ex.Message });
+            }
+        }
+
+
+
 
 
     }

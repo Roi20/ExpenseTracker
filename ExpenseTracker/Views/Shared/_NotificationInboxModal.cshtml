@@ -1,0 +1,107 @@
+﻿@{
+
+    var controllerName = "";
+
+    if (ViewData["CurrentController"]?.ToString() == "Category")
+    {
+        controllerName = "Category";
+    }
+    else if (ViewData["CurrentController"]?.ToString() == "Dashboard")
+    {
+        controllerName = "Dashboard";
+    }
+    else if (ViewData["CurrentController"]?.ToString() == "Transaction")
+    {
+        controllerName = "Transaction";
+    }
+}
+
+<!--Inbox Modal-->
+<div class="modal fade" id="inboxModal" data-controller-name="@controllerName" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-xl">
+        <div class="modal-content">
+           <div class="title-close-holder">
+                <span class="inbox-title">Notification Inbox</span>
+                <button type="button" data-bs-dismiss="modal" id="close-btn">&times;</button>
+           </div>
+            <div class="inbox-table table-responsive">
+                <table class="inbox-table-content table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Title</th>
+                            <th>Message</th>
+                            <th>Received Date</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="notificationTableBody">
+                        @foreach (var item in Model.Notifications)
+                        {
+                            <tr class="@(item.IsRead ? "read" : "unread")"
+                                data-caller="tr-inboxModal"
+                                data-controller="@controllerName"
+                                data-id="@item.Id"
+                                data-title="@item.Title"
+                                data-message="@item.Message"
+                                data-timestamp="@item.TimeStamp"
+                                data-isread="@(item.IsRead ? "Read" : "Unread")">
+
+                                <td>@item.Title</td>
+                                <td>@item.Message</td>
+                                <td>@item.TimeStamp.ToString("g")</td>
+                                <td class="status">@(item.IsRead ? "Read" : "Unread")</td>
+                                <td data-id="@item.Id"
+                                    data-title="@item.Title">
+                                    <div class="action-button">
+                                        <a class="text-danger"
+                                           data-bs-toggle="tooltip"
+                                           data-bs-placement="left"
+                                           title="Delete"
+                                           id="delete-message-btn">
+                                            Delete
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Inbox Modal-->
+
+<!--Read Message Modal-->
+<div class="modal fade" id="inboxModal2" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal2-btn-holder">
+                <button id="second-inbox-closeBtn" type="button" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
+</div>
+<!--Read Message Modal-->
+
+<!--Delete Message Modal-->
+<div class="modal fade" id="deleteMessageModal" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal3-btn-holder">
+                <button id="third-inbox-closeBtn" type="button" data-bs-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+               
+            </div>
+            <div id="delete-confirmed" class="delete-confirmed">
+                <button id="cancel-confirmed-btn" data-bs-dismiss="modal" class="btn btn-secondary">Cancel</button>
+                <button id="delete-confirmed-btn" type="button" class="btn btn-danger">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Delete Message Modal-->

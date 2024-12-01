@@ -1,9 +1,12 @@
 ﻿using ExpenseTracker.Common;
 using ExpenseTracker.Context;
 using ExpenseTracker.Contracts;
+using ExpenseTracker.Data;
+
 //using ExpenseTracker.Migrations;
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 
@@ -16,7 +19,10 @@ namespace ExpenseTracker.Repository
         private readonly DbContext _db;
 
 
-        public TransactionRepository(ExpenseTrackerDbContext db, ICategoryRepository categoryRepository) : base(db)
+        public TransactionRepository(ExpenseTrackerDbContext db, 
+                                     ICategoryRepository categoryRepository,
+                                     UserManager<AppIdentityUser> userManager,
+                                     IHttpContextAccessor httpContext) : base(db, httpContext, userManager)
         {
             _categoryRepository = categoryRepository;
             _db = db;

@@ -13,6 +13,9 @@ namespace ExpenseTracker.ViewModel
         public IEnumerable<Transaction> Transactions { get; set; }
         public LineChartData LineChartData { get; set; }
         public AppIdentityUser User { get; set; }
+        public IEnumerable<Notification> Notifications { get; set; }
+        public Notification Notification { get; set; }
+
 
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ExpenseTracker.Data;
+using ExpenseTracker.Models;
 
 namespace ExpenseTracker.Common
 {
@@ -12,6 +13,7 @@ namespace ExpenseTracker.Common
         public IEnumerable<T>? Result { get; set; }
         public T Entity { get; set; }
         public AppIdentityUser User { get; set; }
+        public IEnumerable<Notification> Notifications { get; set; }
 
     }
 }

@@ -1,0 +1,72 @@
+﻿@model AdminViewModel
+
+@{
+    Layout = "_LayoutNoSidebar";
+}
+
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/adminmanagerole.css")" />
+}
+
+@if (TempData["Message"] != null)
+{
+    <partial name="_PopUpSuccessModal" />
+}
+<div class="main-wrapper">
+    <div class="table-wrapper">
+        <div class="upper-section">
+            <span class="notif-title">Moderators</span>
+            <!--a asp-action="Create" class="btn btn-primary">
+                <span>
+                    <i class="fa-solid fa-plus"></i> Add Moderator
+                </span>
+            </a-->
+        </div>
+        <div class="admin-notif-table table-responsive">
+            <table class="adminnotif-table-content table table-hover">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Business</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Moderators)
+                    {
+                        <tr data-id="@item.UserId" data-email="@item.Email">
+                            <td>@item.Name</td>
+                            <td>@item.Email</td>
+                            <td>@item.Business</td>
+                            <td>
+                                <div class="action-button" id="remove-btn-holder"> 
+                                    <a 
+                                       id="remove-action-btn" 
+                                       class="text-danger"
+                                       data-bs-toggle="tooltip"
+                                       data-bs-placement="left"
+                                       title="Remove">
+                                       Remove
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <a asp-action="Index" asp-controller="AdminUser" id="exit-btn">
+            <span>
+                <i class="fa-solid fa-right-to-bracket"> </i> Exit
+            </span>
+        </a>
+    </div>
+</div>
+<partial name="_RemoveModeratorModal" />
+
+@section CustomScripts {
+    
+    <script src="@Url.Content("~/js/adminmanagerole.js")"></script>
+}

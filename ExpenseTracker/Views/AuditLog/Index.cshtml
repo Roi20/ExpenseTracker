@@ -1,0 +1,68 @@
+﻿@model AdminViewModel
+
+@{
+    Layout = "_LayoutNoSidebar";
+}
+
+
+@section CustomStyles {
+    <link rel="stylesheet" href="@Url.Content("~/css/auditlog.css")" />
+}
+
+@if (TempData["Message"] != null)
+{
+    <partial name="_PopUpSuccessModal" />
+}
+<div class="main-wrapper">
+    <div class="table-wrapper">
+        <div class="upper-section">
+            <span class="notif-title">Log Records</span>
+            <form asp-action="Index" method="get" class="searchForm">
+                @Html.AntiForgeryToken()
+                <input type="text"
+                       placeholder="Search.."
+                       name="search"
+                       value="@Model.SearchKeyword" />
+                <button type="submit" id="submit-search">
+                    <span>
+                        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    </span>
+                </button>
+            </form>
+        </div>
+        <div class="admin-notif-table table-responsive">
+            <table class="adminnotif-table-content table table-hover">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Role</th>
+                        <th>Action</th>
+                        <th>Details</th>
+                        <th>TimeStamp</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Logs)
+                    {
+                        <tr>
+                            <td>@item.Username</td>
+                            <td>@item.Role</td>
+                            <td>@item.Action</td>
+                            <td>@item.Details</td>
+                            <td>@item.TimeStamp</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <a asp-action="Index" asp-controller="AdminUser" id="exit-btn">
+            <span>
+                <i class="fa-solid fa-right-to-bracket"> </i> Exit
+            </span>
+        </a>
+    </div>
+</div>
+@section CustomScripts {
+
+    <script src="@Url.Content("~/js/adminmanagerole.js")"></script>
+}
