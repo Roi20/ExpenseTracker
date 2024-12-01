@@ -12,10 +12,19 @@ using Hangfire;
 //ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Logging.SetMinimumLevel(LogLevel.Debug); 
+builder.Logging.AddConsole(); 
+builder.Logging.AddDebug();
+
 builder.Configuration.AddUserSecrets<Program>();
 
 var config = builder.Configuration;
 var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+
+
+//Add Environment Variables
+//builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+  //                   .AddEnvironmentVariables();
 
 
 //Google Authentication
@@ -59,6 +68,16 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
          })
        .AddRoles<IdentityRole>()
        .AddEntityFrameworkStores<ExpenseTrackerDbContext>();
+//Cookie
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.HttpOnly = true;
+    options.ExpireTimeSpan = TimeSpan.FromDays(90);
+    options.LoginPath = "/Identity/Account/Login";
+    options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+    options.SlidingExpiration = true;
+
+});
 
 
 
@@ -122,9 +141,25 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-
-
 app.MapRazorPages();
+
+
+//Apply Migration at Startup
+using var migrationScope = app.Services.CreateScope();
+
+var services = migrationScope.ServiceProvider;
+
+try
+{
+    var context = services.GetRequiredService<ExpenseTrackerDbContext>();
+    context.Database.Migrate();
+}
+catch (Exception ex)
+{
+    var logger = services.GetRequiredService<ILogger<Program>>();
+    logger.LogError(ex, "An error occurred while migrating the database.");
+}
+
 
 //Seeding roles
 using var scope = app.Services.CreateScope();
@@ -139,6 +174,7 @@ foreach(var role in roles)
         await roleManager.CreateAsync(new IdentityRole(role));
 
 }
+
 
 //Adding Admin Role
 using var adminScope = app.Services.CreateScope();

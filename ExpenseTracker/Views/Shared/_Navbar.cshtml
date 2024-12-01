@@ -30,7 +30,7 @@
                 else
                 {
                     <a asp-action="Index" asp-controller="UploadProfilePicture">
-                        <img src="~/Images/defaultprofile.jpg" alt="Profile Picture" class="profile-picture" />
+                        <img src="@Url.Content("~/Images/defaultprofile.jpg")" alt="Profile Picture" aria-hidden="true" class="profile-picture" />
                     </a>
                 }
             </div>

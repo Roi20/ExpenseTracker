@@ -585,6 +585,11 @@ input:-webkit-autofill:active {
 }
 
 
+#remember-me label{
+    color: #FFFFFF;
+    font-size: .8em;
+}
+
 @media only screen and (max-width: 768px) {
     /* For mobile phones: */
 

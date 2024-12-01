@@ -33,6 +33,10 @@
                     <i class="fa-solid fa-lock icon"></i>
                     <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="Password" />
                 </div>
+                <div id="remember-me">
+                    <input asp-for="Input.RememberMe" />
+                    <label asp-for="Input.RememberMe"></label>
+                </div>
                 <div id="btnHolder">
                     <button type="submit" class="submit-button">
                         Login to Your Account
