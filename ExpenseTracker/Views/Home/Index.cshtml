@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="@Url.Content("~/css/home.css")" />
 }
 
-<div class="navbar-wrapper">
+<div class="navbar-wrapper" id="home-section">
    <div class="content">
         <nav class="navbar">
             <div class="navbar-holder">
@@ -81,7 +81,7 @@
        </div>
    </div>
 </div>
-<div class="key-features-holder">
+<div class="key-features-holder" id="feature-section">
     <div class="keyfeature-title">
         <span>Features</span>
     </div>
@@ -133,7 +133,7 @@
         </div>
     </div>
 </div>
-<div class="second-main-section">
+<div class="second-main-section" id="benefits-section">
     <div class="second-title">
         <span>Benefits</span>
    </div>
@@ -173,19 +173,28 @@
         <span>About the Project</span>
         <p>This Expense Tracker app is a comprehensive portfolio project designed and developed to showcase my full-stack development skills. It encompasses a wide range of functionalities, demonstrating my ability to handle both front-end and back-end development efficiently.</p>
     </div>
+    <div class="tech-stack" id="footer-section">
+        <span>Text Stack</span>
+        <p>.Net8</p>
+        <p>AspNet MVC</p>
+        <p>Razor</p>
+        <p>MS SQL</p>
+        <p>Entity Framework Core</p>
+        <p>JavaScript</p>
+        <p>CSS</p>
+        <p>BootStrap</p>
+    </div>
     <div class="contacts" id="footer-section">
         <span>Contacts</span>
         <p><i class="fa-solid fa-paper-plane"></i> Email: roiverano20@gmail.com</a></p>
         <p><i class="fa-brands fa-linkedin"></i><a href="https://www.linkedin.com/in/roi-anthony-verano-a806aa124" target="_blank">Linkedin</a></p>
         <p><i class="fa-brands fa-github"></i><a href="https://github.com/Roi20" target="_blank">Github</a></p>
     </div>
-    <div class="tech-stack" id="footer-section">
-        <span>text stack</span>
-        <p>Content</p>
-    </div>
     <div class="quick-links" id="footer-section">
         <span>quick-links</span>
-        <p>Content</p>
+        <p><a href="#home-section">Home</a></p>
+        <p><a href="#feature-section">Features</a></p>
+        <p><a href="#benefits-section">Benefits</a></p>
     </div>
 </div>
 @section CustomScripts{
