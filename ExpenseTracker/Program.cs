@@ -22,6 +22,10 @@ var config = builder.Configuration;
 var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 
 
+var conString = builder.Configuration["ConnectionStrings:DefaultConnection"];
+Console.WriteLine($"ConnectionString: {conString}");
+
+
 //Add Environment Variables
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                      .AddEnvironmentVariables()
@@ -68,6 +72,7 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
          })
        .AddRoles<IdentityRole>()
        .AddEntityFrameworkStores<ExpenseTrackerDbContext>();
+
 //Cookie
 builder.Services.ConfigureApplicationCookie(options =>
 {
@@ -93,12 +98,8 @@ builder.Services.AddScoped<IAdminManageRoleRepository, AdminManageRoleRepository
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
-//Add Hangfire server
-builder.Services.AddHangfireServer();
-
-
 //Notification Service Dependency
-builder.Services.AddScoped<NotificationService>();
+//builder.Services.AddScoped<NotificationService>();
 
 //EmailService Dependency
 builder.Services.AddTransient<IEmailServiceAsync, EmailServiceAsync>();
@@ -112,13 +113,24 @@ builder.Services.AddControllersWithViews();
 //Razor Pages 
 builder.Services.AddRazorPages();
 
+
+//Add Hangfire server
+//builder.Services.AddHangfireServer();
 //Hangfire
-builder.Services.AddHangfire(options => options.UseSqlServerStorage(CONNECTION_STRING));
-builder.Services.AddHangfireServer();
+//builder.Services.AddHangfire(options => options.UseSqlServerStorage(CONNECTION_STRING));
+//builder.Services.AddHangfireServer();
+
+
 
 var app = builder.Build();
 
-    
+//app.Lifetime.ApplicationStopping.Register(() =>
+//{
+  //  var server = app.Services.GetService<BackgroundJobServer>();
+   // server?.Dispose();
+//});
+
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
@@ -161,7 +173,7 @@ catch (Exception ex)
 }
 */
 
-//Seeding roles
+/*/Seeding roles
 using var scope = app.Services.CreateScope();
 var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
 
@@ -201,20 +213,26 @@ if(userEmail == null)
     await userManager.AddToRoleAsync(user, "Admin");
 
 }
+*/
 
 app.UseMiddleware<ActivityMiddlerware>();
 
-app.UseHangfireDashboard();
 
-
-//Hangfire ScheduleRecurringJob NotificationService
-using var scheduleScope = app.Services.CreateScope();
-var notificationService = scheduleScope.ServiceProvider.GetRequiredService<NotificationService>();
-notificationService.ScheduleRecurringJob();
 
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapHub<NotificationHub>("/notificationHub");
+
+
+//app.UseHangfireDashboard();
+
+
+//Hangfire ScheduleRecurringJob NotificationService
+//using var scheduleScope = app.Services.CreateScope();
+//var notificationService = scheduleScope.ServiceProvider.GetRequiredService<NotificationService>();
+//notificationService.ScheduleRecurringJob();
+
+
 app.Run();
