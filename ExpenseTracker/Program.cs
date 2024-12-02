@@ -23,8 +23,9 @@ var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw
 
 
 //Add Environment Variables
-//builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-  //                   .AddEnvironmentVariables();
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                     .AddEnvironmentVariables()
+                     .AddUserSecrets<Program>();
 
 
 //Google Authentication
@@ -101,7 +102,7 @@ builder.Services.AddHangfireServer();
 builder.Services.AddScoped<NotificationService>();
 
 //EmailService Dependency
-builder.Services.AddSingleton<IEmailServiceAsync, EmailServiceAsync>();
+builder.Services.AddTransient<IEmailServiceAsync, EmailServiceAsync>();
 
 //SignalR
 builder.Services.AddSignalR();
@@ -143,7 +144,7 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 
-
+/*
 //Apply Migration at Startup
 using var migrationScope = app.Services.CreateScope();
 
@@ -159,7 +160,7 @@ catch (Exception ex)
     var logger = services.GetRequiredService<ILogger<Program>>();
     logger.LogError(ex, "An error occurred while migrating the database.");
 }
-
+*/
 
 //Seeding roles
 using var scope = app.Services.CreateScope();
