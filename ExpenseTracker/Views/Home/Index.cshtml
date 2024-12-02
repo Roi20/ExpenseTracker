@@ -17,26 +17,57 @@
                 </div>
                 <div class="navbar-ul">
                     <ul id="home-navbar-ul">
-                        <li>
-                            <a asp-action="Index" asp-controller="Home">
-                                Home
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-action="Index" asp-controller="Dashboard">
-                                Dashboard
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-action="Index" asp-controller="Category">
-                                Category
-                            </a>
-                        </li>
-                        <li>
-                            <a asp-action="Index" asp-controller="Transaction">
-                                Transaction
-                            </a>
-                        </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="AdminUser">
+                                    Admin
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Home">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Category">
+                                    Category
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Transaction">
+                                    Transaction
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <a asp-action="Index" asp-controller="Home">
+                                    Home
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Dashboard">
+                                    Dashboard
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Category">
+                                    Category
+                                </a>
+                            </li>
+                            <li>
+                                <a asp-action="Index" asp-controller="Transaction">
+                                    Transaction
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
                 <button id="home-navbar-toggle" class="navbar-toggle">☰</button>
@@ -174,7 +205,7 @@
         <p>This Expense Tracker app is a comprehensive portfolio project designed and developed to showcase my full-stack development skills. It encompasses a wide range of functionalities, demonstrating my ability to handle both front-end and back-end development efficiently.</p>
     </div>
     <div class="tech-stack" id="footer-section">
-        <span>Text Stack</span>
+        <span>Tech Stack</span>
         <p>.Net8</p>
         <p>AspNet MVC</p>
         <p>Razor</p>

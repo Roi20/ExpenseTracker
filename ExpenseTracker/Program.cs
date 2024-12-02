@@ -38,7 +38,6 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 
 });
 
-
 //EmailSettings - Email Sender Service
 builder.Services.Configure<EmailSettings>(config.GetSection("EmailSettings"));
 
