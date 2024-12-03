@@ -117,13 +117,6 @@ namespace ExpenseTracker.Repository
             
         }
 
-        public async Task<IEnumerable<Transaction>> GetAllTransaction()
-        {
-            return await _table.Include(t => t.Category).ToListAsync();
-           
-        }
-
-
 
     }
 }

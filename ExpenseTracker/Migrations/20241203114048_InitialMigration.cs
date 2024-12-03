@@ -267,11 +267,10 @@ namespace ExpenseTracker.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Transactions_Categories_CategoryId",
+                        name: "FK_Transaction_Category",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId",
-                        onDelete: ReferentialAction.NoAction);
+                        principalColumn: "CategoryId");
                 });
 
             migrationBuilder.CreateIndex(

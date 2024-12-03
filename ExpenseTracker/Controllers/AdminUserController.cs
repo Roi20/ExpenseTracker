@@ -360,25 +360,35 @@ namespace ExpenseTracker.Controllers
                     TempData["ConfirmPasswordMessage"] = "Password and Confirm Password does not match";
                     return RedirectToAction("AdminManagePassword");
                 }
-  
-                await _repo.UpdateAdminPassword(userId, model.User);
 
-                TempData["Message"] = "Admin password updated";
+                var user = await _userManager.FindByIdAsync(userId);
+                var result = await _userManager.ChangePasswordAsync(user, model.User.CurrentPassword, model.User.Password);
+                
+                if(result.Succeeded)
+                {
+                    TempData["Message"] = "Admin password updated";
 
-                //Create Audit Logs
-                var currentUser = await _baseRepo.GetCurrentUser();
+                    //Create Audit Logs
+                    var currentUser = await _baseRepo.GetCurrentUser();
 
-                await _baseRepo.CreateAuditLog(currentUser.Id,
-                                            currentUser.UserName ?? currentUser.Email,
-                                            await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
-                                            $"Update admin password.",
-                                            DateTime.UtcNow.AddHours(8),
-                                            model.User.Id,
-                                            "Admin Password",
-                                            $"Updated the admin password");
+                    await _baseRepo.CreateAuditLog(currentUser.Id,
+                                                currentUser.UserName ?? currentUser.Email,
+                                                await _userManager.IsInRoleAsync(currentUser, "Admin") ? "Admin" : "Moderator",
+                                                $"Update admin password.",
+                                                DateTime.UtcNow.AddHours(8),
+                                                model.User.Id,
+                                                "Admin Password",
+                                                $"Updated the admin password");
 
+                    return RedirectToAction("Index");
+                   
+                }
+                else
+                {
+                    TempData["CurrentPasswordValidation"] = "Incorrect current password.";
+                    return RedirectToAction("AdminManagePassword");
+                }
 
-                return RedirectToAction("Index");
 
             }
             catch(ArgumentException ex)

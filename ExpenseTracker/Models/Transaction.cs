@@ -21,7 +21,8 @@ namespace ExpenseTracker.Models
 
         public DateOnly Date { get; set; } = DateOnly.FromDateTime(DateTime.Now);
 
-        [ForeignKey("Category"), DisplayName("Category")]
+        [DisplayName("Category")]
+        [ForeignKey("Category")]
         public int CategoryId { get; set; }
 
         [ForeignKey("User")]

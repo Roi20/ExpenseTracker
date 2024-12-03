@@ -30,6 +30,7 @@ namespace ExpenseTracker.Models
         public string User_Id { get; set; }
 
         public virtual AppIdentityUser User { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
 
     }
 }
