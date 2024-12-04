@@ -13,6 +13,8 @@ namespace ExpenseTracker.Services
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            //Wait for migration to finish
+            await MigrationSignal.MigrationCompleted.Task;
 
             using var scope = _serviceProvider.CreateScope();
             var notificationService = scope.ServiceProvider.GetRequiredService<NotificationService>();

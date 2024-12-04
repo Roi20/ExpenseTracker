@@ -17,6 +17,9 @@ namespace ExpenseTracker.Services
 
         public async Task StartAsync(CancellationToken cancellationToken)
         {
+            //Wait for migration to finish
+            await MigrationSignal.MigrationCompleted.Task;
+
             using var scope = _serviceProvider.CreateScope();
             var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
             var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppIdentityUser>>();

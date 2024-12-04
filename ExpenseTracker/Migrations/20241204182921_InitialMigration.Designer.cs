@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Migrations
 {
     [DbContext(typeof(ExpenseTrackerDbContext))]
-    [Migration("20241203114048_InitialMigration")]
+    [Migration("20241204182921_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -457,14 +457,14 @@ namespace ExpenseTracker.Migrations
                     b.HasOne("ExpenseTracker.Models.Category", "Category")
                         .WithMany("Transactions")
                         .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("FK_Transaction_Category");
+                        .HasConstraintName("FK_Transaction_Categories");
 
                     b.HasOne("ExpenseTracker.Data.AppIdentityUser", "User")
                         .WithMany("Transactions")
                         .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_Transaction_AspNetUsers");
 

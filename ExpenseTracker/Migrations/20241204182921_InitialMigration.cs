@@ -265,12 +265,13 @@ namespace ExpenseTracker.Migrations
                         column: x => x.User_Id,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Transaction_Category",
+                        name: "FK_Transaction_Categories",
                         column: x => x.CategoryId,
                         principalTable: "Categories",
-                        principalColumn: "CategoryId");
+                        principalColumn: "CategoryId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(

@@ -8,6 +8,8 @@ using ExpenseTracker.Common;
 using ExpenseTracker.Services;
 using ExpenseTracker.Hubs;
 using Hangfire;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 //ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
@@ -120,6 +122,10 @@ builder.Services.AddRazorPages();
 builder.Services.AddScoped<NotificationService>();
 
 
+//Startup Migration Service
+builder.Services.AddHostedService<StartUpMigrationService>();
+
+
 //Add Hangfire server
 builder.Services.AddHangfireServer();
 //Hangfire
@@ -153,7 +159,6 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-
 
 app.UseAuthorization();
 

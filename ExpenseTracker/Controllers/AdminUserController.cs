@@ -7,7 +7,6 @@ using ExpenseTracker.ViewModel;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Syncfusion.EJ2.Linq;
 using System.Security.Claims;
 
 namespace ExpenseTracker.Controllers
@@ -170,6 +169,12 @@ namespace ExpenseTracker.Controllers
             try
             {
                 var user = await _userManager.FindByIdAsync(userModel.Id);
+
+                if(userModel.Password == null)
+                {
+                    TempData["UserPassword"] = "Enter a new password";
+                    return RedirectToAction("Update");
+                }
 
                 if (user == null)
                     return NotFound();
