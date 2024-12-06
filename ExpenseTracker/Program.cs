@@ -49,7 +49,6 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 
     googleOptions.ClientId = builder.Configuration["GoogleAuthentication:ClientId"] ?? "ClientId Not Found";
     googleOptions.ClientSecret = builder.Configuration["GoogleAuthentication:ClientSecret"] ?? "ClientSecret Not Found";
-    googleOptions.CallbackPath = new PathString("/signin-google");
 
 
 });
@@ -89,6 +88,7 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.None;
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.ExpireTimeSpan = TimeSpan.FromDays(90);
     options.LoginPath = "/Identity/Account/Login";
