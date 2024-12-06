@@ -27,6 +27,11 @@ var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw
 var conString = builder.Configuration["ConnectionStrings:DefaultConnection"];
 var eUser = builder.Configuration["EmailSettings:UserName"];
 var ePass = builder.Configuration["EmailSettings:Password"];
+var gId = builder.Configuration["GoogleAuthentication:ClientId"];
+var gSecret = builder.Configuration["GoogleAuthentication:ClientSecret"];
+
+Console.WriteLine($"Google Id: {gId}");
+Console.WriteLine($"Google Secret:{gSecret}");
 Console.WriteLine($"ConnectionString: {conString}");
 Console.WriteLine($"Initial ConnectionString: {CONNECTION_STRING}");
 Console.WriteLine($"Email User: {eUser}");
@@ -44,6 +49,7 @@ builder.Services.AddAuthentication().AddGoogle(googleOptions =>
 
     googleOptions.ClientId = builder.Configuration["GoogleAuthentication:ClientId"] ?? "ClientId Not Found";
     googleOptions.ClientSecret = builder.Configuration["GoogleAuthentication:ClientSecret"] ?? "ClientSecret Not Found";
+    googleOptions.CallbackPath = new PathString("/signin-google");
 
 
 });
@@ -83,6 +89,7 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.ExpireTimeSpan = TimeSpan.FromDays(90);
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
