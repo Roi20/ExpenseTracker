@@ -54,7 +54,7 @@
             <h5>Categories</h5>
             <p>Top Categories</p>
             <div class="doughnut-chart">
-                <canvas width="300" height="250" id="adminDoughnutChart"></canvas>
+                <canvas width="300" height="250" id="adminCategoryChart"></canvas>
             </div>
         </div>
     </div>
@@ -129,9 +129,8 @@
         var modeData = @Html.Raw(JsonConvert.SerializeObject(Model.ModeDataSummary));
         var topCategoryData = @Html.Raw(JsonConvert.SerializeObject(Model.TopListCategories));
     </script>
-
+    <script src="@Url.Content("~/js/adminCategoryChart.js")"></script>
     <script src="@Url.Content("~/js/adminFinancialTrendChart.js")"></script>
     <script src="@Url.Content("~/js/adminModeChart.js")"></script>
-    <script src="@Url.Content("~/js/adminDoughnutChart.js")"></script>
-
+   
 }

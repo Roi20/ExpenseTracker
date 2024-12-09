@@ -12,7 +12,7 @@ function getColor(index) {
 }
 
 
-var ctx = document.getElementById('adminDoughnutChart').getContext('2d');
+var ctx = document.getElementById('adminCategoryChart').getContext('2d');
 
 
 //Chart.defaults.font.family = 'Libre Franklin';

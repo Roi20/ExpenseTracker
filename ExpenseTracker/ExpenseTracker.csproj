@@ -9,7 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Remove="wwwroot\js\adminDoughnutChart.js" />
+    <Content Remove="wwwroot\js\adminCategoryChart.js" />
     <Content Remove="wwwroot\js\ComponentUI.js" />
     <Content Remove="wwwroot\js\doughnutChart.js" />
     <Content Remove="wwwroot\js\homepage.js" />
@@ -58,7 +58,7 @@
   <ItemGroup>
     <None Include="wwwroot\js\ComponentUI.js" />
     <None Include="wwwroot\js\doughnutChart.js" />
-    <None Include="wwwroot\js\adminDoughnutChart.js" />
+    <None Include="wwwroot\js\adminCategoryChart.js" />
     <None Include="wwwroot\js\homepage.js" />
     <None Include="wwwroot\js\inbox.js" />
     <None Include="wwwroot\js\LineChart.js" />
