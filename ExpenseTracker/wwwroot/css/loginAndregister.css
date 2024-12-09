@@ -38,7 +38,7 @@ body {
     border-radius: 18px;
     align-items: center;
     box-shadow: 1px 1px #e85d04; /*#fb4b4e // #852467*/
-    min-width: 420px;
+    min-width: 360px;
     max-width: 450px;
     padding-bottom: 30px;
 }
@@ -249,7 +249,7 @@ input:-webkit-autofill:active {
     border-radius: 18px;
     align-items: center;
     box-shadow: 1px 1px #e85d04; /*#fb4b4e // #852467*/
-    min-width: 420px;
+    min-width: 360px;
     max-width: 450px;
     padding-bottom: 30px
 }
@@ -393,7 +393,7 @@ input:-webkit-autofill:active {
 
 .pass-confirmation-wrapper .content-wrapper{
     background: #17181d;
-    min-width: 420px;
+    min-width: 360px;
     padding: 20px;
     border-radius: 8px;
     overflow: hidden;
@@ -451,7 +451,7 @@ input:-webkit-autofill:active {
 
 .external-login-wrapper {
     background: #17181d;
-    min-width: 400px;
+    min-width: 380px;
     max-width: 500px;
     height: 40px;
     min-height: 300px;
@@ -497,7 +497,7 @@ input:-webkit-autofill:active {
 
 .reg-confirm-wrapper {
     background: #17181d;
-    min-width: 400px;
+    min-width: 380px;
     max-width: 500px;
     min-height: 200px;
     border-radius: 8px;

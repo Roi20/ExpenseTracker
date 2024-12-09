@@ -12,8 +12,5 @@ namespace ExpenseTracker.Contracts
         Task<PaginatedResult<AppIdentityUser>> GetPagination(int page, int pageSize, string sortOrder, string keyword);
         Task<AppIdentityUser> GetUser(string userId);
         Task AssignRoleAsync(AppIdentityUser user, string role);
-        Task<bool> CheckIfExist(Expression<Func<AppIdentityUser, bool>> condition);
-        Task UpdateAdminPassword(string userId, AppIdentityUser adminUser);
-
     }
 }

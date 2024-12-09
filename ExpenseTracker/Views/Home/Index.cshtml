@@ -17,53 +17,79 @@
                 </div>
                 <div class="navbar-ul">
                     <ul id="home-navbar-ul">
-                        @if (User.IsInRole("Admin"))
+                        @if (SignInManager.IsSignedIn(User))
                         {
-                            <li>
-                                <a asp-action="Index" asp-controller="AdminUser">
-                                    Admin
-                                </a>
-                            </li>
-                            <li>
-                                <a asp-action="Index" asp-controller="Home">
-                                    Home
-                                </a>
-                            </li>
-                            <li>
-                                <a asp-action="Index" asp-controller="Dashboard">
-                                    Dashboard
-                                </a>
-                            </li>
-                            <li>
-                                <a asp-action="Index" asp-controller="Category">
-                                    Category
-                                </a>
-                            </li>
-                            <li>
-                                <a asp-action="Index" asp-controller="Transaction">
-                                    Transaction
-                                </a>
-                            </li>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-controller="AdminUser">
+                                        Admin
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Home">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Dashboard">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Category">
+                                        Category
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Transaction">
+                                        Transaction
+                                    </a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li>
+                                    <a asp-action="Index" asp-controller="Home">
+                                        Home
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Dashboard">
+                                        Dashboard
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Category">
+                                        Category
+                                    </a>
+                                </li>
+                                <li>
+                                    <a asp-action="Index" asp-controller="Transaction">
+                                        Transaction
+                                    </a>
+                                </li>
+                            }
                         }
                         else
                         {
                             <li>
-                                <a asp-action="Index" asp-controller="Home">
+                                <a asp-area="Identity" asp-page="/Account/Login">
                                     Home
                                 </a>
                             </li>
                             <li>
-                                <a asp-action="Index" asp-controller="Dashboard">
+                                <a asp-area="Identity" asp-page="/Account/Login">
                                     Dashboard
                                 </a>
                             </li>
                             <li>
-                                <a asp-action="Index" asp-controller="Category">
+                                <a asp-area="Identity" asp-page="/Account/Login">
                                     Category
                                 </a>
                             </li>
                             <li>
-                                <a asp-action="Index" asp-controller="Transaction">
+                                <a asp-area="Identity" asp-page="/Account/Login">
                                     Transaction
                                 </a>
                             </li>

@@ -15,16 +15,20 @@
     @RenderSection("CustomStyles", required: false)
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="admin-sidebar" id="admin-sidebar">
+    <div class="container-fluid" id="admin-main-container">
+        <div class="admin-sidebar" id="admin-sidebar-layout">
             <partial name="_AdminSidebar" />
         </div>
         <div id="admin-main-layout" class="main-layout">
+            <div class="admin-toggle-holder">
+                <button id="admin-sidebar-toggle" class="admin-sidebar-toggle">☰</button>
+            </div>
             @RenderBody()
         </div>
     </div>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/adminsite.js" asp-append-version="true"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     @RenderSection("CustomScripts", required: false)

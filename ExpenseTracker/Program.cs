@@ -8,6 +8,8 @@ using ExpenseTracker.Common;
 using ExpenseTracker.Services;
 using ExpenseTracker.Hubs;
 using Hangfire;
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 
 //ExpenseTrackerDbContextConnection
 var builder = WebApplication.CreateBuilder(args);
@@ -23,8 +25,17 @@ var CONNECTION_STRING = config.GetConnectionString("DefaultConnection") ?? throw
 
 
 var conString = builder.Configuration["ConnectionStrings:DefaultConnection"];
-Console.WriteLine($"ConnectionString: {conString}");
+var eUser = builder.Configuration["EmailSettings:UserName"];
+var ePass = builder.Configuration["EmailSettings:Password"];
+var gId = builder.Configuration["GoogleAuthentication:ClientId"];
+var gSecret = builder.Configuration["GoogleAuthentication:ClientSecret"];
 
+Console.WriteLine($"Google Id: {gId}");
+Console.WriteLine($"Google Secret:{gSecret}");
+Console.WriteLine($"ConnectionString: {conString}");
+Console.WriteLine($"Initial ConnectionString: {CONNECTION_STRING}");
+Console.WriteLine($"Email User: {eUser}");
+Console.WriteLine($"Email Password: {ePass}");
 
 //Add Environment Variables
 builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
@@ -77,6 +88,8 @@ builder.Services.AddDefaultIdentity<AppIdentityUser>(options =>
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.Cookie.HttpOnly = true;
+    options.Cookie.SameSite = SameSiteMode.None;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
     options.ExpireTimeSpan = TimeSpan.FromDays(90);
     options.LoginPath = "/Identity/Account/Login";
     options.AccessDeniedPath = "/Identity/Account/AccessDenied";
@@ -98,11 +111,9 @@ builder.Services.AddScoped<IAdminManageRoleRepository, AdminManageRoleRepository
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 builder.Services.AddScoped<IAuditLogRepository, AuditLogRepository>();
 
-//Notification Service Dependency
-//builder.Services.AddScoped<NotificationService>();
 
 //EmailService Dependency
-builder.Services.AddTransient<IEmailServiceAsync, EmailServiceAsync>();
+builder.Services.AddScoped<IEmailServiceAsync, EmailServiceAsync>();
 
 //SignalR
 builder.Services.AddSignalR();
@@ -114,21 +125,27 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 
 
+//Notification Service Dependency
+builder.Services.AddScoped<NotificationService>();
+
+
+//Startup Migration Service
+builder.Services.AddHostedService<StartUpMigrationService>();
+
+
 //Add Hangfire server
-//builder.Services.AddHangfireServer();
+builder.Services.AddHangfireServer();
 //Hangfire
-//builder.Services.AddHangfire(options => options.UseSqlServerStorage(CONNECTION_STRING));
-//builder.Services.AddHangfireServer();
+builder.Services.AddHangfire(options => options.UseSqlServerStorage(CONNECTION_STRING));
+builder.Services.AddHangfireServer();
 
+//Role Seeding Service
+builder.Services.AddHostedService<RoleSeederService>();
 
+//Hangfire Service
+builder.Services.AddHostedService<HangfireSchedulerService>();
 
 var app = builder.Build();
-
-//app.Lifetime.ApplicationStopping.Register(() =>
-//{
-  //  var server = app.Services.GetService<BackgroundJobServer>();
-   // server?.Dispose();
-//});
 
 
 // Configure the HTTP request pipeline.
@@ -150,72 +167,14 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-
 app.UseAuthorization();
 
 app.MapRazorPages();
 
-/*
-//Apply Migration at Startup
-using var migrationScope = app.Services.CreateScope();
-
-var services = migrationScope.ServiceProvider;
-
-try
-{
-    var context = services.GetRequiredService<ExpenseTrackerDbContext>();
-    context.Database.Migrate();
-}
-catch (Exception ex)
-{
-    var logger = services.GetRequiredService<ILogger<Program>>();
-    logger.LogError(ex, "An error occurred while migrating the database.");
-}
-*/
-
-/*/Seeding roles
-using var scope = app.Services.CreateScope();
-var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-var roles = new[] {"Admin", "Moderator", "User"};
-
-foreach(var role in roles)
-{
-
-    if (!await roleManager.RoleExistsAsync(role))
-        await roleManager.CreateAsync(new IdentityRole(role));
-
-}
-
-
-//Adding Admin Role
-using var adminScope = app.Services.CreateScope();
-
-var userManager = adminScope.ServiceProvider.GetRequiredService<UserManager<AppIdentityUser>>();
-
-var email = "admin123@admin.com";
-var password = "@AdminPassword123";
-
-var userEmail = await userManager.FindByEmailAsync(email);
-
-if(userEmail == null)
-{
-    var user = new AppIdentityUser
-    {
-        FirstName = "Admin",
-        LastName = "Admin",
-        Email = email,
-        UserName = email,
-        EmailConfirmed = true
-    };
-
-    await userManager.CreateAsync(user, password);
-    await userManager.AddToRoleAsync(user, "Admin");
-
-}
-*/
 
 app.UseMiddleware<ActivityMiddlerware>();
+
+app.UseHangfireDashboard();
 
 
 
@@ -225,14 +184,6 @@ app.MapControllerRoute(
 
 app.MapHub<NotificationHub>("/notificationHub");
 
-
-//app.UseHangfireDashboard();
-
-
-//Hangfire ScheduleRecurringJob NotificationService
-//using var scheduleScope = app.Services.CreateScope();
-//var notificationService = scheduleScope.ServiceProvider.GetRequiredService<NotificationService>();
-//notificationService.ScheduleRecurringJob();
 
 
 app.Run();

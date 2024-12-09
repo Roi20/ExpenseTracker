@@ -616,23 +616,6 @@ input:-webkit-autofill:active {
 
 
 
-/* For Chrome, Safari, and Opera 
-input:-webkit-autofill,
-input:-webkit-autofill:focus,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 1000px #17181d inset !important;
-    -webkit-text-fill-color: #ffffff !important;
-    outline: none !important;
-    caret-color: #FFFFFF !important;
-    border-radius: 5px !important;
-    border: none !important;
-}
-
-/*For input field*/
-
-
-
 
 
 /*Success Modal Customization*/
@@ -653,7 +636,7 @@ input:-webkit-autofill:active {
         background: #1F1B24;
         margin: auto;
         max-width: 400px;
-        min-width: 30%;
+        min-width: 360px;
         border-radius: 5px;
         padding: 20px;
         transition: all 1s ease-in-out;

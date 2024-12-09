@@ -2,6 +2,7 @@
 using ExpenseTracker.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 
 namespace ExpenseTracker.Context
 {
@@ -23,10 +24,19 @@ namespace ExpenseTracker.Context
                    .HasConstraintName("FK_Category_AspNetUsers");
 
             builder.Entity<Transaction>()
-                  .HasOne(c => c.User)
-                  .WithMany(u => u.Transactions)
-                  .HasForeignKey(c => c.User_Id)
-                  .HasConstraintName("FK_Transaction_AspNetUsers");
+                   .HasOne(c => c.User)
+                   .WithMany(u => u.Transactions)
+                   .HasForeignKey(c => c.User_Id)
+                   .OnDelete(DeleteBehavior.Restrict)
+                   .HasConstraintName("FK_Transaction_AspNetUsers");
+
+            builder.Entity<Transaction>()
+                   .HasOne(t => t.Category)
+                   .WithMany(u => u.Transactions)
+                   .HasForeignKey(t => t.CategoryId)
+                   .HasConstraintName("FK_Transaction_Categories");
+
+
         }
 
         public DbSet<Category> Categories { get; set; }

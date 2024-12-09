@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace ExpenseTracker.Migrations
 {
     [DbContext(typeof(ExpenseTrackerDbContext))]
-    [Migration("20241202102632_InitialMigration")]
+    [Migration("20241204182921_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -455,15 +455,16 @@ namespace ExpenseTracker.Migrations
             modelBuilder.Entity("ExpenseTracker.Models.Transaction", b =>
                 {
                     b.HasOne("ExpenseTracker.Models.Category", "Category")
-                        .WithMany()
+                        .WithMany("Transactions")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .IsRequired()
+                        .HasConstraintName("FK_Transaction_Categories");
 
                     b.HasOne("ExpenseTracker.Data.AppIdentityUser", "User")
                         .WithMany("Transactions")
                         .HasForeignKey("User_Id")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired()
                         .HasConstraintName("FK_Transaction_AspNetUsers");
 
@@ -533,6 +534,11 @@ namespace ExpenseTracker.Migrations
             modelBuilder.Entity("ExpenseTracker.Models.AdminNotification", b =>
                 {
                     b.Navigation("Notifications");
+                });
+
+            modelBuilder.Entity("ExpenseTracker.Models.Category", b =>
+                {
+                    b.Navigation("Transactions");
                 });
 #pragma warning restore 612, 618
         }
