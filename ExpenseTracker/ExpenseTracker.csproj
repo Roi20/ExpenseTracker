@@ -15,6 +15,7 @@
     <Content Remove="wwwroot\js\homepage.js" />
     <Content Remove="wwwroot\js\inbox.js" />
     <Content Remove="wwwroot\js\LineChart.js" />
+    <Content Remove="wwwroot\js\logincredentials.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -29,6 +30,7 @@
     <_ContentIncludedByDefault Remove="wwwroot\js\homepage.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\inbox.js" />
     <_ContentIncludedByDefault Remove="wwwroot\js\LineChart.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\logincredentials.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -62,6 +64,7 @@
     <None Include="wwwroot\js\homepage.js" />
     <None Include="wwwroot\js\inbox.js" />
     <None Include="wwwroot\js\LineChart.js" />
+    <None Include="wwwroot\js\logincredentials.js" />
   </ItemGroup>
 
   <ItemGroup>

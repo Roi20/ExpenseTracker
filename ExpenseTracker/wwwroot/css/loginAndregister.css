@@ -1,4 +1,15 @@
-﻿
+﻿.login-credentials{
+    display: flex;
+    justify-content:space-between;
+    padding: 10px 12px 5px 12px;
+    margin-bottom: 0;
+    gap: 2px;
+}
+
+.login-credentials button{
+    font-size: .9rem;
+}
+
 * {
     letter-spacing: 1px;
 }
@@ -125,7 +136,7 @@ input:-webkit-autofill:active {
     height: 45px;
     border-radius: 3px;
     overflow: hidden;
-    margin-top: 30px;
+    margin-top: 10px;
     transition: All .3s ease-in-out;
 }
 

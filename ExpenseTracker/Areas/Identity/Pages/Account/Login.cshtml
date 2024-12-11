@@ -26,12 +26,12 @@
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                 <div id="inputHolder">
                     <i class="fa-solid fa-envelope icon"></i>
-                    <input asp-for="Input.Email" autocomplete="username" aria-required="true" placeholder="Email" />
+                    <input asp-for="Input.Email" id="username-input" autocomplete="username" aria-required="true" placeholder="Email" />
                 </div>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
                 <div id="inputHolder">
                     <i class="fa-solid fa-lock icon"></i>
-                    <input asp-for="Input.Password" autocomplete="current-password" aria-required="true" placeholder="Password" />
+                    <input asp-for="Input.Password" id="password-input" autocomplete="current-password" aria-required="true" placeholder="Password" />
                 </div>
                 <div id="remember-me">
                     <input asp-for="Input.RememberMe" />
@@ -67,6 +67,10 @@
                     </form>
                 }
             }
+            <div class="login-credentials" id="credentials">
+                <button id="admin-credential" class="btn btn-secondary">Login as Admin</button>
+                <button id="user-credential" class="btn btn-secondary">Login as User</button>
+            </div>
             <div class="register-link" id="text-link">
                 <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl" id="register-link">Sign up here</a>
                 <a id="forgot-password" asp-page="./ForgotPassword">Forgot Password?</a>
@@ -76,4 +80,7 @@
 </div>
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+}
+@section CustomScripts{
+    <script src="@Url.Content("~/js/logincredentials.js")"></script>
 }
